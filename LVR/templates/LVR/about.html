@@ -1,0 +1,86 @@
+{% extends 'LVR/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %} 
+
+
+
+{% block title %} Acerca de | Le vélo rouge {% endblock %}
+
+
+
+{% block about %}
+
+<div class="py-5">
+    <div class="card my-4 col-lg-12">
+        <div class="card-body">
+            <section  id="contact">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-7 text-left my-4">
+                            <h3 class="section-heading font-weight-bold text-uppercase"> {% trans 'about_title' %} <strong> Le vélo rouge</strong> </h3>
+                            <h5 class="s my-5 pr-5">
+                                
+                                El blog nació con la idea de compartir conocimiento con el mundo. Aquí hablamos de todo con todos, la ubicación 
+                                o idiomas no son barrera para estar informados y conocer otro punto de vista. Los temas son selectos cuidadosamente 
+                                si es que se consideran relevantes, desde información que puede ser útil hasta temas selectos para inversionistas, 
+                                pasando por tutoriales, reviews, consejos, etc. Son temas diferentes pero que tienen algo en común: estar disponibles 
+                                a los lectores y a todo el público en general. <br> <br>  Explora el blog a tu antojo, lee los posts que gustes, dejan
+                                algún comentario y conoce toda la información que está disponible para ti. 
+                                
+                            </h5>
+    
+                            <a href="{% url 'tags' %}" class="btn btn-primary btn-xl text-uppercase my-3"> <i class="material-icons align-top">label</i> Explora los tags</a>
+    
+                            <a href="{% url 'categories' %}" class="btn btn-primary btn-xl text-uppercase my-3 mx-2"> <i class="material-icons align-top">category</i> Explora las categorías</a>
+    
+    
+                        </div>
+    
+                        <div class="col-lg-5 text-left my-4">
+                            <h3 class="section-heading font-weight-bold text-uppercase"> {% trans 'about_MTTeam_title' %} </h3>
+                            <h6 class="section-subheading text-muted mb-5">
+                                {% trans 'about_MTTeam_subtitle' %}
+                                <!-- ¡Gracias a ellos y a su trabajo podemos utilizar este blog y otros servicios más de  -->
+                                <b>LOCK IT
+    
+                                </b>!</h6>
+    
+    
+                            <div class="row mt-2 mb-5">
+                                <div class="col-xs-6 col-sm-3 col-md-2 col-lg-3" >
+                                    <div class="author" style="padding-left: 15px;">
+                                        <img class="circle-rounded" src="{% static 'LVR/assets/img/jeff.png' %}" alt="" width="95">
+                                    </div>
+                                </div>
+                                
+                                <div class="col-xs-6 col-sm-9 col-md-10 col-lg-9">
+                                    <div class="row mt-1 ml-1">
+                                        <div class="column detailsAuthor">
+                                            <h6> <b> ANTONIO FALCÓN </b> </h6>
+                                            <p> Founder & Main Developer </p>
+                                            <div class="person-social">
+                                                <a href=""> <i class="material-icons align-top">email</i> </a>
+                                                <a href="" class="mx-2"> <i class="material-icons align-top">local_phone</i> </a>
+                                                <a href="" class="mx-2"> <i class="material-icons align-top">chat</i> </a>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div> 
+                            </div>
+    
+                           
+    
+                          
+    
+                            <a href="{% url 'authors' %}" class="btn btn-primary btn-xl text-uppercase my-3"> {% trans 'about_meetEditors' %} </a>
+    
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

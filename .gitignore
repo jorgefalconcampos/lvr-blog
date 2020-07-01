@@ -1,0 +1,25 @@
+# Python & Django stuff
+*.pyc
+*~
+__pycache__
+*.log
+
+# Translations
+
+# Virtual enviroment
+lvr-venv/
+
+
+# Node modules
+node_modules/
+
+
+# Database 
+db.sqlite3
+
+
+# Others
+.DS_Store
+.vscode
+.idea
+

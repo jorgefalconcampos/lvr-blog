@@ -1,0 +1,37 @@
+// Global VARIABLES only (not styles), fit for both site & blog
+
+// Importing variables; this file will be like a link between all the variable files for each site
+
+// Importing admin/dashboard variable
+@import "./variables/admin-vars";
+
+// Importing blog variables
+@import "./variables/blog-vars";
+
+
+
+
+// General variables, fit for both admin & post
+
+
+$lvr-dark-red: #BC0306;
+$lvr-main-red: #F52B2B;
+$lvr-dark-gray: #767676;
+$lvr-dark2-gray: rgb(90, 90, 90);
+
+
+$lvr-light-gray: #BEBEBE;
+$lvr-steel: #647C7D;
+$lvr-brown: #855446;
+$lvr-black: #1B1B1B;
+$lvr-platinum: #EBEBEB;
+
+$generalvar: rgb(6, 43, 129);
+$variablegralparaadmin: slateblue;
+
+$variablegralparablog: brown;
+
+
+
+
+

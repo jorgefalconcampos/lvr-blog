@@ -1,0 +1,132 @@
+
+=======================================================
+======================== Setup ========================
+=======================================================
+
+    1) Create a virtual enviroment (venv) inside the root of the project 
+        (thefolder where you'll work). Once there, execute << python -m venv mynewvirtualenv >>
+        A folder called 'mynewvirtualenv' will be created
+    
+    2) Go inside the 'mynewvirtualenv' folder, once there go inside 'Scripts' folder
+        and activate the virtual env with << . activate >> then go back to the root 
+        of the proyect
+
+    3) Maybe you'd like to install packages with pip (a tool for insgtalling Python packages), then 
+        we have to update it if necessary. Do it with << python -m pip install --upgrade pip >>
+
+    4) Once we got pip up to date, we have to install some Python packages... e.g. Django and others
+
+        Django is the Python framework for the web. But we don't want to install a single package, in 
+        fact some projects uses lots of packages... that's why we can create a file of requirements and
+        install all the required packages with the command << pip install -r reqs.txt >> 
+
+        'reqs.txt' is the name of the plain text file where we put the packages we want to install 
+        at the same time. The packages name must be exactly the same as those found in https://pypi.org/ 
+
+    5) Once << pip install -r reqs.txt >> has been executed, wait until the installation is over
+
+    6) Create the proyect with << django-admin startproject MyProject . >> and modify stuff in settings.py
+	IMPORTANT - Do not forget the dot (.) right after MyProject
+
+    7) At root project level create an app with the following command << python manage.py startapp MyApp >>
+	then import the created app 'MyApp' in the settings.py file. Do that by adding the following to the 
+	INSTALLED_APPS array 'MyApp.apps.MyAppConfig' inside the settins.py file inside the Project folder
+
+    8) Run migrations at root project level with << python manage.py migrate >>
+
+    9) Then create a superuser with << pyhton manage.py createsuperuser >> and fill the required info
+    
+    9) Go to the root project folder and run the server << python manage.py runserver >> 
+
+    
+=====================================================================
+======================== Models & Migrations ========================
+=====================================================================
+
+
+    1) To crate a model go to MyApp/models.py folder, then create it
+
+    2) At root project level, execute << python manage.py makemigrations >>
+    
+    3) Django prepared a migration file that we have to apply to our db, do it with the following
+        command:  << python manage.py migrate >>
+
+    NOTE: MyApp could go after the end of each command, it's the name of the application you've just created in step 7
+
+    4) Create the urls & templates ash shown in NEW PAGE
+
+
+
+=======================================================
+======================== Start ========================
+=======================================================
+
+    1) To start server, go to:
+        project root folder > project virtual enviroment > Scripts
+    
+    2) Inside scripts, execute << . activate >> in cmd... go back to project root  and start the server
+        with the following command << python manage.py runserver >>
+
+
+======================================================
+======================== i18n ========================
+======================================================
+
+    1) Inside a template, write: << {% trans 'StringTitle' %} >>
+
+    2) After that, execute the command << django-admin makemessages -l 'xx' >>, where 'xx' is the desired 
+        language to create the strings (!!!) IMPORTANT: execute the previous command inside MyApp folder,
+        i.e. MyApp/locale/es,en,fr...
+       
+    3) Go to the file with extension '.po' inside the folder 'locale' and  make the necessary translations
+
+    4) Once made, execute <<  django-admin compilemessages >>
+
+
+==========================================================
+======================== NEW PAGE ========================
+==========================================================
+
+    1) Create the '.html' file inside templates/MyApp/MyHTML_file.html
+
+    2) Define it inside 'views.py' and add parameters if they're needed
+
+    3) Define the path in 'urls.py' inside MyApp as below
+        urlpatterns=[
+            ...
+            path('MyHTML_file', views.MyHTML_file, name='MyHTML_file'),
+        ]
+
+
+
+=========================================================================================
+======================== SOTRING & SERVING ASSETS & STATIC FILES ========================
+=========================================================================================
+
+
+    1) We have to create a folder called 'static' inside MyApp folder. Inside 'static', create another 
+        folder called MyApp, and inside it you'll place all your static files (i.e. javascript, img, favicon)
+        You might be thinking about why another subdirectory 'MyApp' should be created... well, this is a good
+        practice if you create another app inside the same project, and it is done in order not to Django get 
+        confused if a resource is called the same in two different apps. 
+        Read this for more info:  https://docs.djangoproject.com/en/3.0/howto/static-files/#configuring-static-files
+        NOTE: This is for development enviroment only! Still reading to know what to do in production
+
+    2) As said in step 1, it's important to have our static files namespaced, this is not only a good practice, but 
+        also will be useful for production, when we execute << python manage.py collectstatic >>
+        This instruction will look for all our static files in all our apps and will place it inside a folder (a folder
+        specified in )
+
+
+
+==========================================================
+==========================================================
+==========================================================
+
+    i.e. = esto es
+    e.g. = for example
+
+
+
+
+

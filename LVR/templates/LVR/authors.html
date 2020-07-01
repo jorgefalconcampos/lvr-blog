@@ -1,0 +1,80 @@
+{% extends 'LVR/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %} 
+
+
+
+{% block title %} Autores | Le vélo rouge {% endblock %}
+
+
+
+{% block authors %}
+
+<div class="card my-5 col-lg-12">
+    <div class="card-body">
+        <section  id="contact">
+            <div class="container">
+                <div class="row py-5 mt-2 mb-5 justify-content-between"> 
+                    <h1 class="ml-4"> <b> ELLOS HACEN POSIBLE ESTE BLOG </b> </h1> 
+
+                    {% if user.is_authenticated %}
+                    <a href="" class="mt-2"> <span> <button type="button" class="btn btn-dark"> <i class="material-icons align-top">add_box</i> {% trans 'authors_NewAuthor' %} </button> </span></a> 
+                    {% endif %}   
+
+                </div>
+
+                <div class="row justify-content-center align-items-center">
+                    {% for author in authors %}
+                        <div class="col-4 py-3">
+                            <div class="author-list text-center">
+                                <div class="row justify-content-center align-items-center">
+                                    <a href="{% url 'author_detail' author.slug %}">
+                                        <img class="rounded-circle" src="{{ author.image.url }}" alt="" width="155px">
+                                    </a>
+                                </div>
+
+                                
+                                <div class="row mt-2 py-3">
+                                    <div class="col">
+                                        <h4> <a href=" {% url 'author_detail' author.slug %} "> {{ author.name.get_full_name }} </a> </h4>
+                                        <h5> {{ author.title }} </h5>
+
+                                        <!-- post.author.get_full_name -->
+                                        <!-- <h5> {{ author.name }}  </h5> Displays the username -->
+
+                                        {% if author.blog_post_set.all %}
+                                        <h6> {% trans 'authors_PublishedPosts' %}: {{ author.blog_post_set.all|length }} </h6>
+                                        {% else %}
+                                        <h6> {% trans 'authors_NoPostsYet' %} </h6>
+                                        {% endif %}                                    
+                                </div>
+                            </div>
+                        </div>                      
+                    </div>
+
+                    {% endfor %}
+
+                    
+
+
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<div class="row container d-flex justify-content-center align-items-center py-3 mt-1 mb-4 bottom-pagination">
+    {% if authors.has_other_pages %}
+    <ul class="pagination justify-content-center">
+        {% if authors.has_previous %}
+        <li><a href="?page={{ authors.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+        {% endif %}
+        {% if authors.has_next %}
+        <li><a href="?page={{ authors.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+    {% endif %}
+    </ul>
+    {% endif %}
+</div>
+
+{% endblock %}

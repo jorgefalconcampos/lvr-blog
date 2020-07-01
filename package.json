@@ -1,0 +1,19 @@
+{
+  "name": "Dev",
+  "version": "1.0.0",
+  "description": "**REQUIRES**: Python >= 3.6.6, Django >= 3.0.7 and other packages specified in 'reqs.txt'",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "onchange \"LVR/static/LVR/assets/scss/**/*.scss\" -- npm run compile",
+    "compile": "node-sass --watch LVR/static/LVR/assets/scss/ -o LVR/static/LVR/assets/css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "node-sass": "^4.14.1",
+    "onchange": "^7.0.2"
+  }
+}

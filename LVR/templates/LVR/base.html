@@ -1,0 +1,275 @@
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %} 
+{% get_current_language as LANGUAGE_CODE %}
+
+
+<!doctype html>
+<html lang="{{LANGUAGE_CODE}}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F52B2B"/>
+  <meta name="description" content="Le vélo rouge es un blog de noticias, tecnología y actualidad. Creado por millenials para millenials">
+  <title> {% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'LVR/assets/css/styles.css' %}">  
+  <link rel="shortcut icon" type="image/png" href="{% static 'LVR/assets/favicon/r-icon.ico' %}"/>
+  <link rel="apple-touch-icon" href="{% static 'LVR/assets/img/r-icon-apple.png' %}">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+
+<body>
+  <header>
+    <nav class="top-navigation-bar navbar navbar-expand-lg navbar-light static-top">
+      <div class="container">
+        <a href="{% url 'index' %}" class="navbar-brand">
+          <img src="{% static 'LVR/assets/img/R.png' %}" alt="LVR-logo" width="45" alt="" class="d-inline-block align-middle mr-2">
+          Le vélo <span class="font-weight-bold"> rouge </span> 
+        </a>
+
+        <button type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+           
+        <div class="collapse navbar-collapse text-center" id="navbar">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'index' %}"> {% trans 'NavHome' %} <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'about' %}"> {% trans 'NavAbout' %} </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"> {% trans 'NavContact' %} </a>
+            </li>
+            <li class="nav-item dropdown mx-0">
+              <a class="nav-link dropdown-toggle" id="searchDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="material-icons align-middle md-22">search</i>
+              </a>
+              
+              <div class="dropdown-menu dropdown-menu-right bg-platinum" aria-labelledby="searchDropdown" style="min-width:max-content;">
+                <div class="dropdown-header py-2 text-center"> 
+                  <h5 class="py-1 font-weight-bold"> Busca dentro del blog </h5> 
+                  <a href="{% url 'categories' %}" class="py-1"> Conoce todas las categorías </a> 
+                </div>  
+                
+                <form class="mx-3 mt-2 mb-2 p-2 rounded shadow-sm bg-white" action="#">
+                  <h5 class="py-1 font-weight-bold"> Busca dentro del blog </h5> 
+                  <a href="{% url 'categories' %}" class="py-1"> Conoce todas las categorías </a> 
+                  <div class="input-group">
+                    <input class="form-control border-0 mr-2" type="search" placeholder="Busca entre +{{total_posts}} posts">
+                    <div class="input-group-append rounded">
+                      <button class="btn btn-primary rounded" type="submit"><i class="fas fa-search mr-2"></i>Buscar</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </li>
+
+            {% if user.is_authenticated %}
+            <li class="nav-item dropdown mx-0 mx-lg-3 border rounded">
+              <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons align-top">person</i> 
+              </a>
+
+              <div class="collapsable-menu dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown" style="min-width:max-content;">
+                  <h4 class="container py-2"> {% trans 'logged_in_as' %}: <b> {{ request.user.get_full_name|default:request.user }} </b> </h4>
+                  <div class="dropdown-divider"></div>      
+                  <a class="dropdown-item" href="{% url 'dashboard' %}"> <i class="material-icons align-top">dashboard</i> {% trans 'Dashboard' %} </a>
+                  <a class="dropdown-item" href="{% url 'post_new' %}"> <i class="material-icons align-top">add_box</i>  {% trans 'NewPost' %} </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'logout' %}"> <i class="material-icons align-top">exit_to_app</i> {% trans 'dashboard_DropDown_Logout' %} </a>
+              </div>
+            </li>
+            {% endif %}                  
+          </ul>
+        </div>
+
+      </div>
+    </nav>
+  </header>
+  
+  <!-- Content imported from "index.html" with the block of code "show_posts" -->
+   <div class="container"> 
+    {% block show_posts %} 
+    {% endblock %} 
+  </div>
+
+
+  <!-- Content imported from "about.html" with the block of code "about" -->
+  <div class="container">
+    <div class="row my-3">
+      {% block about %}
+      {% endblock %}
+    </div>
+  </div>
+         
+
+  <!-- Content imported from "post_detail.html" with the block of code "post_content" -->
+  <div class="container">
+    {% block post_content %}
+    {% endblock %}
+  </div>
+
+
+  <!-- Content imported from "post_edit.html" with the block of code "post_edit" -->
+  <div class="container">
+    <div class="row my-3">
+      {% block post_edit %}
+      {% endblock %}
+    </div>
+  </div>
+
+      
+  <!-- Content imported from "authors.html" with the block of code "authors" -->
+  <div class="container">
+    <div class="row my-3">
+      {% block authors %}
+      {% endblock %}
+    </div>
+  </div>
+  
+
+  <!-- Content imported from "authors_detail.html" with the block of code "author_detail" -->
+  <div class="container">
+    <div class="row my-3">
+      {% block author_detail %}
+      {% endblock %}
+    </div>
+  </div>
+
+
+  <!-- Content imported from "tags.html" with the block of code "tags" -->
+  <div class="container">
+    <div class="row my-3">
+      {% block tags %}
+      {% endblock %}
+    </div>
+  </div>
+
+
+  <!-- Content imported from "tag_detail.html" with the block of code "tag_detail" -->
+  <div class="container">
+    <div class="row my-3">
+      {% block tag_detail %}
+      {% endblock %}
+    </div>
+  </div>
+
+
+    <!-- Content imported from "tags.html" with the block of code "tags" -->
+    <div class="container">
+      <div class="row my-3">
+        {% block categories %}
+        {% endblock %}
+      </div>
+    </div>
+  
+  
+    <!-- Content imported from "tag_detail.html" with the block of code "tag_detail" -->
+    <div class="container">
+      <div class="row my-3">
+        {% block categories_detail %}
+        {% endblock %}
+      </div>
+    </div>
+
+
+  <!-- Content imported from "404.html" with the block of code "page_not_found" -->
+  <div class="container">
+    {% block page_not_found %}
+    {% endblock %}
+  </div>
+
+
+</body>
+
+
+<div class="alert text-center cookiealert h6" role="alert">
+  <b>¿Una galletita joven?</b> &#x1F36A; Usamos cookies para mejorar tu experiencia en este sitio web. Al seguir navegando, aceptas la <a href="{% url 'cookies' %}" target="_blank">política de cookies</a>.
+  <button type="button" class="btn btn-primary btn-sm acceptcookies my-1 my-sm-1 my-md-1 my-md-1 my-xl-1 "> Aceptar </button>
+</div>
+
+
+<footer class="pt-3 bg-gray-900">
+  <div class="container">
+    <div class="row d-flex my-4 py-2 justify-content-between ">
+      <div class="col-4 d-flex align-items-center">
+        <div class="footer-logo">
+          <img src="{% static 'LVR/assets/img/lvr-sml-md.png' %}" alt="Le vélo rouge logo" width="120" class="img-fluid">
+        </div>
+      </div>
+
+      <div class="col-8 col-md-6 col-lg-5 text-white text-center">
+        <div class="py-2 bg-info">
+          <h3> Suscríbete al newsletter </h3>
+          Recibe un email cada vez que escribamos un nuevo post. Sin spam garantizado.
+        </div>
+
+        <div class="row">
+          <div class="col mx-auto">
+            <form action="" class="">
+              <div class="input-group pt-3 align-items-center">
+                <label class="mr-2" for="subscribeNewsletter"> Email: </label>
+                <input type="email" class="form-control bg-none border-dark text-white" id="subscribeNewsletter"  placeholder="Escribe tu dirección de email" >
+                <div class="input-group-append">
+                  <button class="btn btn-light" type="submit"><i class="fas fa-paper-plane"></i> </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="mb-lg-3 mb-md-3 mb-sm-4">  
+
+    <div class="row px-3 py-2 d-flex justify-content-center justify-content-sm-between justify-content-md-between justify-content-lg-between align-items-center text-white">
+      <div class="text-center">
+        <a class="h6 small mr-1" href="{% url 'privacy_policy' %}">Política de Privacidad</a> |
+        <a class="h6 small mx-1" href="{% url 'cookies' %}">Política de Cookies</a> |
+        <a class="h6 small mx-1" href="{% url 'service_terms' %}">Términos del Servicio</a> |
+        <a class="h6 small ml-1" href="{% url 'login' %}">Redactores</a>
+      </div>
+       
+      <div class="py-3 d-flex d-inline">
+          <label class="lead mr-2" for="changeLang">Idioma:</label>
+
+        <form action="{% url 'set_language' %}" method="post">
+          {% csrf_token %}
+          <select name="language" class="form-control form-control-sm" id="changeLang" style="max-width: 110px; height: 30px;" onchange="this.form.submit()">
+            {% get_language_info_list for LANGUAGES as languages %}
+            {% for language in languages %}
+            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+              {{ language.name_local }} ({{ language.code }})
+            </option>
+            {% endfor %}
+          </select>
+        </form>  
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-gray-1000 footer-copyright text-center text-white-secondary pt-3 pb-2">
+    Copyright © {% now 'Y' %} LVR
+    <div class="my-2"> &#60 / &#62 with ❤️ in CD<b>MX</b>. </div>
+  </div>
+</footer>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script type="text/javascript" src="{% static 'LVR/assets/js/cookies.js' %}"></script>
+
+
+<script src="https://kit.fontawesome.com/0b5e6aae1f.js" crossorigin="anonymous"></script>
+
+<script> $(document).ready(function(){ $('[data-toggle="tooltip"]').tooltip(); }); </script>
+
+</html>

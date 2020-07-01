@@ -1,0 +1,17 @@
+{% extends 'Blog/base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block page_not_found %}
+
+<div class="jumbotron py-5">
+    <div class="mx-xs-1 mx-sm-3 mx-md-1 mx-lg-3">
+        <h1 class="font-weight-bold py-1"> {% trans 'page404_title' %} </h1>
+        <h2> {% trans 'page404_subtitle' %} </h2>
+        <a href="{% url 'index' %}" class="btn btn-secondary btn-xl text-uppercase my-3 "> <i class="material-icons align-top">home</i> {% trans 'page404_goHome' %} </a>
+        <img src="{% static 'Blog/assets/img/http_states/404.png' %}" alt="Not found" width="1000" class="d-inline-block align-middle">
+      </div>    
+</div>
+
+{% endblock %}
