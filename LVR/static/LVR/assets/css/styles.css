@@ -241,7 +241,7 @@ section {
   top: 1rem;
   left: 1rem;
   z-index: 999;
-  border: 2px solid white; }
+  border: 2px solid #EBEBEB; }
 
 .tool-rating {
   position: absolute;
@@ -256,10 +256,32 @@ section {
 .featured-badge {
   color: #fff;
   padding: 0.35rem 1rem;
-  font-size: 0.6rem;
+  font-size: 0.8rem;
   position: absolute;
   bottom: 1rem;
   right: 7rem;
+  z-index: 99;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0.2rem; }
+
+.watched-badge {
+  color: whitesmoke;
+  padding: 0.35rem 1rem;
+  font-size: 0.8rem;
+  position: absolute;
+  bottom: 1rem;
+  right: 6rem;
+  z-index: 99;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 0.2rem; }
+
+.cmts-badge {
+  color: whitesmoke;
+  padding: 0.35rem 1rem;
+  font-size: 0.8rem;
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
   z-index: 99;
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 0.2rem; }
@@ -708,7 +730,7 @@ a.text-hover-dark {
     width: 100%;
     height: 100%;
     content: ' ';
-    opacity: .5;
+    opacity: .25;
     z-index: 22;
     background: #000; } }
 
@@ -749,7 +771,7 @@ a.text-hover-dark {
     width: 100%;
     height: 100%;
     content: ' ';
-    opacity: .5;
+    opacity: .25;
     z-index: 22;
     background: #000; } }
 
@@ -790,7 +812,7 @@ a.text-hover-dark {
     width: 100%;
     height: 100%;
     content: ' ';
-    opacity: .5;
+    opacity: .25;
     z-index: 22;
     background: #000; } }
 
@@ -831,7 +853,7 @@ a.text-hover-dark {
     width: 100%;
     height: 100%;
     content: ' ';
-    opacity: .5;
+    opacity: .25;
     z-index: 22;
     background: #000; } }
 
@@ -874,7 +896,7 @@ a.text-hover-dark {
     width: 100%;
     height: 100%;
     content: ' ';
-    opacity: .5;
+    opacity: .25;
     z-index: 22;
     background: #000; }
 
@@ -915,6 +937,11 @@ a.text-hover-dark {
   transition: all 0.3s; }
   .reset-anchor:hover, .reset-anchor:focus {
     text-decoration: none; }
+  .reset-anchor a:hover, .reset-anchor a:focus {
+    text-decoration: none; }
+  .reset-anchor p {
+    font-size: 12px;
+    color: #767676; }
 
 .reset-anchor-inherit {
   color: inherit; }
@@ -962,11 +989,11 @@ a.text-hover-dark {
       font-size: 0.9rem;
       border-bottom: 1px solid #eee; }
       .bootstrap-select .dropdown-menu .dropdown-item.active, .bootstrap-select .dropdown-menu .dropdown-item:active {
-        background: #f8f9fa !important;
+        background: #ececec !important;
         color: #343a40 !important; }
   .bootstrap-select .filter-option-inner-inner {
     line-height: 1.5rem !important;
-    color: #adb5bd;
+    color: #6c757d;
     font-weight: 400; }
     .bootstrap-select .filter-option-inner-inner.selected {
       color: #343a40;
@@ -1781,6 +1808,9 @@ a.text-primary:hover, a.text-primary:focus {
 /*
   * 5. UTILITIES
   */
+.bg-steel {
+  background-color: #647C7D; }
+
 .bg-primary {
   background-color: #F52B2B !important; }
 
@@ -2022,11 +2052,11 @@ a.text-dark:hover, a.text-dark:focus {
   .form-control:focus {
     color: #495057;
     background-color: #fff;
-    border-color: #ffcbb9;
+    border-color: #647C7D;
     outline: 0;
     box-shadow: 0 0 0 transparent; }
   .form-control::-webkit-input-placeholder, .form-control::-moz-placeholder, .form-control:-ms-input-placeholder, .form-control::-ms-input-placeholder, .form-control::placeholder {
-    color: #adb5bd;
+    color: #bdadb9;
     font-size: 0.85rem; }
   .form-control:disabled, .form-control[readonly] {
     background-color: #e9ecef; }
@@ -2402,7 +2432,14 @@ code {
 
 .card-img-top {
   border-top-left-radius: calc(0.25rem - 1px);
-  border-top-right-radius: calc(0.25rem - 1px); }
+  border-top-right-radius: calc(0.25rem - 1px);
+  overflow: hidden; }
+  .card-img-top img {
+    transition: transform .35s, filter 0.5s ease-in-out;
+    filter: grayscale(45%); }
+  .card-img-top img:hover {
+    filter: grayscale(0);
+    transform: scale(1.25); }
 
 .card-img-bottom {
   border-bottom-right-radius: calc(0.25rem - 1px);
@@ -2463,6 +2500,10 @@ h1, h2, h3, h4 {
 .opacity-50 {
   filter: blur(2px);
   -webkit-filter: blur(2px); }
+
+.txtarea-maxh-400 {
+  min-height: 73px;
+  max-height: 400px; }
 
 .bg-platinum {
   background-color: #EBEBEB; }
@@ -2868,6 +2909,9 @@ Calendar Styling */
   text-transform: uppercase;
   max-width: 230px;
   word-wrap: break-word; }
+
+.text-preview {
+  color: #BEBEBE !important; }
 
 .img-zoom {
   overflow: hidden; }

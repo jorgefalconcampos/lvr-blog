@@ -5,16 +5,26 @@
 
 
 <!doctype html>
-<html lang="{{LANGUAGE_CODE}}">
+<html lang="{{LANGUAGE_CODE}}" prefix="og: http://ogp.me/ns#">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:type" content="website" />
   <meta name="theme-color" content="#F52B2B"/>
   <meta name="description" content="Le vélo rouge es un blog de noticias, tecnología y actualidad. Creado por millenials para millenials">
-  <title> {% block title %}{% endblock %}</title>
+  <meta property="og:locale" content="{{LANGUAGE_CODE}}">
+  <meta property="og:type" content="{% block og_type %}{% endblock %}">
+  <meta property="og:title" content="{% block og_title %}{% endblock %}">
+  <meta property="og:description" content="{% block og_desc %}{% endblock %}">
+  <meta property="og:image" content="{% block og_image %}{% endblock %}">
+  <meta property="og:image:width" content="684">
+  <meta property="og:image:height" content="328">
+  <meta property="og:site_name" content="Le vélo rouge">
+  <title>{% block title %}{% endblock %}</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <link rel="stylesheet" href="{% static 'LVR/assets/css/styles.css' %}">  
+  <link rel="stylesheet" href="{% static 'LVR/assets/css/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'LVR/assets/css/bootstrap-select.css' %}">  
   <link rel="shortcut icon" type="image/png" href="{% static 'LVR/assets/favicon/r-icon.ico' %}"/>
   <link rel="apple-touch-icon" href="{% static 'LVR/assets/img/r-icon-apple.png' %}">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -43,7 +53,7 @@
               <a class="nav-link" href="{% url 'about' %}"> {% trans 'NavAbout' %} </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"> {% trans 'NavContact' %} </a>
+              <a class="nav-link" href="#contactModal" data-toggle="modal"> {% trans 'NavContact' %} </a>
             </li>
             <li class="nav-item dropdown mx-0">
               <a class="nav-link dropdown-toggle" id="searchDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -57,8 +67,6 @@
                 </div>  
                 
                 <form class="mx-3 mt-2 mb-2 p-2 rounded shadow-sm bg-white" action="#">
-                  <h5 class="py-1 font-weight-bold"> Busca dentro del blog </h5> 
-                  <a href="{% url 'categories' %}" class="py-1"> Conoce todas las categorías </a> 
                   <div class="input-group">
                     <input class="form-control border-0 mr-2" type="search" placeholder="Busca entre +{{total_posts}} posts">
                     <div class="input-group-append rounded">
@@ -185,12 +193,54 @@
   </div>
 
 
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  <script type="application/javascript" src="{% static 'LVR/assets/js/cookies.js' %}"></script>
+  <script type="application/javascript" src="{% static 'LVR/assets/js/bootstrap-select.js' %}"></script>
+  <script src="https://kit.fontawesome.com/0b5e6aae1f.js" crossorigin="anonymous"></script>
+  <script> $(document).ready(function(){ $('[data-toggle="tooltip"]').tooltip(); }); </script>
+
 </body>
 
 
 <div class="alert text-center cookiealert h6" role="alert">
   <b>¿Una galletita joven?</b> &#x1F36A; Usamos cookies para mejorar tu experiencia en este sitio web. Al seguir navegando, aceptas la <a href="{% url 'cookies' %}" target="_blank">política de cookies</a>.
   <button type="button" class="btn btn-primary btn-sm acceptcookies my-1 my-sm-1 my-md-1 my-md-1 my-xl-1 "> Aceptar </button>
+</div>
+
+<div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModal" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header px-lg-5">
+        <h5 class="modal-title" id="contact_Label">Contacta con LVR </h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+      <div class="modal-body px-lg-5">
+        <form action="#">
+          <div class="row">
+            <div class="form-group col-lg-6">
+              <label for="contact_fullName">Nombre y apellido</label>
+              <input class="form-control form-control-lg" id="contact_fullName" type="text" name="fullname" placeholder="Tu nombre completo">
+            </div>
+            <div class="form-group col-lg-6">
+              <label for="contact_email">Correo electrónico</label>
+              <input class="form-control form-control-lg" id="contact_email" type="email" name="email" placeholder="Tu email">
+            </div>
+            <div class="form-group col-lg-12">
+              <label for="contact_message">Mensaje</label>
+              <textarea class="form-control form-control-lg txtarea-maxh-400" id="contact_message" name="message" rows="4" placeholder="Escribe tu mensaje (máximo 500 caracteres)"></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer justify-content-end px-lg-5">
+        <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">Cancelar</button>
+        <button class="btn btn-primary" type="submit">Enviar</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 
@@ -204,7 +254,7 @@
       </div>
 
       <div class="col-8 col-md-6 col-lg-5 text-white text-center">
-        <div class="py-2 bg-info">
+        <div class="py-2">
           <h3> Suscríbete al newsletter </h3>
           Recibe un email cada vez que escribamos un nuevo post. Sin spam garantizado.
         </div>
@@ -213,10 +263,9 @@
           <div class="col mx-auto">
             <form action="" class="">
               <div class="input-group pt-3 align-items-center">
-                <label class="mr-2" for="subscribeNewsletter"> Email: </label>
                 <input type="email" class="form-control bg-none border-dark text-white" id="subscribeNewsletter"  placeholder="Escribe tu dirección de email" >
                 <div class="input-group-append">
-                  <button class="btn btn-light" type="submit"><i class="fas fa-paper-plane"></i> </button>
+                  <button class="btn btn-light" type="submit" aria-label="Suscríbete al newsletter"><i class="fas fa-paper-plane"></i> </button>
                 </div>
               </div>
             </form>
@@ -261,15 +310,5 @@
 
 
 
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-<script type="text/javascript" src="{% static 'LVR/assets/js/cookies.js' %}"></script>
-
-
-<script src="https://kit.fontawesome.com/0b5e6aae1f.js" crossorigin="anonymous"></script>
-
-<script> $(document).ready(function(){ $('[data-toggle="tooltip"]').tooltip(); }); </script>
 
 </html>

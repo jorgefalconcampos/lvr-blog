@@ -181,7 +181,6 @@
 .post-category{
   position: absolute;
   top:1em;
-  // background: #e74c3c;
   background: $lvr-steel;
   padding: 10px 15px;
   color: #FFFFFF;
@@ -191,6 +190,11 @@
   // overflow-wrap: break-word;
   max-width: 230px;
   word-wrap: break-word;
+}
+
+
+.text-preview{
+  color: $lvr-light-gray !important;
 }
 
 

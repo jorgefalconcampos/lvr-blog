@@ -82,6 +82,8 @@ def index(request):
     print(f" categorias: {popular_categories}")
     diccionario = {}
 
+    # TODO: while diccionario < 8 añadir
+
     for category in popular_categories:
         how_many = all_posts.filter(category=category).count() #Getting how many posts with that popular category exists
         diccionario[category]=how_many
