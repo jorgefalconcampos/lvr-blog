@@ -1,5 +1,5 @@
 from django.utils import timezone
-import datetime, math
+import datetime, math, json, urllib
 from django.template.defaultfilters import date
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -9,6 +9,8 @@ from django.shortcuts import redirect, render, get_object_or_404
 from . models import blog_post, blog_category, blog_author, blog_postComment, blog_misc  #Importing the models
 from . forms import PostForm, CommentForm, CreateUserForm
 from django.utils.translation import gettext as _
+from django.conf import settings as conf_settings #To read reCaptcha's key
+from . decorators import check_recaptcha
 from taggit.models import Tag
 from django.db.models import Count, Q
 from django.db.models.functions import Upper
@@ -103,30 +105,63 @@ def index(request):
 
 
 
+
+
+
+#This method validates the data and reCaptcha
+def check_recaptcha(request):
+    recaptcha_response = request.POST.get('g-recaptcha-response')
+    data = {
+        'secret': conf_settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+        'response': recaptcha_response
+    }
+    r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
+    result = r.json()
+
+    if result['success']:
+        return True
+    else:
+        return False
+
+
+
 #This method shows the detail of the selected post of the blog
 def post_detail(request, category_text, slug_text):
-    template_name = 'LVR/post_detail.html'
-    post = get_object_or_404(blog_post, slug=slug_text)
+    template = 'LVR/post_detail.html'
+    post = get_object_or_404(blog_post, slug=slug_text)    
     get_author = post.author
     more_from_author = blog_post.objects.filter(author=get_author).order_by('-published_date')[:4]
     related = post.tags.similar_objects()[:3] #Getting the last 3 posts that contains the same tags that the current post
-
     all_total_posts = blog_post.objects.filter(status=1).count() #counting all-time posts
-
-    print(all_total_posts)
-
-
     all_comments = post.comments.filter(is_approved=True) # Filtering only approved comments
     new_comment = None
 
+
     if request.method == 'POST':
-        comment_form = CommentForm(data=request.POST)
-        if comment_form.is_valid():
-            new_comment = comment_form.save(commit=False) #Create a new comment but don't save it to the DB yet
-            new_comment.post = post #Assign the current post to the comment
-            new_comment.save()
+        cmt_form = CommentForm(data=request.POST)
+
+        if cmt_form.is_valid():
+            recaptcha_response = request.POST.get('g-recaptcha-response')
+            url = 'https://www.google.com/recaptcha/api/siteverify'
+            values = {
+                'secret': conf_settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+                'response': recaptcha_response
+            }
+            data = urllib.parse.urlencode(values).encode()
+            req =  urllib.request.Request(url, data=data)
+            response = urllib.request.urlopen(req)
+            result = json.loads(response.read().decode())
+            print(result)
+            if result['success']:
+                new_comment = cmt_form.save(commit=False) #Create a new comment but don't save it to the DB yet
+                new_comment.in_post = post #Assign the current post to the comment
+                new_comment.save()
+                messages.success(request, 'New comment added with success!')
+            else:
+                messages.error(request, 'Invalid reCAPTCHA. Please try again.')           
     else:
-        comment_form = CommentForm()
+        cmt_form = CommentForm()
+
 
     context = {
         'post': post,
@@ -135,10 +170,14 @@ def post_detail(request, category_text, slug_text):
         'total_posts': all_total_posts,
         'comments': all_comments,
         'new_comment': new_comment,
-        'comment_form': comment_form
+        'cmt_form': cmt_form
     }
 
-    return render(request, 'LVR/post_detail.html', context )
+    return render(request, template, context )
+
+
+
+
 
 
 
@@ -159,11 +198,18 @@ def authors(request):
 
 
 
+
+
 #Author detail
 def author_detail(request, pinchiautor):
     template = 'LVR/author_detail.html'
     author = blog_author.objects.filter(slug=pinchiautor).first()
+    print(f"autor: {author}")
     posts_by_author = blog_post.objects.filter(author__slug=pinchiautor, status=1).order_by('-published_date')  #Getting al posts by the current author
+
+    print(posts_by_author)
+
+
     paginator = Paginator(posts_by_author, 9)
     page = request.GET.get('page')
     try:
@@ -488,7 +534,7 @@ def post_new(request):
             newpost.save()
             form.save_m2m()
             messages.success(request, _('PostCreated_Ok'))
-            return redirect('post_detail', slug_text=newpost.slug)
+            return redirect('post_detail', category_text=newpost.category, slug_text=newpost.slug)
     else:
         form = PostForm()
     context = { 'form': form }
@@ -516,7 +562,7 @@ def post_edit(request, slug_text):
             post.save()
             form.save_m2m()
             # messages.success(request, _('PostUpdated_Ok'))
-            return redirect('post_detail', slug_text=post.slug)
+            return redirect('post_detail', category_text=newpost.category, slug_text=post.slug)
     else:
         form = PostForm(instance=post)
     context = {'form': form, 'is_edit': is_edit, 'status': status, 'title': title, 'slug': slug }

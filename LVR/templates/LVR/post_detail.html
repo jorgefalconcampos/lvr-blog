@@ -14,6 +14,13 @@
 
 
 
+
+{% block javascript_captcha %}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{% endblock %}
+
+
+
 {% block post_content %}
 
 <div itemscope itemtype="https://schema.org/BlogPosting">
@@ -286,13 +293,57 @@
 {% endif %}
 
 
-
-<div class="card border-0 shadow-sm p-2 p-lg-0">
+{% if post.status == 1 %}
+<div class="card shadow-sm p-2 p-lg-0">
    
-    <div class="card-body tex">
-        <h3 class="py-1 mb-4 text-center"> <b> {{ comments.count }} </b> {% trans 'post_detail_CountingComments' %} </h3>
+    <div class="card-body">
 
-        <div class="cmt" itemscope itemtype="https://schema.org/Comment"> 
+        <h3 class="py-1 mb-3"> <b> {{ comments.count }} </b> {% trans 'post_detail_CountingComments' %} </h3>
+        <a class="my-2 mb-4 btn btn-secondary" href="#newCmt" role="button" data-toggle="collapse" aria-expanded="false" aria-control="newCmt">Escribe un comentario</a>
+        {% if new_comment %} 
+        <div class="alert alert-success" role="alert"> {% trans 'post_detail_AwaitingModeration' %} </div>
+        {% else %}
+        <div class="collapse" id="newCmt">
+            <div class="py-3">
+                <form id="new_comment" method="POST">
+                    {% csrf_token %}
+
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label for="comment_fullName">{{cmt_form.author.label}}</label>
+                            {{cmt_form.author}}
+                        </div>
+    
+                        <div class="form-group col-6">
+                            <label for="comment_email">{{cmt_form.author_email.label}}</label>
+                            {{cmt_form.author_email}}
+                        </div>
+    
+                        <div class="form-group col-12">
+                            <label for="comment_body">{{cmt_form.comment_body.label}}</label>
+                            <small class="float-left float-sm-right float-md-right float-lg-right mx-2"> (Asegúrate que tu comentario siga las <a href="{% url 'comments_terms' %}"  target="_blank"> normas comunitarias</a>). </small>
+                            {{cmt_form.comment_body}}
+                        </div>
+
+                       
+
+                        <div class="form-group col-12 m-0">
+                            <div class="g-recaptcha" data-sitekey="6Le7PK0ZAAAAAB35Ahoq-zY-OWb1y_4hBqiQEg3l"></div>
+                            <button class="mt-3 btn btn-primary" type="submit">Comentar</button>
+                        </div>
+                        
+
+                    </div>
+                </form> 
+            </div>
+        </div>
+        {% endif %}
+
+
+        <hr class="mt-1 mb-4">
+
+        {% for comment in comments %}
+        <div class="cmt mt-3 mb-3" itemscope itemtype="https://schema.org/Comment"> 
             <div class="row mx-3 d-flex justify-content-left justify-content-lg-between" >
                 <div class="col-10">
                     <div class="row d-flex justify-content-start">
@@ -300,19 +351,18 @@
                         <div class="media align-items-center">
                             <img class="rounded-circle" src="{% static 'LVR/assets/img/jeff.png' %}" alt="" width="75">
                             <div class="media-body ml-3">
-                                <h5 class="mb-0 font-weight-bold">Emiliano Echeverria</h5>
-                                <p class="small text-muted mb-0 font-weight-bold">1 March , 2019 at 3:08 pm</p>
-                                <ul class="list-inline mb-0 small ">
+                                <h5 class="mb-0 font-weight-bold">{{comment.author}}</h5>
+                                <p class="small text-muted mb-0 font-weight-bold">{{comment.created_date}}</p>
+                                <!-- <ul class="list-inline mb-0 small ">
                                     <li class="list-inline-item m-0"><i class="fas fa-star text-primary"></i></li>
                                     <li class="list-inline-item m-0"><i class="fas fa-star text-primary"></i></li>
                                     <li class="list-inline-item m-0"><i class="fas fa-star text-primary"></i></li>
                                     <li class="list-inline-item m-0"><i class="fas fa-star text-primary"></i></li>
                                     <li class="list-inline-item m-0"><i class="fas fa-star-half-alt text-primary"></i></li>
-                                </ul>
+                                </ul> -->
                             </div>
                         </div>
                         
-                        <!-- <p> {{ comment.author }} | <span> {{ comment.created_date }}</span> </p> -->
                     </div>
                 </div>
                 
@@ -321,8 +371,6 @@
                         {% if not comment.has_report %}
                         <div class="" data-toggle="tooltip" data-html="true" data-placement='right' title="{% trans 'reportComment' %}">
                             <p class=""> <a href="#"> <i class="material-icons align-top md-22">report_problem</i></a> </p>
-                            
-                            
                         </div>
                         {% else %}
                         <div class="" data-toggle="tooltip" data-html="true" data-placement='right' title="{% trans 'reportedComment' %}">
@@ -332,165 +380,48 @@
                     </div>
                 </div>
             </div>
-            <div class="cmt-body" itemprop="comment" > 
-                
+            <div class="cmt-body" itemprop="comment"> 
                 {% if not comment.has_report %}
-                Lorem ipsum dolor comentario muy largo vamos a ver que pas jaja vomentario largo sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
-                
-                <!-- {{ comment.comment_body | linebreaks }}  -->
+                {{ comment.comment_body | linebreaks }} 
                 {% else %}                          
                 <div>
-                    <div class="" id="reportedComment">
-                        <h3 class="mb-1">
-                            <button class="btn btn-link btn-sm" data-toggle="collapse" data-target="#collapse_reportedComment" aria-expanded="true" >
-                                <i class="material-icons align-top md-22 text-danger">keyboard_arrow_down</i> {% trans 'dashboard_Settings_SM_show' %} 
-                            </button>
-                        </h3>
-                    </div>
+                    <h3 class="mb-1">
+                        <button class="btn btn-link btn-sm" data-toggle="collapse" data-target="#collapse_reportedComment" aria-expanded="true" >
+                            <i class="material-icons align-top md-22 text-danger">keyboard_arrow_down</i> {% trans 'dashboard_Settings_SM_show' %} 
+                        </button>
+                    </h3>
+                    
                     <div id="collapse_reportedComment" class="collapse" aria-labelledby="reportedComment" >
                         <div class="py-2 px-2">
-                            <div class="text-danger" style="text-decoration: line-through;">
-                                
-                                lorem ipsum
-                                <!-- {{ comment.comment_body | linebreaks }}  -->
+                            <div class="text-danger" style="text-decoration: line-through;">                                
+                                {{ comment.comment_body | linebreaks }} 
                             </div>
                         </div>
                     </div>
                 </div>
                 {% endif %}                        
             </div> 
-        </div>      
-
-        <a class="mt-4 btn btn-secondary" href="#reviewPanel" role="button" data-toggle="collapse" aria-expanded="false" aria-control="reviewPanel">Escribe un comentario</a>
-        <div class="collapse" id="reviewPanel">
-            <div class="pt-4">
-                <form action="#">
-                    <div class="row">
-                        <div class="form-group col-lg-6">
-                            <label for="comment_fullName">Nombre completo</label>
-                            <input class="form-control form-control-lg" id="comment_fullName" type="text" name="full-name" placeholder="Your full name">
-                        </div>
-                        
-                        <div class="form-group col-lg-6">
-                            <label for="comment_email">Email</label>
-                            <input class="form-control form-control-lg" id="comment_email" type="email" name="author-email" placeholder="Escribe tu dirección de email" >
-                        </div>
-                        
-                        <div class="form-group col-12">
-                            <label for="comment_body">Tu comentario </label>
-                            <small class="float-right mx-2"> (Asegúrate que tu comentario siga las <a href="{% url 'comments_terms' %}"  target="_blank"> normas comunitarias</a>). </small>
-                            <textarea class="form-control form-control-lg txtarea-maxh-400" id="comment_body" name="comment-body" rows="5" placeholder="Escribe un comentario"></textarea>
-                        </div>
-                        
-                        <div class="form-group col-12 m-0">
-                            <button class="btn btn-primary" type="submit">Comentar</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
         </div>
+        {% endfor %}      
+
+       
     </div>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{% if post.status == 1 %}
-<div class="row mt-1 py-5">
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="py-1"> <b> {{ comments.count }} </b> {% trans 'post_detail_CountingComments' %} </h3>
-            </div>
-
-            <div class="card-body">
-                {% for comment in comments %}
-                <div class="py-2">
-                    <div class="comment">
-                        <div class="row mx-2 d-flex justify-content-left justify-content-lg-between ">
-                            <div class="col-10">
-                                <div class="row d-flex justify-content-start">
-                                    <p> {{ comment.author }} | <span> {{ comment.created_date }}</span> </p>
-                                </div>
-                            </div>
-
-                            <div class="col-2">                            
-                                <div class="row d-flex justify-content-end">
-                                    {% if not comment.has_report %}
-                                    <div class="" data-toggle="tooltip" data-html="true" data-placement='right' title="{% trans 'reportComment' %}">
-                                        <p class=""> <a href="#"> <i class="material-icons align-top">report_problem</i></a> </p>
-                                    </div>
-                                    {% else %}
-                                    <div class="" data-toggle="tooltip" data-html="true" data-placement='right' title="{% trans 'reportedComment' %}">
-                                        <p> <a href="#" class="text-danger"> <i class="material-icons align-top">info</i></a> </p>
-                                    </div>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comment-body"> 
-
-                            {% if not comment.has_report %}
-                                {{ comment.comment_body | linebreaks }} 
-                            {% else %}                          
-                                <div>
-                                    <div class="" id="reportedComment">
-                                        <h3 class="mb-1">
-                                            <button class="btn btn-link btn-sm" data-toggle="collapse" data-target="#collapse_reportedComment" aria-expanded="true" >
-                                                <i class="material-icons align-top md-22 text-danger">keyboard_arrow_down</i> {% trans 'dashboard_Settings_SM_show' %} 
-                                            </button>
-                                        </h3>
-                                    </div>
-                                    <div id="collapse_reportedComment" class="collapse" aria-labelledby="reportedComment" >
-                                        <div class="py-2 px-2">
-                                            <div class="text-danger" style="text-decoration: line-through;">
-                                                {{ comment.comment_body | linebreaks }} 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endif %}                        
-                        </div> 
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-
-            <div class="card-footer">
-                <div class="card border-info rounded">
-                    <div class="card-header p-0">
-                        <div class="container bg-info py-2">
-                            <h3 class="text-white"> <i class="material-icons align-middle">comment</i> {% trans 'post_detail_LeaveComment' %} </h3>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        {% if new_comment %} 
-                        <div class="alert alert-success" role="alert"> {% trans 'post_detail_AwaitingModeration' %} </div>
-                        {% else %}
-                        <form id="new_comment" method="POST">
-                            {% csrf_token %}
-                            {{ comment_form | crispy }}
-                            <button type="submit" class="btn btn-info btn-lg"> {% trans 'post_detail_SendComment' %} </button>
-                        </form>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

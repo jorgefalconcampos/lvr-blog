@@ -12,7 +12,7 @@ urlpatterns = [
     path("robots.txt", views.robots_txt),
     path('', views.index, name='index'),
     path('about', views.about, name='about'),  
-    path('<slug:category_text>/<slug:slug_text>/', views.post_detail, name='post_detail'),
+    path('post/<slug:category_text>/<slug:slug_text>/', views.post_detail, name='post_detail'),
     path('tags', views.tags, name='tags'),
     path('tags/<slug:slug>', views.tags_detail, name='tags_detail'),
     path('categories', views.categories, name='categories'),

@@ -141,7 +141,7 @@
   </div>
   
 
-  <!-- Content imported from "authors_detail.html" with the block of code "author_detail" -->
+  <!-- Content imported from "author_detail.html" with the block of code "author_detail" -->
   <div class="container">
     <div class="row my-3">
       {% block author_detail %}
@@ -197,6 +197,7 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  {% block javascript_captcha %}{% endblock %}
   <script type="application/javascript" src="{% static 'LVR/assets/js/cookies.js' %}"></script>
   <script type="application/javascript" src="{% static 'LVR/assets/js/bootstrap-select.js' %}"></script>
   <script src="https://kit.fontawesome.com/0b5e6aae1f.js" crossorigin="anonymous"></script>
@@ -211,6 +212,13 @@
 </div>
 
 <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModal" aria-hidden="true">
+
+
+
+
+
+
+
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header px-lg-5">
@@ -228,6 +236,25 @@
               <label for="contact_email">Correo electrónico</label>
               <input class="form-control form-control-lg" id="contact_email" type="email" name="email" placeholder="Tu email">
             </div>
+
+            <!-- <div class="form-group col-lg-12">
+              <label for="listingCategory">Listing category</label>
+              <select class="selectpicker" id="listingCategory" name="listing-category" data-style="bs-select-form-control" data-title="Select listing category" data-width="100%" required>
+                <option value="">Marketing</option>
+                <option value="">Idea generation</option>
+                <option value="">Idea generation</option>
+                <option value="">Design</option>
+                <option value="">Naming</option>
+                <option value="">Domain names</option>
+                <option value="">Sales</option>
+                <option value="">Finance</option>
+                <option value="">Project management</option>
+                <option value="">Hosting</option>
+                <option value="">Social tools</option>
+              </select>
+            </div> -->
+
+
             <div class="form-group col-lg-12">
               <label for="contact_message">Mensaje</label>
               <textarea class="form-control form-control-lg txtarea-maxh-400" id="contact_message" name="message" rows="4" placeholder="Escribe tu mensaje (máximo 500 caracteres)"></textarea>

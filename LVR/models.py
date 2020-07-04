@@ -60,7 +60,7 @@ class blog_post(m.Model):
     title = m.CharField(max_length=150)
     subtitle = m.CharField(max_length=200, blank=True) #Subtitles are optional
     slug = m.SlugField(unique=True)
-    category = m.ForeignKey(blog_category, on_delete=m.CASCADE, related_name='catego', default='Uncategorized')
+    category = m.ForeignKey(blog_category, on_delete=m.CASCADE, related_name='catego', default='1')
     image = m.ImageField(upload_to='img/', default='no-img.png')
     post_body = m.TextField() #Post body
     tags = TaggableManager() #Tags

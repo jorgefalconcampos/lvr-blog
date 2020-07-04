@@ -28,8 +28,10 @@
     `User.objects.all()` - You'll see the user you've created in step 5.
     * Create the supusr object with `supusr = User.objects.get(username='Username')`, Username is the same you wrote in step 5
     * Then create the blog_author object with `blog_author.objects.create(name=supusr)` and that's it
+
+  6) Rename .env.example to .env and modify the values    
     
-  6) Go to the root project folder and run the server with `python manage.py runserver`
+  7) Go to the root project folder and run the server with `python manage.py runserver`
   
 For further information read the *DjangoTutorial.txt* file
 

@@ -972,9 +972,11 @@ a.text-hover-dark {
       margin-left: -0.5rem !important; }
   .bootstrap-select .dropdown-menu {
     padding: 0;
-    border-radius: 0;
+    border-radius: 0.25rem;
+    border-width: 1px;
+    border-style: solid;
     border-color: #ddd;
-    box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-height: 200px !important;
     max-width: 100%;
     -webkit-transform: none !important;
@@ -1714,7 +1716,7 @@ hr {
   border-top: 1px solid rgba(0, 0, 0, 0.1); }
 
 small, .small {
-  padding-top: 5px;
+  padding-top: 3px;
   font-size: 105%;
   font-weight: 400; }
 

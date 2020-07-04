@@ -48,6 +48,26 @@
                                         {{ form.subtitle }}
 
                                     </div>
+
+
+                                    <!-- <div class="form-group col-lg-12">
+                                        <label for="listingCategory">Listing category</label>
+                                        <select class="selectpicker" id="listingCategory" name="listing-category" data-style="bs-select-form-control" data-title="Select listing category" data-width="100%" required>
+                                          <option value="">Marketing</option>
+                                          <option value="">Idea generation</option>
+                                          <option value="">Idea generation</option>
+                                          <option value="">Design</option>
+                                          <option value="">Naming</option>
+                                          <option value="">Domain names</option>
+                                          <option value="">Sales</option>
+                                          <option value="">Finance</option>
+                                          <option value="">Project management</option>
+                                          <option value="">Hosting</option>
+                                          <option value="">Social tools</option>
+                                        </select>
+                                      </div>
+                           -->
+
                                     
                                     <div class="form-group py-1" > 
                                         <div class="container"> <div class="row"> <h6 class="ml-1"> {{ form.image.label }} </h6> </div> </div>   
@@ -57,13 +77,21 @@
                                             </div>
                                         </div>
                                     </div>
+
+
+                                    <div class="form-group py-1">
+                                        <div class="container"> <div class="row"> <h6 class="ml-1"> {{ form.category.label }} </h6> </div> </div>   
+                                        <!-- <input type="text" data-role="tagsinput" class="form-control" name="tags"> -->
+                                        {{ form.category }}
+                                        <p class="ml-1 mt-1 text-muted"> {{ form.category.help_text }} </p>
+
+                                    </div>
                                     
                                     <div class="form-group py-1">
                                         <div class="container"> <div class="row"> <h6 class="ml-1"> {{ form.tags.label }} </h6> </div> </div>   
                                         <!-- <input type="text" data-role="tagsinput" class="form-control" name="tags"> -->
                                         {{ form.tags }}
                                         <p class="ml-1 mt-1 text-muted"> {{ form.tags.help_text }} </p>
-
                                     </div>
                                     
                                 </div>
