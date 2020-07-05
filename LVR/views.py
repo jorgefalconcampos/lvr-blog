@@ -6,7 +6,7 @@ from django.core import serializers
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.urls import reverse_lazy
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404, reverse
 from . models import blog_post, blog_category, blog_author, blog_postComment, blog_misc  #Importing the models
 from . forms import PostForm, CommentForm, CreateUserForm
 from django.utils.translation import gettext as _
@@ -29,19 +29,7 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.template.loader import render_to_string
 from . tokens import account_activation_token
 from django.core.mail import EmailMessage
-
-
-from django.http import HttpResponse
-from django.shortcuts import render, redirect, reverse
-from django.contrib.auth import login, authenticate
-from . forms import CreateUserForm
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes, force_text
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template.loader import render_to_string
 from .tokens import account_activation_token
-from django.contrib.auth.models import User
-from django.core.mail import EmailMessage
 
 
 
