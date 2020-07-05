@@ -59,14 +59,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'LVR.apps.LvrConfig',
+    'corsheaders',
     'crispy_forms',
     'taggit',
+    'pwa',
     'django_summernote'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -74,9 +77,44 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:8000',
+    'http://localhost:9000',
+]
+
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 GOOGLE_RECAPTCHA_SECRET_KEY = config('GOOGLE_RECAPTCHA_SECRET_KEY')
+
+
+PWA_APP_NAME = 'Le velo rouge' 
+PWA_APP_START_URL = '/base_layout' 
+PWA_APP_SCOPE = '/base_layout' 
+PWA_APP_DISPLAY = 'standalone' 
+PWA_APP_BACKGROUND_COLOR = '#EBEBEB' 
+PWA_APP_THEME_COLOR = '#F52B2B' 
+PWA_APP_DESCRIPTION = "Le velo rouge - PWA" 
+PWA_APP_DIR = 'ltr' 
+PWA_APP_LANG = 'en-US'
+PWA_APP_ORIENTATION = 'portrait-primary' 
+PWA_APP_STATUS_BAR_COLOR = 'default' 
+
+
+PWA_APP_ICONS = [ { 'src': '/static/LVR/assets/img/icons/r-icon.png', 'sizes': '160x160' } ] 
+PWA_APP_ICONS_APPLE = [ { 'src': '/static/LVR/assets/img/icons/r-icon.png', 'sizes': '160x160' } ] 
+PWA_APP_SPLASH_SCREEN = [ { 'src': '/static/LVR/assets/img/icons/splash-640x1136.png', 'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)' } ] 
+
+
+
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'LVR/static/LVR/assets/js/pwa', 'serviceworker.js')
+
+
+
+
+
+
+
+
 
 
 

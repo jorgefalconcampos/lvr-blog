@@ -2,6 +2,7 @@ from django.utils import timezone
 import datetime, math, json, urllib
 from django.template.defaultfilters import date
 from django.contrib.auth.models import User
+from django.core import serializers
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.urls import reverse_lazy
@@ -59,6 +60,17 @@ def robots_txt(request):
     return HttpResponse("\n".join(lines), content_type="text/plain") 
 
 
+# ============================#
+# ====== Base section ====== #
+# ============================#
+
+
+def getdata(request):
+    results = blog_post.objects.all()
+    jsondata = serializers.serialize('json',results)
+    return HttpResponse(jsondata)
+
+
 
 
 # ===========================#
@@ -81,7 +93,7 @@ def index(request):
     avg = math.ceil(all_posts.count()/all_categories.count()) #Getting the average between all posts divided by number of categories
     popular_categories = blog_category.objects.annotate(post_count=Count('catego')).filter(post_count__gte=avg)
     #Once average is calculated, we filter categories that have more or equal posts (gte) than the average
-    print(f" categorias: {popular_categories}")
+    # print(f" categorias: {popular_categories}")
     diccionario = {}
 
     # TODO: while diccionario < 8 añadir
@@ -90,7 +102,7 @@ def index(request):
         how_many = all_posts.filter(category=category).count() #Getting how many posts with that popular category exists
         diccionario[category]=how_many
 
-    print(diccionario)
+    # print(diccionario)
 
     paginator = Paginator(all_posts, 9) #n posts in each page
     page = request.GET.get('page')
@@ -104,6 +116,10 @@ def index(request):
     return render(request, template_name, context)
 
 
+
+def base_layout(request):
+	template = 'LVR/base.html'
+	return render(request, template)
 
 
 

@@ -32,6 +32,7 @@ from LVR import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('LVR.urls')),
+    path('', include('pwa.urls')),
     path('summernote/', include('django_summernote.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
 ]

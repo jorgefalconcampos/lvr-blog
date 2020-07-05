@@ -11,6 +11,8 @@ from django.contrib import admin
 urlpatterns = [
     path("robots.txt", views.robots_txt),
     path('', views.index, name='index'),
+    path('base_layout', views.base_layout, name='base_layout'),
+    path('getdata', views.getdata, name='getdata'),
     path('about', views.about, name='about'),  
     path('post/<slug:category_text>/<slug:slug_text>/', views.post_detail, name='post_detail'),
     path('tags', views.tags, name='tags'),
