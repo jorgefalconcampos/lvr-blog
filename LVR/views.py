@@ -529,19 +529,19 @@ def post_list(request):
 def post_new(request):
     template = 'LVR/user/post_edit.html'
     if request.method == "POST":
-        form = PostForm(request.POST, request.FILES)
-        if form.is_valid():
-            newpost = form.save(commit=False)
+        newPost_form = PostForm(request.POST, request.FILES)
+        if newPost_form.is_valid():
+            newpost = newPost_form.save(commit=False)
             get_author = blog_author.objects.get(name=request.user)
             newpost.author = get_author
             newpost.published_date = timezone.now()
             newpost.save()
-            form.save_m2m()
+            newPost_form.save_m2m()
             messages.success(request, _('PostCreated_Ok'))
             return redirect('post_detail', category_text=newpost.category, slug_text=newpost.slug)
     else:
-        form = PostForm()
-    context = { 'form': form }
+        newPost_form = PostForm()
+    context = { 'newPost_form': newPost_form }
     return render(request, template, context)
 
 
