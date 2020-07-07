@@ -10,7 +10,9 @@ from django.contrib import admin
 
 urlpatterns = [
     path("robots.txt", views.robots_txt),
+    path('', views.index, name='base'),
     path('', views.index, name='index'),
+    path('search', views.searchido, name='search'),
     path('base_layout', views.base_layout, name='base_layout'),
     path('getdata', views.getdata, name='getdata'),
     path('about', views.about, name='about'),  

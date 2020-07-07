@@ -70,9 +70,9 @@
                   <a href="{% url 'categories' %}" class="py-1"> Conoce todas las categorías </a> 
                 </div>  
                 
-                <form class="mx-3 mt-2 mb-2 p-2 rounded shadow-sm bg-white" action="#">
+                <form method="GET" action="{% url 'search' %}" name="searchForm" class="mx-3 mt-2 mb-2 p-2 rounded shadow-sm bg-white">
                   <div class="input-group">
-                    <input class="form-control border-0 mr-2" type="search" placeholder="Busca entre +{{total_posts}} posts">
+                    <input type="search" type="text" name="q" class="form-control border-0 mr-2" placeholder="Busca entre +{{all_total_posts}} posts" required>
                     <div class="input-group-append rounded">
                       <button class="btn btn-primary rounded" type="submit"><i class="fas fa-search mr-2"></i>Buscar</button>
                     </div>
@@ -123,6 +123,16 @@
       {% endblock %}
     </div>
   </div>
+  
+  
+  <!-- Content imported from "about.html" with the block of code "about" -->
+  <div class="container">
+    <div class="row my-3">
+      {% block search %}
+      {% endblock %}
+    </div>
+  </div>
+           
          
 
   <!-- Content imported from "post_detail.html" with the block of code "post_content" -->

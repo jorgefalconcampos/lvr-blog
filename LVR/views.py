@@ -59,6 +59,43 @@ def getdata(request):
     return HttpResponse(jsondata)
 
 
+   
+
+
+def base(request):
+    template = 'LVR/base.html' 
+    context = {}
+    return render(request, template, context)
+    
+
+
+def searchido(request):
+    template = 'LVR/search.html'
+    if request.method == 'GET':
+        search_term = request.GET.get('q')
+        bad_query = False
+
+        if len(search_term) <= 2:
+            bad_query = True
+        else:
+            queryset = []
+            queries = search_term.split(" ") #python install 2019 --> [python, install, 2019]
+            for q in queries:
+                posts = blog_post.objects.filter(
+                    Q(title__icontains=q)|
+                    Q(subtitle__icontains=q)|
+                    Q(post_body__icontains=q)).distinct()
+
+            for post in posts:
+                queryset.append(post)
+            
+            how_many = len(queryset)
+            context = {'results': queryset, 'number': how_many, 'query': search_term}
+            return render(request, template, context)
+
+    return render(request, template, {'bad_query':bad_query} )
+
+
 
 
 # ===========================#
@@ -91,6 +128,13 @@ def index(request):
         diccionario[category]=how_many
 
     # print(diccionario)
+
+
+
+
+
+
+
 
     paginator = Paginator(all_posts, 9) #n posts in each page
     page = request.GET.get('page')
@@ -136,7 +180,6 @@ def post_detail(request, category_text, slug_text):
     get_author = post.author
     more_from_author = blog_post.objects.filter(author=get_author).order_by('-published_date')[:4]
     related = post.tags.similar_objects()[:3] #Getting the last 3 posts that contains the same tags that the current post
-    all_total_posts = blog_post.objects.filter(status=1).count() #counting all-time posts
     all_comments = post.comments.filter(is_approved=True) # Filtering only approved comments
     new_comment = None
 
@@ -171,7 +214,6 @@ def post_detail(request, category_text, slug_text):
         'post': post,
         'related_posts': related,
         'more_from_author': more_from_author,
-        'total_posts': all_total_posts,
         'comments': all_comments,
         'new_comment': new_comment,
         'cmt_form': cmt_form
