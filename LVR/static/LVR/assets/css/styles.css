@@ -2503,9 +2503,18 @@ h1, h2, h3, h4 {
   filter: blur(2px);
   -webkit-filter: blur(2px); }
 
+.par {
+  font-weight: 500;
+  font-size: 13px;
+  text-transform: none;
+  letter-spacing: 0em; }
+
 .txtarea-maxh-400 {
   min-height: 73px;
   max-height: 400px; }
+
+.search-title h1, .search-title h2, .search-title h3, .search-title h4, .search-title h5, .search-title h6 {
+  text-transform: uppercase !important; }
 
 .bg-platinum {
   background-color: #EBEBEB; }

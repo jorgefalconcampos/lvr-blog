@@ -30,7 +30,12 @@ h1,h2,h3,h4{
 
 
 
-
+.par{
+	font-weight: 500;
+	font-size: 13px;
+	text-transform: none;
+	letter-spacing: 0em;
+}
 
 .txtarea-maxh-400{
 	min-height: 73px;

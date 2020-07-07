@@ -1,4 +1,15 @@
 from . models import blog_post
+from . forms import SearchForm
+
+
+
+
+def searchPosts(request):
+    form = SearchForm()
+    return {'searchForm': form}
+
+
+
 
 def get_total_posts(request):
     all_total_posts = blog_post.objects.filter(status=1).count() #counting all-time posts

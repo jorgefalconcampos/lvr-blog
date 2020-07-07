@@ -5,7 +5,6 @@ from . models import blog_post, blog_author, blog_postComment, blog_category
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 from django_summernote.fields import SummernoteTextFormField, SummernoteTextField
 
-
 class PostForm(f.ModelForm):
     class Meta:
         model = blog_post
@@ -62,3 +61,23 @@ class CreateUserForm(UserCreationForm):
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
 
+
+
+
+
+class SearchForm(f.Form):
+    all_posts = str(blog_post.objects.filter(status=1).count()) #counting all-time posts
+    q_attrs = {'id':'search_input', 'type': 'text', 'class':'form-control border-0 mr-2', 'placeholder': 'Busca entre +'+all_posts+' posts'}
+    q = f.CharField(label='Escribe una o más palabras clave', max_length=128, widget=f.TextInput(attrs=q_attrs))
+
+
+
+
+
+class RegistrarUsuario(f.Form):
+    nombre = f.CharField(label='Nombre:',max_length=15,widget=f.TextInput())    
+    telefono = f.CharField(label='Teléfono',max_length=12,widget=f.TextInput())    
+    fecha_de_nacimiento = f.DateField(label='Fecha de nacimiento:', widget=f.SelectDateWidget(years=range(1900,2001)))    
+    email = f.EmailField(label='Email:',max_length=254,widget=f.EmailInput())
+
+   

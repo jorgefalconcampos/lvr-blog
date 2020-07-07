@@ -65,19 +65,24 @@
               </a>
               
               <div class="dropdown-menu dropdown-menu-right bg-platinum" aria-labelledby="searchDropdown" style="min-width:max-content;">
-                <div class="dropdown-header py-2 text-center"> 
-                  <h5 class="py-1 font-weight-bold"> Busca dentro del blog </h5> 
-                  <a href="{% url 'categories' %}" class="py-1"> Conoce todas las categorías </a> 
+                <div class="dropdown-header px-2 mx-1 py-2 text-center"> 
+                  <h5 class="py-1 font-weight-bold"> Buscar dentro del blog </h5>
+                  <form method="GET" action="{% url 'search' %}" name="" class="mx-0 mt-2 mb-2 rounded">
+                    <label class="col bg-platinum p-0 pt-1 text-center par" for="search_input">{{searchForm.q.label}}</label>
+                    <div class="bg-white p-2 rounded">
+                      <div class="input-group">
+                        {{searchForm.q}}
+                        <div class="input-group-append rounded">
+                          <button class="btn btn-primary rounded" type="submit"><i class="fas fa-search mr-2"></i>Buscar</button>
+                        </div>
+                      </div>
+                    </div>                                    
+                  </form> 
                 </div>  
-                
-                <form method="GET" action="{% url 'search' %}" name="searchForm" class="mx-3 mt-2 mb-2 p-2 rounded shadow-sm bg-white">
-                  <div class="input-group">
-                    <input type="search" type="text" name="q" class="form-control border-0 mr-2" placeholder="Busca entre +{{all_total_posts}} posts" required>
-                    <div class="input-group-append rounded">
-                      <button class="btn btn-primary rounded" type="submit"><i class="fas fa-search mr-2"></i>Buscar</button>
-                    </div>
-                  </div>
-                </form>
+                <hr class="my-1 py-1">
+                <div class="text-center">
+                  <a href="{% url 'categories' %}" class="py-1"> Ver todas las categorías </a> 
+                </div>
               </div>
             </li>
 

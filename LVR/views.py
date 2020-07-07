@@ -74,7 +74,6 @@ def searchido(request):
     if request.method == 'GET':
         search_term = request.GET.get('q')
         bad_query = False
-
         if len(search_term) <= 2:
             bad_query = True
         else:
@@ -89,8 +88,7 @@ def searchido(request):
             for post in posts:
                 queryset.append(post)
             
-            how_many = len(queryset)
-            context = {'results': queryset, 'number': how_many, 'query': search_term}
+            context = {'results': queryset, 'number': len(queryset), 'query': search_term}
             return render(request, template, context)
 
     return render(request, template, {'bad_query':bad_query} )
