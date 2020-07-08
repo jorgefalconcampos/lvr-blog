@@ -69,7 +69,7 @@ def base(request):
     
 
 
-def searchido(request):
+def search(request):
     template = 'LVR/search.html'
     if request.method == 'GET':
         search_term = request.GET.get('q')
