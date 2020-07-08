@@ -8,13 +8,14 @@ from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render, get_object_or_404, reverse
 from . models import blog_post, blog_category, blog_author, blog_postComment, blog_misc  #Importing the models
-from . forms import PostForm, CommentForm, CreateUserForm
+from . forms import PostForm, CommentForm, CreateUserForm, ContactForm
 from django.utils.translation import gettext as _
 from django.conf import settings as conf_settings #To read reCaptcha's key
 from . decorators import check_recaptcha
 from taggit.models import Tag
 from django.db.models import Count, Q
 from django.db.models.functions import Upper
+from decouple import config
 from django.views.decorators.http import require_GET
 
 #User, Admin & Superuser
@@ -59,13 +60,15 @@ def getdata(request):
     return HttpResponse(jsondata)
 
 
-   
-
 
 def base(request):
     template = 'LVR/base.html' 
-    context = {}
-    return render(request, template, context)
+    if request.method == 'GET':
+        return redirect('index')
+    return render(request, template)
+
+def cm(request):
+    return render(request, 'LVR/user/contact-mail.html', {})
     
 
 
@@ -95,6 +98,31 @@ def search(request):
 
 
 
+def contact(request):
+    if request.method == 'POST':
+        print('okkk perro')
+        ctct_form = ContactForm(data=request.POST)
+        if ctct_form.is_valid():
+            template = 'LVR/user/contact-mail.html'
+            msg_sender = request.POST.get('name')
+            msg_email = request.POST.get('email') 
+            msg_subject = request.POST.get('subject')
+            msg_msg = request.POST.get('msg')
+            context = {'name': msg_sender, 'email': msg_email, 'subject': msg_subject, 'msg': msg_msg }
+            mail_subject = msg_subject
+            message = render_to_string(template, context)
+            message_to = config('EMAIL_TO')
+            email = EmailMessage(mail_subject, message, to=[message_to])
+            email.content_subtype = 'html'
+            email.send()
+            messages.info(request, 'El email fue enviado con éxito')
+            return redirect('index')
+    else:
+        return redirect('index')
+
+
+
+   
 
 # ===========================#
 # ====== Blog section ====== #
@@ -126,14 +154,6 @@ def index(request):
         diccionario[category]=how_many
 
     # print(diccionario)
-
-
-
-
-
-
-
-
     paginator = Paginator(all_posts, 9) #n posts in each page
     page = request.GET.get('page')
     try:
@@ -144,13 +164,6 @@ def index(request):
         post_list = paginator.page(paginator.num_pages)
     context = { 'all_posts': all_posts, 'trending': trending[:3], 'page': page, 'post_list': post_list, 'popular_categories': diccionario }
     return render(request, template_name, context)
-
-
-
-def base_layout(request):
-	template = 'LVR/base.html'
-	return render(request, template)
-
 
 
 

@@ -10,10 +10,11 @@ from django.contrib import admin
 
 urlpatterns = [
     path("robots.txt", views.robots_txt),
-    path('', views.index, name='base'),
-    path('', views.index, name='index'),
+    path('', views.base, name='base'),
+    path('home', views.index, name='index'),
     path('search', views.search, name='search'),
-    path('base_layout', views.base_layout, name='base_layout'),
+    path('cm', views.cm, name='cm'),
+    path('contact', views.contact, name='contact'),
     path('getdata', views.getdata, name='getdata'),
     path('about', views.about, name='about'),  
     path('post/<slug:category_text>/<slug:slug_text>/', views.post_detail, name='post_detail'),

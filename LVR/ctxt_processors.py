@@ -1,7 +1,5 @@
 from . models import blog_post
-from . forms import SearchForm
-
-
+from . forms import SearchForm, ContactForm
 
 
 def searchPosts(request):
@@ -9,6 +7,9 @@ def searchPosts(request):
     return {'searchForm': form}
 
 
+def contactMsg(request):
+    form = ContactForm()
+    return {'contactForm': form}
 
 
 def get_total_posts(request):

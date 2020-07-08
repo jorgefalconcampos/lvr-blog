@@ -55,7 +55,7 @@ class CommentForm(f.ModelForm):
 
 
 
-# Overriding the "UserCreationForm" to allow the new following fields as inputs: email, first_name last_name
+# Overriding the 'UserCreationForm' to allow the new following fields as inputs: email, first_name last_name
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
@@ -69,6 +69,31 @@ class SearchForm(f.Form):
     all_posts = str(blog_post.objects.filter(status=1).count()) #counting all-time posts
     q_attrs = {'id':'search_input', 'type': 'text', 'class':'form-control border-0 mr-2', 'placeholder': 'Busca entre +'+all_posts+' posts'}
     q = f.CharField(label='Escribe una o más palabras clave', max_length=128, widget=f.TextInput(attrs=q_attrs))
+
+
+
+class ContactForm(f.Form):
+    name_attrs = {'class':'form-control form-control-lg',  'id':'contact_fullName', 'type':'text', 'name': 'fullname', 'placeholder':'Escribe tu nombre'}
+    email_attrs = {'class':'form-control form-control-lg', 'id':'contact_email', 'type':'email', 'name':'email', 'placeholder':'Escribe tu email'}
+    subject_attrs = {'class':'form-control form-control-lg', 'id':'contact_subject', 'type':'text', 'name':'subject', 'placeholder':'Escibe un asunto'}
+    msg_attrs = {'class':'form-control form-control-lg txtarea-maxh-400', 'id':'contact_message', 'name':'message', 'rows':'2', 'placeholder':'Escribe tu mensaje (máx. 1000 caracteres)'}
+
+    name = f.CharField(label='Nombre y apellido', max_length=128, widget=f.TextInput(attrs=name_attrs), required=True)
+    email = f.EmailField(label='Correo electrónico', max_length=128, widget=f.EmailInput(attrs=email_attrs), required=True)
+    subject = f.CharField(label='Asunto', max_length=128, widget=f.TextInput(attrs=subject_attrs), required=True)
+    msg = f.CharField(label='Mensaje', max_length=1024, widget=f.Textarea(attrs=msg_attrs), required=True)
+
+    
+    
+
+
+
+
+ 
+
+
+
+
 
 
 

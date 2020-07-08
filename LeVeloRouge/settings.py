@@ -88,8 +88,8 @@ GOOGLE_RECAPTCHA_SECRET_KEY = config('GOOGLE_RECAPTCHA_SECRET_KEY')
 
 
 PWA_APP_NAME = 'Le velo rouge' 
-PWA_APP_START_URL = '/base_layout' 
-PWA_APP_SCOPE = '/base_layout' 
+PWA_APP_START_URL = '/' 
+PWA_APP_SCOPE = '/' 
 PWA_APP_DISPLAY = 'standalone' 
 PWA_APP_BACKGROUND_COLOR = '#EBEBEB' 
 PWA_APP_THEME_COLOR = '#F52B2B' 
@@ -100,7 +100,7 @@ PWA_APP_ORIENTATION = 'portrait-primary'
 PWA_APP_STATUS_BAR_COLOR = 'default' 
 
 
-PWA_APP_ICONS = [ { 'src': '/static/LVR/assets/img/icons/r-icon.png', 'sizes': '160x160' } ] 
+PWA_APP_ICONS = [ { 'src': '/static/LVR/assets/img/icons/r-icon.png', 'sizes': '160x160' }, { 'src': '/static/LVR/assets/img/icons/r-icon-192.png', 'sizes': '192x192' },  { 'src': '/static/LVR/assets/img/icons/r-icon-512.png', 'sizes': '512x512' } ] 
 PWA_APP_ICONS_APPLE = [ { 'src': '/static/LVR/assets/img/icons/r-icon.png', 'sizes': '160x160' } ] 
 PWA_APP_SPLASH_SCREEN = [ { 'src': '/static/LVR/assets/img/icons/splash-640x1136.png', 'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)' } ] 
 
@@ -132,6 +132,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'LVR.ctxt_processors.searchPosts',
+                'LVR.ctxt_processors.contactMsg',
                 'LVR.ctxt_processors.get_total_posts',
             ],
             # 'loaders': [

@@ -224,6 +224,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/0b5e6aae1f.js" crossorigin="anonymous"></script>
   {% block javascript_captcha %}{% endblock %}
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <script type="application/javascript" src="{% static 'LVR/assets/js/pwa/idb.js' %}"></script>
   <script type="application/javascript" src="{% static 'LVR/assets/js/pwa/idbop.js' %}"></script>
   <script type="application/javascript" src="{% static 'LVR/assets/js/cookies.js' %}"></script>
@@ -250,46 +251,47 @@
         <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
       </div>
       <div class="modal-body px-lg-5">
-        <form action="#">
+        <form action="{% url 'contact' %}" method="POST">
+          {% csrf_token %}
           <div class="row">
             <div class="form-group col-lg-6">
-              <label for="contact_fullName">Nombre y apellido</label>
-              <input class="form-control form-control-lg" id="contact_fullName" type="text" name="fullname" placeholder="Tu nombre completo">
+              <label for="contact_fullName">{{contactForm.name.label}}</label>
+              <!-- <span class="small h6 font-weight-bold text-danger float-right mr-1"> <i class="fas fa-exclamation-circle"></i> Este campo es obligatorio</span> -->
+              {{contactForm.name}}
             </div>
+
             <div class="form-group col-lg-6">
-              <label for="contact_email">Correo electrónico</label>
-              <input class="form-control form-control-lg" id="contact_email" type="email" name="email" placeholder="Tu email">
+              <label for="contact_email">{{contactForm.email.label}}</label>
+              <!-- <span class="small h6 font-weight-bold text-danger float-right mr-1"> <i class="fas fa-exclamation-circle"></i> Este campo es obligatorio</span> -->
+              {{contactForm.email}}
             </div>
-
-            <!-- <div class="form-group col-lg-12">
-              <label for="listingCategory">Listing category</label>
-              <select class="selectpicker" id="listingCategory" name="listing-category" data-style="bs-select-form-control" data-title="Select listing category" data-width="100%" required>
-                <option value="">Marketing</option>
-                <option value="">Idea generation</option>
-                <option value="">Idea generation</option>
-                <option value="">Design</option>
-                <option value="">Naming</option>
-                <option value="">Domain names</option>
-                <option value="">Sales</option>
-                <option value="">Finance</option>
-                <option value="">Project management</option>
-                <option value="">Hosting</option>
-                <option value="">Social tools</option>
-              </select>
-            </div> -->
-
 
             <div class="form-group col-lg-12">
-              <label for="contact_message">Mensaje</label>
-              <textarea class="form-control form-control-lg txtarea-maxh-400" id="contact_message" name="message" rows="4" placeholder="Escribe tu mensaje (máximo 500 caracteres)"></textarea>
+              <label for="contact_subject">{{contactForm.subject.label}}</label>
+              <!-- <span class="small h6 font-weight-bold text-danger float-right mr-1"> <i class="fas fa-exclamation-circle"></i> Este campo es obligatorio</span> -->
+              {{contactForm.subject}}
+            </div>
+
+            <div class="form-group col-lg-12">
+              <label for="contact_message">{{contactForm.msg.label}}</label>
+              <!-- <span class="small h6 font-weight-bold text-danger float-right mr-1"> <i class="fas fa-exclamation-circle"></i> Este campo es obligatorio</span> -->
+              {{contactForm.msg}}
+            </div>
+
+            <div class="form-group col-6">
+              <div class="g-recaptcha" data-sitekey="6Le7PK0ZAAAAAB35Ahoq-zY-OWb1y_4hBqiQEg3l"></div>
+              <!-- <p class="ml-1 mt-2 small h6 font-weight-bold text-danger"> <i class="fas fa-exclamation-circle"></i> Captcha incorrecto, intenta de nuevo</p> -->
             </div>
           </div>
+
+          <div class="modal-footer justify-content-end">
+            <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            <button class="btn btn-primary" type="submit">Enviar</button>
+          </div>
+
         </form>
       </div>
-      <div class="modal-footer justify-content-end px-lg-5">
-        <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">Cancelar</button>
-        <button class="btn btn-primary" type="submit">Enviar</button>
-      </div>
+     
     </div>
   </div>
 </div>
