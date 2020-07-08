@@ -65,20 +65,21 @@
               </a>
               
               <div class="dropdown-menu dropdown-menu-right bg-platinum" aria-labelledby="searchDropdown" style="min-width:max-content;">
-                <div class="dropdown-header px-2 mx-1 py-2 text-center"> 
-                  <h5 class="py-1 font-weight-bold"> Buscar dentro del blog </h5>
-                  <form method="GET" action="{% url 'search' %}" name="" class="mx-0 mt-2 mb-2 rounded">
-                    <label class="col bg-platinum p-0 pt-1 text-center par" for="search_input">{{searchForm.q.label}}</label>
+                <div class="dropdown-header text-center px-1 mx-2 py-2">
+                  <h5 class="py-1 font-weight-bold">Busca en el blog</h5>
+                  <form method="GET" action="{% url 'search' %}" class="mt-2 mb-1 rounded" >
+                    <label class="bg-platinum py-1 text-center par" for="search_input">{{searchForm.q.label}}</label>
                     <div class="bg-white p-2 rounded">
                       <div class="input-group">
                         {{searchForm.q}}
                         <div class="input-group-append rounded">
-                          <button class="btn btn-primary rounded" type="submit"><i class="fas fa-search mr-2"></i>Buscar</button>
+                          <button class="btn btn-primary rounded d-block d-sm-none" type="submit"><i class="fas fa-search"></i></button>
+                          <button class="btn btn-primary rounded d-none d-sm-block" type="submit"><i class="fas fa-search mr-2"></i>Buscar</button>
                         </div>
                       </div>
-                    </div>                                    
-                  </form> 
-                </div>  
+                    </div>
+                  </form>
+                </div>
                 <hr class="my-1 py-1">
                 <div class="text-center">
                   <a href="{% url 'categories' %}" class="py-1"> Ver todas las categorías </a> 
