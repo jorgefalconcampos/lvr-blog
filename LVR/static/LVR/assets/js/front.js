@@ -11,7 +11,16 @@ $(function() {
   });
 
 
-  
+
+function restart_ctct_btns(isSent){
+  $('#contact_frm_sending').css({'display': 'none'}).fadeOut(800);
+  $('#ctct_form_send').blur();
+  $('#ctct_form_send').css({'display': 'block'}).fadeIn(800);
+  if(isSent == true){ $('#ctct_form_success').fadeIn(1000).css({'display': 'block'}).delay(2500).fadeOut(1000); }
+  else { $('#ctct_form_error').fadeIn(1000).css({'display': 'block'}).delay(2500).fadeOut(1000); }  
+}
+
+
 $(document).on('submit', '#contact_frm',function(e){
   $('#ctct_form_send').css({'display': 'none'}).fadeOut(800);
   $('#contact_frm_sending').css({'display': 'block'}).fadeIn(800);
@@ -29,14 +38,12 @@ $(document).on('submit', '#contact_frm',function(e){
     },
     success:function(json){
       document.getElementById("contact_frm").reset();
-      $('#contact_frm_sending').css({'display': 'none'}).fadeOut(800);
-      $('#ctct_form_send').blur();
-      $('#ctct_form_send').css({'display': 'block'}).fadeIn(800);
-      $('#ctct_form_success').fadeIn(1000).css({'display': 'block'}).delay(2500).fadeOut(1000);
+      restart_ctct_btns(true);
     },
     error : function(xhr,errmsg,err) {
-      $('#ctct_form_error').fadeIn(1000).css({'display': 'block'}).delay(3000).fadeOut(1000);
+      restart_ctct_btns(false);
       console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
     }
+    
     });
 });
