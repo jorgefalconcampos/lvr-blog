@@ -4,7 +4,7 @@ from django.template.defaultfilters import date
 from django.contrib.auth.models import User
 from django.core import serializers
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.http import Http404, HttpResponseRedirect, HttpResponse
+from django.http import Http404, HttpResponseRedirect, HttpResponse, JsonResponse
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render, get_object_or_404, reverse
 from . models import blog_post, blog_category, blog_author, blog_postComment, blog_misc  #Importing the models
@@ -99,8 +99,8 @@ def search(request):
 
 
 def contact(request):
-    if request.method == 'POST':
-        print('okkk perro')
+    response_data = {}
+    if request.POST.get('action') == 'sendCtct_Form':
         ctct_form = ContactForm(data=request.POST)
         if ctct_form.is_valid():
             template = 'LVR/user/contact-mail.html'
@@ -108,6 +108,12 @@ def contact(request):
             msg_email = request.POST.get('email') 
             msg_subject = request.POST.get('subject')
             msg_msg = request.POST.get('msg')
+
+            response_data['name'] = msg_sender
+            response_data['email'] = msg_email
+            response_data['subject'] = msg_subject
+            response_data['msg'] = msg_msg
+
             context = {'name': msg_sender, 'email': msg_email, 'subject': msg_subject, 'msg': msg_msg }
             mail_subject = msg_subject
             message = render_to_string(template, context)
@@ -115,8 +121,8 @@ def contact(request):
             email = EmailMessage(mail_subject, message, to=[message_to])
             email.content_subtype = 'html'
             email.send()
-            messages.info(request, 'El email fue enviado con éxito')
-            return redirect('index')
+            return JsonResponse(response_data)
+            # return redirect('index')
     else:
         return redirect('index')
 
