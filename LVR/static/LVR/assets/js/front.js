@@ -28,17 +28,28 @@ $(document).on('submit', '#contact_frm',function(e){
   $.ajax({
     type:'POST',
     url:'contact',
+    dataType: 'json',
     data:{
       name:$('#contact_fullName').val(),
       email:$('#contact_email').val(),
       subject:$('#contact_subject').val(),
       msg:$('#contact_message').val(),
       csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
-      action: 'sendCtct_Form'
+      action: 'sendCtct_Form',
+      grecaptcha_response:grecaptcha.getResponse()
     },
     success:function(json){
-      document.getElementById("contact_frm").reset();
-      restart_ctct_btns(true);
+      if(json.success){
+        document.getElementById("contact_frm").reset();
+        restart_ctct_btns(true);
+        console.log('# --- JS: Captcha OK --- #')
+        grecaptcha.reset();
+      }
+      else if(json.err_code === 'invalid_captcha'){
+        $('#ctct_form_errorCaptcha').fadeIn(1000).css({'display': 'block'}).delay(2500).fadeOut(1000);
+        restart_ctct_btns(false);
+        console.log('# --- JS: failed captcha --- #')
+      }
     },
     error : function(xhr,errmsg,err) {
       restart_ctct_btns(false);

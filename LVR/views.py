@@ -97,18 +97,20 @@ def search(request):
     return render(request, template, {'bad_query':bad_query} )
 
 
-
+@check_recaptcha
 def contact(request):
     response_data = {}
     if request.POST.get('action') == 'sendCtct_Form':
         ctct_form = ContactForm(data=request.POST)
-        if ctct_form.is_valid():
+        if ctct_form.is_valid() and request.recaptcha_is_valid:
+            print('\n\n# --- PY: Form & Captcha passed --- #')
             template = 'LVR/user/contact-mail.html'
             msg_sender = request.POST.get('name')
             msg_email = request.POST.get('email') 
             msg_subject = request.POST.get('subject')
             msg_msg = request.POST.get('msg')
 
+            response_data['success'] = True
             response_data['name'] = msg_sender
             response_data['email'] = msg_email
             response_data['subject'] = msg_subject
@@ -121,8 +123,11 @@ def contact(request):
             email = EmailMessage(mail_subject, message, to=[message_to])
             email.content_subtype = 'html'
             email.send()
+            print(f"\n# --- Form & Captcha were valid. More info: --- #\n{response_data}")
             return JsonResponse(response_data)
             # return redirect('index')
+        else:
+            return JsonResponse({'success': False, 'err_code': 'invalid_captcha'})
     else:
         return redirect('index')
 
@@ -174,7 +179,7 @@ def index(request):
 
 
 #This method validates the data and reCaptcha
-def check_recaptcha(request):
+def check_recaptcha_method(request):
     recaptcha_response = request.POST.get('g-recaptcha-response')
     data = {
         'secret': conf_settings.GOOGLE_RECAPTCHA_SECRET_KEY,

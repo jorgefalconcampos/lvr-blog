@@ -252,7 +252,7 @@
         <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
       </div>
       <div class="modal-body px-lg-5">
-        <form id="contact_frm" method="POST" >
+        <form id="contact_frm" method="POST">
           {% csrf_token %}
           <div class="row">
             <div class="form-group col-lg-6">
@@ -260,42 +260,41 @@
               <!-- <span class="small h6 font-weight-bold text-danger float-right mr-1"> <i class="fas fa-exclamation-circle"></i> Este campo es obligatorio</span> -->
               {{contactForm.name}}
             </div>
-
+            
             <div class="form-group col-lg-6">
               <label for="contact_email">{{contactForm.email.label}}</label>
               <!-- <span class="small h6 font-weight-bold text-danger float-right mr-1"> <i class="fas fa-exclamation-circle"></i> Este campo es obligatorio</span> -->
               {{contactForm.email}}
             </div>
-
+            
             <div class="form-group col-lg-12">
               <label for="contact_subject">{{contactForm.subject.label}}</label>
               <!-- <span class="small h6 font-weight-bold text-danger float-right mr-1"> <i class="fas fa-exclamation-circle"></i> Este campo es obligatorio</span> -->
               {{contactForm.subject}}
             </div>
-
+            
             <div class="form-group col-lg-12">
               <label for="contact_message">{{contactForm.msg.label}}</label>
               <!-- <span class="small h6 font-weight-bold text-danger float-right mr-1"> <i class="fas fa-exclamation-circle"></i> Este campo es obligatorio</span> -->
               {{contactForm.msg}}
             </div>
-
+            
             <div class="form-group col">
               <div class="g-recaptcha" data-sitekey="6Le7PK0ZAAAAAB35Ahoq-zY-OWb1y_4hBqiQEg3l" ></div>
-              <!-- <p class="ml-1 mt-2 small h6 font-weight-bold text-danger"> <i class="fas fa-exclamation-circle"></i> Captcha incorrecto, intenta de nuevo</p> -->
+              <p id="ctct_form_errorCaptcha" style="display: none;" class="ml-1 mt-2 small h6 font-weight-bold text-danger"> <i class="fas fa-exclamation-circle"></i> Captcha incorrecto, intenta de nuevo</p>
             </div>
           </div>
 
-         
-            <div class="modal-footer justify-content-end px-sm-0 px-md-0 px-lg-0">
-              <p id="ctct_form_success" style="display:none" class="mt-2 mr-2 small h6 font-weight-bold text-success"> <i class="fas fa-check mr-1"></i>Mensaje enviado</p>
-              <p id="ctct_form_error" style="display:none" class="mt-2 mr-2 small h6 font-weight-bold text-danger"> <i class="fas fa-exclamation-circle mr-1"></i>Ocurrió un error al enviar el mensaje</p>
-              <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">Cancelar</button>
-              <button id="ctct_form_send" type="submit" class="btn btn-primary">Enviar</button>
-              <button class="btn btn-primary px-3" id="contact_frm_sending" style="display: none;">
-                <div class="sp-pb spinner-grow spinner-grow-sm" role="status"><span class="sr-only"></span></div>
-                 Enviando
-              </button> 
-            </div>
+          <div class="modal-footer justify-content-end px-sm-0 px-md-0 px-lg-0">
+            <p id="ctct_form_success" style="display:none" class="mt-2 mr-2 small h6 font-weight-bold text-success"> <i class="fas fa-check mr-1"></i>Mensaje enviado</p>
+            <p id="ctct_form_error" style="display:none" class="mt-2 mr-2 small h6 font-weight-bold text-danger"> <i class="fas fa-exclamation-circle mr-1"></i>Ocurrió un error al enviar el mensaje</p>
+            <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            <button id="ctct_form_send" type="submit" class="btn btn-primary">Enviar</button>
+            <button class="btn btn-primary px-3" id="contact_frm_sending" style="display: none;">
+              <div class="sp-pb spinner-grow spinner-grow-sm" role="status"><span class="sr-only"></span></div>
+              Enviando
+            </button> 
+          </div>
         </form>
       </div>
      
