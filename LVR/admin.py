@@ -50,6 +50,8 @@ class CommentAdmin(admin.ModelAdmin):
 #User
 UserAdmin.list_display = ('username', 'first_name', 'last_name', 'email', 'is_active', 'is_staff')
 
+
+
 #User/Author, person who can access to the dashboard and writes a post 
 class AuthorAdmin(admin.ModelAdmin):
     list_display = ('name', 'title', 'email', 'slug', 'activated_account')
@@ -59,6 +61,8 @@ class AuthorAdmin(admin.ModelAdmin):
 
     def activate_account(self, reques, queryset):
         queryset.update(activated_account=True)
+
+
 
 
 class MiscAdmin(SummernoteModelAdmin):

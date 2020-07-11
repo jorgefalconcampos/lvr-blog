@@ -5,6 +5,8 @@ from . models import blog_post, blog_author, blog_postComment, blog_category
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 from django_summernote.fields import SummernoteTextFormField, SummernoteTextField
 
+
+
 class PostForm(f.ModelForm):
     class Meta:
         model = blog_post
@@ -29,8 +31,6 @@ class PostForm(f.ModelForm):
         }
 
 
-  
-
 
 #Form for a new comment
 class CommentForm(f.ModelForm):
@@ -53,15 +53,11 @@ class CommentForm(f.ModelForm):
 
 
 
-
-
 # Overriding the 'UserCreationForm' to allow the new following fields as inputs: email, first_name last_name
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
-
-
 
 
 
@@ -82,13 +78,6 @@ class ContactForm(f.Form):
     email = f.EmailField(label='Correo electrónico', max_length=128, widget=f.EmailInput(attrs=email_attrs), required=True)
     subject = f.CharField(label='Asunto', max_length=128, widget=f.TextInput(attrs=subject_attrs), required=True)
     msg = f.CharField(label='Mensaje', max_length=1024, widget=f.Textarea(attrs=msg_attrs), required=True)
-
-    
-
-
-
-
-
 
 
 

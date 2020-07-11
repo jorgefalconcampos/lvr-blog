@@ -9,6 +9,8 @@ from django.contrib.auth.models import User
 from django.db.models import Count
 from django.utils.translation import gettext as _
 
+
+
 # Author model, represents an author who writes blog posts and have access to dashboard
 class blog_author(m.Model):
     name = m.OneToOneField(User, on_delete=m.CASCADE)
@@ -101,7 +103,7 @@ class blog_post(m.Model):
     def __str__(self):
         return self.title
 
-  
+
 
 
 
@@ -129,6 +131,9 @@ class blog_postComment(m.Model):
 
     def __str__(self):
         return 'Comment {} by {}'.format(self.comment_body, self.author)
+
+
+
 
 
 #blog_misc model, generalized for its use inside a Privacy Policy page, Cookies page, Rules pages, etc

@@ -39,6 +39,7 @@ from .tokens import account_activation_token
 # ====== Config section ====== #
 # =============================#
 
+
 @require_GET
 def robots_txt(request):
     lines = [
@@ -97,12 +98,12 @@ def search(request):
     return render(request, template, {'bad_query':bad_query} )
 
 
+
 @check_recaptcha
 def contact(request):
     response_data = {}
     if request.POST.get('action') == 'sendCtct_Form':
         ctct_form = ContactForm(data=request.POST)
-        print(f" ****** avrrrrrrr{ctct_form}")
 
         if ctct_form.is_valid() and request.recaptcha_is_valid:
             print('\n\n# --- PY: Form & Captcha passed --- #')
@@ -127,7 +128,6 @@ def contact(request):
             email.send()
             print(f"\n# --- Form & Captcha were valid. More info: --- #\n{response_data}")
             return JsonResponse(response_data)
-            # return redirect('index')
         else:
             return JsonResponse({'success': False, 'err_code': 'invalid_captcha'})
     else:
@@ -136,7 +136,6 @@ def contact(request):
 
 
    
-
 # ===========================#
 # ====== Blog section ====== #
 # ===========================#
@@ -180,23 +179,6 @@ def index(request):
 
 
 
-#This method validates the data and reCaptcha
-def check_recaptcha_method(request):
-    recaptcha_response = request.POST.get('g-recaptcha-response')
-    data = {
-        'secret': conf_settings.GOOGLE_RECAPTCHA_SECRET_KEY,
-        'response': recaptcha_response
-    }
-    r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
-    result = r.json()
-
-    if result['success']:
-        return True
-    else:
-        return False
-
-
-
 #This method shows the detail of the selected post of the blog
 @check_recaptcha
 def post_detail(request, category_text, slug_text):
@@ -207,11 +189,9 @@ def post_detail(request, category_text, slug_text):
     related = post.tags.similar_objects()[:3] #Getting the last 3 posts that contains the same tags that the current post
     all_comments = post.comments.filter(is_approved=True) # Filtering only approved comments
     new_comment = None
-    
     response_data = {}
 
     if request.POST.get('action') == 'newCmt_Form':
-        print('hi')
         cmt_form = CommentForm(data=request.POST)
         if cmt_form.is_valid() and request.recaptcha_is_valid:
             print('\n\n# --- PY: Form & Captcha passed --- #')
@@ -247,8 +227,6 @@ def post_detail(request, category_text, slug_text):
 
 
 
-
-
 #All authors page
 def authors(request):
     template = 'LVR/authors.html'
@@ -272,12 +250,7 @@ def authors(request):
 def author_detail(request, pinchiautor):
     template = 'LVR/author_detail.html'
     author = blog_author.objects.filter(slug=pinchiautor).first()
-    print(f"autor: {author}")
     posts_by_author = blog_post.objects.filter(author__slug=pinchiautor, status=1).order_by('-published_date')  #Getting al posts by the current author
-
-    print(posts_by_author)
-
-
     paginator = Paginator(posts_by_author, 9)
     page = request.GET.get('page')
     try:
@@ -319,7 +292,6 @@ def categories(request):
     for category in all_categories:
         how_many = blog_post.objects.filter(category=category, status=1).count() #Getting how many posts with that popular category exists
         diccionario[category]=how_many
-    print(diccionario)
     context = { 'categories': diccionario }
     return render(request, template, context)
 
@@ -329,7 +301,6 @@ def categories(request):
 def categories_detail(request, slug):
     template = 'LVR/categories_detail.html'
     category = get_object_or_404(blog_category, slug=slug)
-    print(category)
     posts = blog_post.objects.filter(category=category, status=1)
     context = { 'category': category, 'posts': posts}
     return render(request, template, context)
@@ -352,10 +323,6 @@ def page_not_found_404(request, exception):
 # ===================================#
 #  ===== Miscellaneous section ===== #
 # ===================================#
-
-
-
-
 
 
 def cookies(request):
@@ -382,15 +349,11 @@ def service_terms(request):
 
 
 
-
-
-
 def comments_terms(request):
     template =  'LVR/misc/comment_terms.html'
     cmt = blog_misc.objects.filter(Q(name__contains="comunidad")|Q(head_desc__contains="comunidad")).first()
     context = { 'misc': cmt }
     return render(request, template, context)
-
 
 
 
