@@ -1,5 +1,5 @@
 from . models import blog_post
-from . forms import SearchForm, ContactForm
+from . forms import SearchForm, ContactForm, CommentForm
 
 
 def searchPosts(request):
@@ -10,6 +10,11 @@ def searchPosts(request):
 def contactMsg(request):
     form = ContactForm()
     return {'contactForm': form}
+
+
+def newComment(request):
+    form = CommentForm()
+    return {'commntForm': form}
 
 
 def get_total_posts(request):

@@ -102,6 +102,8 @@ def contact(request):
     response_data = {}
     if request.POST.get('action') == 'sendCtct_Form':
         ctct_form = ContactForm(data=request.POST)
+        print(f" ****** avrrrrrrr{ctct_form}")
+
         if ctct_form.is_valid() and request.recaptcha_is_valid:
             print('\n\n# --- PY: Form & Captcha passed --- #')
             template = 'LVR/user/contact-mail.html'
@@ -196,6 +198,7 @@ def check_recaptcha_method(request):
 
 
 #This method shows the detail of the selected post of the blog
+@check_recaptcha
 def post_detail(request, category_text, slug_text):
     template = 'LVR/post_detail.html'
     post = get_object_or_404(blog_post, slug=slug_text)    
@@ -204,33 +207,30 @@ def post_detail(request, category_text, slug_text):
     related = post.tags.similar_objects()[:3] #Getting the last 3 posts that contains the same tags that the current post
     all_comments = post.comments.filter(is_approved=True) # Filtering only approved comments
     new_comment = None
+    
+    response_data = {}
 
-
-    if request.method == 'POST':
+    if request.POST.get('action') == 'newCmt_Form':
+        print('hi')
         cmt_form = CommentForm(data=request.POST)
-
-        if cmt_form.is_valid():
-            recaptcha_response = request.POST.get('g-recaptcha-response')
-            url = 'https://www.google.com/recaptcha/api/siteverify'
-            values = {
-                'secret': conf_settings.GOOGLE_RECAPTCHA_SECRET_KEY,
-                'response': recaptcha_response
-            }
-            data = urllib.parse.urlencode(values).encode()
-            req =  urllib.request.Request(url, data=data)
-            response = urllib.request.urlopen(req)
-            result = json.loads(response.read().decode())
-            print(result)
-            if result['success']:
-                new_comment = cmt_form.save(commit=False) #Create a new comment but don't save it to the DB yet
-                new_comment.in_post = post #Assign the current post to the comment
-                new_comment.save()
-                messages.success(request, 'New comment added with success!')
-            else:
-                messages.error(request, 'Invalid reCAPTCHA. Please try again.')           
+        if cmt_form.is_valid() and request.recaptcha_is_valid:
+            print('\n\n# --- PY: Form & Captcha passed --- #')
+            name = request.POST.get('author')
+            email = request.POST.get('author_email')
+            cmt = request.POST.get('comment_body')
+            response_data['success'] = True
+            response_data['cmt_name'] = name
+            response_data['cmt_name'] = email
+            response_data['cmt_name'] = cmt
+            new_comment = cmt_form.save(commit=False) #Create a new comment but don't save it to the DB yet
+            new_comment.in_post = post #Assign the current post to the comment
+            new_comment.save()
+            print(f"\n# --- Form & Captcha were valid. More info: --- #\n{response_data}")
+            return JsonResponse(response_data)
+        else:
+            return JsonResponse({'success': False, 'err_code': 'invalid_captcha'})
     else:
         cmt_form = CommentForm()
-
 
     context = {
         'post': post,

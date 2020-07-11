@@ -103,19 +103,7 @@ PWA_APP_STATUS_BAR_COLOR = 'default'
 PWA_APP_ICONS = [ { 'src': '/static/LVR/assets/img/icons/r-icon.png', 'sizes': '160x160' }, { 'src': '/static/LVR/assets/img/icons/r-icon-192.png', 'sizes': '192x192' },  { 'src': '/static/LVR/assets/img/icons/r-icon-512.png', 'sizes': '512x512' } ] 
 PWA_APP_ICONS_APPLE = [ { 'src': '/static/LVR/assets/img/icons/r-icon.png', 'sizes': '160x160' } ] 
 PWA_APP_SPLASH_SCREEN = [ { 'src': '/static/LVR/assets/img/icons/splash-640x1136.png', 'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)' } ] 
-
-
-
 PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'LVR/static/LVR/assets/js/pwa', 'serviceworker.js')
-
-
-
-
-
-
-
-
-
 
 
 ROOT_URLCONF = 'LeVeloRouge.urls'
@@ -133,6 +121,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'LVR.ctxt_processors.searchPosts',
                 'LVR.ctxt_processors.contactMsg',
+                'LVR.ctxt_processors.newComment',
                 'LVR.ctxt_processors.get_total_posts',
             ],
             # 'loaders': [

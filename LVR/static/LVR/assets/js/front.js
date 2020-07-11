@@ -58,3 +58,41 @@ $(document).on('submit', '#contact_frm',function(e){
     
     });
 });
+
+
+
+
+$('#new_comment').submit(function(e){
+  e.preventDefault();
+  console.log('JS: llego aki')
+  $.ajax({
+    type: 'POST',
+    dataType: 'json',
+    data:{
+      author: $('#comment_fullName').val(),
+      author_email: $('#comment_email').val(),
+      comment_body: $('#comment_body').val(),
+      csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+      action: 'newCmt_Form',
+      grecaptcha_response:grecaptcha.getResponse()
+    },
+    success:function(json){
+      if(json.success){
+        document.getElementById("new_comment").reset();
+        $('html, body').animate({scrollTop: $("#new_cmt_btn").offset().top - (160)}, 1500);
+        $('#newCmt').collapse('toggle');
+        $('#new_cmt_success').fadeIn(1000).css({'display': 'block'}).delay(2500).fadeOut(1000);
+        console.log('# --- JS: Comment Captcha OK --- #')
+        grecaptcha.reset();
+      }
+      else if(json.err_code === 'invalid_captcha'){
+        $('#new_cmt_errorCaptcha').fadeIn(1000).css({'display': 'block'}).delay(2500).fadeOut(1000);
+        console.log('# --- JS: Comment failed captcha --- #')
+      }
+    },
+    error : function(xhr,errmsg,err) {
+      console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+    }
+    
+    });
+});

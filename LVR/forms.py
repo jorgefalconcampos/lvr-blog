@@ -84,13 +84,6 @@ class ContactForm(f.Form):
     msg = f.CharField(label='Mensaje', max_length=1024, widget=f.Textarea(attrs=msg_attrs), required=True)
 
     
-    
-
-
-
-
- 
-
 
 
 

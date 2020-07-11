@@ -304,10 +304,8 @@
     <div class="card-body">
 
         <h3 class="py-1 mb-3"> <b> {{ comments.count }} </b> {% trans 'post_detail_CountingComments' %} </h3>
-        <a class="my-2 mb-4 btn btn-secondary" href="#newCmt" role="button" data-toggle="collapse" aria-expanded="false" aria-control="newCmt">Escribe un comentario</a>
-        {% if new_comment %} 
-        <div class="alert alert-success" role="alert"> {% trans 'post_detail_AwaitingModeration' %} </div>
-        {% else %}
+        <a id="new_cmt_btn" class="my-2 mb-4 btn btn-secondary" href="#newCmt" role="button" data-toggle="collapse" aria-expanded="false" aria-control="newCmt">Escribe un comentario</a>
+        <div id="new_cmt_success" style="display:none;" class="alert alert-success" role="alert"> {% trans 'post_detail_AwaitingModeration' %} </div>
         <div class="collapse" id="newCmt">
             <div class="py-3">
                 <form id="new_comment" method="POST">
@@ -315,25 +313,25 @@
 
                     <div class="row">
                         <div class="form-group col-6">
-                            <label class="ml-1" for="comment_fullName">{{cmt_form.author.label}}</label>
-                            {{cmt_form.author}}
+                            <label class="ml-1" for="comment_fullName">{{commntForm.author.label}}</label>
+                            {{commntForm.author}}
                         </div>
     
                         <div class="form-group col-6">
-                            <label class="ml-1" for="comment_email">{{cmt_form.author_email.label}}</label>
-                            {{cmt_form.author_email}}
+                            <label class="ml-1" for="comment_email">{{commntForm.author_email.label}}</label>
+                            {{commntForm.author_email}}
                         </div>
     
                         <div class="form-group col-12">
-                            <label class="ml-1" for="comment_body">{{cmt_form.comment_body.label}}</label>
+                            <label class="ml-1" for="comment_body">{{commntForm.comment_body.label}}</label>
                             <small class="float-left float-sm-right float-md-right float-lg-right mx-2"> (Asegúrate que tu comentario siga las <a href="{% url 'comments_terms' %}"  target="_blank"> normas comunitarias</a>). </small>
-                            {{cmt_form.comment_body}}
+                            {{commntForm.comment_body}}
                         </div>
-
-                       
 
                         <div class="form-group col-12 m-0">
                             <div class="g-recaptcha" data-sitekey="6Le7PK0ZAAAAAB35Ahoq-zY-OWb1y_4hBqiQEg3l"></div>
+                            <p id="new_cmt_errorCaptcha" style="display: none;" class="ml-1 mt-2 small h6 font-weight-bold text-danger"> <i class="fas fa-exclamation-circle"></i> Captcha incorrecto, intenta de nuevo</p>
+
                             <button class="mt-3 btn btn-primary" type="submit">Comentar</button>
                         </div>
                         
