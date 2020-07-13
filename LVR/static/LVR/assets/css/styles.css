@@ -2602,6 +2602,9 @@ h1, h2, h3, h4 {
 .sp-pb {
   margin: 0 2px 2px 0; }
 
+.sp-pb-bgr {
+  margin: 0 0 3px 0px; }
+
 .material-icons.md-18 {
   font-size: 18px; }
 

@@ -96,3 +96,50 @@ $('#new_comment').submit(function(e){
     
     });
 });
+
+
+
+
+
+function restart_subcribe_btns(isSent){
+  $('#subscribe_sending').css({'display': 'none'}).fadeOut(800);
+  $('#subscribe_send').css({'display': 'inline'}).fadeIn(800);
+  $('#subscribe_send').blur();
+  if(isSent == true){ $('#subscribe_success').fadeIn(1000).css({'display': 'block'}).delay(2500).fadeOut(1000); }
+  else { $('#subscribe_error').fadeIn(1000).css({'display': 'block'}).delay(2500).fadeOut(1000); }  
+}
+
+
+$(document).on('submit', '#subscribe_frm',function(e){
+  $('#subscribe_send').css({'display': 'none'}).fadeOut(800);
+  $('#subscribe_sending').css({'display': 'inline-block'}).fadeIn(800);
+  e.preventDefault();
+  $.ajax({
+    type: 'POST',
+    url:'subscribe',
+    dataType: 'json',
+    data:{
+      s_email: $('#sub_email').val(),
+      csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+      action: 'subscribe_Form',
+    },
+    success:function(json){
+      if(json.success){
+        document.getElementById("subscribe_frm").reset();
+        restart_subcribe_btns(true);
+        console.log('# --- JS: OK --- #')
+      }
+      else{
+        if(json.already_exists == true){
+          $('#subscribe_already_error').fadeIn(1000).css({'display': 'block'}).delay(2500).fadeOut(1000);
+          $('#subscribe_sending').css({'display': 'none'}).fadeOut(800);
+          $('#subscribe_send').css({'display': 'inline'}).fadeIn(800);
+        } else{ restart_subcribe_btns(); }
+        console.log('# --- JS: Failed try of subscription --- #')
+      }
+    },
+    error : function(xhr,errmsg,err) {
+      console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+    }  
+    });
+});

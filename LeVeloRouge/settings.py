@@ -122,6 +122,7 @@ TEMPLATES = [
                 'LVR.ctxt_processors.searchPosts',
                 'LVR.ctxt_processors.contactMsg',
                 'LVR.ctxt_processors.newComment',
+                'LVR.ctxt_processors.subscribeNewsletter',
                 'LVR.ctxt_processors.get_total_posts',
             ],
             # 'loaders': [
@@ -139,11 +140,19 @@ WSGI_APPLICATION = 'LeVeloRouge.wsgi.application'
 
 
 # Email host server
-EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = config('EMAIL_PORT', cast=int)
+EMAIL_TIMEOUT = config('EMAIL_TIMEOUT', cast=int)
+
+NEMAIL_USE_TLS = config('NEMAIL_USE_TLS')
+NEMAIL_HOST = config('NEMAIL_HOST')
+NEMAIL_HOST_USER = config('NEMAIL_HOST_USER')
+NEMAIL_HOST_PASSWORD = config('NEMAIL_HOST_PASSWORD')
+NEMAIL_PORT = config('NEMAIL_PORT', cast=int)
+
 
 
 

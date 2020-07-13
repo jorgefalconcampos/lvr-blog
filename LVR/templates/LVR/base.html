@@ -290,7 +290,7 @@
             <p id="ctct_form_error" style="display:none" class="mt-2 mr-2 small h6 font-weight-bold text-danger"> <i class="fas fa-exclamation-circle mr-1"></i>Ocurrió un error al enviar el mensaje</p>
             <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">Cancelar</button>
             <button id="ctct_form_send" type="submit" class="btn btn-primary">Enviar</button>
-            <button class="btn btn-primary px-3" id="contact_frm_sending" style="display: none;">
+            <button id="contact_frm_sending" class="btn btn-primary px-3" style="display: none;">
               <div class="sp-pb spinner-grow spinner-grow-sm" role="status"><span class="sr-only"></span></div>
               Enviando
             </button> 
@@ -315,13 +315,26 @@
 
       <div class="col-8 col-md-6 col-lg-5 text-white text-center my-auto">     
         <div class="col mx-auto">
-          <form action="" class="form-group">
-            <label class="h4 pt-2 font-weight-bold" for="subscribeNewsletter">Suscríbete al newsletter</label>
+          <form id="subscribe_frm" method="POST" class="form-group">
+            {% csrf_token %}
+            <label class="h4 pt-2 font-weight-bold" for="sub_email">{{subscribeForm.s_email.label}}</label>
             <p class="small"> Recibe un email cada vez que escribamos un nuevo post. Sin spam garantizado.</p>
+            <h5 id="subscribe_success" style="display:none" class="my-3 h5 font-weight-bold text-success"> <i class="fas fa-check mr-2"></i>Listo, enviamos un mensaje a tu email para que verifiques tu suscripción</h5> 
+            <h5 id="subscribe_error" style="display: none;" class="my-3 h5 font-weight-bold text-danger"> <i class="fas fa-exclamation-circle mr-1"></i>Ocurrió un error al enviar el email, intenta de nuevo más tarde</h5>
+            <h5 id="subscribe_already_error" style="display: none;" class="my-3 h5 font-weight-bold text-danger"> <i class="fas fa-exclamation-circle mr-1"></i>Parece que este email ya está registrado en el newsletter</h5>
+
             <div class="input-group pt-2 align-items-center">
-              <input type="email" class="form-control bg-none border-dark text-white" id="subscribeNewsletter"  placeholder="Escribe tu dirección de email" >
+              {{subscribeForm.s_email}}
               <div class="input-group-append">
-                <button class="btn btn-light" type="submit" aria-label="Suscríbete al newsletter"><i class="fas fa-paper-plane"></i> </button>
+
+
+
+                <button class="btn btn-light" type="submit" aria-label="Suscríbete al newsletter">
+                  <div id="subscribe_sending" class="sp-pb-bgr spinner-grow spinner-grow-sm" style="display: none;" role="status"><span class="sr-only"></span></div>
+                
+                  <i id="subscribe_send" class="fas fa-paper-plane"></i>
+                
+                </button>
               </div>
             </div>
           </form>

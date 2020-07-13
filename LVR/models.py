@@ -150,6 +150,19 @@ class blog_misc(m.Model):
 
 
 
+
+class blog_subscriber(m.Model):
+    email = m.EmailField(unique=True)
+    conf_num = m.CharField(max_length=15)
+    confirmed = m.BooleanField(default=False)
+
+    def __str__(self):
+        return self.email + " (" + ("not " if not self.confirmed else "") + "confirmed)"
+
+
+
+
+
     
 # Automatic slug generator for a blog post when is saved from a HTTP request (that means, a form)
 def slug_generator(sender, instance, *args, **kwargs):

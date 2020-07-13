@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext as _
 from django_summernote.admin import SummernoteModelAdmin
-from . models import blog_post, blog_category, blog_author, blog_postComment, blog_misc
+from . models import blog_post, blog_category, blog_author, blog_postComment, blog_misc, blog_subscriber
 
 
 
@@ -59,7 +59,7 @@ class AuthorAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
     actions = [ 'activate_account' ]
 
-    def activate_account(self, reques, queryset):
+    def activate_account(self, request, queryset):
         queryset.update(activated_account=True)
 
 
@@ -70,6 +70,16 @@ class MiscAdmin(SummernoteModelAdmin):
     summernote_fields = ('content')
     search_fields = ('name', 'content')
 
+
+
+
+class SubscriberAdmin(admin.ModelAdmin):
+    list_display = ('email', 'confirmed', 'conf_num')
+    search_fields = ('email', 'confirmed')
+    actions = ['confirm_subscriber']
+
+    def confirm_subscriber(self, request, queryset):
+        queryset.update(confirmed=True)
 
 
 
@@ -85,3 +95,4 @@ admin.site.register(blog_post, PostAdmin)
 admin.site.register(blog_author, AuthorAdmin)
 admin.site.register(blog_postComment, CommentAdmin)
 admin.site.register(blog_misc, MiscAdmin)
+admin.site.register(blog_subscriber, SubscriberAdmin)

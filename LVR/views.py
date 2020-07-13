@@ -1,17 +1,18 @@
 from django.utils import timezone
-import datetime, math, json, urllib
+import datetime, math, json, urllib, smtplib
 from django.template.defaultfilters import date
 from django.contrib.auth.models import User
-from django.core import serializers
+from django.core import serializers, mail
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404, HttpResponseRedirect, HttpResponse, JsonResponse
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render, get_object_or_404, reverse
-from . models import blog_post, blog_category, blog_author, blog_postComment, blog_misc  #Importing the models
-from . forms import PostForm, CommentForm, CreateUserForm, ContactForm
+from . models import blog_post, blog_category, blog_author, blog_postComment, blog_misc, blog_subscriber  #Importing the models
+from . forms import PostForm, CommentForm, CreateUserForm, ContactForm, SubscribeForm
 from django.utils.translation import gettext as _
 from django.conf import settings as conf_settings #To read reCaptcha's key
 from . decorators import check_recaptcha
+from . helpers import generate_random_digits
 from taggit.models import Tag
 from django.db.models import Count, Q
 from django.db.models.functions import Upper
@@ -29,7 +30,9 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.template.loader import render_to_string
 from . tokens import account_activation_token
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, get_connection, send_mail
+from django.core.mail.backends.smtp import EmailBackend
+# from LeVeloRouge.settings import NEMAIL_HOST_USER
 from .tokens import account_activation_token
 
 
@@ -69,7 +72,9 @@ def base(request):
     return render(request, template)
 
 def cm(request):
-    return render(request, 'LVR/user/contact-mail.html', {})
+    # return render(request, 'LVR/user/contact-mail.html', {})
+    return render(request, 'LVR/mails/blog/confirm-mail.html', {})
+
     
 
 
@@ -134,6 +139,89 @@ def contact(request):
         return redirect('index')
 
 
+def subscribe(request):
+    response_data = {}
+    if request.POST.get('action') == 'subscribe_Form':
+        subscribe_form = SubscribeForm(data=request.POST)
+        if subscribe_form.is_valid():
+            subscriber_email = request.POST.get('s_email')
+            if not blog_subscriber.objects.filter(email=subscriber_email):
+                template = 'LVR/mails/blog/confirm-mail.html'
+                rnd = generate_random_digits()
+
+
+
+                conf_url ="{}?id={}".format(request.build_absolute_uri('/confirm/'), rnd)
+
+
+                print(f'\n\n# --- PY: Confirmation URL: --- #\n{conf_url}')
+
+                sub = blog_subscriber(email=subscriber_email, conf_num=rnd)
+                sub.save()
+                try:
+                    con = mail.get_connection()
+                    con.open()
+                    print(f'\n\n# --- PY: Django connected to the SMTP Server --- #\n')
+                    host=conf_settings.NEMAIL_HOST
+                    host_username=conf_settings.NEMAIL_HOST_USER
+                    host_password=conf_settings.NEMAIL_HOST_PASSWORD
+                    host_port=conf_settings.NEMAIL_PORT
+                    host_use_tls=conf_settings.NEMAIL_USE_TLS
+                    print(f'\n\n# --- PY: Email details: --- #\n\n- Host: <<{host}>>\n- User: <<{host_username}>>\n- Port: <<{host_port}>>\n- Use TLS: <<{host_use_tls}>>')
+                    mail_obj = EmailBackend(host=host, port=host_port, username=host_username, password=host_password, use_tls=host_use_tls)
+                    context = {'email': subscriber_email, 'confirmation_url': conf_url}
+                    mail_subject = 'Confirma tu email'
+                    message = render_to_string(template, context)
+                    message_from = conf_settings.NEMAIL_HOST_USER
+                    msg = mail.EmailMessage(subject=mail_subject, body=message, from_email=host_username, to=[subscriber_email], connection=con)
+                    msg.content_subtype = 'html'
+                    mail_obj.send_messages([msg])                    
+                    response_data['success'] = True
+                    print(f'\n\n# --- PY: Email sent successfully to <<{subscriber_email}>> --- #\n')
+                except Exception as e:
+                    response_data['success'] = False
+                    sub.delete()
+                    print(f'\n\n# --- PY: There was an error sending the email: --- #\n{e}')
+                finally:
+                    return JsonResponse(response_data)
+            else:
+                print(f'\n\n# --- PY: The email <<{subscriber_email}>> is already subscribed to newsletter --- #\n')
+                return JsonResponse({'success': False, 'already_exists': True})        
+
+        else:
+            return JsonResponse({'success': False})        
+    else:
+        subscribe_form = SubscribeForm()
+
+
+
+def confirm_subscribe(request):
+    template = 'LVR/mails/blog/verify.html'
+    conf_numb = request.GET['id']
+    print(conf_numb)
+    sub = blog_subscriber.objects.get(conf_num=conf_numb)
+    context = {'email': sub.email}
+    if sub.conf_num == conf_numb:
+        sub.confirmed = True
+        sub.save()
+        print(f'\n\n# --- PY: The email <<{sub}>> is now confirmed! --- #\n')
+        context['action'] = 'confirmed'
+        return render(request, template, context)
+    else:
+        context['action'] = 'denied'
+        return render(request, template, context)
+    
+
+
+def unsubscribe(request):
+    sub = blog_subscriber.objects.get(email=request.GET['email'])
+    if sub.conf_num == request.GET['conf_num']:
+        sub.delete()
+        return render(request, 'index.html')
+    else:
+        return render(reques, 'index.html')
+
+    
 
    
 # ===========================#

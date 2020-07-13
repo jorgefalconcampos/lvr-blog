@@ -6,7 +6,7 @@ from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 from django_summernote.fields import SummernoteTextFormField, SummernoteTextField
 
 
-
+#Create a new post
 class PostForm(f.ModelForm):
     class Meta:
         model = blog_post
@@ -32,7 +32,7 @@ class PostForm(f.ModelForm):
 
 
 
-#Form for a new comment
+#Create a new comment
 class CommentForm(f.ModelForm):
     class Meta:
         model = blog_postComment
@@ -60,14 +60,14 @@ class CreateUserForm(UserCreationForm):
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
 
 
-
+#Search inside the blog
 class SearchForm(f.Form):
     all_posts = str(blog_post.objects.filter(status=1).count()) #counting all-time posts
     q_attrs = {'id':'search_input', 'type': 'text', 'class':'form-control border-0 mr-2', 'placeholder': 'Busca entre +'+all_posts+' posts'}
     q = f.CharField(label='Escribe una o más palabras clave', max_length=128, widget=f.TextInput(attrs=q_attrs))
 
 
-
+#Send contact mail
 class ContactForm(f.Form):
     name_attrs = {'class':'form-control form-control-lg',  'id':'contact_fullName', 'type':'text', 'name': 'fullname', 'placeholder':'Escribe tu nombre'}
     email_attrs = {'class':'form-control form-control-lg', 'id':'contact_email', 'type':'email', 'name':'email', 'placeholder':'Escribe tu email'}
@@ -80,11 +80,11 @@ class ContactForm(f.Form):
     msg = f.CharField(label='Mensaje', max_length=1024, widget=f.Textarea(attrs=msg_attrs), required=True)
 
 
+#Subscribe to newsletter
+class SubscribeForm(f.Form):
+    s_email_attrs = {'class':'form-control bg-none border-dark text-white', 'id':'sub_email', 'type':'email', 'name':'sub_email', 'placeholder':'Escribe tu dirección de email'}
+    s_email = f.EmailField(label='Suscríbete al newsletter', max_length=128, widget=f.EmailInput(attrs=s_email_attrs), required=True)
 
-class RegistrarUsuario(f.Form):
-    nombre = f.CharField(label='Nombre:',max_length=15,widget=f.TextInput())    
-    telefono = f.CharField(label='Teléfono',max_length=12,widget=f.TextInput())    
-    fecha_de_nacimiento = f.DateField(label='Fecha de nacimiento:', widget=f.SelectDateWidget(years=range(1900,2001)))    
-    email = f.EmailField(label='Email:',max_length=254,widget=f.EmailInput())
+
 
    

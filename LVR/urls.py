@@ -9,6 +9,7 @@ from django.contrib import admin
 
 
 urlpatterns = [
+    #base:
     path("robots.txt", views.robots_txt),
     path('', views.base, name='base'),
     path('home', views.index, name='index'),
@@ -16,6 +17,11 @@ urlpatterns = [
     path('cm', views.cm, name='cm'),
     path('contact', views.contact, name='contact'),
     path('getdata', views.getdata, name='getdata'),
+    #subscriber
+    path('subscribe', views.subscribe, name='subscribe'),
+    path('confirm/', views.confirm_subscribe, name='confirm'),
+    path('unsubscribe', views.unsubscribe, name='unsubscribe'),
+    #blog
     path('about', views.about, name='about'),  
     path('post/<slug:category_text>/<slug:slug_text>/', views.post_detail, name='post_detail'),
     path('tags', views.tags, name='tags'),
