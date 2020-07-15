@@ -1,6 +1,5 @@
 {% load static %}
 {% load i18n %}
-{% load crispy_forms_tags %} 
 
 <!doctype html>
 <html>
@@ -10,8 +9,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <link rel="stylesheet" href="{% static 'LVR/assets/css/custom.css' %}">  
-  <link rel="shortcut icon" type="image/png" href="{% static 'LVR/assets/favicons/lvr.ico' %}"/>
+  <link rel="stylesheet" href="{% static 'LVR/assets/css/styles.css' %}">  
+  <link rel="stylesheet" href="{% static 'LVR/assets/css/bootstrap-select.css' %}">  
+  <link rel="shortcut icon" type="image/png" href="{% static 'LVR/assets/favicon/rneg-icon.ico' %}"/>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
@@ -21,7 +21,7 @@
         <div class="row d-flex justify-content-between mx-2">
             <div>
                 <div class="row">
-                    <img src="{% static 'LVR/assets/img/R.png' %}" alt="Lock it" width="55" class="mx-0 mx-sm-2 mx-md-2 mx-lg-2">
+                    <img src="{% static 'LVR/assets/img/R.png' %}" alt="LVR" width="55" class="mx-0 mx-sm-2 mx-md-2 mx-lg-2">
                     <h2 class="mt-2 font-weight-bold"> {% trans 'login' %} </h2>
                 </div>
                 <p> {% trans 'login_Subtitle' %} </p>
@@ -40,29 +40,24 @@
             <div class="col-lg-xs-12 col-lg-sm-12 col-lg-md-8 col-lg-5 col-lg-xl-6">
                 <div class="card">
                     <div class="card-header text-center">
-                        <h2> <i>THE</i> <span class="text-uppercase font-weight-bold"> <i>LOCK IT</i> </span>  <i>BLOG</i> <sup class="h5"> ADMIN </sup> </h2>                
+                        <h2> LE VÉLO <span class="text-uppercase font-weight-bold"> ROUGE</span><sup class="h5"> ADMIN </sup> </h2>                
                     </div>
 
-                    <form method="POST">
+                    <form id="login_frm" method="POST">
                         {% csrf_token %}
                         <div class="card-body mt-1">
-
-
-                            <!-- <p class="text-center mt-0 mb-4"> Usuario o contraseña incorrectos </p> -->
-
-                            <!-- Username -->                        
+                            <p id="login_form_error" style="display: none;" class="small h6 font-weight-bold text-danger text-center pb-2"> <i class="fas fa-exclamation-circle mr-1"></i>Usuario o contraseña incorrectos</p>
+                            
                             <div class="form-group py-1"> 
-                                <!-- {{ form|crispy }} -->
                                 <div class="container"> <div class="row"> <h6 class="ml-1"> {% trans 'login_formUser' %} </h6> </div> </div>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"> <i class="material-icons align-top">person</i> </span>
+                                        <span class="input-group-text"> <i class="fas fa-user"></i> </span>
                                     </div>
                                     <input name="A_username" class="form-control" placeholder="Email or login" type="text">
                                 </div> 
                             </div> 
                             
-                            <!-- Password -->
                             <div class="form-group py-1">
                                 <div class="container">
                                     <div class="row d-flex justify-content-between"> 
@@ -73,13 +68,13 @@
                                 
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"> <i class="material-icons align-top">lock</i> </span>
+                                        <span class="input-group-text"> <i class="fas fa-lock"></i> </span>
                                     </div>
                                     <input name="A_password" class="form-control" placeholder="******" type="password">
                                 </div>
                             </div> 
                             
-                            <div class="form-group"> <button type="submit" id="btnToasts" class="btn btn-primary btn-block"> {% trans 'login' %} </button> </div>
+                            <div class="form-group"> <button type="submit" id="loginBtn_CTA " class="btn btn-primary btn-block"> {% trans 'login' %} </button> </div>
                         </div>
 
 
@@ -122,7 +117,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-
+<script src="https://kit.fontawesome.com/0b5e6aae1f.js" crossorigin="anonymous"></script>
 
 
 <script>

@@ -16,25 +16,6 @@
 {% block show_posts %}
 
 <div itemscope itemtype="https://schema.org/Blog">
-     <!-- <section class="hero-home py-5">
-        <div class="container pt-5">
-          <div class="row">
-            <div class="col-lg-7 mx-auto text-center">
-              <p class="h6 text-uppercase text-primary mb-3">Listings</p>
-              <h1 class="mb-5">A curated directory of tools and resources to build your startup.</h1>
-              <form class="p-2 rounded shadow-sm bg-white" action="#">
-                <div class="input-group">
-                  <input class="form-control border-0 mr-2" type="search" placeholder="Search tools and resources...">
-                  <div class="input-group-append rounded">
-                    <button class="btn btn-primary rounded" type="submit"><i class="fas fa-search"></i></button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>  -->
-
 
     {% if post_list.number == 1 %}
     <div class="alert jumbotron alert-dismissible fade show py-5 my-4" role="alert">
@@ -76,21 +57,23 @@
                         <div class="row mx-2">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 ">
                                 <div class="mt-4">
-                                    <h2 itemprop="headline" class="title-header"> <a href=" {% url 'post_detail' post.category post.slug %}"> {{ post.title }} </a> </h2>
-                                    <h5 itemprop="alternativeHeadline" class="subtitle-header"> {{ post.subtitle}} </h5>
-
-                                    <div itemprop="text">
-                                        <div class="py-2 post-preview" style="max-height: 150"> {{ post.post_body|truncatewords:15 }} </div>
+                                    <div class="position-relative">
+                                        <h2 itemprop="headline" class="title-header"> <a href=" {% url 'post_detail' post.category post.slug %}" class="stretched-link"> {{ post.title }} </a> </h2>
+                                        <h5 itemprop="alternativeHeadline" class="subtitle-header"> {{ post.subtitle}} </h5>
+                                        <div itemprop="text">
+                                            <div class="py-2 post-preview" style="max-height: 150"> {{ post.post_body|safe|truncatewords:15 }} </div>
+                                        </div>
                                     </div>
 
                                     <div class="mt-2">
+                                        <div itemprop="keywords" class="d-flex d-inline-block">
                                         {% for tag in post.tags.all %}
-                                        <div itemprop="keywords">
-                                            <a href="{% url 'tags_detail' tag.slug %}" class="d-inline-block">
-                                                <h5 class="display-6"> <span class="py-1 px-2 mr-1 badge badge-pill badge-dark display-6"> #{{tag}} </span> </h5>
-                                            </a>
-                                        </div>
+                                        <a href="{% url 'tags_detail' tag.slug %}" class="d-flex d-inline-block">
+                                            <h5 class="display-6"> <span class="py-1 px-2 mr-2 badge badge-pill badge-dark display-6"> #{{tag}} </span> </h5>
+                                        </a>
                                         {% endfor %}
+                                    </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -127,8 +110,6 @@
             <h1 class="mt-5 py-3 font-weight-bold text-center"> {% trans 'index_Trending' %} 🔥 </h1>
             <div class="row my-2">
                 {% for post in trending %}
-
-
                 <div class="col-md-4 my-4">
                     <div itemscope itemtype="https://schema.org/BlogPosting">
                         <div class="card h-100 detail">
@@ -144,12 +125,11 @@
                             </div>
 
 
-                            <div class="card-body">
-                                <h5 itemprop="headline" class="post-title"> <a href=" {% url 'post_detail' post.category post.slug %} "> {{ post.title }} </a> </h5>
+                            <div class="card-body position-relative">
+                                <h5 itemprop="headline" class="post-title"> <a href=" {% url 'post_detail' post.category post.slug %}" class="stretched-link"> {{ post.title }} </a> </h5>
                                 <h6 itemprop="alternativeHeadline" class="post-subtitle mt-3 mb-3"> {{ post.subtitle }} </h6>
                                 <hr>
-                                <div itemprop="text"> {{ post.post_body|truncatewords:10 }} </div>
-
+                                <div itemprop="text"> {{ post.post_body|safe|truncatewords:10 }} </div>
                             </div>
 
                             <div class="card-footer">
@@ -177,7 +157,6 @@
         <div class="row my-3">
         {% else %}
         <div class="col-md-4 my-4">
-
             <div itemscope itemtype="https://schema.org/BlogPosting">
                 <div class="card h-100 detail">
                     <div class="img-post img-zoom">
@@ -188,12 +167,11 @@
                     <div class="post-category p-3">
                         <a href="{% url 'categories_detail' post.category.slug %}" class="stretched-link reset-anchor-inherit">
                             {{post.category|truncatechars:10}}
-
                         </a>
                     </div>
 
-                    <div class="card-body">
-                        <h5 itemprop="headline" class="post-title"><a href=" {% url 'post_detail' post.category post.slug %} "> {{ post.title }} </a></h5>
+                    <div class="card-body position-relative">
+                        <h5 itemprop="headline" class="post-title"><a href=" {% url 'post_detail' post.category post.slug %}" class="stretched-link"> {{ post.title }} </a></h5>
                         <h6 itemprop="alternativeHeadline" class="post-subtitle mt-3 mb-3"> {{ post.subtitle }} </h6>
                         <hr>
                         <div itemprop="text"> {{ post.post_body|safe|truncatewords:30 }} </div>
@@ -205,9 +183,28 @@
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
         {% endif %}
     {% endfor %}
+
+
+
+
+        </div>
+
+
+        <div class="pt-5 mt-3">
+            {% if post_list.has_other_pages %}
+            <ul class="pagination pagination-lg justify-content-center">
+                {% if post_list.has_previous %}
+                <li><a href="?page={{ post_list.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+                {% endif %}
+                {% if post_list.has_next %}
+                <li><a href="?page={{ post_list.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+                {% endif %}
+            </ul>
+            {% endif %}
+            <span class="row d-flex- justify-content-center lead text-muted"> Página {{ post_list.number }} de {{ post_list.paginator.num_pages }}</span>
         </div>
 
 
@@ -215,7 +212,7 @@
 
 
     <div class="container">
-        <section class="pb-5 bg-dark">
+        <section class="pb-5">
 
               <header class="text-center mb-5">
                 <h1 class="mt-5 py-3 font-weight-bold text-center"> {% trans 'index_Categoriess' %} </h1>
@@ -234,27 +231,13 @@
                   </div>
                 </div>
                 {% endfor %}
-                <div class="col-lg-12 text-center pt-4"><a class="btn btn-primary" href="{% url 'categories' %}">Show more categories</a></div>
+                <div class="col-lg-12 text-center pt-4"><a class="btn btn-primary" href="{% url 'categories' %}">Mostrar todas las categorías</a></div>
               </div>
 
           </section>
 
     </div>
 
-
-    <div class="pt-5 mt-3">
-        {% if post_list.has_other_pages %}
-        <ul class="pagination pagination-lg justify-content-center">
-            {% if post_list.has_previous %}
-            <li><a href="?page={{ post_list.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
-            {% endif %}
-            {% if post_list.has_next %}
-            <li><a href="?page={{ post_list.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
-            {% endif %}
-        </ul>
-        {% endif %}
-        <span class="row d-flex- justify-content-center lead text-muted"> Página {{ post_list.number }} de {{ post_list.paginator.num_pages }}</span>
-    </div>
 </div>
 
 {% endblock %}
