@@ -72,10 +72,13 @@ def base(request):
     return render(request, template)
 
 def cm(request):
-    notify_new(request)
+    # notify_new(request)
     # return render(request, 'LVR/user/contact-mail.html', {})
     # context = {'action': 'deleted'}
-    return render(request, 'LVR/mails/blog/average-mail.html')
+    # return render(request, 'LVR/mails/blog/average-mail.html')
+    return render(request, 'LVR/user/aa-wrong-link.html')
+
+
     # return render(request, 'LVR/mails/blog/verify.html')
 
     
