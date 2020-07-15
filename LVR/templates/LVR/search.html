@@ -17,24 +17,60 @@
             <div class="container">
                 <div class="row pt-5 mt-2 mb-1 justify-content-start"> 
                     <div class="col">
-                        {% if not bad_query %}
-                        <h2 class="font-weight-bold"> RESULTADOS DE LA BÚSQUEDA: "<strong>{{query}}</strong>" </h2>
+                        {% if empty_search %}
+                            <h2 class="font-weight-bold"> BUSCA LO QUE SEA DENTRO DEL BLOG</h2>
+                            <h5 class="pt-2 pb-1"> Escribe una o más palabras clave relacionadas con tu búsqueda</h5>
                         {% else %}
-                        <h2 class="font-weight-bold"> RESULTADOS DE LA BÚSQUEDA</h2>
-                        {% endif %}
-                        {% if results %}
-                            {% if number == 1 %}
-                            <h5 class="pt-2 pb-1"> Se encontró {{ number }} resultado relacionado con con tu búsqueda</h5>
+                            {% if not bad_query %}
+                            <h2 class="font-weight-bold"> RESULTADOS DE LA BÚSQUEDA: "<strong>{{query}}</strong>" </h2>
                             {% else %}
-                            <h5 class="pt-2 pb-1"> Se encontraron {{ number }} resultados relacionados con con tu búsqueda</h5>
+                            <h2 class="font-weight-bold"> RESULTADOS DE LA BÚSQUEDA</h2>
                             {% endif %}
-                        {% else %}
-                        <h5 class="pt-2 pb-1"> No se encontró nada relacionado con con tu búsqueda</h5>
+                            {% if results %}
+                                {% if number == 1 %}
+                                <h5 class="pt-2 pb-1"> Se encontró {{ number }} resultado relacionado con con tu búsqueda</h5>
+                                {% else %}
+                                <h5 class="pt-2 pb-1"> Se encontraron {{ number }} resultados relacionados con con tu búsqueda</h5>
+                                {% endif %}
+                            {% else %}
+                            <h5 class="pt-2 pb-1"> No se encontró nada relacionado con con tu búsqueda</h5>
+                            {% endif %}
                         {% endif %}
                     </div>
                 </div>
 
                 <div class="row justify-content-start py-3 pb-5">
+
+
+
+                    {% if empty_search %}
+
+                    <div class="col-lg-7 d-flex align-items-center">
+                        <div class="row pt-4 pt-sm-5 pt-md-0 pt-lg-0">
+                            <div class="col">
+                                <div class="bg-platinum p-3 rounded">
+                                    <form method="GET" action="{% url 'search' %}" class="rounded" >
+                                        <label class="bg-platinum pb-1 text-center par" for="search_input">{{searchForm.q.label}}</label>
+                                        <div class="bg-white p-2 rounded">
+                                          <div class="input-group input-group-lg flex-fill">
+                                            {{searchForm.q}}
+                                            <div class="input-group-append rounded">
+                                              <button class="btn btn-primary rounded d-none d-sm-block" type="submit"><i class="fas fa-search mr-2"></i>Buscar</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 mt-5 mt-md-0 mt-lg-0 text-center">                
+                        <img class="" src="{% static 'LVR/assets/img/cherry-search.png' %}" alt="" height="300px">
+                    </div>
+
+                    
+
+{% else %}
 
                   
                     {% if results %}
@@ -128,7 +164,7 @@
                     {% endif %}
 
 
-                   
+                {% endif %}   
                     
 
 

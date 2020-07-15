@@ -91,7 +91,7 @@ def search(request):
         bad_query = False
 
         if not search_term:
-            return render(request, template, {})
+            return render(request, template, {'empty_search':True})
 
         if len(search_term) <= 2:
             bad_query = True
