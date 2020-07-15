@@ -20,7 +20,7 @@ urlpatterns = [
     #subscriber
     path('subscribe', views.subscribe, name='subscribe'),
     path('confirm/', views.confirm_subscribe, name='confirm'),
-    path('unsubscribe', views.unsubscribe, name='unsubscribe'),
+    path('unsubscribe/', views.unsubscribe, name='unsubscribe'),
     #blog
     path('about', views.about, name='about'),  
     path('post/<slug:category_text>/<slug:slug_text>/', views.post_detail, name='post_detail'),

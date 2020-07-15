@@ -1,5 +1,4 @@
 {% load i18n %}
-{% autoescape off %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns:v="urn:schemas-microsoft-com:vml">
@@ -124,50 +123,8 @@
 
 
 <body class="respond" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
- 
-    <table border="0" width="100%" cellpadding="0" cellspacing="0" bgcolor="ffffff">
 
-        <tr>
-            <td align="center">
-                <table border="0" align="center" width="590" cellpadding="0" cellspacing="0" class="container590">
-
-                    <tr>
-                        <td height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td>
-                    </tr>
-
-                    <tr>
-                        <td align="center">
-
-                            <table border="0" align="center" width="590" cellpadding="0" cellspacing="0" class="container590">
-
-                                <tr>
-                                    <td align="center" height="70" style="height:70px;">
-                                        <a href="" style="display: block; border-style: none !important; border: 0 !important;">
-                                            <img width="100" border="0" style="display: block; width: 100px;" src="https://pix.sr/images/2020/07/03/7dHNg.png" alt="" />
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td align="center">
-                                        <table width="360 " border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse; "
-                                            class="container590 hide">
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td>
-                    </tr>
-
-                </table>
-            </td>
-        </tr>
-    </table>
-  
+    <div style="padding: 25px 0 25px 0;"></div>
 
     <table border="0" width="100%" cellpadding="0" cellspacing="0" bgcolor="ffffff" class="bg_color">
 
@@ -180,7 +137,7 @@
                             class="main-header">
 
                             <div style="line-height: 35px">
-                                {% trans 'EmailWelcome_Title' %} a la familia de <span style="color: #F52B2B;"> Le vélo <b> rouge</b> </span>!
+                                ¡Nuevo post en <span style="color: #F52B2B;"> Le vélo <b> rouge</b></span>!
                             </div>
                         </td>
                     </tr>
@@ -209,35 +166,35 @@
                                 <tr>
                                     <td align="left" style="color: #888888; font-size: 16px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
 
-                                        <p style="line-height: 24px; margin-bottom:3px;"> {% trans 'Hello' %}, gracias por suscribirte!</p>
+                                        <p style="line-height: 24px; margin-bottom:3px;"> {% trans 'Hello' %}, hemos publicado una nueva entrada en el blog de <b>LVR</b></p>
                                         <p style="line-height: 24px;margin-bottom:25px;">
-                                            Estás cerca de recibir en tu email las últimas historias de <b>LVR</b>. 
-                                            <br><br> - Para finalizar, solo debes hacer clic en el botón de abajo para confirmar tu cuenta y listo! 👏</li>
+                                            Puedes ver la última historia publicada haciendo clic <a href="#">aquí</a>.
                                             <br>
-                                            <p style="font-size: 14px;"> Si el botón no funciona, copia y pega el siguiente enlace en tu navegador: <a href="{{confirmation_url}}">{{confirmation_url}}</a></p>
-                                            <br><br>
                                         </p>
 
-                                        
-                                        <table border="0" align="center" width="180" cellpadding="0" cellspacing="0" bgcolor="647C7D" style="margin-bottom:20px;">
+                                       
 
-                                            <tr> <td height="10" style="font-size: 10px; line-height: 10px;">&nbsp;</td> </tr>
 
+
+                                        <table style="border: 2px solid #855446; padding: 15px;" width="590" align="center" cellpadding="0" cellspacing="0">
                                             <tr>
-                                                <td align="center" style="color: #ffffff; font-size: 16px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 22px; letter-spacing: 2px;">
-                                                    <div style="line-height: 22px;">
-                                                        <a href="{{confirmation_url}}" style="color: #ffffff; text-decoration: none;">{% trans 'Confirm' %}</a>
+                                                <td align="left" style="color: #888888; font-size: 16px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
+            
+                                                    <div style="width: 350px; border: dashed #1B1B1B 2px; margin: auto;">
+                                                        <img style="display: block; width: 100%; height:100%; margin:auto;" src=""/>
                                                     </div>
+                                
+                                                    <p style="font-size: larger; font-weight: 600; padding-top: 15px;" >Título</p>
+                                                    <p>Cuerpo del post...</p>
                                                 </td>
                                             </tr>
-
-                                            <tr>
-                                                <td height="10" style="font-size: 10px; line-height: 10px;">&nbsp;</td>
-                                            </tr>
-
                                         </table>
-                                        <p style="line-height: 24px"> <br> - {% trans 'greetings' %} <b>LVR</b>. </p>
+                                        <p style="line-height: 24px; margin-top: 10px;"> <br> - {% trans 'greetings' %}, el equipo de <b>LVR</b>. </p>
                                         <br><hr>
+                                        <p style="font-size: 12px; margin: 25px 0px 5px">Estás viendo este mensaje porque te suscribiste al Newsletter de <b>LVR</b> con el email <b>{{email}}</b>.
+                                            <br> Si ya no deseas recibir este tipo de mensajes, 
+                                            <a href="{{unsubscribe}}" style="text-decoration:underline;color:rgb(75, 75, 75)">haz clic aquí</a>. 
+                                        </p>
                                     </td>
                                 </tr>
                             </table>
@@ -258,5 +215,3 @@
 </body>
 
 </html>
-
-{% endautoescape %}

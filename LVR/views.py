@@ -12,7 +12,7 @@ from . forms import PostForm, CommentForm, CreateUserForm, ContactForm, Subscrib
 from django.utils.translation import gettext as _
 from django.conf import settings as conf_settings #To read reCaptcha's key
 from . decorators import check_recaptcha
-from . helpers import generate_random_digits
+from . helpers import generate_random_digits, mail_newsletter
 from taggit.models import Tag
 from django.db.models import Count, Q
 from django.db.models.functions import Upper
@@ -72,17 +72,24 @@ def base(request):
     return render(request, template)
 
 def cm(request):
+    notify_new(request)
     # return render(request, 'LVR/user/contact-mail.html', {})
-    return render(request, 'LVR/mails/blog/confirm-mail.html', {})
+    # context = {'action': 'deleted'}
+    return render(request, 'LVR/mails/blog/average-mail.html')
+    # return render(request, 'LVR/mails/blog/verify.html')
 
     
 
-
+#For searching a blog_post object 
 def search(request):
     template = 'LVR/search.html'
     if request.method == 'GET':
         search_term = request.GET.get('q')
         bad_query = False
+
+        if not search_term:
+            return render(request, template, {})
+
         if len(search_term) <= 2:
             bad_query = True
         else:
@@ -104,12 +111,12 @@ def search(request):
 
 
 
+#This method allows blog readers get in touch with <<Le vélo rouge>>
 @check_recaptcha
 def contact(request):
     response_data = {}
     if request.POST.get('action') == 'sendCtct_Form':
         ctct_form = ContactForm(data=request.POST)
-
         if ctct_form.is_valid() and request.recaptcha_is_valid:
             print('\n\n# --- PY: Form & Captcha passed --- #')
             template = 'LVR/user/contact-mail.html'
@@ -139,6 +146,7 @@ def contact(request):
         return redirect('index')
 
 
+#This method adds a new subscriber and send a confirmation mail
 def subscribe(request):
     response_data = {}
     if request.POST.get('action') == 'subscribe_Form':
@@ -146,48 +154,27 @@ def subscribe(request):
         if subscribe_form.is_valid():
             subscriber_email = request.POST.get('s_email')
             if not blog_subscriber.objects.filter(email=subscriber_email):
-                template = 'LVR/mails/blog/confirm-mail.html'
                 rnd = generate_random_digits()
-
-
-
                 conf_url ="{}?id={}".format(request.build_absolute_uri('/confirm/'), rnd)
-
-
                 print(f'\n\n# --- PY: Confirmation URL: --- #\n{conf_url}')
-
                 sub = blog_subscriber(email=subscriber_email, conf_num=rnd)
                 sub.save()
-                try:
-                    con = mail.get_connection()
-                    con.open()
-                    print(f'\n\n# --- PY: Django connected to the SMTP Server --- #\n')
-                    host=conf_settings.NEMAIL_HOST
-                    host_username=conf_settings.NEMAIL_HOST_USER
-                    host_password=conf_settings.NEMAIL_HOST_PASSWORD
-                    host_port=conf_settings.NEMAIL_PORT
-                    host_use_tls=conf_settings.NEMAIL_USE_TLS
-                    print(f'\n\n# --- PY: Email details: --- #\n\n- Host: <<{host}>>\n- User: <<{host_username}>>\n- Port: <<{host_port}>>\n- Use TLS: <<{host_use_tls}>>')
-                    mail_obj = EmailBackend(host=host, port=host_port, username=host_username, password=host_password, use_tls=host_use_tls)
-                    context = {'email': subscriber_email, 'confirmation_url': conf_url}
-                    mail_subject = 'Confirma tu email'
-                    message = render_to_string(template, context)
-                    message_from = conf_settings.NEMAIL_HOST_USER
-                    msg = mail.EmailMessage(subject=mail_subject, body=message, from_email=host_username, to=[subscriber_email], connection=con)
-                    msg.content_subtype = 'html'
-                    mail_obj.send_messages([msg])                    
+
+                subj = 'Confirma tu email'
+                template = 'LVR/mails/blog/confirm-mail.html'
+                context = {'email': subscriber_email, 'confirmation_url': conf_url}
+
+                # The 'mail_newsletter' method expects the following: message_to, subject, template, ctxt, is_massive):
+                if mail_newsletter(subscriber_email, subj, template, context, False, request):
                     response_data['success'] = True
-                    print(f'\n\n# --- PY: Email sent successfully to <<{subscriber_email}>> --- #\n')
-                except Exception as e:
+                else:
                     response_data['success'] = False
                     sub.delete()
-                    print(f'\n\n# --- PY: There was an error sending the email: --- #\n{e}')
-                finally:
-                    return JsonResponse(response_data)
+                return JsonResponse(response_data)
+
             else:
                 print(f'\n\n# --- PY: The email <<{subscriber_email}>> is already subscribed to newsletter --- #\n')
                 return JsonResponse({'success': False, 'already_exists': True})        
-
         else:
             return JsonResponse({'success': False})        
     else:
@@ -195,10 +182,36 @@ def subscribe(request):
 
 
 
+#This method notifies when a new post is accepted by superuser, so subscribers know when a new post is published (accepted) 
+def notify_new(request):
+    #Creating a subs object full of tuples with subscribers info from 'blog_subscriber' 
+    subs = blog_subscriber.objects.values_list('email', 'conf_num').filter(confirmed=True)
+    ctxt = []
+    for sub in subs.iterator():
+        lista=list(sub)
+        ctxt.append(lista)
+    subscribers = []
+    print(f'\n\n# --- PY: (views.py) List of all subscribers email: --- #\n')
+    for (i, element) in enumerate([i[0] for i in subs], start=1):
+        subscribers.append(element)
+        print(f'> {i}: {element}')
+
+    print(subscribers)
+
+    subj = 'Nuevo post en LVR: titulo del post'
+    template = 'LVR/mails/blog/average-mail.html'
+        
+    if mail_newsletter(subscribers, subj, template, ctxt, True, request):
+        print('Massive sent OK')
+    else:
+        print('Massive sent failed')
+
+
+
+#Method that allows a subscriber confirm its email and receive updates
 def confirm_subscribe(request):
     template = 'LVR/mails/blog/verify.html'
     conf_numb = request.GET['id']
-    print(conf_numb)
     sub = blog_subscriber.objects.get(conf_num=conf_numb)
     context = {'email': sub.email}
     if sub.conf_num == conf_numb:
@@ -213,13 +226,24 @@ def confirm_subscribe(request):
     
 
 
+
+#This method removes a subscriber from the database
 def unsubscribe(request):
-    sub = blog_subscriber.objects.get(email=request.GET['email'])
-    if sub.conf_num == request.GET['conf_num']:
-        sub.delete()
-        return render(request, 'index.html')
+    template = 'LVR/mails/blog/verify.html'
+    conf_numb = request.GET['id']
+    context = {}
+    if blog_subscriber.objects.filter(conf_num=conf_numb).exists():
+        sub = blog_subscriber.objects.get(conf_num=conf_numb)
+        if sub.conf_num == conf_numb:
+            print(f'\n\n# --- PY: The email <<{sub.email}>> have been deleted from the database --- #\n')
+            sub.delete()
+            context['action'] = 'deleted'
+            return render(request, template, context)
+        else:
+            return redirect('index')
     else:
-        return render(reques, 'index.html')
+        context['action'] = 'already_deleted'
+        return render(request, template, context)
 
     
 
@@ -500,8 +524,6 @@ def profile(request):
     rejected_posts = blog_post.objects.filter(author=author, status=2).count()
     archived_posts = blog_post.objects.filter(author=author, status=3).count()
 
-
-
     context = {
         'author': author,
         'total_posts': total_post_list,
@@ -595,6 +617,15 @@ def sign_up(request):
             messages.error(request, _('ErrorCreatingUser') )
     context = {'form': form}
     return render (request, template, context)
+
+
+
+@login_required(login_url='login')
+@user_passes_test(lambda u: u.is_superuser)
+def approve_post(request):
+    return redirect('dashboard')
+    
+    
 
 
 
@@ -703,6 +734,12 @@ def post_archive(request, slug_text):
     post.status = 3
     post.save()
     return redirect('dashboard')
+
+
+
+def send_newsletter_msg(request):
+    return redirect('dashboard')
+    
 
 
 

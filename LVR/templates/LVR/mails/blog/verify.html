@@ -7,7 +7,18 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% if action == 'confirmed' %}
   <title>Account activated successfully</title>
+  {% endif %}
+  {% if action == 'denied' %}
+  <title>Ocurrió un errory</title>
+  {% endif %}
+  {% if action == 'deleted' %}
+  <title>Nos duele verte partir</title>
+  {% endif %}
+  {% if action == 'already_deleted' %}
+  <title>Email no encontrado</title>
+  {% endif %}
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <link rel="stylesheet" href="{% static 'LVR/assets/css/styles.css' %}">  
   <link rel="stylesheet" href="{% static 'LVR/assets/css/bootstrap-select.css' %}">  
@@ -44,12 +55,15 @@
                 </div>
             </div>   
             <div class="col-lg-5 text-center mt-3">                
-                <img class="" src="{% static 'LVR/assets/img/bermuda-done.png' %}" width="340px">
+                <img class="" src="{% static 'LVR/assets/img/cherry-done.png' %}" width="340px">
             </div>
         </div>
     </div>
 </div>
-{% else %}
+{% endif %}
+
+
+{% if action == 'denied'%}
 <div class="mx-4 py-4 mt-3">
     <div class="card shadow border-danger rounded">
         <div class="row mx-3 my-5">
@@ -96,7 +110,109 @@
                 </div> -->
             </div>   
             <div class="col-lg-5 text-center mt-3">                
-                <img class="" src="{% static 'LVR/assets/img/bermuda-done.png' %}" width="340px">
+                <img class="" src="{% static 'LVR/assets/img/cherry-ohno.png' %}" width="340px">
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% if action == 'deleted' %}
+<div class="mx-4 py-4 mt-3">
+    <div class="card shadow border-dark rounded">
+        <div class="row mx-3 my-5">
+            <div class="col-lg-7 text-center">
+                <div class="alert alert-dark">
+                    <h2 class="font-weight-bold">¡Esperamos que regreses pronto!</h2> 
+                </div>                
+                <div class="py-3">
+                    <div class="row">
+                        <div class="col">
+                            <div class="center py-5 h4">
+                                Tu email <b> {{email}} </b> ahora está fuera de la lista del Newsletter
+                            </div>
+                            <div class="mt-3 center h5">
+
+                                <p>Si lo deseas, puedes suscribirte de nuevo:</p>
+                                    <div class="mx-0 mx-sm-4 mx-md-4 mx-lg-5 px-0 px-sm-4 px-sm-4 px-lg-5">
+                                   <form id="subscribe_frm" method="POST" class="form-group">
+                                    {% csrf_token %}
+                                    <h5 id="subscribe_success" style="display:none" class="my-3 h5 font-weight-bold text-success"> <i class="fas fa-check mr-2"></i>Listo, enviamos un mensaje a tu email para que verifiques tu suscripción</h5> 
+                                    <h5 id="subscribe_error" style="display: none;" class="my-3 h5 font-weight-bold text-danger"> <i class="fas fa-exclamation-circle mr-1"></i>Ocurrió un error al enviar el email, intenta de nuevo más tarde</h5>
+                                    <h5 id="subscribe_already_error" style="display: none;" class="my-3 h5 font-weight-bold text-danger"> <i class="fas fa-exclamation-circle mr-1"></i>Parece que este email ya está registrado en el newsletter</h5>
+                                    <div class="bg-gray-500 input-group p-2 rounded align-items-center">
+                                      {{subscribeForm.s_email}}
+                                      <div class="input-group-append">
+                                        <button class="btn btn-light" type="submit" aria-label="Suscríbete al newsletter">
+                                          <div id="subscribe_sending" class="sp-pb-bgr spinner-grow spinner-grow-sm" style="display: none;" role="status"><span class="sr-only"></span></div>
+                                          <i id="subscribe_send" class="fas fa-paper-plane"></i>
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </form>
+                               </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-4 pb-5  justify-content-center">
+                    <a href="{% url 'index' %}" class="py-1 my-1 btn btn-dark btn-lg"> Ir a inicio </a>
+                </div>
+            </div>   
+            <div class="col-lg-5 text-center mt-3">                
+                <img class="" src="{% static 'LVR/assets/img/cherry-unsubscribed.png' %}" width="340px">
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% if action == 'already_deleted'%}
+<div class="mx-4 py-4 mt-3">
+    <div class="card shadow border-danger rounded">
+        <div class="row mx-3 my-5">
+            <div class="col-lg-7 text-center">
+                <div class="alert alert-danger">
+                    <h2 class="font-weight-bold">No encontramos el email proporcionado</h2> 
+                </div>                
+                <div class="py-3">
+                    <div class="row">
+                        <div class="col">
+                            <div class="center py-5 h4">
+                                Parece que el email que se está tratando de eliminar ya no está registrado en el Newsletter </b>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="mt-3 center h5">
+                                <p>Si lo deseas, puedes suscribirte de nuevo:</p>
+
+                               <div class="mx-0 mx-sm-4 mx-md-4 mx-lg-5 px-0 px-sm-4 px-sm-4 px-lg-5">
+                                   <form id="subscribe_frm" method="POST" class="form-group">
+                                    {% csrf_token %}
+                                    <h5 id="subscribe_success" style="display:none" class="my-3 h5 font-weight-bold text-success"> <i class="fas fa-check mr-2"></i>Listo, enviamos un mensaje a tu email para que verifiques tu suscripción</h5> 
+                                    <h5 id="subscribe_error" style="display: none;" class="my-3 h5 font-weight-bold text-danger"> <i class="fas fa-exclamation-circle mr-1"></i>Ocurrió un error al enviar el email, intenta de nuevo más tarde</h5>
+                                    <h5 id="subscribe_already_error" style="display: none;" class="my-3 h5 font-weight-bold text-danger"> <i class="fas fa-exclamation-circle mr-1"></i>Parece que este email ya está registrado en el newsletter</h5>
+                                    <div class="bg-gray-500 input-group p-2 rounded align-items-center">
+                                      {{subscribeForm.s_email}}
+                                      <div class="input-group-append">
+                                        <button class="btn btn-light" type="submit" aria-label="Suscríbete al newsletter">
+                                          <div id="subscribe_sending" class="sp-pb-bgr spinner-grow spinner-grow-sm" style="display: none;" role="status"><span class="sr-only"></span></div>
+                                          <i id="subscribe_send" class="fas fa-paper-plane"></i>
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </form>
+                               </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             
+            </div>   
+            <div class="col-lg-5 text-center mt-3">                
+                <img class="" src="{% static 'LVR/assets/img/cherry-not-found.png' %}" width="340px">
             </div>
         </div>
     </div>
