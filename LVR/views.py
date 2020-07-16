@@ -22,7 +22,7 @@ from django.views.decorators.http import require_GET
 #User, Admin & Superuser
 from django.utils.text import slugify
 from django.contrib import messages #To customize login & signup forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import authenticate, login as do_login, logout as do_logout
 from django.contrib.auth.decorators import login_required, user_passes_test # upt is to restrict to super user only
@@ -493,15 +493,21 @@ def login(request):
     if request.user.is_authenticated:
         return redirect('dashboard')
     else:
-        if request.method == 'POST':
-            username = request.POST.get('A_username')
-            password = request.POST.get('A_password')
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                do_login(request, user)
-                return redirect('dashboard')
+        if request.POST.get('action') == 'login_Form':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            if (username and password):
+                user = authenticate(request, username=username, password=password)
+                if user is not None and user.is_active:
+                    do_login(request, user)
+
+                    # return HttpResponse(json.dumps({'status': True}), content_type='application/json')
+                    return JsonResponse({'status': True})
+                    # return redirect('dashboard')
+                else:                
+                    return JsonResponse({'status': False, 'err_code': 'login_failed'})                
             else:
-                messages.info(request, _('WrongUserOrPass'))
+                return JsonResponse({'status': False, 'err_code': 'invalid_form'})                
     context = {}
     return render(request, template, context)
 
