@@ -76,7 +76,8 @@ def cm(request):
     # return render(request, 'LVR/user/contact-mail.html', {})
     # context = {'action': 'deleted'}
     # return render(request, 'LVR/mails/blog/average-mail.html')
-    return render(request, 'LVR/user/aa-wrong-link.html')
+    return render(request, 'LVR/mails/user/wrong-link.html')
+
 
 
     # return render(request, 'LVR/mails/blog/verify.html')
@@ -565,13 +566,13 @@ def settings(request):
 
 
 def send_activation_link(user, user_email, first_name, last_name, domain):
-    template = 'LVR/user/aa-email-sent.html'
+    template = 'LVR/mails/user/activate-email.html'
     try:
         uid = urlsafe_base64_encode(force_bytes(user.id))
         token = account_activation_token.make_token(user)
         url = domain + reverse('activate', kwargs={ 'uidb64':uid, 'token':token })
         mail_subject = _('EmailWelcome_Subject')+first_name+' '+last_name
-        message = render_to_string('LVR/user/aa-activate-email.html', {
+        message = render_to_string(template, {
             'name': first_name,
             'user': user,
             'url':url,
@@ -610,7 +611,7 @@ def sign_up(request):
             last_name = form.cleaned_data.get('last_name')
             user_email = form.cleaned_data.get('email')
             domain = get_current_site(request).domain
-            template = 'LVR/user/aa-email-sent.html'
+            template = 'LVR/mails/user/email-sent.html'
             sent_successfully = False
             context = {'email': user_email, 'first_name': first_name, 'last_name': last_name, 'sent_successfully': sent_successfully }
 
@@ -639,7 +640,7 @@ def approve_post(request):
 
 
 def signup_account_activated(request, user):
-    template = 'LVR/user/aa-account-activated.html'
+    template = 'LVR/mails/user/account-activated.html'
     context = {'new_user': user}
     return render(request, template, context)
 
@@ -662,7 +663,7 @@ def activate(request, uidb64, token):
         user.save()
         return redirect('account_activated', user=user)
     else:
-        template = 'LVR/user/aa-wrong-link.html'
+        template = 'LVR/mails/user/wrong-link.html'
         rendered = render_to_string(template, {'user': user } )
         return HttpResponse(rendered)
 
