@@ -24,7 +24,6 @@
                         </div>   
                     </div>  
                     <div class="row py-2 d-flex justify-content-center">
-
                         {% if author.facebook_URL%}
                         <a href="{{ author.facebook_URL }}"> <i class="fab fa-facebook-square fa-2x"></i> </a>
                         {% endif %}
@@ -33,14 +32,9 @@
                         <a href="{{ author.twitter_URL }}" class="mx-3"> <i class="fab fa-twitter-square fa-2x"></i> </a>
                         {% endif %}
 
-
                         {% if author.linkedin_URL%}
                         <a href="{{ author.linkedin_URL }}"> <i class="fab fa-linkedin fa-2x"></i> </a>
                         {% endif %}
-
-
-
-
                     </div>
                 </div>
             
@@ -112,7 +106,6 @@
         {% endif %}
         <span class="row d-flex- justify-content-center lead text-muted"> Página {{ post_list.number }} de {{ post_list.paginator.num_pages }}</span>
     </div>
-
 </div>
 
 {% endblock %}

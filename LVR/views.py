@@ -342,20 +342,26 @@ def post_detail(request, category_text, slug_text):
 
 
 
-
 #All authors page
 def authors(request):
     template = 'LVR/authors.html'
-    all_authors = blog_author.objects.filter(activated_account=True).order_by('name')
-    paginator = Paginator(all_authors, 20) #n authors in each page
+    details = []
+    all_authors = blog_author.objects.filter(activated_account=True).order_by('name__first_name', 'name__last_name')
+    for author in all_authors:
+        dicc = {}
+        num = blog_post.objects.filter(author=author, status=1).count()
+        dicc['author'] = author
+        dicc['posts'] = num
+        details.append(dicc)
+    paginator = Paginator(details, 2) #n authors in each page
     page = request.GET.get('page')
     try:
-        authors = paginator.page(page)
+        authors_list = paginator.page(page)
     except PageNotAnInteger:
-        authors = paginator.page(1)
+        authors_list = paginator.page(1)
     except EmptyPage:
-        authors = paginator.page(paginator.num_pages)
-    context = {'page': page, 'authors': authors, 'all_authors': all_authors }
+        authors_list = paginator.page(paginator.num_pages)
+    context = {'page': page, 'authors_list': authors_list}
     return render(request, template, context)
 
 
@@ -367,7 +373,8 @@ def author_detail(request, pinchiautor):
     template = 'LVR/author_detail.html'
     author = blog_author.objects.filter(slug=pinchiautor).first()
     posts_by_author = blog_post.objects.filter(author__slug=pinchiautor, status=1).order_by('-published_date')  #Getting al posts by the current author
-    paginator = Paginator(posts_by_author, 9)
+    print(posts_by_author)
+    paginator = Paginator(posts_by_author, 1)
     page = request.GET.get('page')
     try:
         post_list = paginator.page(page)
