@@ -135,7 +135,7 @@
                     <tr>
                         <td align="center" style="color: #343434; font-size: 24px; font-family: Quicksand, Calibri, sans-serif; font-weight:700;letter-spacing: 3px; line-height: 35px;"
                             class="main-header">
-                            <div style="line-height: 35px; margin-top: 40px;" >Restablece tu contraseña</div>
+                            <div style="line-height: 35px; margin-top: 40px;" >Restablece tu contraseña en {{ site_name}}</div>
                         </td>
                     </tr>
 
@@ -163,18 +163,18 @@
                                 <tr>
                                     <td align="left" style="color: #888888; font-size: 16px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
 
-                                        <p style="line-height: 24px; margin-bottom:15px;">{% trans 'Hello' %} <b>{{ name }}</b>, ¡esto pasa más seguido de lo que crees!</p>
+                                        <p style="line-height: 24px; margin-bottom:15px;">¡Esto pasa más seguido de lo que crees!</p>
                                         
                                         <p style="line-height: 24px;">
                                             A veces olvidamos cosas... pero no te preocupes, que estamos aquí para ayudar. Sigue los siguientes pasos para restablecer tu contraseña:
                                             <ol>
-                                                <li> Haz clic <a href="{{ url }}"> en este enlace</a> o en el botón de abajo* </li>
+                                                <li> Haz clic <a href="{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}"> en este enlace</a> o en el botón de abajo* </li>
                                                 <li style="margin: 10px 0px 10px 0px"> Se abrirá una página segura de <b>LVR</b> donde podrás ingresar una nueva contraseña  ¡Esta vez recuérdala bien! 🧠 </li>
                                                 <li>Ahora podrás iniciar sesión con la nueva contraseña</li>
                                             </ol>
 
                                         </p>
-                                        <p style="font-size: 11px; line-height: 10px;">*Si el botón o enlace no funcionan, copia y pega el siguiente enlace en tu navegador: <a href="{{confirmation_url}}">{{confirmation_url}}</a></p>
+                                        <p style="font-size: 11px; line-height: 10px; margin-bottom: 30px;">*Si el botón o enlace no funcionan, copia y pega el siguiente enlace en tu navegador: <br> <a href="{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}">{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}</a></p>
 
                                         <table border="0" align="center" width="180" cellpadding="0" cellspacing="0" bgcolor="647C7D" style="margin-bottom:20px; margin-top: 40px;">
 
@@ -186,7 +186,7 @@
                                                 <td align="center" style="color: #ffffff; font-size: 16px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 22px; letter-spacing: 2px;">
 
                                                     <div style="line-height: 22px;">
-                                                        <a href="{{url}}" style="color: #ffffff; text-decoration: none;"> Restablecer contraseña </a>
+                                                        <a href="{% block reset_link %}{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}{% endblock %}" style="color: #ffffff; text-decoration: none;"> Restablecer contraseña </a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -198,8 +198,7 @@
                                         </table>
                                         <p style="line-height: 24px"> <br> - {% trans 'greetings' %} <b>LVR</b>. </p>
                                         <hr>
-                                        <p style="font-size: 12px; margin-top: 25px ">Este mensaje fue enviado al email <b>{{email}}</b>.
-                                            Si tu no hiciste esta solicitud, simplemente ignora este mensaje.
+                                        <p style="font-size: 12px; margin-top: 25px">Este mensaje se envió a <b>{{user.email}}</b>. Si no hiciste esta solicitud, ignora este mensaje.
                                         </p>
                                     </td>
                                 </tr>

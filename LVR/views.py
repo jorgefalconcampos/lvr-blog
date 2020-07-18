@@ -77,9 +77,9 @@ def cm(request):
     # context = {'action': 'deleted'}
     # return render(request, 'LVR/mails/blog/confirm-mail.html')
 
-    # return render(request, 'LVR/mails/blog/average-mail.html')
+    return render(request, 'LVR/mails/user/pswd/reset-pass-mail.html')
     # return render(request, 'LVR/user/pswd/password-reset-done.html')
-    return render(request, 'LVR/user/pswd/password-reset-complete.html')
+    # return render(request, 'LVR/user/pswd/password-reset-complete.html')
 
 
     # return render(request, 'LVR/mails/user/pswd/reset-pass.html')
