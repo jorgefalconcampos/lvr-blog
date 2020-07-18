@@ -20,7 +20,7 @@ class PostForm(f.ModelForm):
             'image': 'Imagen',
             'category': 'Categoría',
             'tags': 'Tags',
-            'post_body': 'Cuerpoaaaa'
+            'post_body': 'Cuerpo del post'
         }
 
         widgets = {

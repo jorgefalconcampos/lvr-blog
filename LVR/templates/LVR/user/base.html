@@ -19,201 +19,103 @@
 </head>
 
 <header>
-
-    
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a href="{% url 'dashboard' %}" class="navbar-brand">
-            <img src="{% static 'LVR/assets/img/r-neg.png' %}" alt="Lock it" width="45" alt="" class="d-inline-block align-middle">
+            <img src="{% static 'LVR/assets/img/icons/r-neg.png' %}" alt="LVR" width="45" alt="" class="d-inline-block align-middle">
             LE VÉLO <span class="text-uppercase font-weight-bold">ROUGE</span> <sup class="h6">ADMIN</sup>
         </a>
-
-
-
-
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse text-center" id="navbar">
-          <ul class="navbar-nav ml-auto topnav">
-              <!-- <h5 class="text-white"> {{ srequet.user}} | {{ request.user.first_name}} | {{ request.user.last_name }} | {{ request.user.get_full_name }} </h5> -->
-              <li class="nav-item py-1 py-lg-1"> <a href="{% url 'index' %}" target="_blank" class="mx-1"> <span> <button type="button" class="btn btn-light"> <i class="material-icons align-top">web</i> {% trans 'dashboard_goToPage' %} </button> </span> </a> </li>
-              <li class="nav-item py-1 py-lg-1"> <a href="{% url 'post_new' %}" class="mx-1"> <span> <button type="button" class="btn btn-light px-4 px-lg-3"> <i class="material-icons align-top">add_box</i> {% trans 'NewPost' %} </button> </span> </a> </li>
-
-              <li class="nav-item dropdown my-1 px-0 px-lg-1 pt-1">
-                  <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="material-icons align-top">person</i>
-                  </a>
-
-                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown" style="min-width:max-content;">
-                    <div class="dropdown-header py-0"> <h5 class="py-2"> {% trans 'Hello' %} {{ request.user.first_name|default:request.user }}! 👋 </h5> </div>  
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="{% url 'profile' %}"> <i class="material-icons align-top">person</i> {% trans 'dashboard_DropDown_Profile' %} </a>
-                      <a class="dropdown-item" href="{% url 'settings' %}"> <i class="material-icons align-top">settings</i> {% trans 'dashboard_DropDown_Settings' %} </a>
-                      <a class="dropdown-item" href="#"> <i class="material-icons align-top">view_list</i> {% trans 'dashboard_DropDown_Activity' %} </a>
-                      <a class="dropdown-item" href="#" type="button" data-toggle="modal" data-target="#myModal"> <i class="material-icons align-top">error</i> {% trans 'dashboard_DProblem' %} </a>
-                      <a class="dropdown-item" href="#" type="button" data-toggle="modal" data-target="#listingModal"> <i class="material-icons align-top">error</i> REPORTAR PROBLEMA Version 2 </a>                      
-                      {% if request.user.is_superuser %}
-                      <a class="dropdown-item" href="{{ HTTP_HOST }}/admin"> <i class="material-icons align-top">admin_panel_settings</i> {% trans 'dashboard_DropDown_DjangoAdmin' %} </a>
-                      {% endif %}
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="{% url 'logout' %}"> <i class="material-icons align-top">exit_to_app</i> {% trans 'dashboard_DropDown_Logout' %} </a>
-                  </div>
-              </li>
-          </ul>
-      </div>
-
-
-
-      <!-- Button trigger modal -->
-
-  
-
-      
-
-
-    
-
-
-
-      <!-- Report problem Modal -->
-      <div class="modal fade" id="myModal">
-          <div class="modal-dialog">
-              <div class="modal-content" style="z-index: 10000;">
-                  <div class="modal-header">
-                      <span class="d-flex d-inline">
-                          <i style="font-size: 30px;" class="material-icons">error</i>
-                          <h4 class="ml-3 modal-title"> {% trans 'dashboard_DProblem' %} </h4>
-                      </span>
-
-                      <button type="button" class="close" data-dismiss="modal">×</button>
-                  </div>
-
-                  <div class="modal-body">
-                      <form>
-                          <div class="container">
-                              <div class="row">
-                                  <div class="col-md-6">
-                                      <div class="row">
-                                          <div class="col-sm-12 pt-2"">
-                                              <div class="form-group">
-                                                  <div class="container"> <div class="row"> <h6 class="ml-1"> {% trans 'login_formUser' %} </h6> </div> </div>
-                                                  <div class="input-group">
-                                                      <input placeholder="{{ request.user}}" name="username" class="form-control" type="text" readonly disabled>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div>
-                                      <div class="row">
-                                          <div class="col-sm-12 pt-1">
-                                              <div class="form-group">
-                                                  <div class="container"> <div class="row"> <h6 class="ml-1"> {% trans 'dashboard_DProblem_date' %} </h6> </div> </div>
-                                                  <div class="input-group">
-                                                      <input placeholder="{% now "SHORT_DATETIME_FORMAT" %}" name="today_date" class="form-control field left" type="text" readonly disabled>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div class="col-md-6 pt-1">
-                                      <div class="form-group">
-                                          <div class="container"> <div class="row"> <h6 class="ml-1"> {% trans 'dashboard_DProblem_label' %} </h6> </div> </div>
-                                          <div class="input-group">
-                                              <!-- Describe el problema... (140 caracteres o menos) -->
-                                              <textarea class="form-control" style="max-height: 123px;" id="exampleFormControlTextarea1" rows="4" type="text" placeholder="{% trans 'dashboard_DescribeProblem_placeholder' %}"></textarea>
-                                          </div>
-                                        </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </form>
-                  </div>
-
-                  <div class="modal-footer mr-2">
-                      <button type="submit" class="btn btn-success"> {% trans 'dashboard_DProblem_send' %} </button>
-                      <button type="button" class="btn btn-danger" data-dismiss="modal"> {% trans 'dashboard_DProblem_cancel' %} </button>
-                  </div>
-              </div>
-          </div>
-      </div>
-
-  </nav>
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse text-center" id="navbar">
+            <ul class="navbar-nav ml-auto topnav">
+                <!-- <h5 class="text-white"> {{ srequet.user}} | {{ request.user.first_name}} | {{ request.user.last_name }} | {{ request.user.get_full_name }} </h5> -->
+                <li class="nav-item py-1 py-lg-1"> <a href="{% url 'index' %}" target="_blank" class="mx-1"> <span> <button type="button" class="btn btn-light"> <i class="material-icons align-top">web</i> {% trans 'dashboard_goToPage' %} </button> </span> </a> </li>
+                <li class="nav-item py-1 py-lg-1"> <a href="{% url 'post_new' %}" class="mx-1"> <span> <button type="button" class="btn btn-light px-4 px-lg-3"> <i class="material-icons align-top">add_box</i> {% trans 'NewPost' %} </button> </span> </a> </li>
+                
+                <li class="nav-item dropdown my-1 px-0 px-lg-1 pt-1">
+                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="material-icons align-top">person</i>
+                    </a>
+                    
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown" style="min-width:max-content;">
+                        <div class="dropdown-header py-0"> <h5 class="py-2"> {% trans 'Hello' %} {{ request.user.first_name|default:request.user }}! 👋 </h5> </div>  
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'profile' %}"> <i class="material-icons align-top">person</i> {% trans 'dashboard_DropDown_Profile' %} </a>
+                        <a class="dropdown-item" href="{% url 'settings' %}"> <i class="material-icons align-top">settings</i> {% trans 'dashboard_DropDown_Settings' %} </a>
+                        <a class="dropdown-item" href="#"> <i class="material-icons align-top">view_list</i> {% trans 'dashboard_DropDown_Activity' %} </a>
+                        <a class="dropdown-item" href="#" type="button" data-toggle="modal" data-target="#problemModal"> <i class="material-icons align-top">error</i> {% trans 'dashboard_DProblem' %} </a>
+                        {% if request.user.is_superuser %}
+                        <a class="dropdown-item" href="{{ HTTP_HOST }}/admin"> <i class="material-icons align-top">admin_panel_settings</i> {% trans 'dashboard_DropDown_DjangoAdmin' %} </a>
+                        {% endif %}
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'logout' %}"> <i class="material-icons align-top">exit_to_app</i> {% trans 'dashboard_DropDown_Logout' %} </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </header>
 
 
-  <!-- Report problem modal version 2 -->
-  <div class="modal fade" id="listingModal" tabindex="-1" role="dialog" aria-labelledby="listingModal" aria-hidden="true"  >
-    <div class="modal-dialog modal-lg" >
-      <div class="modal-content" >
-        <div class="modal-header px-lg-5">
-          <h5 class="modal-title" id="listingModalLabel">Add Listing</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-        </div>
-        <div class="modal-body px-lg-5">
-          <form action="#">
-            <div class="row">
-              <div class="form-group col-lg-6">
-                <label for="fullName">Full name</label>
-                <input class="form-control form-control-lg" id="fullName" type="text" name="fullname" placeholder="Your full name">
-              </div>
-              <div class="form-group col-lg-6">
-                <label for="email">Email Address</label>
-                <input class="form-control form-control-lg" id="email" type="email" name="email" placeholder="Your email address">
-              </div>
-              <div class="form-group col-lg-6">
-                <label for="fullName">Listing Type</label>
-                <select class="selectpicker" id="listingType" name="listing-type" data-style="bs-select-form-control" data-title="What do you want to add" data-width="100%" required>
-                  <option value="tool">Tool</option>
-                  <option value="resource">Resource</option>
-                </select>
-              </div>
-              <div class="form-group col-lg-6">
-                <label for="istingTitle">Listing title</label>
-                <input class="form-control form-control-lg" id="istingTitle" type="text" name="listing-title" placeholder="Title of your title">
-              </div>
-              <div class="form-group col-lg-6">
-                <label for="listingUrl">Listing URL</label>
-                <input class="form-control form-control-lg" id="listingUrl" type="text" name="listing-url" placeholder="Listing website url">
-              </div>
-              <div class="form-group col-lg-6">
-                <label for="listingCategory">Listing category</label>
-                <select class="selectpicker" id="listingCategory" name="listing-category" data-style="bs-select-form-control" data-title="Select listing category" data-width="100%" required>
-                  <option value="">Marketing</option>
-                  <option value="">Idea generation</option>
-                  <option value="">Idea generation</option>
-                  <option value="">Design</option>
-                  <option value="">Naming</option>
-                  <option value="">Domain names</option>
-                  <option value="">Sales</option>
-                  <option value="">Finance</option>
-                  <option value="">Project management</option>
-                  <option value="">Hosting</option>
-                  <option value="">Social tools</option>
-                </select>
-              </div>
-              <div class="form-group col-lg-12">
-                <label for="listingDescription">Listing description</label>
-                <textarea class="form-control form-control-lg" id="listingDescription" name="listing-description" rows="5" placeholder="Add a small brief about your listing."></textarea>
-              </div>
-              <div class="form-group col-lg-6 mb-lg-0">
-                <label for="listingThumb">Listing thumbnail</label>
-                <input class="form-control form-control-lg-2" id="listingThumb" type="file" name="listing-thumb">
-              </div>
-              <div class="form-group col-lg-6 mb-lg-0">
-                <label for="listingCover">Listing cover</label>
-                <input class="form-control form-control-lg-2" id="listingCover" type="file" name="listing-cover">
-              </div>
+<div class="modal fade" id="problemModal" tabindex="-1" role="dialog" aria-labelledby="contactModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header px-lg-5">
+                <h5 class="modal-title" id="prblm_form_title">Contacta con soporte técnico</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
-          </form>
+            <div class="modal-body px-lg-5">
+                <form id="problem_frm" action="">     
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-sm-12 pt-2"">
+                                    <div class="form-group">
+                                        <div class="container"> <div class="row"> <h6 class="ml-1"> {% trans 'login_formUser' %} </h6> </div> </div>
+                                        <div class="input-group">
+                                            <input placeholder="{{ request.user}}" name="username" class="form-control" type="text" readonly disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 pt-1">
+                                    <div class="form-group">
+                                        <div class="container"> <div class="row"> <h6 class="ml-1"> {% trans 'dashboard_DProblem_date' %} </h6> </div> </div>
+                                        <div class="input-group">
+                                            <input placeholder="{% now "SHORT_DATETIME_FORMAT" %}" name="today_date" class="form-control field left" type="text" readonly disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 pt-1">
+                            <div class="form-group">
+                                <div class="container"> <div class="row"> <h6 class="ml-1"> {% trans 'dashboard_DProblem_label' %} </h6> </div> </div>
+                                <div class="input-group">
+                                    <textarea id="prblm_form" rows="5" class="form-control" style="max-height: 127px; min-height: 127px;" type="text" placeholder="{% trans 'dashboard_DescribeProblem_placeholder' %}"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-end px-sm-0 px-md-0 px-lg-0">
+                        <p id="prblm_form_success" style="display:none" class="mt-2 mr-2 small h6 font-weight-bold text-success"> <i class="fas fa-check mr-1"></i>Mensaje enviado</p>
+                        <p id="prblm_form_error" style="display:none" class="mt-2 mr-2 small h6 font-weight-bold text-danger"> <i class="fas fa-exclamation-circle mr-1"></i>Ocurrió un error al enviar el mensaje</p>
+                        <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">{% trans 'dashboard_DProblem_cancel' %}</button>
+                        <button id="prblm_form_send" type="submit" class="btn btn-primary">{% trans 'dashboard_DProblem_send' %}</button>
+                        <button id="contact_frm_sending" class="btn btn-primary px-3" style="display: none;">
+                            <div class="sp-pb spinner-grow spinner-grow-sm" role="status"><span class="sr-only"></span></div>
+                            Enviando
+                        </button> 
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="modal-footer justify-content-start px-lg-5">
-          <button class="btn btn-primary" type="submit">Submit listing</button>
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 
 
 <body class="sb-nav-fixed">
@@ -262,12 +164,12 @@
                         <span class="menu-collapsed"> {% trans 'login_formPass' %} </span>
                     </a>
                 </div>
-                <a href="#" class="bg-dark list-group-item list-group-item-action">
+                <a href="{% url 'notifications' %}" class="bg-dark list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <i class="material-icons md-18 mr-2">notifications</i> 
                         <span class="menu-collapsed"> {% trans 'dashboard_Notifications' %} 
                             <span class="badge badge-pill badge-primary ml-2">
-                                5
+                                #
                             </span>
                         </span>
                     </div>
@@ -283,7 +185,7 @@
                         <span class="menu-collapsed">Calendar</span>
                     </div>
                 </a>
-                <a href="#" class="bg-dark list-group-item list-group-item-action">
+                <a href="{% url 'tasks' %}" class="bg-dark list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <i class="material-icons md-18 mr-2">grading</i> 
                         
@@ -346,19 +248,28 @@
             </div>
 
             <!-- Content imported from "user/calendar.html" with the block of code "calendar" -->
-            <div class="">
-                {% block calendar %}
-                {% endblock %}
-            </div>
+            <div>{% block calendar %}{% endblock %}</div>
+
+             <!-- Content imported from "user/notifications.html" with the block of code "notifications" -->
+             <div>{% block notifications %}{% endblock %}</div>
+
+            <!-- Content imported from "user/tasks.html" with the block of code "tasks" -->
+            <div>{% block tasks %}{% endblock %}</div>
+
         </div><!-- Main Col END -->
     </div><!-- body-row END --> 
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/0b5e6aae1f.js" crossorigin="anonymous"></script>
 <script type="application/javascript" src="{% static 'LVR/assets/js/bootstrap-select.js' %}"></script>
+
+<script type="text/javascript">
+    $(window).on('load',function(){
+        $('#inProgressModal').modal('show');
+    });
+  </script>
 
 <script type="text/javascript" src="{% static 'LVR/assets/js/sidenav.js' %}"></script>
 <script type="text/javascript" src="{% static 'LVR/assets/js/tagsinput.js' %}"></script>
@@ -373,7 +284,7 @@
   <div class="container">
 
     <div class="py-2 footer-copyright text-center">
-      Copyright © {% now 'Y' %} LOCK IT
+      Copyright © {% now 'Y' %} LVR
       <div class="mt-3">
         <a href="{% url 'index' %}" class="border rounded py-1 px-1"> <b> {% trans 'dashboard_goToPage' %} </b> </a>
       </div>

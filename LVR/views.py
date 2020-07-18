@@ -568,6 +568,22 @@ def calendar(request):
 
 
 @login_required(login_url='login')
+def notifications(request):
+    template = 'LVR/user/notifications.html'
+    context = {}
+    return render (request, template, context)
+
+
+
+@login_required(login_url='login')
+def tasks(request):
+    template = 'LVR/user/tasks.html'
+    context = {}
+    return render (request, template, context)
+
+
+
+@login_required(login_url='login')
 def settings(request):
     template = 'LVR/user/settings.html'
     author = blog_author.objects.get(name=request.user)
