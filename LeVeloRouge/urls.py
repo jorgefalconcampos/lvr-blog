@@ -22,6 +22,7 @@ from django.conf.urls.i18n import i18n_patterns
 from django.urls import path, include
 from django.conf.urls import url, handler404
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.contrib import admin
 from LVR.views import page_not_found_404
@@ -35,6 +36,10 @@ urlpatterns = [
     path('', include('pwa.urls')),
     path('summernote/', include('django_summernote.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
+    path('user/password-reset/', auth_views.PasswordResetView.as_view(template_name='LVR/user/pswd/password-reset.html'), name='password_reset'),    
+    path('user/password-reset/done', auth_views.PasswordResetDoneView.as_view(template_name='LVR/user/pswd/password-reset-done.html'), name='password_reset_done'),
+    path('user/password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='LVR/user/pswd/password-reset-confirm.html'),name='password_reset_confirm'),
+    path('user/password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='LVR/user/pswd/password-reset-complete.html'),name='password_reset_complete'),
 ]
 
 handler404 = 'LVR.views.page_not_found_404'

@@ -22,7 +22,7 @@ from django.views.decorators.http import require_GET
 #User, Admin & Superuser
 from django.utils.text import slugify
 from django.contrib import messages #To customize login & signup forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import authenticate, login as do_login, logout as do_logout
 from django.contrib.auth.decorators import login_required, user_passes_test # upt is to restrict to super user only
@@ -32,8 +32,8 @@ from django.template.loader import render_to_string
 from . tokens import account_activation_token
 from django.core.mail import EmailMessage, get_connection, send_mail
 from django.core.mail.backends.smtp import EmailBackend
+from django.contrib.auth.tokens import default_token_generator
 # from LeVeloRouge.settings import NEMAIL_HOST_USER
-from .tokens import account_activation_token
 
 
 
@@ -75,8 +75,14 @@ def cm(request):
     # notify_new(request)
     # return render(request, 'LVR/user/contact-mail.html', {})
     # context = {'action': 'deleted'}
+    # return render(request, 'LVR/mails/blog/confirm-mail.html')
+
     # return render(request, 'LVR/mails/blog/average-mail.html')
-    return render(request, 'LVR/mails/user/wrong-link.html')
+    # return render(request, 'LVR/user/pswd/password-reset-done.html')
+    return render(request, 'LVR/user/pswd/password-reset-complete.html')
+
+
+    # return render(request, 'LVR/mails/user/pswd/reset-pass.html')
 
 
 
@@ -110,7 +116,6 @@ def search(request):
             
             context = {'results': queryset, 'number': len(queryset), 'query': search_term}
             return render(request, template, context)
-
     return render(request, template, {'bad_query':bad_query} )
 
 
@@ -673,6 +678,29 @@ def activate(request, uidb64, token):
         template = 'LVR/mails/user/wrong-link.html'
         rendered = render_to_string(template, {'user': user } )
         return HttpResponse(rendered)
+
+
+
+
+# def password_reset(request):
+#     form = PasswordResetForm(request.POST)
+
+
+#     if request.method == "POST":
+#         email = form.cleaned_data('email')
+#         if form.is_valid():
+#             subject = 'Solicitud de restablecimiento de contraseña'
+#             subject = ''
+#             mail_template = 'LVR/mails/user/pswd/reset-pass-mail.html'
+#             from_email=''
+#             ctxt = {}
+#             print('llegp lego aki')
+#             form.save(from_email='blah@blah.com', email_template_name='path/to/your/email_template.html')
+#         else:
+#             print('jaja')
+
+#     form = PasswordResetForm()
+#     return render(request, 'LVR/user/pswd/password-reset.html', {"form":form})
 
 
 
