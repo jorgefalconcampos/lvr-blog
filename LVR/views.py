@@ -588,8 +588,13 @@ def tasks(request):
 def settings(request):
     template = 'LVR/user/settings.html'
     author = blog_author.objects.get(name=request.user)
-    perms = request.user.get_group_permissions()
-    context = { 'author': author, 'permissions': perms}
+    context = {'author': author}
+    if not request.user.is_superuser:
+        avg_user_perms = ['Crear posts en mi nombre', 'Eliminar posts escritos en mi nombre', 'Archivar posts escritos en mi nombre', 'Borrar posts escritos en mi nombre', 'Solicitar restablecimiento de contraseña', 'Crear tags (al crear un post, siempre y cuando el tag no exista)', 'Modificar datos personales públicos', 'Modificar datos personales privados', 'Cambiar imagen de perfil público', 'Login y logout']
+        context['permissions'] = avg_user_perms
+    else:
+        perms = request.user.get_group_permissions()
+        context['permissions'] = perms
     return render (request, template, context)
 
 

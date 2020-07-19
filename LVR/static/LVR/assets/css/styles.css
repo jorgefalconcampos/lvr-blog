@@ -2605,6 +2605,10 @@ h1, h2, h3, h4 {
 .sp-pb-bgr {
   margin: 0 0 3px 0px; }
 
+.list-group-item.active {
+  background-color: #6c757d !important;
+  border-color: #6c757d; }
+
 .material-icons.md-18 {
   font-size: 18px; }
 

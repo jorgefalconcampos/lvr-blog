@@ -271,11 +271,8 @@
 <script src="https://kit.fontawesome.com/0b5e6aae1f.js" crossorigin="anonymous"></script>
 <script type="application/javascript" src="{% static 'LVR/assets/js/bootstrap-select.js' %}"></script>
 
-<script type="text/javascript">
-    $(window).on('load',function(){
-        $('#inProgressModal').modal('show');
-    });
-  </script>
+<script type="text/javascript">$(window).on('load',function(){$('#inProgressModal').modal('show');});</script>
+<script>$("#settings_notifications, #settings_widgets, #settings_delete_acc").click(function(){$("#toastMessage").toast('show'); });</script>
 
 <script type="text/javascript" src="{% static 'LVR/assets/js/sidenav.js' %}"></script>
 <script type="text/javascript" src="{% static 'LVR/assets/js/tagsinput.js' %}"></script>
