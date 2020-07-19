@@ -20,11 +20,12 @@
 
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a href="{% url 'dashboard' %}" class="navbar-brand">
+        <a href="{% url 'dashboard' %}" class="navbar-brand d-flex d-inline">
             <img src="{% static 'LVR/assets/img/icons/r-neg.png' %}" alt="LVR" width="45" alt="" class="d-inline-block align-middle">
-            LE VÉLO <span class="text-uppercase font-weight-bold">ROUGE</span> <sup class="h6">ADMIN</sup>
+            <span class="ml-1 my-auto d-none d-sm-block">LE VÉLO <span class="text-uppercase font-weight-bold">ROUGE</span> <sup class="h6">ADMIN</sup></span>
+            <span class="ml-1 my-auto d-block d-sm-none" >LV<span class="text-uppercase font-weight-bold">R</span> <sup class="h6">ADMIN</sup></span>
         </a>
-        
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -228,9 +229,14 @@
                 {% block signup %}
                 {% endblock %}
             </div>
+
+            <div>
+                {% block moderate %}
+                {% endblock %}
+            </div>
             
             <!-- Content imported from "user/post_list.html" with the block of code "post_list"  -->
-            <div class="">
+            <div>
                 {% block post_list %}
                 {% endblock %}
             </div>

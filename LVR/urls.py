@@ -40,10 +40,12 @@ urlpatterns = [
     # user/author:
     path('user/login', views.login, name='login'),
     path('user/signup', views.sign_up, name='signup'),
+    path('user/moderate', views.moderate_posts, name='moderate'),
     path('user/profile', views.profile, name='profile'),    
     path('user/settings', views.settings, name='settings'),
     path('user/dashboard', views.dashboard, name='dashboard'),
     path('user/calendar', views.calendar, name='calendar'),
+    path('user/notifications', views.notifications, name='notifications'),
     path('user/notifications', views.notifications, name='notifications'),
     path('user/tasks', views.tasks, name='tasks'),
     path('user/posts/', views.post_list, name='post_list'),

@@ -33,7 +33,7 @@
               <div class="card-body px-4 py-4">
                   <div class="d-flex d-inline justify-content-center text-shadow-light">
                       <i class="material-icons mr-2 text-primary">fact_check</i> 
-                      <h2 class="h5"> <a class="stretched-link reset-anchor-inherit" href=""> {% trans 'ApprovePosts' %}</a></h2>
+                      <h2 class="h5"> <a class="stretched-link reset-anchor-inherit" href="{% url 'moderate' %}"> {% trans 'ModeratePosts' %}</a></h2>
                     </div>
                 </div>
             </div>
@@ -109,17 +109,14 @@
 
     <div class="card mb-4">
         <div class="card-header">
-           
             <div class="row d-flex d-inline justify-content-between mx-1">
                 <span class="d-flex d-inline">
                     <i class="material-icons align-top mr-2">view_compact</i> 
                     <h6> {% trans 'dashboard_table_MyLatestPosts' %} </h6>
                 </span>
 
-                <a href="" class="h6"> {% trans 'dashboard_table_AllMyPosts' %} </a>
+                <a href="{% url 'post_list' %}" class="h6"> {% trans 'dashboard_table_AllMyPosts' %} </a>
             </div>
-           
-         
         </div> 
 
         <div class="card-body">

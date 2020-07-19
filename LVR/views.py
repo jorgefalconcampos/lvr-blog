@@ -77,12 +77,14 @@ def cm(request):
     # context = {'action': 'deleted'}
     # return render(request, 'LVR/mails/blog/confirm-mail.html')
 
-    return render(request, 'LVR/mails/user/pswd/reset-pass-mail.html')
+    # return render(request, 'LVR/mails/user/pswd/reset-pass-mail.html')
     # return render(request, 'LVR/user/pswd/password-reset-done.html')
     # return render(request, 'LVR/user/pswd/password-reset-complete.html')
 
 
     # return render(request, 'LVR/mails/user/pswd/reset-pass.html')
+    
+    return render(request, 'LVR/mails/user/wrong-link.html')
 
 
 
@@ -530,7 +532,7 @@ def login(request):
 def dashboard(request):
     template = 'LVR/user/dashboard.html'
     author = blog_author.objects.filter(name=request.user).first()
-    posts_by_author = blog_post.objects.filter(author=author).order_by('-published_date')
+    posts_by_author = blog_post.objects.filter(author=author).order_by('-published_date')[:5]
     context = { 'author': author, 'posts_by_author': posts_by_author}
     return render (request, template , context)
 
@@ -555,7 +557,6 @@ def profile(request):
         'archived': archived_posts,
     }
     return render (request, 'LVR/user/profile.html', context)
-
 
 
 @login_required(login_url='login')
@@ -660,9 +661,19 @@ def sign_up(request):
 
 @login_required(login_url='login')
 @user_passes_test(lambda u: u.is_superuser)
-def approve_post(request):
-    return redirect('dashboard')
-    
+def moderate_posts(request):
+    template = 'LVR/user/moderate_posts.html'
+    all_post_list = blog_post.objects.filter().order_by('-published_date')
+    paginator = Paginator(all_post_list, 10)
+    page = request.GET.get('page')
+    try:
+        post_list = paginator.page(page)
+    except PageNotAnInteger:
+        post_list = paginator.page(1)
+    except EmptyPage:
+        post_list = paginator.page(paginator.num_pages)
+    context = {'post_list': post_list}
+    return render(request, template, context)    
     
 
 
@@ -725,7 +736,16 @@ def activate(request, uidb64, token):
 def post_list(request):
     template = 'LVR/user/post_list.html'
     author = blog_author.objects.filter(name=request.user).first()
-    post_list = blog_post.objects.filter(author=author, status=2).order_by('-published_date')
+    all_post_list = blog_post.objects.filter(author=author).order_by('-published_date')
+    paginator = Paginator(all_post_list, 10)
+    page = request.GET.get('page')
+    try:
+        post_list = paginator.page(page)
+    except PageNotAnInteger:
+        post_list = paginator.page(1)
+    except EmptyPage:
+        post_list = paginator.page(paginator.num_pages)
+
     context = { 'author': author, 'post_list': post_list}
     return render(request, template, context)
 

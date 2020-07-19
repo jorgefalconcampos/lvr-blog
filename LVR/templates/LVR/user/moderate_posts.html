@@ -3,7 +3,7 @@
 {% load i18n %}
 
 
-{% block post_list %}
+{% block moderate %}
 
 
 
@@ -12,7 +12,7 @@
     <h1 class="mt-4"> {% trans 'dashboard_AllPostsTitle' %} </h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active"> 
-            <a href="{% url 'dashboard' %}"> {% trans 'dashboard_mainTitle_dashboard' %}</a> / Todos mis posts 
+            <a href="{% url 'dashboard' %}"> {% trans 'dashboard_mainTitle_dashboard' %}</a> / Moderar posts 
         </li>
     </ol>
 
@@ -38,11 +38,8 @@
                     <tr>
                         <th> {% trans 'dashboard_tableTitle_PostDetail' %} </th>
                         <th> {% trans 'dashboard_tableTitle_PostTitle' %} </th>
-                        <th> {% trans 'dashboard_tableTitle_PostSubtitle' %} </th>
                         <th> {% trans 'dashboard_tableTitle_PostImage' %} </th>
                         <th> {% trans 'dashboard_tableTitle_PostPublishedDate' %} </th>
-                        <th> {% trans 'dashboard_tableTitle_PostComments' %} </th>
-                        <th> {% trans 'dashboard_tableTitle_PostApproved' %} </th>
                         <th> {% trans 'dashboard_tableTitle_PostActions' %} </th>
                     </tr>
                 </thead>
@@ -62,78 +59,26 @@
                     <tr>
                         <td class="text-center"> <a href="{% url 'post_detail' post.category post.slug %}" target="_blank"> <i class="material-icons align-top md-inactive">open_in_new</i> </a> </td>
                         <td style="max-width: 350px;"> {{ post.title }} </td>
-                        <td> {{ post.subtitle }} </td>
                         <td class="text-center"> 
                             <div data-toggle="tooltip" data-html="true" data-placement='bottom' title="{{ post.image.url}}">
                                 <a href="{{ post.image.url }}" target="_blank"> <i class="material-icons align-top md-inactive">image</i> </a> 
                             </div>
                         </td>
                         <td> {{ post.published_date }} </td>
-                        <td>
-                            {% if post.all_cmts %}
-                            <span class="d-flex d-inline justify-content-left"> <h6 class="font-weight-bold mr-1"> {{ post.all_cmts }} </h6> 
-                                {% trans 'dashboard_table_TotalComments' %} </span>
-                                <hr class=" mt-0 mb-2" style="margin:0px; max-width: 70px;"> 
-                                {% trans 'dashboard_table_ApprovedComments' %}: {{ post.approved_cmts }} <br>
-                                {% trans 'dashboard_table_RejectedComments' %}: {{ post.non_approved_cmts }}
-                            </span>
-                            {% else %}
-                            <p> {% trans 'NoComments' %} </p>
-                            {% endif %}
-                        </td>
-                        
-                        <td class="text-center"> 
-                            
-                            {% if post.status == 0 %}
-                            <div class="" data-toggle="tooltip" data-html="true" data-placement='bottom' title="{% trans 'status_draft_desc' %}">
-                                <i class="px-0 material-icons align-top md-inactive">access_time</i>  
-                            </div>
-                            {% endif %}
-                            
-                            {% if post.status == 1 %}
-                            <div class="" data-toggle="tooltip" data-html="true" data-placement='bottom' title="{% trans 'status_approved_desc' %}">
-                                <i class="px-0 material-icons align-top md-inactive">done</i>  
-                            </div>
-                            {% endif %}
-                            
-                            {% if post.status == 2 %}
-                            <div class="" data-toggle="tooltip" data-html="true" data-placement='bottom' title="{% trans 'status_rejected_desc' %}">
-                                <i class="px-0 material-icons align-top md-inactive">clear</i>
-                            </div>
-                            {% endif %}
-                            
-                            {% if post.status == 3 %}
-                            <div class="" data-toggle="tooltip" data-html="true" data-placement='bottom' title="{% trans 'status_archived_desc' %}">
-                                <i class="px-0 material-icons align-top md-inactive">clear</i>!
-                            </div>
-                            {% endif %}
-                            
-                        </td>
+                    
                         
                         
                         <td class="text-center">
-                            <div > 
-                                <a class="btn btn-sm btn-outline-info" href="{% url 'post_edit' post.slug %}" target="_blank"> 
-                                    <i class="material-icons align-top">edit</i> 
-                                </a> 
-                            </div>
+                            <a class="btn btn-sm btn-outline-success" href=""> <i class="material-icons align-top">check</i> </a> 
                             
-                            <div class="py-2"> 
+                            <div class="py-2">
                                 <a data-toggle="modal" data-target="#deletePostModal"> 
-                                    <button type="button" class="btn btn-sm btn-outline-secondary"> 
-                                        <i class="material-icons align-top">archive</i> 
-                                    </button> 
+                                    <button type="button" class="btn btn-sm btn-outline-secondary"> <i class="material-icons align-top">archive</i> </button> 
                                 </a> 
                             </div>
-                            
-                            <div> 
-                                <a data-toggle="modal" data-target="#deletePostModal"> 
-                                    <button type="button" class="btn btn-sm btn-outline-danger"> 
-                                        <i class="material-icons align-top">delete</i> 
-                                    </button> 
-                                </a> 
-                            </div>
-                            
+                            <a data-toggle="modal" data-target="#deletePostModal"> 
+                                <button type="button" class="btn btn-sm btn-outline-danger"> <i class="material-icons align-top">close</i> </button> 
+                            </a> 
                         </td>
                     </tr>
                     
@@ -177,26 +122,21 @@
         </div>              
         
         {% else %}
-        
-        <div class="container py-5 my-5">
-            <div class="row my-5">
-                <div class="col-lg-6 text-center mb-5 mb-lg-0">
-                    <h3> Parece que aún no escribes ningún artículo...</h3>
-                    <a href="{% url 'post_new' %}" class="h3 font-weight-bold">¿Porqué no escribes uno nuevo ahora?</a>
-                    <div class="row pt-3 pt-lg-5">
-                        <div class="col">
-                            <a href="{% url 'post_new' %}" class="btn btn-primary rounded mt-2">
-                                <i class="material-icons align-top mr-1">add_box</i> {% trans 'NewPost' %}
-                            </a>
+        <div class="container mt-3 py-lg-2">
+            <h3 class="mt-5 text-center"> Parece que aún no se ha escrito ningún artículo...</h3>            
+            <div class="row d-flex justify-content-center py-1 py-sm-5 py-md-3 py-lg-1">
+                <div class="col-lg-xs-12 col-lg-sm-12 col-lg-md-8 col-lg-5 col-lg-xl-6">
+                    <div class="col text-center mt-3"> 
+                        <div class="d-none d-sm-block">
+                            <img class="" src="{% static 'LVR/assets/img/cherry-no-posts-tom.png' %}" alt="" width="370">
                         </div>
+                        <div class="d-block d-sm-none">
+                            <img class="" src="{% static 'LVR/assets/img/cherry-no-posts-tom.png' %}" alt="" width="300">
+                        </div>                    
                     </div>
-                </div>   
-                <div class="col-lg-6 text-center mt-5 mt-lg-0">                
-                    <img class="" src="{% static 'LVR/assets/img/cherry-no-posts.png' %}" alt="" height="300px">
                 </div>
             </div>
-        </div>
-        
+        </div> 
         {% endif %}                      
     </section>
 
