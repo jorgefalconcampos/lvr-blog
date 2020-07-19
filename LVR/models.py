@@ -8,6 +8,7 @@ from LeVeloRouge.utils import unique_slug_generator #Importing the auto slug gen
 from django.contrib.auth.models import User
 from django.db.models import Count
 from django.utils.translation import gettext as _
+from django.template.defaultfilters import slugify
 
 
 
@@ -102,6 +103,10 @@ class blog_post(m.Model):
     
     def __str__(self):
         return self.title
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super (blog_post, self).save(*args, **kwargs)
 
 
 
