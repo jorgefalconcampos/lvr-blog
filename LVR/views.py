@@ -8,7 +8,7 @@ from django.http import Http404, HttpResponseRedirect, HttpResponse, JsonRespons
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render, get_object_or_404, reverse
 from . models import blog_post, blog_category, blog_author, blog_postComment, blog_misc, blog_subscriber  #Importing the models
-from . forms import PostForm, CommentForm, CreateUserForm, ContactForm, SubscribeForm
+from . forms import PostForm, CommentForm, CreateUserForm, ContactForm, SubscribeForm, NewCategory
 from django.utils.translation import gettext as _
 from django.conf import settings as conf_settings #To read reCaptcha's key
 from . decorators import check_recaptcha
@@ -276,17 +276,19 @@ def index(request):
                 trending.append(post) #Putting that post inside the trending array list
 
     all_categories = blog_category.objects.all()
-    avg = math.ceil(all_posts.count()/all_categories.count()) #Getting the average between all posts divided by number of categories
-    popular_categories = blog_category.objects.annotate(post_count=Count('catego')).filter(post_count__gte=avg)
-    #Once average is calculated, we filter categories that have more or equal posts (gte) than the average
-    # print(f" categorias: {popular_categories}")
-    diccionario = {}
 
-    # TODO: while diccionario < 8 añadir
-
-    for category in popular_categories:
-        how_many = all_posts.filter(category=category).count() #Getting how many posts with that popular category exists
-        diccionario[category]=how_many
+    try: 
+        avg = math.ceil(all_posts.count()/all_categories.count()) #Getting the average between all posts divided by number of categories
+        popular_categories = blog_category.objects.annotate(post_count=Count('catego')).filter(post_count__gte=avg)
+        #Once average is calculated, we filter categories that have more or equal posts (gte) than the average
+        # print(f" categorias: {popular_categories}")
+        diccionario = {}
+        for category in popular_categories:
+            how_many = all_posts.filter(category=category).count() #Getting how many posts with that popular category exists            
+            if len(diccionario) < 8:
+                diccionario[category]=how_many
+    except Exception as e:
+        diccionario = {}
 
     # print(diccionario)
     paginator = Paginator(all_posts, 9) #n posts in each page
@@ -519,7 +521,7 @@ def login(request):
                     # return HttpResponse(json.dumps({'status': True}), content_type='application/json')
                     return JsonResponse({'status': True})
                     # return redirect('dashboard')
-                else:                
+                else:
                     return JsonResponse({'status': False, 'err_code': 'login_failed'})                
             else:
                 return JsonResponse({'status': False, 'err_code': 'invalid_form'})                
@@ -557,6 +559,36 @@ def profile(request):
         'archived': archived_posts,
     }
     return render (request, 'LVR/user/profile.html', context)
+
+
+
+@login_required(login_url='login')
+@user_passes_test(lambda u: u.is_superuser)
+def new_category(request):
+    template = 'LVR/user/new_category.html' 
+    response_data = {'success': False}
+    if request.method == 'POST':
+        form = NewCategory(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            name = form.cleaned_data.get('name')
+            if not blog_category.objects.filter(slug=slugify(name)).exists():
+                newCateg = form.save(commit=False)
+                newCateg.save()
+                form.save_m2m()
+                response_data['success'] = True
+                return JsonResponse(response_data)
+            else:
+                response_data['err_code'] = 'already_exists'
+                return JsonResponse(response_data)
+        else:
+            response_data['err_code'] = form.errors
+            return JsonResponse(response_data)
+    else:
+        form = NewCategory() 
+    context = {'newCategoryForm':form}  
+    return render(request, template, context)
+    
+
 
 
 @login_required(login_url='login')
@@ -774,6 +806,8 @@ def post_new(request):
     else:
         newPost_form = PostForm()
     context = { 'newPost_form': newPost_form }
+    if not blog_category.objects.count():
+        context['nocategs'] = True
     return render(request, template, context)
 
 
@@ -797,11 +831,10 @@ def post_edit(request, slug_text):
             post.status = 0
             post.save()
             form.save_m2m()
-            # messages.success(request, _('PostUpdated_Ok'))
-            return redirect('post_detail', category_text=newpost.category, slug_text=post.slug)
+            return redirect('post_detail', category_text=post.category, slug_text=post.slug)
     else:
         form = PostForm(instance=post)
-    context = {'form': form, 'is_edit': is_edit, 'status': status, 'title': title, 'slug': slug }
+    context = {'editPost_form': form, 'is_edit': is_edit, 'status': status, 'title': title, 'slug': slug }
     return render (request, template, context)
 
 

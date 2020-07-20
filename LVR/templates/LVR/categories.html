@@ -35,7 +35,7 @@
                                 <div class="col-lg-10 mt-xs-1 mt-sm-1 mt-md-2 mt-lg-3">
                                     <div class="ml-0 ml-lg-3">
                                         <h3 class="h3 font-weight-bold"> <a href="{% url 'categories_detail' category.slug %}" class="stretched-link reset-anchor-inherit"> {{ category }} </a></h3>
-                                        <h6 class="h6 lead mt-1 mb-2"> {{ category.description }} vamos a ver que tanto le cabe jaja vermeos ya </h6>
+                                        <h6 class="h6 lead mt-1 mb-2"> {{ category.description }} </h6>
                                     </div>
                                 </div>
                             </div>
@@ -62,19 +62,10 @@
                 <div class="card-body">
                     <h3> {% trans 'tags_NewTag_label' %} </h3>
                 </div>
-                
-                <div class="container">
-                    <div class="input-group py-2">
-                        <input type="text" class="form-control" placeholder=" {% trans 'tags_NewTag_placeholder' %} ">
-                        <span class="input-group-btn">
-                            <button class="btn btn-primary" type="button"> {% trans 'tags_NewTag_button' %} </button>
-                        </span>
-                        
-                    </div>
-                    <h6 class="ml-3 py-2"> Ya existe </h6>
+                <div class="form-group container"> 
+                    <a href="{% url  'new_category' %}" target="_blank" class="btn btn-primary btn-block"> {% trans 'addCatego_CTA' %} </a>
                 </div>
-
-               
+            </div>   
             </div>
         </div>
         {% endif %}    

@@ -124,6 +124,7 @@ TEMPLATES = [
                 'LVR.ctxt_processors.newComment',
                 'LVR.ctxt_processors.subscribeNewsletter',
                 'LVR.ctxt_processors.get_total_posts',
+                'LVR.ctxt_processors.newCategory',
             ],
             # 'loaders': [
             #     ('django.template.loaders.cached.Loader', [

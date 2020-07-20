@@ -41,6 +41,7 @@ urlpatterns = [
     path('user/login', views.login, name='login'),
     path('user/signup', views.sign_up, name='signup'),
     path('user/moderate', views.moderate_posts, name='moderate'),
+    path('user/category/new', views.new_category, name='new_category'),
     path('user/profile', views.profile, name='profile'),    
     path('user/settings', views.settings, name='settings'),
     path('user/dashboard', views.dashboard, name='dashboard'),
@@ -57,5 +58,7 @@ urlpatterns = [
     path('delete/<slug:slug_text>', views.post_delete, name='post_delete'),
     path('archive/<slug:slug_text>', views.post_archive, name='post_archive'),
     path('user/logout', views.logout, name='logout'),
+
+    #others:
 
 ]

@@ -5,9 +5,55 @@
 
 {% block post_edit %}
 
+
+{% if nocat %}
+<div class="modal hide" id="noCategoModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header px-lg-4">
+                <h5 class="modal-title"> <i class="fas fa-code mx-1"></i> Sin categorías</h5>
+            </div>
+            <div class="modal-body px-lg-4">
+              <div class="row my-3">
+                <div class="col-lg-7 text-center">
+                    <div class="alert alert-info">
+                      <h4 class="font-weight-bold">Aún no hay categorías</h4> 
+                    </div>
+                    <div class="py-2">
+                        <div class="row">
+                            <div class="col">
+                                <div class="center py-3 h6"> 
+                                  ¡Hola {{ request.user.first_name|default:request.user }}!
+                                  La forma en la que está creado el blog de <b>LVR</b> es muy especial ya que los posts están organizados dentro de categorías. De esta manera es mucho más fácil ubicarlos o saber de qué tema se está hablando.
+                                </div>
+                                <div class="center py-2 h6"> 
+                                  Tristemente, aún no se ha agregado ninguna categoría y por lo tanto el post que quieres escribir no puede redactarse aún ya que quedaría al aire.
+                                  Te pedimos que por favor esperes a que el administrador del sitio cree una o más categorías nuevas.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>   
+                <div class="col-lg-5 text-center">                
+                    <img class="" src="{% static 'LVR/assets/img/cherry-under-const.png' %}" alt="" width="200px">
+                </div>
+            </div>
+              <div class="modal-footer justify-content-end px-sm-0 px-md-0 px-lg-0">
+                <a href="{% url 'dashboard' %}" class="btn btn-primary">Regresar al Panel de Control</a>
+
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
 <div class="my-3 my-5 pt-4">
 
     <div class="card">
+
+        
+
         <div class="card-body">
             <div class="container">
                 <div class="row">
@@ -19,7 +65,7 @@
                 
                 <div class="row py-5">
                     <div class="col-lg-12">
-                        
+
                         <form id="PostForm"  method="POST" enctype="multipart/form-data">
                             {% csrf_token %}       
 
@@ -49,20 +95,19 @@
                                         </div>
                                     </div>
                                     
-                                     <div class="form-group py-1">
+                                    <div class="form-group py-1">
                                         <label class="ml-1" for="post_category">{{newPost_form.category.label}}</label>
                                         {{newPost_form.category}}
-                                      </div>
-
-                                      <div class="form-group py-1">
-                                        <label class="ml-1" for="post_tags">Tags</label>
-                                        <input id="post_tags" name="tags" class="form-control form-control-lg" type="text" placeholder="Tags">
                                     </div>
 
+
+                                    <div class="form-group py-1">
+                                        <label class="ml-1" for="post_tags">{{newPost_form.tags.label}}</label>
+                                        {{newPost_form.tags}}
+                                    </div>
                                 </div>
 
                                 <div class="col-md-6"> 
-
                                     <div class="form-group py-1" > 
                                         <label class="ml-2" for="post_title">{{newPost_form.post_body.label}}</label>
                                         <!-- <div class="float-right mr-3"><a href="">Ver preview</a></div> -->
@@ -72,15 +117,17 @@
                                     </div>
                                     
                                     <div class="col-lg-12 text-right">
-                                        <a href="javascript:history.go(1)" class="btn btn-outline-secondary btn-xl text-uppercase my-3 mx-2"> <i class="material-icons align-top">cancel</i> {% trans 'Cancel' %} </a>
+                                        <a href="javascript:history.go(-1)" class="btn btn-outline-secondary btn-xl text-uppercase my-3 mx-2"> <i class="material-icons align-top">cancel</i> {% trans 'Cancel' %} </a>
+                                        {% if nocat %}
+                                        <button type="button" class="btn btn-primary btn-xl disabled text-uppercase my-3" > <i class="material-icons align-top">save</i> {% trans 'Save' %} </button> 
+                                        {% else %}
                                         <button type="submit" class="btn btn-primary btn-xl text-uppercase my-3"> <i class="material-icons align-top">save</i> {% trans 'Save' %} </button> 
+                                        {% endif %}
                                     </div>
                                 </div>
 
                             </div>
-
-        
-                            
+                           
                             
                             {% for message in messages %}
                             <div id="toastMessage" class="toast fade show mr-2 mb-2" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false" data-delay="7000" style="position: fixed; bottom: 0; right:0;  z-index:1111;">
@@ -98,55 +145,13 @@
                             
                             
                         </form>
-                        
+
                     </div>
                 </div>            
             </div>
-        </div>
 
-
-        {% if is_edit %}
-
-        <div>
-
-
-            <div class="modal fade" id="deletePostModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <span class="d-flex d-inline">
-                                <i style="font-size: 30px;" class="material-icons">error</i>
-                                <h4 class="ml-3 modal-title"> {% trans 'dashboard_PostDelete_Title' %}? </h4>
-                            </span>
-                            
-                            <button type="button" class="close" data-dismiss="modal">×</button>
-                        </div>
-                        
-                        <div class="modal-body">
-                            <form>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-12 pt-2">
-                                            <div class="container"> 
-                                                <h6 class="ml-1"> {% trans 'dashboard_PostDelete' %} <b> {{ title }} </b>? </h6>
-                                             </div> 
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        
-                        <div class="modal-footer mr-2">
-                            <button type="button" class="btn border-secondary" data-dismiss="modal"> {% trans 'dashboard_DProblem_cancel' %} </button>
-                            <a href="{% url 'post_delete' slug %}" class="btn btn-danger"> {% trans 'dashboard_ConfirmDelete' %} </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="container d-flex inline">
+            {% if is_edit %}
+            <div class="container d-flex inline mt-5">
                 <h6 class="ml-2 font-weight-bold"> {% trans 'postStatus' %}: </h6>
 
                 {% if status == 0 %}
@@ -171,24 +176,16 @@
                 {% endif %}
 
                 {% if status == 3 %}
-
                 <div class="d-flex d-inline" data-toggle="tooltip" data-html="true" data-placement='top' title="{% trans 'status_archived_desc' %}">
                     <i class="ml-1 px-0 material-icons align-top md-inactive">archive</i>  
                     <h6> {% trans 'status_archived' %} </h6>
-                </div>
-
-
-               
+                </div>               
                 {% endif %}
-
-
-
-
             </div>
-            
+
             <hr>
 
-            <div class="container mb-3">
+            <div class="container py-3">
                 <div class="card border-danger rounded">
                     <div class="card-header p-0">
                         <div class="container py-2">
@@ -196,31 +193,58 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        
                         <a type="button" class="mb-2 mb-sm-0 mb-md-0 mb-lg-0 mb-xl-0 btn btn-danger mr-2 text-white" data-toggle="modal" data-target="#deletePostModal"> 
                            {% trans 'post_deletePost' %}
                         </a>
-
 
                         {% if not status == 3 %}
                         <a type="button" class="btn btn-danger text-white" data-toggle="modal" data-target="#deletePostModal"> 
                             {% trans 'post_archivePost' %}
                          </a>
                         {% endif %}
-
-
-
-                        
-
-                       
-
-                      
                     </div>
                 </div>
             </div>
-        </div>
 
-        {% endif %}
+            <div class="modal fade" id="deletePostModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <span class="d-flex d-inline">
+                                <i style="font-size: 30px;" class="material-icons">error</i>
+                                <h4 class="ml-3 modal-title"> {% trans 'dashboard_PostDelete_Title' %}? </h4>
+                            </span>
+
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                        </div>
+                        
+                        <div class="modal-body">
+                            <form>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 pt-2">
+                                            <div class="container"> 
+                                                <h6 class="ml-1"> {% trans 'dashboard_PostDelete' %} <b>{{ title }}</b>? </h6>
+                                             </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <div class="modal-footer mr-2">
+                            <button type="button" class="btn border-secondary" data-dismiss="modal"> {% trans 'dashboard_DProblem_cancel' %} </button>
+                            <a href="{% url 'post_delete' slug %}" class="btn btn-danger"> {% trans 'dashboard_ConfirmDelete' %} </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            {% endif %}
+
+
+        </div>
 
 
     </div>
