@@ -10,7 +10,13 @@ $("#settings_notifications, #settings_widgets, #settings_delete_acc").click(func
 
 
 
+
+//Account form 
 $(window).on('load',function(){
+
+    //Default values (marked with the prefix 'd'.) They're displayed directly from db
+    var d_usr = $('#acc_username').val(); 
+    var d_email = $('#acc_email').val();
     
 
     function success(){
@@ -36,37 +42,44 @@ $(window).on('load',function(){
     }
 
     var hasChanged = false;
-    
-    var d_usr = $('#acc_username').val();
-    var d_email = $('#acc_email').val();
+
+    //If user leaves the section, get default values again and fill inputs...
     $("#settings_account").click(function(){
         $("#acc_username").val(d_usr); 
         $("#acc_email").val(d_email); 
     });
     
-    $('#account_frm').submit(function(e){
-        hasChanged = true;
+    $(document).on('submit', '#account_frm',function(e){
         e.preventDefault();
-        $.ajax({
-        type: 'POST',
-        dataType: 'json',
-        data:{
-            username: $('#acc_username').val(),
-            email: $('#acc_email').val(),
-            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
-            action: 'account_Form',
-        },
-        success:function(json){
-            if(json.success){success();}
-            else { 
-                if (json.errors == 'email_already_taken'){error('Error en email', 'El email que proporcionaste ya está en uso')}
-                else{ for(var key in json.errors){error('Error en '+key, json.errors[key][0])}}
-            }
-        },
-        });
+        //New values introduced by user. If they're different than the default, then they've been changed, then update to db
+        var n_user = $('#acc_username').val();
+        var n_email = $('#acc_email').val();
+        if ((n_user != d_usr)||(n_email != d_email)){ 
+            hasChanged = true;
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: window.location.pathname,
+                data:{
+                    username: $('#acc_username').val(),
+                    email: $('#acc_email').val(),
+                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                    action: 'account_Form',
+                },
+                success:function(json){
+                    if(json.success){success();}
+                    else { 
+                        if (json.errors == 'email_already_taken'){error('Error en email', 'Ocurrió un error al intentar cambiar tu email')}
+                        else{ for(var key in json.errors){error('Error en '+key, json.errors[key][0])}}
+                    }
+                },
+            });
+        }
+        else { error('Error en los datos', 'No se detectaron cambios en el nombre de usuario o en el email');}
     });
-    
 });
+
+
 
 
 
@@ -107,38 +120,3 @@ $(document).on('submit', '#newCatego_frm',function(e){
 });
 
 
-
-$(document).on('submit', '#account_frm',function(e){
-    // $('#subscribe_send').css({'display': 'none'}).fadeOut(800);
-    // $('#subscribe_sending').css({'display': 'inline-block'}).fadeIn(800);
-    e.preventDefault();
-    $.ajax({
-      type: 'POST',
-      url: window.location.pathname,
-      dataType: 'json',
-      data:{
-        username: $('#acc_username').val(),
-        email: $('#sub_email').val(),
-        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
-        action: 'subscribe_Form',
-      },
-      success:function(json){
-        if(json.success){
-          document.getElementById("subscribe_frm").reset();
-          restart_subcribe_btns(true);
-          console.log('# --- JS: OK --- #')
-        }
-        else{
-          if(json.already_exists == true){
-            $('#subscribe_already_error').fadeIn(1000).css({'display': 'block'}).delay(2500).fadeOut(1000);
-            $('#subscribe_sending').css({'display': 'none'}).fadeOut(800);
-            $('#subscribe_send').css({'display': 'inline'}).fadeIn(800);
-          } else{ restart_subcribe_btns(); }
-          console.log('# --- JS: Failed try of subscription --- #')
-        }
-      },
-      error : function(xhr,errmsg,err) {
-        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-      }  
-      });
-  });
