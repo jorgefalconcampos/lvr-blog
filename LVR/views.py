@@ -640,7 +640,7 @@ def settings(request):
         # new_user = request.POST.get('username')
         new_mail = request.POST.get('email')
         if acc_form.is_valid():
-            if not (User.objects.filter(email=request.POST.get('email')).count() > 0:
+            if not User.objects.filter(email=request.POST.get('email')).count() > 0:
                 acc_form.save()
                 response_data['success'] = True
                 return JsonResponse(response_data)
