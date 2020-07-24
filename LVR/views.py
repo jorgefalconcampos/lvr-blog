@@ -8,7 +8,7 @@ from django.http import Http404, HttpResponseRedirect, HttpResponse, JsonRespons
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render, get_object_or_404, reverse
 from . models import blog_post, blog_category, blog_author, blog_postComment, blog_misc, blog_subscriber  #Importing the models
-from . forms import PostForm, CommentForm, CreateUserForm, ContactForm, SubscribeForm, NewCategory
+from . forms import PostForm, CommentForm, CreateUserForm, AccountEditUserForm, ContactForm, SubscribeForm, NewCategory
 from django.utils.translation import gettext as _
 from django.conf import settings as conf_settings #To read reCaptcha's key
 from . decorators import check_recaptcha
@@ -66,7 +66,8 @@ def getdata(request):
 
 
 def base(request):
-    template = 'LVR/base.html' 
+    template = 'LVR/base.html'
+    itemplate = 'LVR/index.html'
     if request.method == 'GET':
         return redirect('index')
     return render(request, template)
@@ -622,12 +623,75 @@ def settings(request):
     author = blog_author.objects.get(name=request.user)
     context = {'author': author}
     if not request.user.is_superuser:
-        avg_user_perms = ['Crear posts en mi nombre', 'Eliminar posts escritos en mi nombre', 'Archivar posts escritos en mi nombre', 'Borrar posts escritos en mi nombre', 'Solicitar restablecimiento de contraseña', 'Crear tags (al crear un post, siempre y cuando el tag no exista)', 'Modificar datos personales públicos', 'Modificar datos personales privados', 'Cambiar imagen de perfil público', 'Login y logout']
+        avg_user_perms = ['Crear posts en mi nombre', 'Editar posts en mi nombre', 'Archivar posts escritos en mi nombre', 'Eliminar posts escritos en mi nombre', 'Solicitar cambio de contraseña', 'Solicitar restablecimiento de contraseña', 'Crear tags (al crear un post, si el tag no existe)', 'Modificar datos personales públicos', 'Modificar datos personales privados', 'Cambiar imagen de perfil público', 'Login y logout']
         context['permissions'] = avg_user_perms
     else:
         perms = request.user.get_group_permissions()
         context['permissions'] = perms
+    
+
+    response_data = {}
+
+
+
+    if request.POST.get('action') == 'account_Form':
+  
+        acc_form = AccountEditUserForm(request.POST, instance=request.user)
+        # new_user = request.POST.get('username')
+        new_mail = request.POST.get('email')
+        if acc_form.is_valid():
+            if not (User.objects.filter(email=request.POST.get('email')).count() > 0:
+                acc_form.save()
+                response_data['success'] = True
+                return JsonResponse(response_data)
+            else:
+                return JsonResponse({'success': False, 'errors': 'email_already_taken'})
+
+
+            # print(f"old data: {c_user}, {c_user.email}\n")
+            # print(f"new data: {new_user}, {new_mail}\n")
+
+            # if new_mail != user.email:
+            #     print('stage 3')
+
+            #     current.username = new_user
+            #     current.email = new_mail
+            #     current.save()
+            #     response_data['success'] = True
+            #     return JsonResponse(response_data)
+            # else:
+            #     print('este email es el mismo nmms')
+            #     return JsonResponse({'success': False, 'err_code': 'repeated_data'})
+        else:
+
+
+            # for e in acc_form.errors['username'].as_data():
+                # print(e)
+            # print(acc_form.errors.as_data())
+            # print(acc_form.errors.as_json())
+            return JsonResponse({'success': False, 'errors': acc_form.errors})
+    else:
+        acc_form = AccountEditUserForm(instance=request.user)
+
+
     return render (request, template, context)
+
+
+
+
+@login_required(login_url='login')
+def edit_account_info(request):
+    if request.method == 'POST':
+        form = EditUserForm(instance=request.user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+    else:
+        form = EditUserForm(isinstance=request.user)
+        context = { 'form':form }
+        return render(reques, 'LVR/user/settings.html', context)
+
 
 
 
@@ -744,30 +808,6 @@ def activate(request, uidb64, token):
         return HttpResponse(rendered)
 
 
-
-
-# def password_reset(request):
-#     form = PasswordResetForm(request.POST)
-
-
-#     if request.method == "POST":
-#         email = form.cleaned_data('email')
-#         if form.is_valid():
-#             subject = 'Solicitud de restablecimiento de contraseña'
-#             subject = ''
-#             mail_template = 'LVR/mails/user/pswd/reset-pass-mail.html'
-#             from_email=''
-#             ctxt = {}
-#             print('llegp lego aki')
-#             form.save(from_email='blah@blah.com', email_template_name='path/to/your/email_template.html')
-#         else:
-#             print('jaja')
-
-#     form = PasswordResetForm()
-#     return render(request, 'LVR/user/pswd/password-reset.html', {"form":form})
-
-
-
 #This method allows user/author add a new post
 @login_required(login_url='login')
 def post_list(request):
@@ -803,6 +843,8 @@ def post_new(request):
             newPost_form.save_m2m()
             messages.success(request, _('PostCreated_Ok'))
             return redirect('post_detail', category_text=newpost.category, slug_text=newpost.slug)
+        else:
+            messages.error(request, _('EmptyFields'))
     else:
         newPost_form = PostForm()
     context = { 'newPost_form': newPost_form }

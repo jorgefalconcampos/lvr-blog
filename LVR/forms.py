@@ -1,10 +1,12 @@
 from django import forms as f
 from taggit.forms import TagWidget
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from . models import blog_post, blog_author, blog_postComment, blog_category
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 from django_summernote.fields import SummernoteTextFormField, SummernoteTextField
+
+
 
 
 #Create a new post
@@ -12,7 +14,7 @@ class PostForm(f.ModelForm):
     class Meta:
         model = blog_post
         title_attrs = {'class':'form-control form-control-lg', 'id':'post_title', 'type': 'text', 'name':'title', 'placeholder': 'Escribe el título del post'}
-        subtitle_attrs = {'class':'form-control form-control-lg', 'id':'post_subtitle', 'type': 'text', 'name':'subtitle', 'placeholder': 'Escribe el subtítulo del post'}
+        subtitle_attrs = {'class':'form-control form-control-lg', 'id':'post_subtitle', 'type': 'text', 'name':'subtitle', 'placeholder': 'Escribe el subtítulo del post',}
         category_attrs = {'class':'selectpicker', 'id':'post_category', 'name':'category', 'data-style':'bs-select-form-control', 'data-title':'Selecciona una categoría', 'data-width':'100%' }
         tags_attrs = {'class': 'form-control form-control-lg,', 'id': 'post_tags', 'type': 'text', 'name': 'tags', 'placeholder': 'Una lista de etiquetas separadas por coma'}
         fields = ('title', 'subtitle', 'image', 'post_body', 'category', 'tags')
@@ -32,6 +34,9 @@ class PostForm(f.ModelForm):
             'tags': TagWidget(attrs=tags_attrs),
             'post_body': SummernoteWidget(),
         }
+
+    # name = f.CharField(label='Nombre y apellido', max_length=128, widget=f.TextInput(attrs=name_attrs), required=True)
+
 
 
 
@@ -68,6 +73,24 @@ class SearchForm(f.Form):
     all_posts = str(blog_post.objects.filter(status=1).count()) #counting all-time posts
     q_attrs = {'id':'search_input', 'type': 'text', 'class':'form-control border-0 mr-2', 'placeholder': 'Busca entre +'+all_posts+' posts'}
     q = f.CharField(label='Escribe una o más palabras clave', max_length=128, widget=f.TextInput(attrs=q_attrs))
+
+
+
+#To edit the account form (in the account section)
+class AccountEditUserForm(UserChangeForm):
+    class Meta:
+        model = User
+        usernme_attrs = {'class':'form-control form-control-lg', 'id':'acc_username', 'type': 'text', 'name':'username', 'value': '{{request.user}}'}
+        email_attrs = {'class':'form-control form-control-lg', 'id':'email_username', 'type': 'email', 'name':'email', 'value': '{{request.user.email}}'}
+        fields = ('username', 'email')
+        labels = { 'username': 'Nombre de usuario', 'email': 'Email privado', }
+        widgets = {
+            'username': f.TextInput(attrs=usernme_attrs),
+            'email': f.EmailInput(attrs=email_attrs),
+        }
+
+
+
 
 
 class NewCategory(f.ModelForm):

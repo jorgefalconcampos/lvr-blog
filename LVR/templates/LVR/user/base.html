@@ -2,8 +2,6 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 
-<!-- Skeleton page for the others (dashboard), contains navbar & footer -->
-
 <!doctype html>
 <html>
 <head>
@@ -260,6 +258,14 @@
                 {% endblock %}
             </div>
 
+
+            <div class="container">
+                {% block settings %}
+                {% endblock %}
+            </div>
+
+    
+
             <!-- Content imported from "user/calendar.html" with the block of code "calendar" -->
             <div>{% block calendar %}{% endblock %}</div>
 
@@ -279,15 +285,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/0b5e6aae1f.js" crossorigin="anonymous"></script>
 <script type="application/javascript" src="{% static 'LVR/assets/js/bootstrap-select.js' %}"></script>
-
-<script type="text/javascript">$(window).on('load',function(){$('#inProgressModal').modal('show');});</script>
-<script type="text/javascript">$(window).on('load',function(){$('#noCategoModal').modal('show');});</script>
-<script>$("#settings_notifications, #settings_widgets, #settings_delete_acc").click(function(){$("#toastMessage").toast('show'); });</script>
 <script type="text/javascript" src="{% static 'LVR/assets/js/sidenav.js' %}"></script>
 <script type="text/javascript" src="{% static 'LVR/assets/js/tagsinput.js' %}"></script>
-<script type="text/javascript" src="{% static 'LVR/assets/js/front.js' %}"></script>
-<script> $(document).ready(function(){$('[data-toggle="tooltip"]').tooltip(); }); </script>
-{% block js %}{% endblock %}
+<script type="text/javascript" src="{% static 'LVR/assets/js/admin-front.js' %}"></script>
 </body>
 
 

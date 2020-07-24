@@ -41,22 +41,22 @@
                           <div class="h6"> {% trans 'dashboard_DropDown_Profile' %}  </div>
                         </a>
 
-                        <a class="list-group-item list-group-item-action" data-toggle="list" href="#account" role="tab">
+                        <a id="settings_account" class="list-group-item list-group-item-action" data-toggle="list" href="#account" role="tab">
                             <div class="h6"> {% trans 'dashboard_Settings_accountSettings' %} </div>
                         </a>
 
                         <a class="list-group-item list-group-item-action" data-toggle="list" href="#password" role="tab">
                             <div class="h6"> {% trans 'dashboard_Settings_securityPass' %} </div>
                         </a>
-                        <a id="settings_notifications" class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
+                        <a id="settings_notifications" class="list-group-item list-group-item-action" data-toggle="list" href="#under_dev" role="tab">
                             <div class="h6"> {% trans 'dashboard_Notifications' %} </div>
                         </a>
 
-                        <a id="settings_widgets" class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
+                        <a id="settings_widgets" class="list-group-item list-group-item-action" data-toggle="list" href="#under_dev" role="tab">
                             <div class="h6"> Widgets </div>
                         </a>
 
-                        <a id="settings_delete_acc" class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">
+                        <a id="settings_delete_acc" class="list-group-item list-group-item-action" data-toggle="list" href="#under_dev" role="tab">
                             <div class="h6"> Borrar cuenta </div>
                         </a> 
                         
@@ -147,7 +147,7 @@
                                               
                                                 <div class="input-group">                          
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text"> <i class="material-icons align-top">lock</i> </span>
+                                                        <span class="input-group-text"><i class="fab fa-facebook-square fa-lg"></i></span>
                                                     </div>
                                                     <input name="facebook_url" class="form-control" placeholder="facebook.com/myprofile" type="">
                                                     
@@ -161,7 +161,7 @@
 
                                                 <div class="input-group py-2">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text"> <i class="material-icons align-top">lock</i> </span>
+                                                        <span class="input-group-text"><i class="fab fa-twitter-square fa-lg"></i></span>
                                                     </div>
                                                     <input name="twitter_url" class="form-control" placeholder="twitter.com/myprofile" type="">
 
@@ -176,7 +176,7 @@
 
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text"> <i class="material-icons align-top">lock</i> </span>
+                                                        <span class="input-group-text"><i class="fab fa-linkedin fa-lg"></i></span>
                                                     </div>
                                                     <input name="linkedin_url" class="form-control" placeholder="linkedin.com/myprofile" type="">
                                                     
@@ -209,7 +209,7 @@
                                                 {% if not request.user.is_superuser %}
                                                 <div class=" py-5">
                                                     <a href="{% url 'author_detail' author.slug %}" target="_blank"> 
-                                                        <span> <button type="button" class="btn btn-sm btn-primary">{% trans 'dashboard_Settings_seeProfile' %}</button> </span> 
+                                                        <button type="button" class="btn btn-sm btn-primary">{% trans 'dashboard_Settings_seeProfile' %}</button> 
                                                     </a> 
                                                 </div>
                                                 {% endif %}
@@ -230,16 +230,22 @@
                         <div class="card">
                             <div class="card-header"> <h5 class="card-title mb-0"> Mi cuenta </h5> </div>
                             <div class="card-body">
-                                <form action="">
+
+
+                                
+
+                                <form id="account_frm">
+                                    {% csrf_token %}
                                     <div class="form-group">
-                                        <label for="inputUsername">Username</label>
-                                        <input type="text" class="form-control" id="inputUsername" placeholder="Username">
+                                        <label for="acc_username">Nombre de usuario</label>
+                                        <input type="text" class="form-control" id="acc_username" placeholder="Escibe un nombre de usuario" value="{{request.user}}">
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="inputEmail">Email</label>
-                                        <input type="email" class="form-control" id="inputUsername" placeholder="Email">
+                                        <label for="acc_email">Email</label>
+                                        <input type="email" class="form-control" id="acc_email" placeholder="Escribe un email" value="{{request.user.email}}">
                                     </div>
+
 
                                     <hr class="mx-1 my-4"> 
 
@@ -289,44 +295,97 @@
                         <div class="card">
                             <div class="card-header"> <h5 class="card-title mb-0"> Modificar o recuperar contraseña </h5> </div>
                             <div class="card-body">
-    
-                                <form>
+                                
+                                
+                                <div class="row">
+                                    <div class="col-md-12">
 
-                                    <div class="form-group">
-                                        <div class="container">
-                                            <div class="row d-flex justify-content-between"> 
-                                                <h6 class="ml-1"> <small> {% trans 'login_formPass' %} </small> </h6> 
-                                                <a href="#"> <p> {% trans 'forgottenPass' %} </p> </a>
+                                        <h4 class="font-weight-bold my-2 mb-4"> Selecciona la opción que más se ajuste a tus necesidades</h4>
+
+                                        <div class="container row d-flex justify-content-between">
+
+
+                                            <div class="float-right" data-toggle="tooltip" data-html="true" data-placement='bottom' title="Esta opción te permite modificar tu contraseña actual a una diferente o a una más segura">
+                                                <a href="{% url 'password_change' %}" target="_blank" class="btn btn-sm btn-primary my-3 py-2">
+                                                    <i class="material-icons align-top mr-1">edit</i> Cambiar contraseña
+                                                </a> 
                                             </div>
+
+                                            <div class="float-right" data-toggle="tooltip" data-html="true" data-placement='bottom' title="Con esta opción te enviamos un enlace único a tu email privado para que ingreses una nueva contraseña en caso de olvidarla">
+                                                <a href="{% url 'password_reset'%}" target="_blank" class="btn btn-sm btn-primary my-3 py-2">
+                                                    <i class="material-icons align-top mr-1">refresh</i> 
+                                                    Restablecer contraseña
+                                                </a> 
+                                            </div>
+
+
+                                           
+
+                                           
                                         </div>
-                                        <input name="A_password" class="form-control" placeholder="******" type="password">
-                                    </div> 
 
-                                    <hr class="mt-4 mb-3">
-
-
-                                    <div class="form-group">
-                                        <h6 class="ml-1"> <small> New password </small> </h6> 
-                                        <input type="password" class="form-control" id="inputPasswordCurrent">                                      
+                                         
                                     </div>
-
-                                    <div class="form-group">
-                                        <h6 class="ml-1"> <small> Verify password </small> </h6> 
-                                        <input type="password" class="form-control" id="inputPasswordCurrent">                                      
-                                    </div>
-
-                                    <button type="submit" class="btn btn-primary my-1"> {% trans 'saveChanges' %} </button>
-                                </form>
+                                </div>
+                                
+                           
                             </div>
                         </div>
                     </div>
+
+                    <div class="tab-pane fade" id="under_dev" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header"> <h5 class="card-title mb-0">Under development</h5> </div>
+                            <div class="card-body">
+                                <div class="row my-3">
+                                    <div class="col-lg-7 text-center">
+                                        <div class="alert alert-info">
+                                            <h4 class="font-weight-bold">Esta sección sigue en desarrollo</h4> 
+                                        </div>
+                                        <div class="py-2">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="center py-3 h6"> 
+                                                        ¡Hola {{ request.user.first_name|default:request.user }}!
+                                                        Lo sentimos mucho, pero esta sección de ajustes aún sigue en fase de desarrollo. Eso significa que aún no está terminada y su funcionamiento podría ser limitado, nulo o podría contener errores
+                                                    </div>
+                                                    <div class="center py-2 h6"> 
+                                                        Pronto quedará lista y será otro <i>feature</i> más en tus ajustes, mantente pendiente a los cambios
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>   
+                                    <div class="col-lg-5 text-center">                
+                                        <img class="" src="{% static 'LVR/assets/img/cherry-under-const.png' %}" alt="" width="200px">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
                 </div>
             </div>
         </div>
     
     </div>
 
-    <div id="toastMessage" class="toast mr-2 mb-2 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false" data-delay="7000" style="position: fixed; bottom: 0; right:0;  z-index:1111;">
+    
+    <div id="toastForm" class="toast mr-2 mb-2 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="true" data-delay="3000" style="position: fixed; bottom: 0; right:0;  z-index:1111;">
+        <div id="msg_header" class="toast-header text-white">
+            <i id="msg_icon" class=""></i> 
+            <strong id="msg_title" class="mr-auto">Title</strong>
+            <button id="msg_hide" type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+        </div>
+        <div id="msg_txt" class="toast-body">Msg text</div>
+    </div>
+
+
+
+    
+
+
+
+    <div id="toastMessage" class="toast mr-2 mb-2 shadow border-info" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="true" data-delay="3000" style="position: fixed; bottom: 0; right:0;  z-index:1111;">
         <div class="toast-header bg-info text-white">
             <i class="fas fa-info-circle fa-lg mr-1"></i> 
             <strong class="mr-auto">En desarrollo</strong>

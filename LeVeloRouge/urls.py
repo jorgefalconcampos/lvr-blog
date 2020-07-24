@@ -41,7 +41,9 @@ urlpatterns = [
         html_email_template_name='LVR/mails/user/pswd/reset-pass-mail.html'),name='password_reset'),    
     path('user/password-reset/done', auth_views.PasswordResetDoneView.as_view(template_name='LVR/user/pswd/password-reset-done.html'), name='password_reset_done'),
     path('user/password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='LVR/user/pswd/password-reset-confirm.html'),name='password_reset_confirm'),
-    path('user/password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='LVR/user/pswd/password-reset-complete.html'),name='password_reset_complete'),
+    path('user/password-reset/complete', auth_views.PasswordResetCompleteView.as_view(template_name='LVR/user/pswd/password-reset-complete.html'),name='password_reset_complete'),
+    path('user/password-change/', auth_views.PasswordChangeView.as_view(template_name='LVR/user/pswd/password-change.html',),name='password_change'),
+    path('user/password-change/complete', auth_views.PasswordChangeDoneView.as_view(template_name='LVR/user/pswd/password-change-done.html'),name='password_change_done'),
 ]
 
 handler404 = 'LVR.views.page_not_found_404'
