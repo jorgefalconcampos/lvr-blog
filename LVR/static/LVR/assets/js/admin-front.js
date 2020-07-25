@@ -69,13 +69,13 @@ $(window).on('load',function(){
                 success:function(json){
                     if(json.success){success();}
                     else { 
-                        if (json.errors == 'email_already_taken'){error('Error en email', 'Ocurrió un error al intentar cambiar tu email')}
+                        if (json.errors == 'email_already_taken'){error('Error en email', 'Ocurrió un error al intentar asignar el email')}
                         else{ for(var key in json.errors){error('Error en '+key, json.errors[key][0])}}
                     }
                 },
             });
         }
-        else { error('Error en los datos', 'No se detectaron cambios en el nombre de usuario o en el email');}
+        else { error('Error en los datos', 'No se detectaron cambios');}
     });
 });
 
