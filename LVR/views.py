@@ -631,13 +631,8 @@ def settings(request):
     
 
     response_data = {}
-
-
-
     if request.POST.get('action') == 'account_Form':
-  
         acc_form = AccountEditUserForm(request.POST, instance=request.user)
-        # new_user = request.POST.get('username')
         new_mail = request.POST.get('email')
         if acc_form.is_valid():
             if not User.objects.filter(email=request.POST.get('email')).count() > 0:
@@ -646,29 +641,7 @@ def settings(request):
                 return JsonResponse(response_data)
             else:
                 return JsonResponse({'success': False, 'errors': 'email_already_taken'})
-
-
-            # print(f"old data: {c_user}, {c_user.email}\n")
-            # print(f"new data: {new_user}, {new_mail}\n")
-
-            # if new_mail != user.email:
-            #     print('stage 3')
-
-            #     current.username = new_user
-            #     current.email = new_mail
-            #     current.save()
-            #     response_data['success'] = True
-            #     return JsonResponse(response_data)
-            # else:
-            #     print('este email es el mismo nmms')
-            #     return JsonResponse({'success': False, 'err_code': 'repeated_data'})
         else:
-
-
-            # for e in acc_form.errors['username'].as_data():
-                # print(e)
-            # print(acc_form.errors.as_data())
-            # print(acc_form.errors.as_json())
             return JsonResponse({'success': False, 'errors': acc_form.errors})
     else:
         acc_form = AccountEditUserForm(instance=request.user)
@@ -833,21 +806,21 @@ def post_list(request):
 def post_new(request):
     template = 'LVR/user/post_edit.html'
     if request.method == "POST":
-        newPost_form = PostForm(request.POST, request.FILES)
-        if newPost_form.is_valid():
-            newpost = newPost_form.save(commit=False)
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            newpost = form.save(commit=False)
             get_author = blog_author.objects.get(name=request.user)
             newpost.author = get_author
             newpost.published_date = timezone.now()
             newpost.save()
-            newPost_form.save_m2m()
-            messages.success(request, _('PostCreated_Ok'))
+            form.save_m2m()
+            # messages.success(request, _('PostCreated_Ok'))
             return redirect('post_detail', category_text=newpost.category, slug_text=newpost.slug)
         else:
             messages.error(request, _('EmptyFields'))
     else:
-        newPost_form = PostForm()
-    context = { 'newPost_form': newPost_form }
+        form = PostForm()
+    context = { 'postForm': form }
     if not blog_category.objects.count():
         context['nocategs'] = True
     return render(request, template, context)
@@ -859,7 +832,6 @@ def post_new(request):
 def post_edit(request, slug_text):
     template = 'LVR/user/post_edit.html'
     post = get_object_or_404(blog_post, slug=slug_text)
-    is_edit = True
     status = post.status
     slug = post.slug
     title = post.title
@@ -876,16 +848,28 @@ def post_edit(request, slug_text):
             return redirect('post_detail', category_text=post.category, slug_text=post.slug)
     else:
         form = PostForm(instance=post)
-    context = {'editPost_form': form, 'is_edit': is_edit, 'status': status, 'title': title, 'slug': slug }
+    context = {'postForm': form, 'is_edit': True, 'status': status, 'title': title, 'slug': slug }
     return render (request, template, context)
 
 
 
+
 @login_required(login_url='login')
-def post_delete(request, slug_text):
-    post = get_object_or_404(blog_post, slug=slug_text)
-    post.delete()
-    return redirect('dashboard')
+def post_delete(request, pk):
+    response_data = {'success': False}
+    try:
+        post = blog_post.objects.filter(pk=pk).delete()
+        response_data['success'] = True
+        return JsonResponse(response_data)
+    except Exception as e:
+        return JsonResponse(response_data)
+
+
+
+
+
+
+
 
 
 
