@@ -89,6 +89,18 @@ class AccountEditUserForm(UserChangeForm):
             'email': f.EmailInput(attrs=email_attrs),
         }
 
+class ProfileEditUserForm(UserChangeForm):
+    class Meta:
+        model = User
+        first_name_attrs = {'class':'form-control form-control-lg', 'id':'profile_firstName', 'type': 'text', 'value': '{{request.user.first_name|default:""}}'}
+        last_name_attrs = {'class':'form-control form-control-lg', 'id':'profile_lastName', 'type': 'text', 'value': '{{request.user.last_name|default:""}}'}
+        fields = ('first_name', 'last_name')
+        labels = {'Nombre', 'Apellido'}
+        widget = {
+            'first_name': f.TextInput(attrs=first_name_attrs),
+            'last_name': f.TextInput(attrs=last_name_attrs)
+        }
+
 
 
 

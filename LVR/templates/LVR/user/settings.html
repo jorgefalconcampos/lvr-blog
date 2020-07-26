@@ -18,8 +18,9 @@
                                 
                                 <div class="row text-center">
                                     <div class="col">                            
-                                        <img class="rounded-circle" src="{% static 'LVR/assets/img/jeff.png' %}" alt="" width="70px">
-                                        <!-- <img class="mt-1 rounded-circle" src="{{ author.image.url }}" alt="" width="165px"> -->
+                                        <!-- <img class="rounded-circle" src="{% static 'LVR/assets/img/jeff.png' %}" alt="" width="70px"> -->
+                                        <img class="mt-1 rounded-circle" src="{{ author.image.url }}" width="70px">
+
                                     </div>   
                                 </div>  
                             </div>
@@ -94,113 +95,98 @@
                         <div class="card">
                             <div class="card-header"> <h5 class="card-title mb-0">Información pública</h5> </div>
                             <div class="card-body">
-                                <form>
+                                <form id="profile_frm">
+                                    {% csrf_token %}
                                     <div class="row">
                                         <div class="col-md-8">
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
-                                                    <h6 class="ml-1"> <small> First name </small> </h6> 
-                                                    <input type="text" class="form-control" id="inputFirstName" placeholder="First name">
+                                                    <h6 class="ml-1"> <small> Nombre </small> </h6> 
+                                                    <input type="text" class="form-control" id="profile_firstName" placeholder="Escribe tu nombre" type="text" value='{{request.user.first_name|default:""}}'>
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                    <h6 class="ml-1"> <small> Last Name </small> </h6> 
-                                                    <input type="text" class="form-control" id="inputLastName" placeholder="Last name">
+                                                    <h6 class="ml-1"> <small> Apellido </small> </h6> 
+                                                    <input type="text" class="form-control" id="profile_lastName" placeholder="Escribe tu apellido" type="text" value='{{request.user.last_name|default:""}}'>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <h6 class="ml-1"> <small> Titulo </small> </h6> 
-                                                <input type="text" class="form-control" id="inputUsername" placeholder="Titulo">
+                                                <input type="text" class="form-control" id="profile_title" placeholder="Redactor, ingeniero, padre de familia, maestro Jedi..." value="{{author.title}}">
                                             </div>
 
                                             <div class="form-group">
                                                 <h6 class="ml-1"> <small> Biografía </small> </h6> 
-                                                <textarea rows="2" class="form-control" id="inputBio" placeholder="Tell something about yourself"></textarea>
-                                            </div>
-
-                                            <div class="form-group">
-                                                
-                                                <h6 class="ml-1"> <small> Email público </small> </h6> 
-
-                                              
-                                                <div class="input-group">                          
-                                                    <input name="email_url" class="form-control" placeholder="" type="email">
-                                                    
-                                                    <div class="input-group-append">
-                                                        <div class="input-group-text">
-                                                            <input type="checkbox" class="form-check-input ml-0" id="exampleCheck1">
-                                                            <label class="form-check-label ml-3" for="exampleCheck1"> {% trans 'dashboard_Settings_SM_show' %} </label>
-                                                        </div>
-                                                    </div>
-                                                </div>   
-
+                                                <textarea rows="2" class="form-control txtarea-maxh-200" id="profile_bio" placeholder="Cuéntale a los lectores un poco de ti y de tu vida :)">{{author.bio}}</textarea>
                                             </div>
 
 
-                                            
+                                            <div data-toggle="tooltip" data-html="true" data-placement='right' title="Esta sección es opcional y puedes colocar perfiles personales o de trabajo; si no quieres mostrar algún campo simplemente déjalo en blanco">                                        
+                                                <div class="bd-callout bd-callout-secondary">
+                                                    <div class="form-group pt-1">
+                                                        <h6 class="ml-1"> <small> Email público </small> <a href="#" type="button" data-toggle="modal" data-target="#generalModal" style="color:#5A5A5A"> <i class="fas fa-info-circle fa-lg mr-1"> </i> </a> </h6> 
+                                                         <!-- if author.email == request.user.email -->
+                                                        <div class="input-group">
+                                                            <input id="profile_email" name="email_url" class="form-control" placeholder="usuario@dominio.com" type="email" value="{{author.email}}">                                                    
+                                                        </div>
 
-
-                                            <div class="form-group">
+                                                        <div class="modal fade" id="generalModal" tabindex="-1" role="dialog" aria-labelledby="generalModal" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header px-lg-5">
+                                                                        <h5 class="modal-title" id="prblm_form_title">¿Qué es el email público?</h5>
+                                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                                    </div>
+                                                                    <div class="modal-body px-lg-5">
+                                                                        <form id="problem_frm" action="">     
+                                                                            <div class="row my-3">
+                                                                                <div class="col">
+                                                                                    <h6>Al crear tu cuenta, el email público y privado es el mismo (y ninguno aparecerá en <a href="{% url 'author_detail' author.slug %}" target="_blank">tu perfil</a> hasta que guardes los cambios). Puedes configurar un email público diferente al privado o puedes omitirlo dejando en blanco el cuadro de texto; esta acción no afectará a tu email privado.</h6>
+                                                                                </div> 
+                                                                            </div>
+                                                                            <div class="modal-footer justify-content-end px-sm-0 px-md-0 px-lg-0">
+                                                                                <button type="button" class="btn btn-primary" data-dismiss="modal">{% trans 'Ok' %}</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>                            
+                                                    </div>
                                                 
-                                                <h6 class="ml-1"> <small> Redes sociales </small> </h6> 
+                                                    <div class="form-group pt-2">                                                
+                                                        <h6 class="ml-1"> <small> Redes sociales </small> </h6> 
+                                                        <div class="input-group">                          
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fab fa-facebook-square fa-lg"></i></span>
+                                                            </div>
+                                                            <input profile="profile_facebook" name="facebook_url" class="form-control" placeholder="facebook.com/myprofile" type="url" value="{{author.facebookURL}}">
+                                                        </div>            
 
-                                              
-                                                <div class="input-group">                          
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"><i class="fab fa-facebook-square fa-lg"></i></span>
-                                                    </div>
-                                                    <input name="facebook_url" class="form-control" placeholder="facebook.com/myprofile" type="">
-                                                    
-                                                    <div class="input-group-append">
-                                                        <div class="input-group-text">
-                                                            <input type="checkbox" class="form-check-input ml-0" id="exampleCheck1">
-                                                            <label class="form-check-label ml-3" for="exampleCheck1"> {% trans 'dashboard_Settings_SM_show' %} </label>
+                                                        <div class="input-group py-2">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fab fa-twitter-square fa-lg"></i></span>
+                                                            </div>
+                                                            <input name="profile_twitter" class="form-control" placeholder="twitter.com/myprofile" type="url" value="{{author.twitterURL}}">
+                                                        </div>
+
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fab fa-linkedin fa-lg"></i></span>
+                                                            </div>
+                                                            <input name="profile_linkedin" class="form-control" placeholder="linkedin.com/myprofile" type="url" value="{{author.linkedinURL}}">
                                                         </div>
                                                     </div>
-                                                </div>            
-
-                                                <div class="input-group py-2">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"><i class="fab fa-twitter-square fa-lg"></i></span>
-                                                    </div>
-                                                    <input name="twitter_url" class="form-control" placeholder="twitter.com/myprofile" type="">
-
-                                                    <div class="input-group-append">
-                                                        <div class="input-group-text">
-                                                            <input type="checkbox" class="form-check-input ml-0" id="exampleCheck1">
-                                                            <label class="form-check-label ml-3" for="exampleCheck1"> {% trans 'dashboard_Settings_SM_show' %} </label>
-                                                        </div>
-                                                    </div>
-
                                                 </div>
-
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"><i class="fab fa-linkedin fa-lg"></i></span>
-                                                    </div>
-                                                    <input name="linkedin_url" class="form-control" placeholder="linkedin.com/myprofile" type="">
-                                                    
-                                                    <div class="input-group-append">
-                                                        <div class="input-group-text">
-                                                            <input type="checkbox" class="form-check-input ml-0" id="exampleCheck1">
-                                                            <label class="form-check-label ml-3" for="exampleCheck1"> {% trans 'dashboard_Settings_SM_show' %} </label>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-
-
-                                            </div> 
-
+                                            </div>
 
                                         </div>
 
                                         <div class="col-md-4">
                                             <div class="text-center">
                                                 <div class="author-d-profile">
-                                                    <img alt="" src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle img-responsive mt-2" width="128" height="128">
-                                                    <p> current image form or url goes here my friend lol </p>
+                                                    <img alt="" src="{{author.image.url}}" class="rounded-circle img-responsive my-3" width="128" height="128">
+                                                    <p class="pb-3">{{author.image}}</p>
                                                 </div>
 
                                                 <div class="row mx-2"> <small> {% trans 'dashboard_Settings_imgAdvice' %} </small> </div>
@@ -305,13 +291,13 @@
                                         <div class="container row d-flex justify-content-between">
 
 
-                                            <div class="float-right" data-toggle="tooltip" data-html="true" data-placement='bottom' title="Modificar tu contraseña actual a una diferente o a una más segura">
+                                            <div class="float-right" data-toggle="tooltip" data-html="true" data-placement='bottom' title="Modifica tu contraseña actual a una diferente o a una más segura">
                                                 <a href="{% url 'password_change' %}" target="_blank" class="btn btn-sm btn-primary my-3 py-2">
                                                     <i class="material-icons align-top mr-1">edit</i> Cambiar contraseña
                                                 </a> 
                                             </div>
 
-                                            <div class="float-right" data-toggle="tooltip" data-html="true" data-placement='bottom' title="Recibe en tu email un enlace para que ingreses una nueva contraseña en caso de haberla olvidado">
+                                            <div class="float-right" data-toggle="tooltip" data-html="true" data-placement='bottom' title="Recibe en tu email un enlace para resetear tu contraseña en caso olvidadarla">
                                                 <a href="{% url 'password_reset'%}" target="_blank" class="btn btn-sm btn-primary my-3 py-2">
                                                     <i class="material-icons align-top mr-1">refresh</i> 
                                                     Restablecer contraseña

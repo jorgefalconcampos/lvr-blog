@@ -2489,6 +2489,31 @@ code {
   .dropdown-item.disabled, .dropdown-item:disabled {
     color: #6c757d; }
 
+.bd-callout {
+  padding: 1rem;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid #D6D6D6;
+  border-left-color: #eeeeee;
+  border-left-width: 1px;
+  border-left-width: .25rem;
+  border-radius: .25rem; }
+
+.bd-callout-warning {
+  border-left-color: #ffc107; }
+
+.bd-callout-danger {
+  border-left-color: #dc3545; }
+
+.bd-callout-info {
+  border-left-color: #17a2b8; }
+
+.bd-callout-success {
+  border-left-color: #28a745; }
+
+.bd-callout-secondary {
+  border-left-color: #6c757d; }
+
 body {
   font-size: 0.75rem;
   font-weight: 400;
@@ -2512,6 +2537,10 @@ h1, h2, h3, h4 {
 .txtarea-maxh-400 {
   min-height: 73px;
   max-height: 400px; }
+
+.txtarea-maxh-200 {
+  min-height: 73px;
+  max-height: 200px; }
 
 .search-title h1, .search-title h2, .search-title h3, .search-title h4, .search-title h5, .search-title h6 {
   text-transform: uppercase !important; }
