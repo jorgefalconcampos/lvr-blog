@@ -2084,8 +2084,8 @@ select.form-control-sm:not([size]):not([multiple]) {
   height: calc(1.8125rem + 2px); }
 
 label {
-  font-size: 0.9rem;
-  font-weight: 700; }
+  font-size: 1rem;
+  font-weight: 600; }
 
 .form-control-lg {
   padding: 1.4rem 1rem;

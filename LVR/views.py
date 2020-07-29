@@ -8,7 +8,7 @@ from django.http import Http404, HttpResponseRedirect, HttpResponse, JsonRespons
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render, get_object_or_404, reverse
 from . models import blog_post, blog_category, blog_author, blog_postComment, blog_misc, blog_subscriber  #Importing the models
-from . forms import PostForm, CommentForm, CreateUserForm, AccountEditUserForm, ContactForm, SubscribeForm, NewCategory
+from . forms import PostForm, CommentForm, CreateUserForm, AccountEditUserForm, ProfileEditUserForm, ProfileEditAuthorForm, ContactForm, SubscribeForm, NewCategory
 from django.utils.translation import gettext as _
 from django.conf import settings as conf_settings #To read reCaptcha's key
 from . decorators import check_recaptcha
@@ -621,19 +621,31 @@ def tasks(request):
 def settings(request):
     template = 'LVR/user/settings.html'
     author = blog_author.objects.get(name=request.user)
-    context = {'author': author}
-    if not request.user.is_superuser:
-        avg_user_perms = ['Crear posts en mi nombre', 'Editar posts en mi nombre', 'Archivar posts escritos en mi nombre', 'Eliminar posts escritos en mi nombre', 'Solicitar cambio de contraseña', 'Solicitar restablecimiento de contraseña', 'Crear tags (al crear un post, si el tag no existe)', 'Modificar datos personales públicos', 'Modificar datos personales privados', 'Cambiar imagen de perfil público', 'Login y logout']
-        context['permissions'] = avg_user_perms
-    else:
-        perms = request.user.get_group_permissions()
-        context['permissions'] = perms
-    
 
     response_data = {}
+
+    if request.POST.get('action') == 'profile_Form':
+        profile_user_form = ProfileEditUserForm(data=request.POST, instance=request.user)
+        profile_author_form = ProfileEditAuthorForm(data=request.POST, instance=author, files=request.FILES)
+        print('llego aki')
+        if  profile_user_form.is_valid() and profile_author_form.is_valid():
+            prof_user = profile_user_form.save(commit=False)
+            prof_user.save()
+            prof_author = profile_author_form.save(commit=False)
+            prof_author.save()
+            print('llego a todo segun')
+            response_data['success'] = True
+            return JsonResponse(response_data)
+        else:
+            return JsonResponse({'success': False})
+    else:
+        profile_user_form = ProfileEditUserForm(instance=request.user)
+        # profile_author_form = ProfileEditAuthorForm(instance=request.user)
+
+    
+
     if request.POST.get('action') == 'account_Form':
         acc_form = AccountEditUserForm(request.POST, instance=request.user)
-        new_mail = request.POST.get('email')
         if acc_form.is_valid():
             if not User.objects.filter(email=request.POST.get('email')).count() > 0:
                 acc_form.save()
@@ -645,6 +657,29 @@ def settings(request):
             return JsonResponse({'success': False, 'errors': acc_form.errors})
     else:
         acc_form = AccountEditUserForm(instance=request.user)
+
+
+    account_frm_initial = { 'username': request.user, 'email': request.user.email }
+    profile_frm_user_initial = { 'first_name': request.user.first_name, 'last_name': request.user.last_name }
+    profile_frm_author_initial = { 'title': author.title, 'bio': author.bio, 'email': author.email, 'image':author.image, 'facebook_URL': author.facebook_URL, 'twitter_URL': author.twitter_URL, 'linkedin_URL': author.linkedin_URL }
+
+    context = {
+        'author': author, 
+        'AccountForm': AccountEditUserForm(initial=account_frm_initial), 
+        # --------------------- #
+        'ProfileUserForm': ProfileEditUserForm(initial=profile_frm_user_initial),
+        'ProfileAuthorUserForm': ProfileEditAuthorForm(initial=profile_frm_author_initial),
+    }
+
+
+
+    
+    if not request.user.is_superuser:
+        avg_user_perms = ['Crear posts en mi nombre', 'Editar posts en mi nombre', 'Archivar posts escritos en mi nombre', 'Eliminar posts escritos en mi nombre', 'Solicitar cambio de contraseña', 'Solicitar restablecimiento de contraseña', 'Crear tags (al crear un post, si el tag no existe)', 'Modificar datos personales públicos', 'Modificar datos personales privados', 'Cambiar imagen de perfil público', 'Login y logout']
+        context['permissions'] = avg_user_perms
+    else:
+        perms = request.user.get_group_permissions()
+        context['permissions'] = perms
 
 
     return render (request, template, context)

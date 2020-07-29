@@ -18,9 +18,7 @@
                                 
                                 <div class="row text-center">
                                     <div class="col">                            
-                                        <!-- <img class="rounded-circle" src="{% static 'LVR/assets/img/jeff.png' %}" alt="" width="70px"> -->
-                                        <img class="mt-1 rounded-circle" src="{{ author.image.url }}" width="70px">
-
+                                        <img class="mt-1 rounded-circle" src="{{ author.image.url }}" width="70" height="70">
                                     </div>   
                                 </div>  
                             </div>
@@ -38,7 +36,7 @@
     
                     <div class="list-group list-group-flush" role="tablist">
                         
-                        <a class="list-group-item list-group-item-action active" data-toggle="list" href="#profile" role="tab">
+                        <a id="settings_profile" class="list-group-item list-group-item-action active" data-toggle="list" href="#profile" role="tab">
                           <div class="h6"> {% trans 'dashboard_DropDown_Profile' %}  </div>
                         </a>
 
@@ -93,41 +91,47 @@
                     <!-- Profile -->
                     <div class="tab-pane fade show active" id="profile" role="tabpanel">
                         <div class="card">
-                            <div class="card-header"> <h5 class="card-title mb-0">Información pública</h5> </div>
+                            <div class="card-header d-flex justify-content-between">    
+                                <h5 class="card-title mb-0">Información pública</h5> 
+                                {% if not request.user.is_superuser %}
+                                <a href="{% url 'author_detail' author.slug %}" target="_blank"> 
+                                    <button type="button" class="btn btn-sm btn-primary">{% trans 'dashboard_Settings_seeProfile' %}</button> 
+                                </a> 
+                                {% endif %}                            
+                            </div>
                             <div class="card-body">
-                                <form id="profile_frm">
+                                <form id="profile_frm" enctype="multipart/form-data">
                                     {% csrf_token %}
                                     <div class="row">
                                         <div class="col-md-8">
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
-                                                    <h6 class="ml-1"> <small> Nombre </small> </h6> 
-                                                    <input type="text" class="form-control" id="profile_firstName" placeholder="Escribe tu nombre" type="text" value='{{request.user.first_name|default:""}}'>
+                                                    <label class="ml-1" for="profile_firstName">{{ProfileUserForm.first_name.label}}</label>
+                                                    {{ProfileUserForm.first_name}}
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                    <h6 class="ml-1"> <small> Apellido </small> </h6> 
-                                                    <input type="text" class="form-control" id="profile_lastName" placeholder="Escribe tu apellido" type="text" value='{{request.user.last_name|default:""}}'>
+                                                    <label class="ml-1" for="profile_lastName">{{ProfileUserForm.last_name.label}}</label>
+                                                    {{ProfileUserForm.last_name}}
                                                 </div>
                                             </div>
-
                                             <div class="form-group">
-                                                <h6 class="ml-1"> <small> Titulo </small> </h6> 
-                                                <input type="text" class="form-control" id="profile_title" placeholder="Redactor, ingeniero, padre de familia, maestro Jedi..." value="{{author.title}}">
+                                                <label class="ml-1" for="profile_title">{{ProfileAuthorUserForm.title.label}}</label>
+                                                {{ProfileAuthorUserForm.title}}
                                             </div>
 
                                             <div class="form-group">
-                                                <h6 class="ml-1"> <small> Biografía </small> </h6> 
-                                                <textarea rows="2" class="form-control txtarea-maxh-200" id="profile_bio" placeholder="Cuéntale a los lectores un poco de ti y de tu vida :)">{{author.bio}}</textarea>
+                                                <label class="ml-1" for="profile_bio">{{ProfileAuthorUserForm.bio.label}}</label>
+                                                {{ProfileAuthorUserForm.bio}}
                                             </div>
 
 
                                             <div data-toggle="tooltip" data-html="true" data-placement='right' title="Esta sección es opcional y puedes colocar perfiles personales o de trabajo; si no quieres mostrar algún campo simplemente déjalo en blanco">                                        
                                                 <div class="bd-callout bd-callout-secondary">
                                                     <div class="form-group pt-1">
-                                                        <h6 class="ml-1"> <small> Email público </small> <a href="#" type="button" data-toggle="modal" data-target="#generalModal" style="color:#5A5A5A"> <i class="fas fa-info-circle fa-lg mr-1"> </i> </a> </h6> 
-                                                         <!-- if author.email == request.user.email -->
+                                                        <label class="ml-1" for="profile_mail"> {{ProfileAuthorUserForm.email.label}} <a href="#" type="button" data-toggle="modal" data-target="#generalModal" style="color:#5A5A5A"> <i id="showEpublic" class="fas fa-info-circle fa-lg mr-1"> </i> </a>  </label>                                                        
+                                                        <!-- if author.email == request.user.email -->
                                                         <div class="input-group">
-                                                            <input id="profile_email" name="email_url" class="form-control" placeholder="usuario@dominio.com" type="email" value="{{author.email}}">                                                    
+                                                            {{ProfileAuthorUserForm.email}}
                                                         </div>
 
                                                         <div class="modal fade" id="generalModal" tabindex="-1" role="dialog" aria-labelledby="generalModal" aria-hidden="true">
@@ -138,43 +142,35 @@
                                                                         <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                                                                     </div>
                                                                     <div class="modal-body px-lg-5">
-                                                                        <form id="problem_frm" action="">     
-                                                                            <div class="row my-3">
-                                                                                <div class="col">
-                                                                                    <h6>Al crear tu cuenta, el email público y privado es el mismo (y ninguno aparecerá en <a href="{% url 'author_detail' author.slug %}" target="_blank">tu perfil</a> hasta que guardes los cambios). Puedes configurar un email público diferente al privado o puedes omitirlo dejando en blanco el cuadro de texto; esta acción no afectará a tu email privado.</h6>
-                                                                                </div> 
-                                                                            </div>
-                                                                            <div class="modal-footer justify-content-end px-sm-0 px-md-0 px-lg-0">
-                                                                                <button type="button" class="btn btn-primary" data-dismiss="modal">{% trans 'Ok' %}</button>
-                                                                            </div>
-                                                                        </form>
+                                                                          <div class="row my-3">
+                                                                            <div class="col">
+                                                                                <h6>Al crear tu cuenta, el email público y privado es el mismo (y ninguno aparecerá en <a href="{% url 'author_detail' author.slug %}" target="_blank">tu perfil</a> hasta que guardes los cambios). Puedes configurar un email público diferente al privado o puedes omitirlo dejando en blanco el cuadro de texto; esta acción no afectará a tu email privado.</h6>
+                                                                            </div> 
+                                                                        </div>
+                                                                        <div class="modal-footer justify-content-end px-sm-0 px-md-0 px-lg-0">
+                                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">{% trans 'Ok' %}</button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>                            
                                                     </div>
                                                 
-                                                    <div class="form-group pt-2">                                                
-                                                        <h6 class="ml-1"> <small> Redes sociales </small> </h6> 
+                                                    <div class="form-group pt-2">    
+                                                        <label class="ml-1">Redes sociales</label>
                                                         <div class="input-group">                          
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text"><i class="fab fa-facebook-square fa-lg"></i></span>
-                                                            </div>
-                                                            <input profile="profile_facebook" name="facebook_url" class="form-control" placeholder="facebook.com/myprofile" type="url" value="{{author.facebookURL}}">
+                                                            <div class="input-group-prepend"><span class="input-group-text"><i class="fab fa-facebook-square fa-lg"></i></span></div>
+                                                            {{ProfileAuthorUserForm.facebook_URL}}
                                                         </div>            
 
                                                         <div class="input-group py-2">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text"><i class="fab fa-twitter-square fa-lg"></i></span>
-                                                            </div>
-                                                            <input name="profile_twitter" class="form-control" placeholder="twitter.com/myprofile" type="url" value="{{author.twitterURL}}">
+                                                            <div class="input-group-prepend"><span class="input-group-text"><i class="fab fa-twitter-square fa-lg"></i></span></div>
+                                                            {{ProfileAuthorUserForm.twitter_URL}}
                                                         </div>
 
                                                         <div class="input-group">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text"><i class="fab fa-linkedin fa-lg"></i></span>
-                                                            </div>
-                                                            <input name="profile_linkedin" class="form-control" placeholder="linkedin.com/myprofile" type="url" value="{{author.linkedinURL}}">
+                                                            <div class="input-group-prepend"><span class="input-group-text"><i class="fab fa-linkedin fa-lg"></i></span></div>
+                                                            {{ProfileAuthorUserForm.linkedin_URL}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -185,26 +181,18 @@
                                         <div class="col-md-4">
                                             <div class="text-center">
                                                 <div class="author-d-profile">
-                                                    <img alt="" src="{{author.image.url}}" class="rounded-circle img-responsive my-3" width="128" height="128">
-                                                    <p class="pb-3">{{author.image}}</p>
+                                                    <img src="{{author.image.url}}" class="rounded-circle img-responsive my-3" width="128" height="128">
+                                                    <p id="author_img">{{author.image}}</p>
+                                                    <div class="pb-3 mx-3">{{ProfileAuthorUserForm.image}}</div>
                                                 </div>
-
-                                                <div class="row mx-2"> <small> {% trans 'dashboard_Settings_imgAdvice' %} </small> </div>
-                                                
-
-                                                {% if not request.user.is_superuser %}
-                                                <div class=" py-5">
-                                                    <a href="{% url 'author_detail' author.slug %}" target="_blank"> 
-                                                        <button type="button" class="btn btn-sm btn-primary">{% trans 'dashboard_Settings_seeProfile' %}</button> 
-                                                    </a> 
+                                                <div class="row mt-3"> 
+                                                    <div class="col">
+                                                        <small> {{ProfileAuthorUserForm.image.help_text}}</small>
+                                                    </div> 
                                                 </div>
-                                                {% endif %}
-
-
                                             </div>
                                         </div>
-                                    </div>
-                                    
+                                    </div>                                    
                                     <button type="submit" class="btn btn-primary my-1">{% trans 'saveChanges' %}</button>
                                 </form>
                             </div>
@@ -216,22 +204,17 @@
                         <div class="card">
                             <div class="card-header"> <h5 class="card-title mb-0"> Mi cuenta </h5> </div>
                             <div class="card-body">
-
-
-                                
-
                                 <form id="account_frm">
                                     {% csrf_token %}
                                     <div class="form-group">
-                                        <label for="acc_username">Nombre de usuario</label>
-                                        <input type="text" class="form-control" id="acc_username" placeholder="Escibe un nombre de usuario" value="{{request.user}}">
+                                        <label for="acc_username">{{AccountForm.username.label}}</label>
+                                        {{AccountForm.username}}
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="acc_email">Email</label>
-                                        <input type="email" class="form-control" id="acc_email" placeholder="Escribe un email" value="{{request.user.email}}">
+                                        <label for="acc_email">{{AccountForm.username.label}}</label>
+                                        {{AccountForm.email}}
                                     </div>
-
 
                                     <hr class="mx-1 my-4"> 
 
