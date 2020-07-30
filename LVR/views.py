@@ -627,13 +627,11 @@ def settings(request):
     if request.POST.get('action') == 'profile_Form':
         profile_user_form = ProfileEditUserForm(data=request.POST, instance=request.user)
         profile_author_form = ProfileEditAuthorForm(data=request.POST, instance=author, files=request.FILES)
-        print('llego aki')
         if  profile_user_form.is_valid() and profile_author_form.is_valid():
             prof_user = profile_user_form.save(commit=False)
             prof_user.save()
             prof_author = profile_author_form.save(commit=False)
             prof_author.save()
-            print('llego a todo segun')
             response_data['success'] = True
             return JsonResponse(response_data)
         else:

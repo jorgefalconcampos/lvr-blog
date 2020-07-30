@@ -34,6 +34,10 @@ class blog_author(m.Model):
             blog_author.objects.create(name=instance)
         instance.blog_author.save()
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name.first_name+' '+self.name.last_name)
+        super (blog_author, self).save(*args, **kwargs)
+
 
 
 
