@@ -2,16 +2,16 @@
   border-radius: 5px;
   background-color: #E1E2E0;
   margin: 5px 15px 5px 15px; }
-  
-  
+
+
 .title-header{
   font-weight: 700;
   max-width: 800px;
-  overflow: hidden; 
+  overflow: hidden;
   text-overflow: clip;
 }
-  
-  
+
+
 .subtitle-header{
   font-weight: 600;
 }
@@ -36,12 +36,12 @@
     font-weight: 600;
     font-size: 14px;
     span{
-      color: rgb(163, 163, 163); 
+      color: rgb(163, 163, 163);
       font-size: 13px;
     }
 
-    
-   
+
+
   }
 
   .comment-body{
@@ -50,9 +50,9 @@
     margin-top: -5px;
     padding: 5px 10px 1px 10px;
     background-color: rgb(243, 243, 243);
-    p { 
-      padding: 7px 0 0 0;      
-      font-size: 15px; 
+    p {
+      padding: 7px 0 0 0;
+      font-size: 15px;
       font-weight: 500;
     }
   }
@@ -69,34 +69,34 @@
     // font-weight: 600;
     // font-size: 14px;
     span{
-      // color: rgb(163, 163, 163); 
+      // color: rgb(163, 163, 163);
       font-size: 13px;
-    }   
+    }
   }
 
-  
+
   .cmt-body{
     border-bottom-left-radius: 8px 8px;
     border-bottom-right-radius: 8px 8px;
     margin-top: 15px;
     padding: 10px 20px 10px 20px;
-    font-size: 14px; 
+    font-size: 14px;
 
     background-color: rgb(243, 243, 243);
-    p { 
-      padding: 7px 0 0 0;      
+    p {
+      padding: 7px 0 0 0;
       font-weight: 500;
     }
   }
 
-  
+
 }
 
 // Img in the top of post's list (index)
-.img-header{ 
+.img-header{
   border-radius: 2px;
   width: 100%;
-  max-height: 300px; 
+  max-height: 300px;
   -webkit-box-shadow: 3px 3px 13px -3px rgba(166,166,166,0.78);
   -moz-box-shadow: 3px 3px 13px -3px rgba(166,166,166,0.78);
   box-shadow: 3px 3px 13px -3px rgba(166,166,166,0.78);
@@ -121,7 +121,7 @@
 .img-related{ max-height: 75px; }
 
 // Title in the look of post's list, not inside a particular post
-.post-title{ 
+.post-title{
   font-weight: 650;
   // text-transform: uppercase;
   *a{
@@ -140,7 +140,7 @@
 }
 
 // Author in the look of post's list, not inside a particular post
-.post-author{ 
+.post-author{
   font-size: 14px; }
 
 // Body of a post, inside a particular post
@@ -167,7 +167,25 @@
 }
 
 // Author info detail
-.detailsAuthor{ margin: 0px 0px 0px 20px; }
+.detailsAuthor{
+  margin: 0px 0px 0px 0px;
+  h5,h6 {
+    text-transform: uppercase;
+  }
+}
+
+.social-circle li a {
+  display: inline-block;
+  position: relative;
+  margin: 0 auto 0 auto;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  font-size: 15px;
+}
 
 // Image detail
 .img-detail {
@@ -201,18 +219,18 @@
 
 
 .img-zoom{
-  overflow: hidden; 
-  
+  overflow: hidden;
+
   img {
     transition: transform .35s, filter 0.5s ease-in-out;
     filter: grayscale(45%);
   }
-  
+
   img:hover {
     filter: grayscale(0);
     transform: scale(1.25);
   }
-  
+
 }
 
 

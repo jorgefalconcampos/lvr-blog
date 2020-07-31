@@ -7,7 +7,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404, HttpResponseRedirect, HttpResponse, JsonResponse
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render, get_object_or_404, reverse
-from . models import blog_post, blog_category, blog_author, blog_postComment, blog_misc, blog_subscriber  #Importing the models
+from . models import blog_post, blog_category, blog_author, blog_postComment, blog_crew, blog_misc, blog_subscriber  #Importing the models
 from . forms import PostForm, CommentForm, CreateUserForm, AccountEditUserForm, ProfileEditUserForm, ProfileEditAuthorForm, ContactForm, SubscribeForm, NewCategory
 from django.utils.translation import gettext as _
 from django.conf import settings as conf_settings #To read reCaptcha's key
@@ -381,10 +381,10 @@ def authors(request):
 #Author detail
 def author_detail(request, pinchiautor):
     template = 'LVR/author_detail.html'
-    author = blog_author.objects.filter(slug=pinchiautor).first()
+    author = get_object_or_404(blog_author, slug=pinchiautor)
     posts_by_author = blog_post.objects.filter(author__slug=pinchiautor, status=1).order_by('-published_date')  #Getting al posts by the current author
     print(posts_by_author)
-    paginator = Paginator(posts_by_author, 1)
+    paginator = Paginator(posts_by_author, 3)
     page = request.GET.get('page')
     try:
         post_list = paginator.page(page)
@@ -442,7 +442,9 @@ def categories_detail(request, slug):
 
 #About page
 def about(request):
-    return render (request, 'LVR/about.html')
+    crew = blog_crew.objects.all()
+    context = { 'crew': crew}
+    return render (request, 'LVR/about.html', context)
 
 
 
@@ -632,6 +634,7 @@ def settings(request):
             prof_user.save()
             prof_author = profile_author_form.save(commit=False)
             prof_author.save()
+            print('llego a todo segun')
             response_data['success'] = True
             return JsonResponse(response_data)
         else:

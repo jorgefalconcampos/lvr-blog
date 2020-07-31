@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext as _
 from django_summernote.admin import SummernoteModelAdmin
-from . models import blog_post, blog_category, blog_author, blog_postComment, blog_misc, blog_subscriber
+from . models import blog_post, blog_category, blog_author, blog_postComment, blog_misc, blog_subscriber, blog_crew
 
 
 
@@ -64,6 +64,10 @@ class AuthorAdmin(admin.ModelAdmin):
 
 
 
+class CrewAdmin(admin.ModelAdmin):
+    list_display = ('name', 'title', 'email')
+    search_fields = ('name', 'title', 'email')
+
 
 class MiscAdmin(SummernoteModelAdmin):
     list_display = ('name', 'date')
@@ -94,5 +98,6 @@ admin.site.register(blog_category, CategoryAdmin)
 admin.site.register(blog_post, PostAdmin)
 admin.site.register(blog_author, AuthorAdmin)
 admin.site.register(blog_postComment, CommentAdmin)
+admin.site.register(blog_crew, CrewAdmin)
 admin.site.register(blog_misc, MiscAdmin)
 admin.site.register(blog_subscriber, SubscriberAdmin)

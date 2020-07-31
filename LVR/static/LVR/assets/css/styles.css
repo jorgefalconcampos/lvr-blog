@@ -2941,7 +2941,21 @@ Calendar Styling */
     box-shadow: 0 0 0 3px #647C7D; }
 
 .detailsAuthor {
-  margin: 0px 0px 0px 20px; }
+  margin: 0px 0px 0px 0px; }
+  .detailsAuthor h5, .detailsAuthor h6 {
+    text-transform: uppercase; }
+
+.social-circle li a {
+  display: inline-block;
+  position: relative;
+  margin: 0 auto 0 auto;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  font-size: 15px; }
 
 .img-detail {
   height: 300px;

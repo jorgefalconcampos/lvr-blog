@@ -146,6 +146,17 @@ class blog_postComment(m.Model):
         return 'Comment {} by {}'.format(self.comment_body, self.author)
 
 
+# blog_crew model, used for displaying vip within about page
+class blog_crew(m.Model):
+    name = m.CharField(max_length=25)
+    title = m.CharField(max_length=35)
+    image = m.ImageField(upload_to='crew/img/', default='crew/default-img.png')
+    email = m.EmailField(unique=True, null=True, blank=True)
+    facebook_URL = m.URLField(null=True, blank=True)
+    instagram_URL = m.URLField(null=True, blank=True)
+    twitter_URL = m.URLField(null=True, blank=True)
+    linkedin_URL = m.URLField(null=True, blank=True)
+
 
 
 
