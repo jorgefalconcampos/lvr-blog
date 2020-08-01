@@ -363,7 +363,7 @@ def authors(request):
         dicc['author'] = author
         dicc['posts'] = num
         details.append(dicc)
-    paginator = Paginator(details, 9) #n authors in each page
+    paginator = Paginator(details, 2) #n authors in each page
     page = request.GET.get('page')
     try:
         authors_list = paginator.page(page)
@@ -384,7 +384,7 @@ def author_detail(request, pinchiautor):
     author = get_object_or_404(blog_author, slug=pinchiautor)
     posts_by_author = blog_post.objects.filter(author__slug=pinchiautor, status=1).order_by('-published_date')  #Getting al posts by the current author
     print(posts_by_author)
-    paginator = Paginator(posts_by_author, 3)
+    paginator = Paginator(posts_by_author, 5)
     page = request.GET.get('page')
     try:
         post_list = paginator.page(page)
