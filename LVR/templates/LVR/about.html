@@ -16,8 +16,8 @@
             <div class="card-body px-2">
                 <div class="mx-0 mx-sm-2 mx-lg-3">
                     <div class="row d-flex justify-content-center justify-content-md-start justify-content-lg-start">
-                        <div class="col-lg-7 text-center text-lg-left my-4">
-                            <h3 class="font-weight-bold text-uppercase"> {% trans 'about_title' %} <strong> Le vélo rouge</strong> </h3>
+                        <div class="col-lg-7 text-center text-lg-left my-5">
+                            <h3 class="font-weight-bold text-uppercase"> {% trans 'about_title' %} <b> Le vélo rouge</b> </h3>
                             <h5 class="my-5 pr-0 pr-md-3 pr-lg-5 text-left">
                                 El blog nació con la idea de compartir conocimiento con el mundo. Aquí hablamos de todo con todos, la ubicación 
                                 o idiomas no son barrera para estar informados y conocer otro punto de vista. Los temas son selectos cuidadosamente 
@@ -35,7 +35,7 @@
                             </div>        
                         </div>
     
-                        <div class="col-lg-5 text-center text-lg-left my-4 pt-5 pt-lg-0">
+                        <div class="col-lg-5 text-center text-lg-left my-5 pt-5 pt-lg-0">
                             <h3 class="font-weight-bold text-uppercase"> {% trans 'about_MTTeam_title' %} </h3>
                             <h6 class="text-muted mb-5">{% trans 'about_MTTeam_subtitle' %}<b>&nbspLE VÉLO ROUGE</b>!</h6>
                             {% for crew_member in crew %}
@@ -53,8 +53,6 @@
                                             <p>{{crew_member.title}}</p>
                                         </div>
                                         <ul class="list-unstyled list-inline">
-
-                                            
                                             {% if crew_member.email %}
                                             <li class="list-inline-item"><a href="{{crew_member.email}}"><i class="fas fa-envelope fa-2x"></i></a></li>
                                             {% endif %}
@@ -70,15 +68,11 @@
                                             {% if crew_member.twitter_URL %}
                                             <li class="list-inline-item"><a href="{{crew_member.twitter_URL}}" target="_blank"><i class="fab fa-twitter fa-2x"></i></a></li>
                                             {% endif %}
-
-                                         
-
                                         </ul>                                        
                                     </div> 
                                 </div>                           
                             </div>
                             {% endfor %}  
-    
                             <a href="{% url 'authors' %}" class="btn btn-primary btn-xl text-uppercase my-3 mt-4"> {% trans 'about_meetEditors' %} </a>
                         </div>
                     </div>
@@ -87,5 +81,4 @@
         </div>
     </div>
 </div>
-
 {% endblock %}

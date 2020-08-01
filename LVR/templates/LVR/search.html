@@ -21,142 +21,160 @@
 
 {% block search %}
 
-<div class="card my-5 col-lg-12">
-    <div class="card-body">
-        <section id="contact">
-            <div class="container">
-                <div class="row pt-5 mt-2 mb-1 justify-content-start"> 
+<div class="container">
+    <div class="my-3 py-5">
+        <div class="card col-lg-12">
+            <div class="card-body">
+                
+                <div class="row my-5 justify-content-start"> 
                     <div class="col">
                         {% if empty_search %}
-                            <h2 class="font-weight-bold"> BUSCA LO QUE SEA DENTRO DEL BLOG</h2>
-                            <h5 class="pt-2 pb-1"> Escribe una o más palabras clave relacionadas con tu búsqueda</h5>
+                        <h3 class="font-weight-bold">BUSCA LO QUE SEA DENTRO DE <b> LE VÉLO ROUGE</b> </h3>
+                        <h5 class="pt-2 pb-1"> Escribe una o más palabras clave relacionadas con tu búsqueda</h5>
                         {% else %}
-                            {% if not bad_query %}
-                            <h2 class="font-weight-bold"> RESULTADOS DE LA BÚSQUEDA: "<strong>{{query}}</strong>" </h2>
-                            {% else %}
-                            <h2 class="font-weight-bold"> RESULTADOS DE LA BÚSQUEDA</h2>
-                            {% endif %}
-                            {% if results %}
-                                {% if number == 1 %}
-                                <h5 class="pt-2 pb-1"> Se encontró {{ number }} resultado relacionado con tu búsqueda</h5>
-                                {% else %}
-                                <h5 class="pt-2 pb-1"> Se encontraron {{ number }} resultados relacionados con tu búsqueda</h5>
-                                {% endif %}
-                            {% else %}
-                            <h5 class="pt-2 pb-1"> No se encontró nada relacionado con tu búsqueda</h5>
-                            {% endif %}
+                        {% if not bad_query %}
+                        <h3 class="font-weight-bold">RESULTADOS DE LA BÚSQUEDA: "<b>{{query}}</b>"</h3>
+                        {% else %}
+                        <h3 class="font-weight-bold">RESULTADOS DE LA BÚSQUEDA</h3>
+                        {% endif %}
+                        {% if results %}
+                        {% if number == 1 %}
+                        <h5 class="pt-2 pb-1"> Se encontró {{ number }} resultado relacionado con tu búsqueda</h5>
+                        {% else %}
+                        <h5 class="pt-2 pb-1"> Se encontraron {{ number }} resultados relacionados con tu búsqueda</h5>
+                        {% endif %}
+                        {% else %}
+                        <h5 class="pt-2 pb-1"> No se encontró nada relacionado con tu búsqueda</h5>
+                        {% endif %}
                         {% endif %}
                     </div>
                 </div>
-                <div class="row justify-content-start py-3 pb-5">
+                <div class="row justify-content-start py-1 py-sm-2 py-md-0 py-lg-3  pb-5">
                     {% if empty_search %}
                     <div class="col-lg-7 my-auto align-middle">
-                        <div class="row pt-4 pt-sm-5 pt-md-0 pt-lg-0">
+                        <div class="row pt-1 mb-lg-5">
                             <div class="col">
                                 <div class="bg-platinum p-3 rounded">
                                     <form method="GET" action="{% url 'search' %}" class="rounded" >
-                                        <label class="bg-platinum pb-1 text-center par ml-1" for="search_input">{{searchForm.q.label}}</label>
+                                        <label class="bg-platinum pb-1 par ml-1" for="search_input">{{searchForm.q.label}}</label>
                                         <div class="bg-white p-2 rounded">
-                                          <div class="input-group input-group-lg flex-fill">
-                                            {{searchForm.q}}
-                                            <div class="input-group-append rounded">
-                                              <button class="btn btn-primary rounded d-none d-sm-block" type="submit"><i class="fas fa-search mr-2"></i>Buscar</button>
+                                            <div class="input-group input-group-lg flex-fill">
+                                                {{searchForm.q}}
+                                                <div class="input-group-append rounded">
+                                                    <button class="btn btn-primary rounded d-none d-sm-block" type="submit"><i class="fas fa-search mr-2"></i>Buscar</button>
+                                                </div>
                                             </div>
-                                          </div>
                                         </div>
-                                      </form>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-5 mt-5 mt-md-0 mt-lg-0 text-center">                
-                        <img class="" src="{% static 'LVR/assets/img/cherry-search.png' %}" alt="" height="300px">
+                    <div class="col-lg-5 mt-5 mt-md-3 mt-lg-0">
+                        <div class="row d-flex justify-content-center">
+                            <img class="d-none d-sm-block" src="{% static 'LVR/assets/img/cherry-search.png' %}" height="300">
+                            <img class="d-block d-sm-none" src="{% static 'LVR/assets/img/cherry-search.png' %}" height="230">
+                        </div>
                     </div>
                     
                     {% else %}
-                        {% if results %}              
-                            <!-- <div class="card border-1 categories-item shadow-sm border-secondary-light bg-gray-200 mb-4">
-                                <div class="card-body py-2">
-                                    <div class="row text-center text-lg-left mt-1 px-1">               
-                                        <div class="col-lg-2 py-1 text-center" >
-                                            <div class="row text-center">
-                                                <div class="col py-1">                            
-                                                    <img class="rounded-circle shadow" src="{{ category.image.url }}" alt=" Le velo rouge {{ category }}" width="85">
+                    {% if results %}              
+                    <!-- <div class="card border-1 categories-item shadow-sm border-secondary-light bg-gray-200 mb-4">
+                        <div class="card-body py-2">
+                            <div class="row text-center text-lg-left mt-1 px-1">               
+                                <div class="col-lg-2 py-1 text-center" >
+                                    <div class="row text-center">
+                                        <div class="col py-1">                            
+                                            <img class="rounded-circle shadow" src="{{ category.image.url }}" alt=" Le velo rouge {{ category }}" width="85">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-10 mt-xs-1 mt-sm-1 mt-md-2 mt-lg-3">
+                                    <div class="ml-0 ml-lg-3">
+                                        <h3 class="h3 font-weight-bold"> <a href="" class="stretched-link reset-anchor-inherit"> {{ category }} </a></h3>
+                                        <h6 class="h6 lead mt-1 mb-2"> {{ category.description }} vamos a ver que tanto le cabe jaja vermeos ya </h6>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="card-footer py-1 bg-gray-300">
+                            <div class="row align-middle d-flex justify-content-center justify-content-sm-center justify-content-md-end justify-content-lg-end mx-1">
+                                <h6 class="small "> 
+                                    {% if posts_number == 0 %} No hay posts en esta categoría
+                                    {% else %} Posts en esta categoría: <b> {{posts_number}} </b> 
+                                    {% endif %}
+                                </h6>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="col">
+                        {% for post in results %}
+                        <div class="row">
+                            <div class="pt-3 mx-1">
+                                <div class="card">
+                                    <div class="img-post img-zoom">    
+                                        <a href="{% url 'post_detail' post.category post.slug %}"> <img class="card-img-top" height="160" src="{{ post.image.url }}" alt="{{ post.title }}"> </a>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5  class="post-title"> <a href=" {% url 'post_detail' post.category post.slug %} "> {{ post.title }} </a> </h5>
+                                        <h6 class="post-subtitle mt-3 mb-3"> {{ post.subtitle }} </h6>
+                                        <p class="mt-2 card-subtitle text-muted ">Publicado: {{ post.published_date }}</p>
+                                    </div>
+                                </div>  
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+
+                    <div class="col-lg-6">
+                        <div class="row pt-1 pt-sm-0 pt-md-0 pb-md-5 pb-lg-5">
+                            <div class="col mt-0 mt-lg-5">
+                                <div class="bg-platinum p-3 rounded mb-lg-4">
+                                    <form method="GET" action="{% url 'search' %}" class="rounded" >
+                                        <div class="bg-white p-2 rounded">
+                                            <div class="input-group flex-fill">
+                                                {{searchForm.q}}
+                                                <div class="input-group-append rounded">
+                                                    <button class="btn btn-primary rounded d-none d-sm-block" type="submit"><i class="fas fa-search mr-2"></i>Buscar</button>
                                                 </div>
                                             </div>
                                         </div>
-                                    
-                                        <div class="col-lg-10 mt-xs-1 mt-sm-1 mt-md-2 mt-lg-3">
-                                            <div class="ml-0 ml-lg-3">
-                                                <h3 class="h3 font-weight-bold"> <a href="" class="stretched-link reset-anchor-inherit"> {{ category }} </a></h3>
-                                                <h6 class="h6 lead mt-1 mb-2"> {{ category.description }} vamos a ver que tanto le cabe jaja vermeos ya </h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                
+                                    </form>
+                                </div> 
+
+                                {% if bad_query %}
+                                <div class="bd-callout bd-callout-secondary">
+                                    <h4>Por favor, introduce al menos una palabra de 3 letras para una búsqueda más precisa</h4>
                                 </div>
-                                <div class="card-footer py-1 bg-gray-300">
-                                    <div class="row align-middle d-flex justify-content-center justify-content-sm-center justify-content-md-end justify-content-lg-end mx-1">
-                                        <h6 class="small "> 
-                                            {% if posts_number == 0 %} No hay posts en esta categoría
-                                            {% else %} Posts en esta categoría: <b> {{posts_number}} </b> 
-                                            {% endif %}
-                                        </h6>
-                                    </div>
+
+                                {% else %}
+                                <div class="bd-callout bd-callout-secondary">
+                                    <h4>Intenta de nuevo cambiando la(s) palabra(s) clave</h4>
+                                    <h6 class="pt-2"> O si lo prefieres, puedes <a href="{% url 'categories' %}">ver todas las categorías</a> </h5>
                                 </div>
-                            </div> -->
-                            <div class="col">
-                            {% for post in results %}
-                            <div class="row">
-                                <div class="pt-3 mx-1">
-                                    <div class="card">
-                                        <div class="img-post img-zoom">    
-                                            <a href="{% url 'post_detail' post.category post.slug %}"> <img class="card-img-top" height="160" src="{{ post.image.url }}" alt="{{ post.title }}"> </a>
-                                        </div>
-                                        <div class="card-body">
-                                            <h5  class="post-title"> <a href=" {% url 'post_detail' post.category post.slug %} "> {{ post.title }} </a> </h5>
-                                            <h6 class="post-subtitle mt-3 mb-3"> {{ post.subtitle }} </h6>
-                                            <p class="mt-2 card-subtitle text-muted ">Publicado: {{ post.published_date }}</p>
-                                        </div>
-                                    </div>  
-                                </div>
+                                {% endif %}
                             </div>
-                            {% endfor %}
-                            </div>
-                        {% else %}
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="row pt-4 pt-lg-0 d-flex justify-content-center">
+
                             {% if bad_query %}
-                                <div class="col-lg-6 d-flex align-items-center">
-                                    <div class="row pt-5 pt-sm-5 pt-md-0 pt-lg-0">
-                                        <div class="col">
-                                            <div class="container">
-                                                <h4 class="py-2">Por favor, introduce al menos una palabra de 3 letras para una búsqueda más precisa</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-5 mt-md-0 mt-lg-0 col-lg-6 text-center">                
-                                    <img class="" src="{% static 'LVR/assets/img/cherry-bquery.png' %}" alt="" height="300px">
-                                </div>
+                            <img class="d-none d-sm-block" src="{% static 'LVR/assets/img/cherry-bquery.png' %}" height="270px">
                             {% else %}
-                                <div class="col-lg-6 d-flex align-items-center">
-                                    <div class="row pt-5 pt-sm-5 pt-md-0 pt-lg-0">
-                                        <div class="col">
-                                            <div class="container">
-                                                <h4 class="py-2">Intenta cambiando el término de búsqueda o las palabras clave</h4>
-                                                <h5 class="pb-5 pb-sm-5 pb-md-0 pb-lg-0"> O si lo prefieres, puedes <a href="{% url 'categories' %}">ver todas las categorías</a> </h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 text-center">                
-                                    <img class="" src="{% static 'LVR/assets/img/cherry-no-search.png' %}" alt="" height="400px">
-                                </div>
+                            <img class="d-none d-sm-block" src="{% static 'LVR/assets/img/cherry-no-search.png' %}" height="300">
                             {% endif %}
-                        {% endif %}
+                        </div>
+                    </div>
+                    {% endif %}
                     {% endif %}   
                 </div>
+                
             </div>
-        </section>
+        </div>
     </div>
 </div>
 
