@@ -2945,6 +2945,9 @@ Calendar Styling */
   .detailsAuthor h5, .detailsAuthor h6 {
     text-transform: uppercase; }
 
+.highlight {
+  background-color: #f5f500; }
+
 .social-circle li a {
   display: inline-block;
   position: relative;
