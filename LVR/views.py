@@ -363,7 +363,7 @@ def authors(request):
         dicc['author'] = author
         dicc['posts'] = num
         details.append(dicc)
-    paginator = Paginator(details, 2) #n authors in each page
+    paginator = Paginator(details, 9) #n authors in each page
     page = request.GET.get('page')
     try:
         authors_list = paginator.page(page)

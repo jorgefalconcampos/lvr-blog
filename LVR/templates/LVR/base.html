@@ -129,6 +129,21 @@
   <!-- Content imported from "about.html" with the block of code "about" -->
   {% block search %}
   {% endblock %}
+
+
+  <!-- Content imported from "authors.html" with the block of code "authors" --> 
+  {% block authors %}
+  {% endblock %}
+  
+
+
+  <!-- Content imported from "author_detail.html" with the block of code "author_detail" -->
+  <div class="container">
+    <div class="row my-3">
+      {% block author_detail %}
+      {% endblock %}
+    </div>
+  </div>
  
          
 
@@ -148,22 +163,7 @@
   </div>
 
       
-  <!-- Content imported from "authors.html" with the block of code "authors" -->
-  <div class="container">
-    <div class="row my-3">
-      {% block authors %}
-      {% endblock %}
-    </div>
-  </div>
-  
 
-  <!-- Content imported from "author_detail.html" with the block of code "author_detail" -->
-  <div class="container">
-    <div class="row my-3">
-      {% block author_detail %}
-      {% endblock %}
-    </div>
-  </div>
 
 
   <!-- Content imported from "tags.html" with the block of code "tags" -->

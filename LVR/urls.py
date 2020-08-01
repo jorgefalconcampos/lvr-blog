@@ -29,7 +29,7 @@ urlpatterns = [
     path('categories', views.categories, name='categories'),
     path('categories/<slug:slug>', views.categories_detail, name='categories_detail'),
     path('authors', views.authors, name='authors'),
-    path('authors/<slug:pinchiautor>/', views.author_detail, name='author_detail'),
+    path('authors/<slug:pinchiautor>', views.author_detail, name='author_detail'),
     #misc:
     path('da-rules', views.rules, name='rules'),
     path('cookies', views.cookies, name='cookies'),
