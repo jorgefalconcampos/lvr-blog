@@ -411,8 +411,16 @@ def tags(request):
 def tags_detail(request, slug):
     template = 'LVR/tags_detail.html'
     tag = get_object_or_404(Tag, slug=slug)
-    posts = blog_post.objects.filter(tags=tag, status=1)
-    context = { 'tag': tag, 'posts': posts }
+    posts = blog_post.objects.filter(tags=tag, status=1).order_by('-published_date')
+    paginator = Paginator(posts, 9)
+    page = request.GET.get('page')
+    try:
+        post_list = paginator.page(page)
+    except PageNotAnInteger:
+        post_list = paginator.page(1)
+    except EmptyPage:
+        post_list = paginator.page(paginator.num_pages)
+    context = { 'tag': tag, 'posts': posts, 'post_list': post_list }
     return render(request, template, context)
 
 
@@ -434,9 +442,7 @@ def categories(request):
 def categories_detail(request, slug):
     template = 'LVR/categories_detail.html'
     category = get_object_or_404(blog_category, slug=slug)
-    posts = blog_post.objects.filter(category=category, status=1)
-
-
+    posts = blog_post.objects.filter(category=category, status=1).order_by('-published_date')
     paginator = Paginator(posts, 9)
     page = request.GET.get('page')
     try:
