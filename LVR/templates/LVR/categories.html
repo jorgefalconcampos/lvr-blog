@@ -11,12 +11,11 @@
 
 {% block categories %}
 
-<div class="container mt-3">
-    <h2 class="mt-2 font-weight-bold"> {% trans 'tags_NewTag_title' %} </h2>
-    <p> {% trans 'tags_NewTag_subtitle' %} </p>
+<div class="container">
+    <h3 class="text-center text-lg-left font-weight-bold text-uppercase ml-0 ml-lg-2"> {% trans 'tags_NewTag_title' %} </h3>
     <hr class="my-3 py-2">
 
-    <div class="row mt-2 mb-5">
+    <div class="row mt-2 mb-5 py-3">
         <div class="col-12 col-lg-7">
             <div class="card text-align-center ">
                 <div class="card-body d-inline-block ">
@@ -41,8 +40,8 @@
                             </div>
                         </div>
                         <div class="card-footer py-1 bg-gray-300">
-                            <div class="row align-middle d-flex justify-content-center justify-content-sm-center justify-content-md-end justify-content-lg-end mx-1">
-                                <h6 class="small "> 
+                            <div class="row d-flex justify-content-center justify-content-sm-center justify-content-md-end justify-content-lg-end mx-1">
+                                <h6 class="small" style="padding-top: 5px;"> 
                                     {% if posts_number == 0 %} No hay posts en esta categoría
                                     {% else %} Posts en esta categoría: <b> {{posts_number}} </b> 
                                     {% endif %}
@@ -56,10 +55,10 @@
         </div>
 
         {% if request.user.is_superuser %}
-        <div class="container col-5">
+        <div class="col-12 col-lg-5 mt-5 mt-lg-0">
             <div class="card text-align-center ">
                 <div class="card-body">
-                    <h3> {% trans 'tags_NewTag_label' %} </h3>
+                    <h3 class="text-center "> {% trans 'NewCatego_label' %} </h3>
                 </div>
                 <div class="form-group container"> 
                     <a href="{% url  'new_category' %}" target="_blank" class="btn btn-primary btn-block"> {% trans 'addCatego_CTA' %} </a>
