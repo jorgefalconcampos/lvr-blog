@@ -1,15 +1,19 @@
 {% extends 'LVR/base.html' %}
 {% load static %}
 {% load i18n %}
+{% load url_builder_openGraph %}
 {% load crispy_forms_tags %} 
 
 
 
+
+{% block og_url %}{{ request.build_absolute_uri }}{{ object.get_absolute_url }}{% endblock %}
+{% block og_title %}{{post.title}}{% endblock %}
 {% block og_type %}article{% endblock %}
-{% block og_title %}{{post.title|truncatewords:30}}{% endblock %}
-{% block og_desc %}{{ post.subtitle|truncatewords:25}}{% endblock %}
-{% block og_image %}{{post.image.url}}{% endblock %}
-{% block og_url %}{% endblock %}
+{% block og_desc %}{{ post.subtitle}}{% endblock %}
+{% block og_image %}{% fullstatic post.image.url %}{% endblock %}
+{% block og_image_secure %}{% fullstatic post.image.url %}{% endblock %}
+{% block og_image_alt %}{{post.title}}{% endblock %}
 {% block title %} {{post.title}} | Le vélo rouge {% endblock %}
 
 
@@ -69,6 +73,9 @@
     
                                     <div class="row">
                                         <div class="col-12">
+                                            <div class="bg-info py-3">
+                                                <h5>{% fullstatic post.image.url %}</h5>
+                                            </div>
                                             <div itemprop="headline"> <h2 class="text-center text-lg-left font-weight-bold"> {{ post.title }} </h2> </div> 
                                         </div>
                                         <div class="col-12">

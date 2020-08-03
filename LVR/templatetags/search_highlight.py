@@ -1,3 +1,5 @@
+#This template tag highlights the post title/subtitle according to a given query in a search form
+
 from django import template
 from django.utils.safestring import mark_safe
 
