@@ -18,12 +18,12 @@
 
         Django is the Python framework for the web. But we don't want to install a single package, in 
         fact some projects uses lots of packages... that's why we can create a file of requirements and
-        install all the required packages with the command << pip install -r reqs.txt >> 
+        install all the required packages with the command << pip install -r requirements.txt >> 
 
-        'reqs.txt' is the name of the plain text file where we put the packages we want to install 
+        'requirements.txt' is the name of the plain text file where we put the packages we want to install 
         at the same time. The packages name must be exactly the same as those found in https://pypi.org/ 
 
-    5) Once << pip install -r reqs.txt >> has been executed, wait until the installation is over
+    5) Once << pip install -r requirements.txt >> has been executed, wait until the installation is over
 
     6) Create the proyect with << django-admin startproject MyProject . >> and modify stuff in settings.py
 	IMPORTANT - Do not forget the dot (.) right after MyProject
