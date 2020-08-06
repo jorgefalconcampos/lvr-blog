@@ -9,7 +9,7 @@
     
     2) Go inside the 'mynewvirtualenv' folder, once there go inside 'Scripts' folder
         and activate the virtual env with << . activate >> then go back to the root 
-        of the proyect
+        of the proyect. Also you can do this with: << source mynewvirtualenv/scripts/activate >>
 
     3) Maybe you'd like to install packages with pip (a tool for insgtalling Python packages), then 
         we have to update it if necessary. Do it with << python -m pip install --upgrade pip >>
