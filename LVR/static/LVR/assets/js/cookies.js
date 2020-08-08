@@ -1,8 +1,10 @@
-/*
- * Bootstrap Cookie Alert by Wruczek
- * https://github.com/Wruczek/Bootstrap-Cookie-Alert
- * Released under MIT license
- */
+// Cookie to know if the visitor visits our website for the 1st time
+Cookies.set("firsttimevisit", "false");
+var myCookie = Cookies.get("firsttimevisit");
+$('#closejumbotron').on('click', function(){ Cookies.set("firsttimevisit", "false"); });
+if(myCookie == "false"){ removeJumbotron(); }
+function removeJumbotron(){  $('#firsttimevisitor').remove(); }
+// Bootstrap Cookie Alert by Wruczek | https://github.com/Wruczek/Bootstrap-Cookie-Alert | Released under MIT license
 (function () {
     "use strict";
 

@@ -94,7 +94,7 @@ $('#addReaction').submit(function(e){
       if(json.success){
         $('#reactions').css({'display': 'none'}).fadeOut(4000);
         $('#new_reaction_success').fadeIn(1000).css({'display': 'block'}).delay(2500).fadeOut(1000);        
-        setTimeout(function(){ $('#reactions_holder').remove();}, 4500);
+        setTimeout(function(){ $('#reactions_holder').remove();}, 4500);cl
       }
     else{ alert('error al agregar voto') }
   }

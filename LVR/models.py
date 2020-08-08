@@ -90,6 +90,7 @@ class blog_post(m.Model):
         self.save()
     
     def approve_post(self):
+        self.published_date = timezone.now()
         self.status = 1
         self.save()
     

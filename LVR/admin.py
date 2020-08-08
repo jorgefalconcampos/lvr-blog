@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils import timezone
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext as _
@@ -17,7 +18,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 #Blog post
 class PostAdmin(SummernoteModelAdmin):
-    list_display = ('title', 'subtitle', 'author', 'created_date', 'status')
+    list_display = ('title', 'subtitle', 'author', 'created_date', 'published_date', 'status')
     exclude = ('slug', 'vote_fav', 'vote_util', 'vote_tmbup', 'vote_tmbdn',)
     summernote_fields = ('post_body')
     list_filter = ('author', 'status')
@@ -25,7 +26,8 @@ class PostAdmin(SummernoteModelAdmin):
     actions = [ 'approve_posts', 'reject_posts', 'archive_posts' ]
 
     def approve_posts(self, request, queryset):
-        queryset.update(status=1)
+        queryset.update(status=1, published_date=timezone.now)
+        print(timezone.now)
 
     def reject_posts(self, request, queryset):
         queryset.update(status=2)
