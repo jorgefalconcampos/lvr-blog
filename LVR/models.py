@@ -73,16 +73,17 @@ class blog_post(m.Model):
     slug = m.SlugField(unique=True)
     category = m.ForeignKey(blog_category, on_delete=m.CASCADE, related_name='catego', default='1')
     image = m.ImageField(upload_to='img/', default='no-img.png')
+    unsplash_URL = m.URLField(null=True, blank=True)
     post_body = m.TextField() #Post body
     tags = TaggableManager() #Tags
     created_date = m.DateTimeField(default=timezone.now)
     published_date = m.DateTimeField(blank=True, null=True)
     status = m.IntegerField(choices=post_status, default=0)
     # Reactions and votes for a blog post, in the same order: thumbs, fav, util, thumbs down 
-    # vote_tmbup = m.IntegerField() 
-    # vote_fav = m.IntegerField() 
-    # vote_util = m.IntegerField() 
-    # vote_tmbdn = m.IntegerField() 
+    vote_fav = m.IntegerField(default=0) 
+    vote_util = m.IntegerField(default=0)     
+    vote_tmbup = m.IntegerField(default=0) 
+    vote_tmbdn = m.IntegerField(default=0) 
 
     def publish(self):
         self.published_date = timezone.now()

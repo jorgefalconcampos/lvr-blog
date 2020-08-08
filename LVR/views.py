@@ -14,7 +14,7 @@ from django.conf import settings as conf_settings #To read reCaptcha's key
 from . decorators import check_recaptcha
 from . helpers import generate_random_digits, mail_newsletter
 from taggit.models import Tag
-from django.db.models import Count, Q
+from django.db.models import Count, Q, F
 from django.db.models.functions import Upper
 from decouple import config
 from django.views.decorators.http import require_GET
@@ -316,6 +316,28 @@ def post_detail(request, category_text, slug_text):
     all_comments = post.comments.filter(is_approved=True) # Filtering only approved comments
     new_comment = None
     response_data = {}
+    response_data_r = {'success': True}
+
+ 
+    if request.POST.get('action') == 'reaction_Form':
+        try:
+            if request.POST.get('reaction') == 'fav':
+                post.vote_fav = F('vote_fav')+1 
+            elif request.POST.get('reaction') == 'util':
+                post.vote_util = F('vote_util')+1 
+            elif request.POST.get('reaction') == 'thumbs_up':
+                post.vote_tmbup = F('vote_tmbup')+1 
+            elif request.POST.get('reaction') == 'thumbs_down':
+                post.vote_tmbdn = F('vote_tmbdn')+1 
+        except:
+            response_data_r['success'] = False            
+        finally:
+            post.save()
+            return JsonResponse(response_data_r)
+
+
+
+
 
     if request.POST.get('action') == 'newCmt_Form':
         cmt_form = CommentForm(data=request.POST)

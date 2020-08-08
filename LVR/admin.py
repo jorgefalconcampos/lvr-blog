@@ -18,10 +18,10 @@ class CategoryAdmin(admin.ModelAdmin):
 #Blog post
 class PostAdmin(SummernoteModelAdmin):
     list_display = ('title', 'subtitle', 'author', 'created_date', 'status')
+    exclude = ('slug', 'vote_fav', 'vote_util', 'vote_tmbup', 'vote_tmbdn',)
     summernote_fields = ('post_body')
     list_filter = ('author', 'status')
     search_fields = ['title', 'subtitle'] #author name has the double underscore bc is a foreign key
-    prepopulated_fields = {'slug': ('title',)}
     actions = [ 'approve_posts', 'reject_posts', 'archive_posts' ]
 
     def approve_posts(self, request, queryset):

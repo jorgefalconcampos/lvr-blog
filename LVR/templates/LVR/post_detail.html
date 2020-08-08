@@ -70,7 +70,6 @@
                                     {% endif %} 
     
     
-    
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="bg-info py-3">
@@ -82,35 +81,35 @@
                                             <div itemprop="alternativeHeadline"> <p class="text-center text-lg-left py-3 h4"> {{ post.subtitle }} </p> </div>
                                         </div>                                  
                                     </div>
-    
-                                    
-                                    
-                                    
-                                   
-                                    
-                              
-                                    
-                                    
-                                    
+                                        
                                 </div>
     
                                 <hr>
                                 <img itemprop="image" class="img-detail img-fluid rounded" src="{{ post.image.url }}" alt="{{post.title}}"> 
-                                <hr>
+                                <p class="small text-right m-0 mt-1 mr-2">Foto: <a href="{{ post.unsplash_URL }}" target="_blank">UNSPLASH</a>  </p>
+                                <hr class="mt-1">
     
-                                <div itemprop="text"> <p class="py-1"> {{ post.post_body|safe}} </p> </div>
+                                <div itemprop="text-left"> <p class="mt-0 py-1"> {{ post.post_body|safe}} </p> </div>
                                 <hr>
-                                <div class="row d-flex d-inline py-3 justify-content-center">
-                                    <button type="button" class="btn btn-secondary mx-2"> <i class="material-icons align-top">grade</i> {% trans 'favReaction' %} <span class="badge badge-light">9</span> </button>
-                                    <button type="button" class="btn btn-info mx-2"> <i class="material-icons align-top">done</i> {% trans 'utilReaction' %} <span class="badge badge-light">9</span> </button>
-                                    <button type="button" class="btn btn-success mx-2"> <i class="material-icons align-top">thumb_up</i> {% trans 'goodReaction' %} <span class="badge badge-light">9</span> </button>
-                                    <button type="button" class="btn btn-danger mx-2"> <i class="material-icons align-top">thumb_down</i> {% trans 'badReaction' %} <span class="badge badge-light">9</span> </button>
+                                <div id="reactions_holder" class="row d-flex d-inline py-3 mb-1 justify-content-center hide">     
+                                    <div class="col">
+                                        <div id="new_reaction_success" style="display:none; font-size: 14px;" class="alert alert-success text-center mx-3" role="alert"> <i class="material-icons align-bottom md-18 mr-1" id="new_reaction_success_icon"></i> {% trans 'post_reaction_added' %} </div>    
+                                        <ul id="reactions" class="list-inline mb-0 text-center">
+                                            <form id="addReaction" method="POST">
+                                                {% csrf_token %}
+                                                <li class="list-inline-item py-1"> <button id="vote_fav" name="fav" type="submit" class="btn btn-outline-secondary px-3"> <i class="material-icons align-bottom md-20 mr-1">grade</i> {% trans 'favReaction' %} <span class="ml-1 badge badge-light border"> {{post.vote_fav}} </span> </button> </li>
+                                                <li class="list-inline-item py-1"> <button id="vote_util" name="util" type="submit" class="btn btn-outline-info px-3 mx-1"> <i class="material-icons align-bottom md-20 mr-1">done</i> {% trans 'utilReaction' %} <span class="ml-1 badge badge-light border"> {{post.vote_util}} </span> </button> </li>
+                                                <li class="list-inline-item py-1"> <button id="vote_tmbup" name="up" type="submit" class="btn btn-outline-success px-3 mx-1"> <i class="material-icons align-bottom md-20 mr-1">thumb_up</i> {% trans 'upReaction' %} <span class="ml-1 badge badge-light border"> {{post.vote_tmbup}} </span> </button> </li>
+                                                <li class="list-inline-item py-1"> <button id="vote_tmbdn" name="down" type="submit" class="btn btn-outline-danger px-3"> <i class="material-icons align-bottom md-20 mr-1">thumb_down</i> {% trans 'downReaction' %} <span class="ml-1 badge badge-light border"> {{post.vote_tmbdn}} </span> </button> </li>
+                                            </form>
+                                        </ul>
+                                    </div>
                                 </div>
     
-                                <div class="row py-3 my-1 align-middle text-center ">
+                                <div class="row align-middle text-center">
                                     <div class="col-12">
                                         <div itemprop="keywords"> 
-                                            <h6 class="lead mx-2 d-inline-block align-middle"> Temas: </h6>
+                                            <h5 class="mx-2 d-inline-block align-middle"> Temas: </h5>
                                             {% if post.category %}
                                             <a class="h6 badge badge-pill bg-steel text-white reset-anchor-inherit px-2" href="{% url 'categories_detail' post.category.slug %}"> 
                                                 {{ post.category }}
@@ -326,9 +325,9 @@
         {% if post.status == 1 %}
         <div class="pb-5">
             <div class="card shadow-sm p-2 p-lg-0">
-                <div class="card-body">
+                <div class="container card-body">
             
-                    <h3 class="py-1 mb-3"> <b> {{ comments.count }} </b> {% trans 'post_detail_CountingComments' %} </h3>
+                    <h3 class="py-1 my-3"> <b> {{ comments.count }} </b> {% trans 'post_detail_CountingComments' %} </h3>
                     <a id="new_cmt_btn" class="my-2 mb-4 btn btn-secondary" href="#newCmt" role="button" data-toggle="collapse" aria-expanded="false" aria-control="newCmt">Escribe un comentario</a>
                     <div id="new_cmt_success" style="display:none;" class="alert alert-success" role="alert"> {% trans 'post_detail_AwaitingModeration' %} </div>
                     <div class="collapse" id="newCmt">

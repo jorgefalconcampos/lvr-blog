@@ -62,6 +62,48 @@ $(document).on('submit', '#contact_frm',function(e){
 
 
 
+
+$('#vote_fav').on('click', function(){reaction(1)});
+$('#vote_util').on('click', function(){reaction(2)});
+$('#vote_tmbup').on('click', function(){reaction(3)});
+$('#vote_tmbdn').on('click', function(){reaction(4)});
+var vote;
+function reaction(val){
+  icon = $('#new_reaction_success_icon');
+  switch (val) {
+    case 1: vote = 'fav'; icon.text('grade'); break;
+    case 2: vote = 'util'; icon.text('done'); break;
+    case 3: vote = 'thumbs_up'; icon.text('thumb_up'); break;
+    case 4: vote = 'thumbs_down'; icon.text('thumb_down'); break;
+    default: vote = 'vote_null'; break;
+  }
+}
+
+$('#addReaction').submit(function(e){
+  e.preventDefault();
+  form = $('#addReaction');
+  $.ajax({
+    type: form.attr('method'),
+    dataType: 'json',
+    data: {
+      reaction: vote,
+      csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+      action: 'reaction_Form',
+    },
+    success: function(json){
+      if(json.success){
+        $('#reactions').css({'display': 'none'}).fadeOut(4000);
+        $('#new_reaction_success').fadeIn(1000).css({'display': 'block'}).delay(2500).fadeOut(1000);        
+        setTimeout(function(){ $('#reactions_holder').remove();}, 4500);
+      }
+    else{ alert('error al agregar voto') }
+  }
+
+});});
+
+
+
+
 $('#new_comment').submit(function(e){
   e.preventDefault();
   console.log('JS: llego aki')

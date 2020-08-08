@@ -61,7 +61,7 @@
                                         <h2 itemprop="headline" class="title-header"> <a href=" {% url 'post_detail' post.category post.slug %}" class="stretched-link"> {{ post.title }} </a> </h2>
                                         <h5 itemprop="alternativeHeadline" class="subtitle-header"> {{ post.subtitle}} </h5>
                                         <div itemprop="text">
-                                            <div class="py-2 post-preview" style="max-height: 150"> {{ post.post_body|safe|truncatewords:15 }} </div>
+                                            <div class="py-1 pt-2" style="max-height: 150"> {{ post.post_body|safe|truncatewords:30 }} </div>
                                         </div>
                                     </div>
 
