@@ -43,9 +43,9 @@
   <header>
     <nav class="top-navigation-bar navbar navbar-expand-lg navbar-light static-top">
       <div class="container">
-        <a href="{% url 'index' %}" class="navbar-brand">
+        <a href="{% url 'base' %}" class="navbar-brand">
           <img src="{% static 'LVR/assets/img/R.png' %}" alt="LVR-logo" width="45" alt="" class="d-inline-block align-middle mr-2">
-          Le vélo <span class="font-weight-bold"> rouge </span> 
+          Le vélo <span class="font-weight-bold"> rouge </span>
         </a>
 
         <button type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler">
@@ -55,7 +55,7 @@
         <div class="collapse navbar-collapse text-center" id="navbar">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="{% url 'index' %}"> {% trans 'NavHome' %} <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{% url 'base' %}"> {% trans 'NavHome' %} <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'about' %}"> {% trans 'NavAbout' %} </a>
@@ -72,10 +72,10 @@
                 <div class="dropdown-header text-center px-1 mx-2 py-2">
                   <h5 class="py-1 font-weight-bold">Busca en el blog</h5>
                   <form method="GET" action="{% url 'search' %}" class="mt-2 mb-1 rounded" >
-                    <label class="bg-platinum py-1 text-center par" for="search_input">{{searchForm.q.label}}</label>
+                    <label class="bg-platinum py-1 text-center par" for="search_input">{{searchForm.q.label}} {{todos_lmp}} </label>
                     <div class="bg-white p-2 rounded">
                       <div class="input-group">
-                        {{searchForm.q}}
+                        {{searchForm.q}} 
                         <div class="input-group-append rounded">
                           <button class="btn btn-primary rounded d-block d-sm-none" type="submit"><i class="fas fa-search"></i></button>
                           <button class="btn btn-primary rounded d-none d-sm-block" type="submit"><i class="fas fa-search mr-2"></i>Buscar</button>
@@ -113,6 +113,8 @@
       </div>
     </nav>
   </header>
+
+ 
   
   <!-- Content imported from "index.html" with the block of code "show_posts" -->
    <div class="container"> 

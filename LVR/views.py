@@ -8,7 +8,7 @@ from django.http import Http404, HttpResponseRedirect, HttpResponse, JsonRespons
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render, get_object_or_404, reverse
 from . models import blog_post, blog_category, blog_author, blog_postComment, blog_crew, blog_misc, blog_subscriber  #Importing the models
-from . forms import PostForm, CommentForm, CreateUserForm, AccountEditUserForm, ProfileEditUserForm, ProfileEditAuthorForm, ContactForm, SubscribeForm, NewCategory
+from . forms import PostForm, CommentForm, CreateUserForm, AccountEditUserForm, ProfileEditUserForm, ProfileEditAuthorForm, ContactForm, SubscribeForm, NewCategory, SearchForm
 from django.utils.translation import gettext as _
 from django.conf import settings as conf_settings #To read reCaptcha's key
 from . decorators import check_recaptcha
@@ -67,10 +67,10 @@ def getdata(request):
 
 def base(request):
     template = 'LVR/base.html'
-    itemplate = 'LVR/index.html'
     if request.method == 'GET':
+        print('lol')
         return redirect('index')
-    return render(request, template)
+    return render(request, template, context)
 
 def cm(request):
     # notify_new(request)
@@ -96,6 +96,11 @@ def cm(request):
 #For searching a blog_post object 
 def search(request):
     template = 'LVR/search.html'
+
+
+    form = SearchForm(request)
+    form.fields['q'].widget.attrs['placeholder'] = 'PUTO'
+
     if request.method == 'GET':
         search_term = request.GET.get('q')
         bad_query = False
@@ -268,6 +273,13 @@ def unsubscribe(request):
 def index(request):
     template_name = 'LVR/index.html'
     all_posts = blog_post.objects.filter(published_date__lte=timezone.now(), status=1).order_by('-published_date') #creating the 'all posts' variable, inside it we'll pass the result of the Query Set
+
+
+    # all_osts = str(all_posts.count()) #counting all-time posts
+    # print(f"TODOS LOS POSTS: {all_osts}")
+
+
+
     common_tags = blog_post.tags.most_common()[:3] #Getting the latest n trending tags
     trending = []
     for tag in common_tags:
@@ -310,15 +322,13 @@ def index(request):
 def post_detail(request, category_text, slug_text):
     template = 'LVR/post_detail.html'
     post = get_object_or_404(blog_post, slug=slug_text)    
-    get_author = post.author
-    more_from_author = blog_post.objects.filter(author=get_author).order_by('-published_date')[:4]
+    more_from_author = blog_post.objects.filter(author=post.author, status=1).exclude(slug=post.slug).order_by('-published_date')[:3]
     related = post.tags.similar_objects()[:3] #Getting the last 3 posts that contains the same tags that the current post
     all_comments = post.comments.filter(is_approved=True) # Filtering only approved comments
     new_comment = None
     response_data = {}
     response_data_r = {'success': True}
 
- 
     if request.POST.get('action') == 'reaction_Form':
         try:
             if request.POST.get('reaction') == 'fav':
@@ -334,10 +344,6 @@ def post_detail(request, category_text, slug_text):
         finally:
             post.save()
             return JsonResponse(response_data_r)
-
-
-
-
 
     if request.POST.get('action') == 'newCmt_Form':
         cmt_form = CommentForm(data=request.POST)

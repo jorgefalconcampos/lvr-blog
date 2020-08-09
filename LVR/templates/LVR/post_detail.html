@@ -32,7 +32,7 @@
 <div class="container-fluid px-lg-5 pb-5">
     <div class="px-lg-5">
         <div itemscope itemtype="https://schema.org/BlogPosting">
-            <div class="row my-3 py-5 px-0 px-sm-0">
+            <div class="row my-3 py-0 py-sm-5 py-md-5 py-lg-5 px-0 px-sm-0">
                 <div class="col-lg-8 ">
                     <div class="card shadow">
                         <div class="mx-2 mx-md-3 mx-lg-3">
@@ -86,7 +86,9 @@
     
                                 <hr>
                                 <img itemprop="image" class="img-detail img-fluid rounded" src="{{ post.image.url }}" alt="{{post.title}}"> 
-                                <p class="small text-right m-0 mt-1 mr-2">Foto: <a href="{{ post.unsplash_URL }}" target="_blank">UNSPLASH</a>  </p>
+                                {% if unsplash_URL %}<p class="small text-right m-0 mt-1 mr-2">Foto: <a href="{{ post.unsplash_URL }}" target="_blank">UNSPLASH</a> </p>                                
+                                {% else %} <p class="small text-right m-0 mt-1 mr-2">Foto: UNSPLASH </p>
+                                {% endif %}
                                 <hr class="mt-1">
     
                                 <div itemprop="text-left"> <p class="mt-0 py-1"> {{ post.post_body|safe}} </p> </div>
@@ -214,7 +216,7 @@
                         </div>
                     </div>
                     
-                    <div class="card mt-3">
+                    <div class="card mt-3 d-none d-sm-block ">
                         <div class="card-body bg-platinum">
                             <h4 class="h4 mb-2">Buscar</h4>
                             <hr class="mt-1 mb-3">
@@ -236,7 +238,7 @@
                         </div>
                     </div>                
                     
-                    {% if post.status == 1 %}
+                    {% if post.status == 1 and more_from_author%}
                     <div class="mt-3 mt-lg-5">
                         <div id="accordion">
                             <div class="card">
@@ -249,9 +251,7 @@
                                 </div>
                                 <div id="collapse_mf" class="collapse" aria-labelledby="more_from" data-parent="#accordion">
                                     <div class="card-body">
-                                        {% for rpost in more_from_author %} <!-- Getting the latest 4 blogs from author, rpost means related post -->  
-                                        {% if rpost %}  <!-- If there're another post related to this author -->
-                                        {% if rpost.title != post.title  %}  <!-- Filtering the 4 latest posts, if the current post_detail is inside the latest 4 we don't want it -->
+                                        {% for rpost in more_from_author %} <!-- Getting the latest 3 blogs from author, rpost means related post -->  
                                         <div class="py-2 mx-1">
                                             <div class="card">
                                                 <div class="img-post-small img-zoom">    
@@ -263,10 +263,6 @@
                                                 </div>
                                             </div>  
                                         </div>
-                                        {% endif %} 
-                                        {% else %} <!-- If the object 'more_from_author' returns a single object, and that object (a post) has a title that's equal to the current post title, that means ther're only one post written by the author -->
-                                        <h5> {% trans 'post_detail_NoMorePosts' %} </h5>
-                                        {% endif %}   
                                         {% endfor %}    
                                     </div>
                                 </div>
@@ -283,13 +279,34 @@
 
         {% if related_posts %}
         <section class="mb-0 mb-sm-5 mb-md-5 mb-lg-5 mb-xl-5">
-            <div class="container pb-5">
+            <div class="pb-3">
                 <header class="text-center mb-5">
-                    <h1 class="mt-3 py-3 font-weight-bold"> {% trans 'mayInterested' %} </h1> 
+                    <h1 class="mt-2 py-2 font-weight-bold"> {% trans 'mayInterested' %} </h1> 
                 </header>
                 <div class="row justify-content-center">
                     {% for post in related_posts%}
-                    <div class="col-lg-4 mb-2 pb-4">
+                    <div class="col-lg-4 align-self-center">
+                        <div class="py-2 mx-1">
+                            <div class="card">
+                                <div class="img-post-small-related img-zoom">
+                                    <a href="{% url 'post_detail' post.category post.slug %}">
+                                        <img itemprop="image" class="card-img-top" src="{{ post.image.url }}" alt="{{ post.title }}">
+                                    </a>
+                                </div>
+            
+                                <div class="card-body pb-1 position-relative">
+                                    <h5 class="post-title"><a href=" {% url 'post_detail' post.category post.slug %}" class="stretched-link"> {{ post.title }} </a> </h5>
+                                    <h6 class="post-subtitle"> {{ post.subtitle }} </h6>
+                                </div>
+            
+                                <div class="card-footer py-2">
+                                    <p class="mt-1 card-subtitle text-muted ">Publicado: {{ post.published_date }} </p>
+                                    <h6 class="mt-1 post-author"> {% trans 'PostBy' %}:  <a href="{% url 'author_detail' post.author.slug %}"> {{ post.author.name.get_full_name }} </a> </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-lg-4 mb-2 pb-4">
                         <div itemscope itemtype="https://schema.org/BlogPosting">
                             <div class="card shadow-sm border-0 reset-anchor d-block">
                                 <div class="tool-thumb rounded-circle">
@@ -314,7 +331,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div> 
+                    </div>  -->
                     {% endfor %}
                 </div>
             </div>

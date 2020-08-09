@@ -2,6 +2,8 @@ from . models import blog_post
 from . forms import SearchForm, ContactForm, CommentForm, SubscribeForm, NewCategory
 
 
+#In a ideal scenario, there'll be only 3: seacrh posts, contact message and subscribe to newsletter
+
 def searchPosts(request):
     form = SearchForm()
     return {'searchForm': form}
@@ -25,8 +27,3 @@ def subscribeNewsletter(request):
 def newCategory(request):
     form = NewCategory()
     return {'newCategoryForm': form}
-
-
-def get_total_posts(request):
-    all_total_posts = blog_post.objects.filter(status=1).count() #counting all-time posts
-    return { 'all_total_posts': all_total_posts }

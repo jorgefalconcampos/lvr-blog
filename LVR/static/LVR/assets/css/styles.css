@@ -2438,7 +2438,7 @@ code {
   overflow: hidden; }
   .card-img-top img {
     transition: transform .35s, filter 0.5s ease-in-out;
-    filter: grayscale(45%); }
+    filter: grayscale(55%); }
   .card-img-top img:hover {
     filter: grayscale(0);
     transform: scale(1.25); }
@@ -2906,11 +2906,15 @@ Calendar Styling */
 .img-post-small {
   max-height: 75px; }
 
+.img-post-small-related {
+  max-height: 100px; }
+
 .img-related {
   max-height: 75px; }
 
 .post-title {
-  font-weight: 650; }
+  font-weight: 650;
+  font-size: 140%; }
   .post-title *a {
     color: black; }
 
@@ -2984,7 +2988,7 @@ Calendar Styling */
   overflow: hidden; }
   .img-zoom img {
     transition: transform .35s, filter 0.5s ease-in-out;
-    filter: grayscale(45%); }
+    filter: grayscale(55%); }
   .img-zoom img:hover {
     filter: grayscale(0);
     transform: scale(1.25); }

@@ -70,10 +70,13 @@ class CreateUserForm(UserCreationForm):
 
 #Search inside the blog
 class SearchForm(f.Form):
-    all_posts = str(blog_post.objects.filter(status=1).count()) #counting all-time posts
-    q_attrs = {'id':'search_input', 'type': 'text', 'class':'form-control border-0 mr-2', 'placeholder': 'Busca entre +'+all_posts+' posts'}
+    q_attrs = {'id':'search_input', 'type': 'text', 'class':'form-control border-0 mr-2', 'placeholder': 'Busca entre todos los posts'}
     q = f.CharField(label='Escribe una o más palabras clave', max_length=128, widget=f.TextInput(attrs=q_attrs))
 
+    def __init__(self, *args, **kwargs):
+        super (SearchForm, self).__init__(*args, **kwargs)
+        all_posts = str(blog_post.objects.filter(status=1).count()) #counting all-time posts
+        self.fields['q'].widget.attrs['placeholder'] = 'Busca entre +'+all_posts+' posts'
 
 
 #To edit the account form (in the account section)

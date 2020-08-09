@@ -116,6 +116,7 @@
 
 
 .img-post-small{ max-height: 75px; }
+.img-post-small-related{ max-height: 100px; }
 
 
 .img-related{ max-height: 75px; }
@@ -123,6 +124,7 @@
 // Title in the look of post's list, not inside a particular post
 .post-title{
   font-weight: 650;
+  font-size: 140%;
   // text-transform: uppercase;
   *a{
 
@@ -227,7 +229,7 @@
 
   img {
     transition: transform .35s, filter 0.5s ease-in-out;
-    filter: grayscale(45%);
+    filter: grayscale(55%);
   }
 
   img:hover {
