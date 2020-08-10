@@ -50,7 +50,7 @@ def robots_txt(request):
         "Disallow: /private/",
         "Disallow: /junk/",
     ]
-    return HttpResponse("\n".join(lines), content_type="text/plain") 
+    return HttpResponse("\n".join(lines), content_type="text/plain")
 
 
 # ============================#
@@ -84,16 +84,16 @@ def cm(request):
 
 
     # return render(request, 'LVR/mails/user/pswd/reset-pass.html')
-    
+
     return render(request, 'LVR/mails/user/wrong-link.html')
 
 
 
     # return render(request, 'LVR/mails/blog/verify.html')
 
-    
 
-#For searching a blog_post object 
+
+#For searching a blog_post object
 def search(request):
     template = 'LVR/search.html'
 
@@ -121,7 +121,7 @@ def search(request):
 
             for post in posts:
                 queryset.append(post)
-            
+
             context = {'results': queryset, 'number': len(queryset), 'query': search_term}
             return render(request, template, context)
     return render(request, template, {'bad_query':bad_query} )
@@ -138,7 +138,7 @@ def contact(request):
             print('\n\n# --- PY: Form & Captcha passed --- #')
             template = 'LVR/user/contact-mail.html'
             msg_sender = request.POST.get('name')
-            msg_email = request.POST.get('email') 
+            msg_email = request.POST.get('email')
             msg_subject = request.POST.get('subject')
             msg_msg = request.POST.get('msg')
 
@@ -191,17 +191,17 @@ def subscribe(request):
 
             else:
                 print(f'\n\n# --- PY: The email <<{subscriber_email}>> is already subscribed to newsletter --- #\n')
-                return JsonResponse({'success': False, 'already_exists': True})        
+                return JsonResponse({'success': False, 'already_exists': True})
         else:
-            return JsonResponse({'success': False})        
+            return JsonResponse({'success': False})
     else:
         subscribe_form = SubscribeForm()
 
 
 
-#This method notifies when a new post is accepted by superuser, so subscribers know when a new post is published (accepted) 
+#This method notifies when a new post is accepted by superuser, so subscribers know when a new post is published (accepted)
 def notify_new(request):
-    #Creating a subs object full of tuples with subscribers info from 'blog_subscriber' 
+    #Creating a subs object full of tuples with subscribers info from 'blog_subscriber'
     subs = blog_subscriber.objects.values_list('email', 'conf_num').filter(confirmed=True)
     ctxt = []
     for sub in subs.iterator():
@@ -217,7 +217,7 @@ def notify_new(request):
 
     subj = 'Nuevo post en LVR: titulo del post'
     template = 'LVR/mails/blog/average-mail.html'
-        
+
     if mail_newsletter(subscribers, subj, template, ctxt, True, request):
         print('Massive sent OK')
     else:
@@ -240,7 +240,7 @@ def confirm_subscribe(request):
     else:
         context['action'] = 'denied'
         return render(request, template, context)
-    
+
 
 
 
@@ -262,9 +262,9 @@ def unsubscribe(request):
         context['action'] = 'already_deleted'
         return render(request, template, context)
 
-    
 
-   
+
+
 # ===========================#
 # ====== Blog section ====== #
 # ===========================#
@@ -290,21 +290,21 @@ def index(request):
 
     all_categories = blog_category.objects.all()
 
-    try: 
+    try:
         avg = math.ceil(all_posts.count()/all_categories.count()) #Getting the average between all posts divided by number of categories
         popular_categories = blog_category.objects.annotate(post_count=Count('catego')).filter(post_count__gte=avg)
         #Once average is calculated, we filter categories that have more or equal posts (gte) than the average
         # print(f" categorias: {popular_categories}")
         diccionario = {}
         for category in popular_categories:
-            how_many = all_posts.filter(category=category).count() #Getting how many posts with that popular category exists            
+            how_many = all_posts.filter(category=category).count() #Getting how many posts with that popular category exists
             if len(diccionario) < 8:
                 diccionario[category]=how_many
     except Exception as e:
         diccionario = {}
 
     # print(diccionario)
-    paginator = Paginator(all_posts, 9) #n posts in each page
+    paginator = Paginator(all_posts, 6) #n posts in each page
     page = request.GET.get('page')
     try:
         post_list = paginator.page(page)
@@ -321,7 +321,13 @@ def index(request):
 @check_recaptcha
 def post_detail(request, category_text, slug_text):
     template = 'LVR/post_detail.html'
-    post = get_object_or_404(blog_post, slug=slug_text)    
+    post = get_object_or_404(blog_post, slug=slug_text)
+
+    # if post isn't approved yet, only the author and superuser can see it in detail, otherwise redirect to index
+    if post.status != '1':
+        if not ((request.user == post.author.name) or (request.user.is_superuser)):
+            return redirect('index')
+
     more_from_author = blog_post.objects.filter(author=post.author, status=1).exclude(slug=post.slug).order_by('-published_date')[:3]
     related = post.tags.similar_objects()[:3] #Getting the last 3 posts that contains the same tags that the current post
     all_comments = post.comments.filter(is_approved=True) # Filtering only approved comments
@@ -332,15 +338,15 @@ def post_detail(request, category_text, slug_text):
     if request.POST.get('action') == 'reaction_Form':
         try:
             if request.POST.get('reaction') == 'fav':
-                post.vote_fav = F('vote_fav')+1 
+                post.vote_fav = F('vote_fav')+1
             elif request.POST.get('reaction') == 'util':
-                post.vote_util = F('vote_util')+1 
+                post.vote_util = F('vote_util')+1
             elif request.POST.get('reaction') == 'thumbs_up':
-                post.vote_tmbup = F('vote_tmbup')+1 
+                post.vote_tmbup = F('vote_tmbup')+1
             elif request.POST.get('reaction') == 'thumbs_down':
-                post.vote_tmbdn = F('vote_tmbdn')+1 
+                post.vote_tmbdn = F('vote_tmbdn')+1
         except:
-            response_data_r['success'] = False            
+            response_data_r['success'] = False
         finally:
             post.save()
             return JsonResponse(response_data_r)
@@ -411,7 +417,6 @@ def author_detail(request, pinchiautor):
     template = 'LVR/author_detail.html'
     author = get_object_or_404(blog_author, slug=pinchiautor)
     posts_by_author = blog_post.objects.filter(author__slug=pinchiautor, status=1).order_by('-published_date')  #Getting al posts by the current author
-    print(posts_by_author)
     paginator = Paginator(posts_by_author, 5)
     page = request.GET.get('page')
     try:
@@ -440,7 +445,7 @@ def tags_detail(request, slug):
     template = 'LVR/tags_detail.html'
     tag = get_object_or_404(Tag, slug=slug)
     posts = blog_post.objects.filter(tags=tag, status=1).order_by('-published_date')
-    paginator = Paginator(posts, 9)
+    paginator = Paginator(posts, 6)
     page = request.GET.get('page')
     try:
         post_list = paginator.page(page)
@@ -471,7 +476,7 @@ def categories_detail(request, slug):
     template = 'LVR/categories_detail.html'
     category = get_object_or_404(blog_category, slug=slug)
     posts = blog_post.objects.filter(category=category, status=1).order_by('-published_date')
-    paginator = Paginator(posts, 9)
+    paginator = Paginator(posts, 6)
     page = request.GET.get('page')
     try:
         post_list = paginator.page(page)
@@ -570,9 +575,9 @@ def login(request):
                     return JsonResponse({'status': True})
                     # return redirect('dashboard')
                 else:
-                    return JsonResponse({'status': False, 'err_code': 'login_failed'})                
+                    return JsonResponse({'status': False, 'err_code': 'login_failed'})
             else:
-                return JsonResponse({'status': False, 'err_code': 'invalid_form'})                
+                return JsonResponse({'status': False, 'err_code': 'invalid_form'})
     context = {}
     return render(request, template, context)
 
@@ -591,21 +596,25 @@ def dashboard(request):
 @login_required(login_url='login')
 def profile(request):
     author = blog_author.objects.filter(name=request.user).first()
-
-    total_post_list = blog_post.objects.filter(author=author).count()
-    draft_posts = blog_post.objects.filter(author=author, status=0).count()
-    approved_posts = blog_post.objects.filter(author=author, status=1).count()
-    rejected_posts = blog_post.objects.filter(author=author, status=2).count()
-    archived_posts = blog_post.objects.filter(author=author, status=3).count()
-
-    context = {
-        'author': author,
-        'total_posts': total_post_list,
-        'draft': draft_posts,
-        'approved': approved_posts,
-        'rejected': rejected_posts,
-        'archived': archived_posts,
-    }
+    total_post_list = blog_post.objects.filter(author=author)
+    posts = {'approved':0, 'draft':0, 'archived':0, 'rejected':0}
+    reactions = {'fav':0, 'util':0, 'tmbup':0, 'tmbdn':0}
+    
+    for post in total_post_list:
+        if post.status == 0:
+            posts['draft'] += 1
+        elif post.status == 1:
+            posts['approved'] += 1
+            reactions['fav'] += post.vote_fav
+            reactions['util'] += post.vote_util
+            reactions['tmbup'] += post.vote_tmbup
+            reactions['tmbdn'] += post.vote_tmbdn
+        elif post.status == 2:
+            posts['rejected'] += 1
+        elif post.status == 2:
+            posts['archived'] += 1
+    
+    context = {'author': author, 'total_posts': total_post_list.count(), 'posts': posts, 'reactions': reactions}
     return render (request, 'LVR/user/profile.html', context)
 
 
@@ -613,7 +622,7 @@ def profile(request):
 @login_required(login_url='login')
 @user_passes_test(lambda u: u.is_superuser)
 def new_category(request):
-    template = 'LVR/user/new_category.html' 
+    template = 'LVR/user/new_category.html'
     response_data = {'success': False}
     if request.method == 'POST':
         form = NewCategory(data=request.POST, files=request.FILES)
@@ -632,10 +641,10 @@ def new_category(request):
             response_data['err_code'] = form.errors
             return JsonResponse(response_data)
     else:
-        form = NewCategory() 
-    context = {'newCategoryForm':form}  
+        form = NewCategory()
+    context = {'newCategoryForm':form}
     return render(request, template, context)
-    
+
 
 
 
@@ -688,7 +697,7 @@ def settings(request):
         profile_user_form = ProfileEditUserForm(instance=request.user)
         # profile_author_form = ProfileEditAuthorForm(instance=request.user)
 
-    
+
 
     if request.POST.get('action') == 'account_Form':
         acc_form = AccountEditUserForm(request.POST, instance=request.user)
@@ -710,8 +719,8 @@ def settings(request):
     profile_frm_author_initial = { 'title': author.title, 'bio': author.bio, 'email': author.email, 'image':author.image, 'facebook_URL': author.facebook_URL, 'twitter_URL': author.twitter_URL, 'linkedin_URL': author.linkedin_URL }
 
     context = {
-        'author': author, 
-        'AccountForm': AccountEditUserForm(initial=account_frm_initial), 
+        'author': author,
+        'AccountForm': AccountEditUserForm(initial=account_frm_initial),
         # --------------------- #
         'ProfileUserForm': ProfileEditUserForm(initial=profile_frm_user_initial),
         'ProfileAuthorUserForm': ProfileEditAuthorForm(initial=profile_frm_author_initial),
@@ -719,7 +728,7 @@ def settings(request):
 
 
 
-    
+
     if not request.user.is_superuser:
         avg_user_perms = ['Crear posts en mi nombre', 'Editar posts en mi nombre', 'Archivar posts escritos en mi nombre', 'Eliminar posts escritos en mi nombre', 'Solicitar cambio de contraseña', 'Solicitar restablecimiento de contraseña', 'Crear tags (al crear un post, si el tag no existe)', 'Modificar datos personales públicos', 'Modificar datos personales privados', 'Cambiar imagen de perfil público', 'Login y logout']
         context['permissions'] = avg_user_perms
@@ -818,7 +827,10 @@ def sign_up(request):
 @user_passes_test(lambda u: u.is_superuser)
 def moderate_posts(request):
     template = 'LVR/user/moderate_posts.html'
-    all_post_list = blog_post.objects.filter().order_by('-published_date')
+    all_post_list = blog_post.objects.filter(status=0).order_by('-created_date')
+
+
+
     paginator = Paginator(all_post_list, 10)
     page = request.GET.get('page')
     try:
@@ -828,8 +840,8 @@ def moderate_posts(request):
     except EmptyPage:
         post_list = paginator.page(paginator.num_pages)
     context = {'post_list': post_list}
-    return render(request, template, context)    
-    
+    return render(request, template, context)
+
 
 
 
@@ -929,7 +941,7 @@ def post_edit(request, slug_text):
             return redirect('post_detail', category_text=post.category, slug_text=post.slug)
     else:
         form = PostForm(instance=post)
-    context = {'postForm': form, 'is_edit': True, 'status': status, 'title': title, 'slug': slug }
+    context = {'postForm': form, 'is_edit': True, 'post':post }
     return render (request, template, context)
 
 
@@ -965,7 +977,7 @@ def post_archive(request, slug_text):
 
 def send_newsletter_msg(request):
     return redirect('dashboard')
-    
+
 
 
 

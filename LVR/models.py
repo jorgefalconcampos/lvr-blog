@@ -83,7 +83,8 @@ class blog_post(m.Model):
     vote_fav = m.IntegerField(default=0) 
     vote_util = m.IntegerField(default=0)     
     vote_tmbup = m.IntegerField(default=0) 
-    vote_tmbdn = m.IntegerField(default=0) 
+    vote_tmbdn = m.IntegerField(default=0)
+    send_to_newsletter = m.BooleanField(null=True, default=False) 
 
     def publish(self):
         self.published_date = timezone.now()

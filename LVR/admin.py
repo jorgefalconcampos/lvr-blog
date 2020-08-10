@@ -11,8 +11,8 @@ from . models import blog_post, blog_category, blog_author, blog_postComment, bl
 
 #Category
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'slug')
-    prepopulated_fields = {'slug': ('name',)}
+    list_display = ('name', 'description')
+    exclude = ('slug',)
 
 
 

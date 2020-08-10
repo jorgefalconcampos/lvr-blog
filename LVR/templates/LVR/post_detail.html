@@ -87,12 +87,13 @@
                                 <hr>
                                 <img itemprop="image" class="img-detail img-fluid rounded" src="{{ post.image.url }}" alt="{{post.title}}"> 
                                 {% if unsplash_URL %}<p class="small text-right m-0 mt-1 mr-2">Foto: <a href="{{ post.unsplash_URL }}" target="_blank">UNSPLASH</a> </p>                                
-                                {% else %} <p class="small text-right m-0 mt-1 mr-2">Foto: UNSPLASH </p>
+                                {% else %} <p class="small text-right m-0 mt-1 mr-2">Foto: <b>UNSPLASH</b> </p>
                                 {% endif %}
                                 <hr class="mt-1">
     
                                 <div itemprop="text-left"> <p class="mt-0 py-1"> {{ post.post_body|safe}} </p> </div>
                                 <hr>
+                                {% if post.status == 1 %}
                                 <div id="reactions_holder" class="row d-flex d-inline py-3 mb-1 justify-content-center hide">     
                                     <div class="col">
                                         <div id="new_reaction_success" style="display:none; font-size: 14px;" class="alert alert-success text-center mx-3" role="alert"> <i class="material-icons align-bottom md-18 mr-1" id="new_reaction_success_icon"></i> {% trans 'post_reaction_added' %} </div>    
@@ -107,6 +108,7 @@
                                         </ul>
                                     </div>
                                 </div>
+                                {% endif %}
     
                                 <div class="row align-middle text-center">
                                     <div class="col-12">
@@ -139,32 +141,28 @@
                     </div>
                 </div>
                 
-                <div class="col-lg-4 ">
-                    <div class="card mt-4 mt-lg-0 mt-xl-0 ">
-                        <div class="card-body">
-                            <h6 itemprop="dateCreated"> <small> {% trans 'post_detail_PublishedDate' %}: {% if post.published_date %} {{ post.published_date }} {% endif %} </small></h6>
+                <div class="col-lg-4">
+                    <div class="card mt-4 mt-lg-0 mt-xl-0 text-center text-lg-left">
+                        <div class="card-body pb-1 pb-lg-3">
+                            <h6 itemprop="dateCreated"> <small> {% trans 'post_detail_PublishedDate' %}: {% if post.published_date %} {{ post.published_date }} {% endif %} </small> </h6>
                             <div itemprop="creator">
-                                <div class="row mt-3 mb-1 ">
-                                    <div class="col-xs-6 col-sm-3 col-md-2 col-lg-4" >
-                                        <div class="author " style="padding-left: 1px;">
+                                <div class="row mt-3 pt-1 mb-1">
+                                    <div class="col-12 col-lg-4">
+                                        <div class="author mr-3" style="padding-left: 1px;">
                                             <a href="{% url 'author_detail' post.author.slug %}">
                                                 <img class="circle-rounded" src="{{ post.author.image.url }}" alt="{{post.author.name.get_full_name}}" width="100">
                                             </a>
                                         </div>
                                     </div>
                                     
-                                    <div class="col-xs-6 col-sm-9 col-md-10 col-lg-8">
-                                        <div class="row">
-                                            
-                                            <div class="column detailsAuthor" >
+                                    <div class="col-12 col-lg-8">
+                                        <div class="row justify-content-center">
+                                            <div class="pl-0 pl-lg-3">
                                                 <h6 class="mt-3"> {% trans 'PostBy' %}:  
-                                                    <a href="{% url 'author_detail' post.author.slug %}" itemscope itemtype="http://schema.org/Person"> {{ post.author.name.get_full_name }}</a>  
+                                                    <a href="{% url 'author_detail' post.author.slug %}" itemscope itemtype="http://schema.org/Person"> {{ post.author.name.get_full_name }} </a>  
                                                 </h6>
-                                                
                                                 <div itemprop="jobTitle"> <p> {{ post.author.title }} </p> </div>
-                                                
                                             </div> 
-                                            
                                         </div>
                                     </div> 
                                 </div>
@@ -174,7 +172,7 @@
                     
                     
                     <div class="card border-0 mt-3 shadow-sm mb-4 mb-lg-5 p-2 p-lg-0">
-                        <div class="card-body p-lg-4">
+                        <div class="card-body p-lg-4 text-center text-lg-left">
                             <h4 class="h4 mb-4">Comparte o guarda este post</h4>
     
                              <!-- AddToAny BEGIN -->
@@ -218,7 +216,7 @@
                     
                     <div class="card mt-3 d-none d-sm-block ">
                         <div class="card-body bg-platinum">
-                            <h4 class="h4 mb-2">Buscar</h4>
+                            <h4 class="h4 mb-2 text-center text-lg-left">Buscar</h4>
                             <hr class="mt-1 mb-3">
                             <div class="row">
                                 <div class="col-lg-12 mx-0">
@@ -281,7 +279,14 @@
         <section class="mb-0 mb-sm-5 mb-md-5 mb-lg-5 mb-xl-5">
             <div class="pb-3">
                 <header class="text-center mb-5">
+
+                    {% if post.status != 1 %}
+                    <div data-toggle="tooltip" data-html="true" data-placement='top' title="Los posts relacionados se mostrarán cuando tu post sea aprobado. Los posts relacionados pueden cambiar dependiendo diversos factores.">
+                        <h1 class="mt-2 py-2 font-weight-bold"> {% trans 'mayInterested' %} </h1>                        
+                    </div>
+                    {% else %}
                     <h1 class="mt-2 py-2 font-weight-bold"> {% trans 'mayInterested' %} </h1> 
+                    {% endif %}
                 </header>
                 <div class="row justify-content-center">
                     {% for post in related_posts%}

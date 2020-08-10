@@ -26,17 +26,31 @@
                                 </div>   
                             </div>  
                             <div class="row py-2 d-flex justify-content-center">
-                                {% if author.facebook_URL%}
-                                <a href="{{ author.facebook_URL }}"> <i class="fab fa-facebook-square fa-2x"></i> </a>
-                                {% endif %}
-        
-                                {% if author.twitter_URL%}
-                                <a href="{{ author.twitter_URL }}" class="mx-3"> <i class="fab fa-twitter-square fa-2x"></i> </a>
-                                {% endif %}
-        
-                                {% if author.linkedin_URL%}
-                                <a href="{{ author.linkedin_URL }}"> <i class="fab fa-linkedin fa-2x"></i> </a>
-                                {% endif %}
+                                <ul class="list-inline mb-0 pb-0">
+                                    {% if author.email%}
+                                    <li class="list-inline-item">
+                                        <a href="mailto:{{author.email}}" target="_blank"> <i class="fas fa-envelope fa-2x"></i> </a>
+                                    </li>
+                                    {% endif %}
+                                    
+                                    {% if author.facebook_URL%}
+                                    <li class="list-inline-item">
+                                        <a href="{{author.facebook_URL}}" target="_blank" class="mr-2"> <i class="fab fa-facebook-square fa-2x"></i> </a>
+                                    </li>
+                                    {% endif %}
+                                    
+                                    {% if author.twitter_URL%}
+                                    <li class="list-inline-item">
+                                        <a href="{{author.twitter_URL}}" target="_blank" class="mr-2"> <i class="fab fa-twitter-square fa-2x"></i> </a>
+                                    </li>
+                                    {% endif %}
+                                    
+                                    {% if author.linkedin_URL%}
+                                    <li class="list-inline-item">
+                                        <a href="{{author.linkedin_URL}}" target="_blank"> <i class="fab fa-linkedin fa-2x"></i> </a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
                             </div>
                         </div>
                     
