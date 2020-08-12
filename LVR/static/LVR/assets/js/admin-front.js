@@ -1,6 +1,8 @@
 $(window).on('load',function(){
     $('#inProgressModal').modal('show');
     $('#noCategoModal').modal('show');
+    // $('#postActionsModal').modal('show');
+    // alert(window.location.origin); //http://localhost:9000
 });
 
 $(document).ready(function(){
@@ -10,6 +12,54 @@ $(document).ready(function(){
 $("#settings_notifications, #settings_widgets, #settings_delete_acc").click(function(){
     $("#toastMessage").toast('show'); 
 });
+
+
+
+var success_title = 'Cambios guardados con éxito', success_text = 'Los cambios fueron guardados. ', success_reloading = 'Recargando esta página...';
+
+
+function success(title, text, param){
+    if($("#toastForm").hasClass("border-danger")){$("#toastForm").removeClass('border-danger'); $("#toastForm").addClass('border-success'); }
+    if($("#msg_header").hasClass("bg-danger")){$("#msg_header").removeClass('bg-danger'); $("#msg_header").addClass('bg-success'); }
+    $("#toastForm").addClass('border-success'); 
+    $("#msg_header").addClass('bg-success'); 
+    $("#msg_icon").attr('class', 'fas fa-check mr-1'); 
+    $("#msg_title").text(title); 
+    $("#msg_txt").text(text); 
+    $("#toastForm").toast('show');
+
+    // 0: updates personal info in settings, reloads the page
+    // 1: deletes a post inside the post detail, then redirect to dashboard
+    // 2: deletes a post inside the dashboard/all posts page, keeps in url but removes the element
+    // 3: archives a post and ... (?)
+    switch (param) {
+        case 0: window.setTimeout( function() { window.location.reload(true); }, 1500);  break;
+        case 1: 
+        
+            if (sender === 'detail'){
+                window.setTimeout( function() { window.location.href = '/user/dashboard'; }, 1500); 
+            }
+            else {
+                $('#postActionsModal').modal('hide');
+                $(`#${postID}`).delay(500).fadeOut(1000, function(){$(this).remove();}); //removing the whole table row element
+            }
+            break;
+      
+        default:  break;
+      }
+    
+    
+}
+
+
+function error(title, text){
+    $("#toastForm").addClass('border-danger'); 
+    $("#msg_header").addClass('bg-danger'); 
+    $("#msg_icon").attr('class', 'fas fa-exclamation-circle mr-1');
+    $("#msg_title").text(title); 
+    $("#msg_txt").text(text); 
+    $("#toastForm").toast('show');
+}
 
 
 
@@ -26,28 +76,6 @@ $(window).on('load',function(){
         d_fb = $('#profile_facebook').val(), 
         d_tw = $('#profile_twitter').val(),
         d_li = $('#proprofile_linkedin').val();
-
-
-    function success(){
-        if($("#toastForm").hasClass("border-danger")){$("#toastForm").removeClass('border-danger'); $("#toastForm").addClass('border-success'); }
-        if($("#msg_header").hasClass("bg-danger")){$("#msg_header").removeClass('bg-danger'); $("#msg_header").addClass('bg-success'); }
-        $("#toastForm").addClass('border-success'); 
-        $("#msg_header").addClass('bg-success'); 
-        $("#msg_icon").attr('class', 'fas fa-check mr-1'); 
-        $("#msg_title").text('Cambios guardados con éxito'); 
-        $("#msg_txt").text('Los cambios fueron guardados. Recargando esta página...'); 
-        $("#toastForm").toast('show');
-        window.setTimeout( function() {window.location.reload(true);}, 1500);
-    }
-
-    function error(title, text){
-        $("#toastForm").addClass('border-danger'); 
-        $("#msg_header").addClass('bg-danger'); 
-        $("#msg_icon").attr('class', 'fas fa-exclamation-circle mr-1');
-        $("#msg_title").text(title); 
-        $("#msg_txt").text(text); 
-        $("#toastForm").toast('show');
-    }
 
      //If user leaves the section, get default values again and fill inputs...
      $("#settings_profile").click(function(){
@@ -84,7 +112,7 @@ $(window).on('load',function(){
                 contentType: false,
                 processData: false,
                 success:function(json){
-                    if(json.success){success();}
+                    if(json.success){success(success_title, success_text+=success_reloading, 0);}
                     else { 
                         if (json.errors == ''){error('Error en email', 'Ocurrió un error al intentar asignar el email')}
                         else{ for(var key in json.errors){error('Error en '+key, json.errors[key][0])}}
@@ -109,32 +137,7 @@ $(window).on('load',function(){
     //Default values (marked with the prefix 'd'.) They're displayed directly from db
     var d_usr = $('#acc_username').val(); 
     var d_email = $('#acc_email').val();
-   
-
-    function success(){
-        if($("#toastForm").hasClass("border-danger")){$("#toastForm").removeClass('border-danger'); $("#toastForm").addClass('border-success'); }
-        if($("#msg_header").hasClass("bg-danger")){$("#msg_header").removeClass('bg-danger'); $("#msg_header").addClass('bg-success'); }
-        $("#toastForm").addClass('border-success'); 
-        $("#msg_header").addClass('bg-success'); 
-        $("#msg_icon").attr('class', 'fas fa-check mr-1'); 
-        $("#msg_title").text('Cambios guardados con éxito'); 
-        $("#msg_txt").text('Los cambios fueron guardados. Recargando esta página...'); 
-        $("#toastForm").toast('show');
-        window.setTimeout( function() {window.location.reload(true);}, 1500);
-    }
-
-    function error(title, text){
-        $("#toastForm").addClass('border-danger'); 
-        $("#msg_header").addClass('bg-danger'); 
-        $("#msg_icon").attr('class', 'fas fa-exclamation-circle mr-1');
-
-        $("#msg_title").text(title); 
-        $("#msg_txt").text(text); 
-        $("#toastForm").toast('show');
-    }
-
     var hasChanged = false;
-
     //If user leaves the section, get default values again and fill inputs...
     $("#settings_account").click(function(){
         $("#acc_username").val(d_usr); 
@@ -159,7 +162,7 @@ $(window).on('load',function(){
                     action: 'account_Form',
                 },
                 success:function(json){
-                    if(json.success){success();}
+                    if(json.success){success(success_title, success_text+=success_reloading, 0);}
                     else { 
                         if (json.errors == 'email_already_taken'){error('Error en email', 'Ocurrió un error al intentar asignar el email')}
                         else{ for(var key in json.errors){error('Error en '+key, json.errors[key][0])}}
@@ -203,41 +206,88 @@ $(document).on('submit', '#newCatego_frm',function(e){
 });
 
 
-$(document).on("click", "#deletePost_btn", function(){
-    var postID = $(this).data('postid'); 
-    var posttitle = $(this).data('posttitle');    
-    $('#deletePostConfirm_btns').attr('data-url', `post/delete/${postID}`);
-    $("#titleHolder").html(posttitle); 
-    $("#deletePostConfirm_btns").click(function(e){
-        e.preventDefault();
-        $.ajax({
-            url: $('#deletePostConfirm_btns').data('url'),
-            data: {
-                pk:postID
-            },
-            type: 'DELETE',
-            dataType: 'json',
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            },
-            success:function(json){
-              if(json.success){
-                  $('#deletePostModal').modal('hide');
-                  $(`#${postID}`).delay(500).fadeOut(1000, function(){$(this).remove();}); //removing the whole table row element
 
-                //   alert('item eliminado');
-              }
-            },
-            error : function(xhr,errmsg,err) {
-              console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-            }
-            });
+$('#deleteBtn_in_post_edit, #deleteBtn_in_dshbrd').on('click', function(){ 
+    // sender_id = $(this).attr('id');
+    postID = $(this).data('postid');
+    posttitle = $(this).data('posttitle');
+    iconName = 'delete'; 
+    // alert($(this).data('posttitle'));
 
-    });
+    if ($(this).attr('id') === 'deleteBtn_in_post_edit'){ post_action_config(1,1); }
+    else{ post_action_config(1,2); }
+
+  
+
+    // alert(sender_id);
+});
+
+// 1: delete, 2: archive, 3: reject
+
+var post_action, iconName, url, where_from, postID, posttitle, sender;
+
+function post_action_config(val, where_f){
+    frm = $('#post_action_frm');
+    icon = `<i class="material-icons align-top mr-1 md-20">${iconName}</i>`;
+    buttonText = $('#modal_post_action_confirm')
+    label = $('#post_action_label');    
+    // sndr = document.getElementById(sender_id);
+    // postID = $(sndr).data('postid');
+    // posttitle = $(sndr).data('posttitle');
+
+    switch (where_f) {
+        case 1: sender = 'detail'; break;
+        case 2: sender = 'dashboard'; break;
+    }
+
+    switch (val) {
+        case 1: 
+            post_action = 'delete'; 
+            frm.attr('method', 'DELETE');
+            label.html(`¿Realmente deseas eliminar el post <b>${posttitle}</b>? (ID: ${postID})<br><br>Esta acción no se puede deshacer.`)
+            buttonText.html(`${icon} Si, eliminar`);
+        break;
+      
+        default: paction = 'action_null'; break;
+      }
+}
 
 
+$(document).on('submit', '#postActionsModal',function(e){
+    var param;
+
+    switch (post_action) {
+        case 'delete': 
+            param = 1; 
+            success_text = 'El post fue eliminado correctamente.';
+            if (sender === 'detail') { success_text += ' Redireccionando...'; }
+        break;
+        
+    }
+
+    e.preventDefault();
+    // alert(`post/perform-action/${post_action}/${postID}`);    
+    $.ajax({
+        url: `/user/post/perform-action/${post_action}/${postID}`,
+        type: $(this).attr('method'),
+        dataType: 'json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        },
+        success:function(json){
+          if(json.success){success(success_title, success_text, param);}
+        },
+        error : function(xhr,errmsg,err) {
+          console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+        }
+        });
 
 });
+
+
+
+
+
 
 
 

@@ -587,7 +587,7 @@ def login(request):
 def dashboard(request):
     template = 'LVR/user/dashboard.html'
     author = blog_author.objects.filter(name=request.user).first()
-    posts_by_author = blog_post.objects.filter(author=author).order_by('-published_date')[:5]
+    posts_by_author = blog_post.objects.filter(author=author).order_by('-created_date')[:5]
     context = { 'author': author, 'posts_by_author': posts_by_author}
     return render (request, template , context)
 
@@ -599,7 +599,7 @@ def profile(request):
     total_post_list = blog_post.objects.filter(author=author)
     posts = {'approved':0, 'draft':0, 'archived':0, 'rejected':0}
     reactions = {'fav':0, 'util':0, 'tmbup':0, 'tmbdn':0}
-    
+
     for post in total_post_list:
         if post.status == 0:
             posts['draft'] += 1
@@ -613,8 +613,10 @@ def profile(request):
             posts['rejected'] += 1
         elif post.status == 2:
             posts['archived'] += 1
-    
-    context = {'author': author, 'total_posts': total_post_list.count(), 'posts': posts, 'reactions': reactions}
+
+    total_reactions = sum([int(i) for i in reactions.values()])
+
+    context = {'author': author, 'posts': posts, 'total_posts': total_post_list.count(), 'reactions': reactions, 'total_reactions': total_reactions}
     return render (request, 'LVR/user/profile.html', context)
 
 
@@ -874,7 +876,7 @@ def activate(request, uidb64, token):
         return HttpResponse(rendered)
 
 
-#This method allows user/author add a new post
+#This method show all the posts written by user/author
 @login_required(login_url='login')
 def post_list(request):
     template = 'LVR/user/post_list.html'
@@ -947,15 +949,71 @@ def post_edit(request, slug_text):
 
 
 
+# This method deletes, archives or rejects a blog post - Only superuser can reject
+def post_actions(request, post_action, pk):
+    response_data = {'success': False}
+    post = blog_post.objects.filter(pk=pk).first()
+    try:
+        if request.user == post.author.name:
+            if post_action == 'delete':
+                post.delete()
+                print('Borrado')
+                response_data['success'] = True
+            elif post_action == 'archive':
+                post.status = 3
+                post.save()
+                print('Archivado')
+                response_data['success'] = True
+        elif request.user == request.user.is_superuser:
+            if post_action == 'reject':
+                post.status = 2
+                post.save()
+                print('Rechazado')
+                response_data['success'] = True
+        else: 
+            response_data['invalid_request'] = f"{request.user} cannot perform action - is not the author"
+    except Exception as e:
+        response_data['err'] = str(e)
+    finally:
+        return JsonResponse(response_data)
+        return redirect('dashboard')
+
+    
+
+
+
 @login_required(login_url='login')
 def post_delete(request, pk):
     response_data = {'success': False}
     try:
-        post = blog_post.objects.filter(pk=pk).delete()
-        response_data['success'] = True
-        return JsonResponse(response_data)
+        post = blog_post.objects.filter(pk=pk).first()
+        if request.user == post.author.name:
+            post.delete()
+            response_data['success'] = True
+        else: 
+            response_data['invalid_request'] = f"{request.user} cannot perform this action - is not the author"
     except Exception as e:
+        response_data['err'] = str(e)
+    finally:
         return JsonResponse(response_data)
+
+
+@login_required(login_url='login')
+def post_archive(request, pk):
+    response_data = {'success': False}
+    try:
+        post = blog_post.objects.filter(pk=pk).first()
+        if request.user == post.author.name:
+            post.status = 3
+            post.save()
+            response_data['success'] = True
+        else: 
+            response_data['invalid_request'] = f"{request.user} cannot perform this action - is not the author"
+    except Exception as e:
+        response_data['err'] = str(e)
+    finally:
+        return JsonResponse(response_data)
+
 
 
 

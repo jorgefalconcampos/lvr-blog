@@ -13,7 +13,8 @@
   <link rel="stylesheet" href="{% static 'LVR/assets/css/styles.css' %}">  
   <link rel="stylesheet" href="{% static 'LVR/assets/css/bootstrap-select.css' %}">  
   <link rel="shortcut icon" type="image/png" href="{% static 'LVR/assets/favicon/rneg-icon.ico' %}"/>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+  <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
 </head>
 
 <header>
@@ -75,7 +76,7 @@
                                     <div class="form-group">
                                         <div class="container"> <div class="row"> <h6 class="ml-1"> {% trans 'login_formUser' %} </h6> </div> </div>
                                         <div class="input-group">
-                                            <input placeholder="{{ request.user}}" name="username" class="form-control" type="text" readonly disabled>
+                                            <input placeholder="{{request.user}}" name="username" class="form-control" type="text" readonly disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -85,7 +86,7 @@
                                     <div class="form-group">
                                         <div class="container"> <div class="row"> <h6 class="ml-1"> {% trans 'dashboard_DProblem_date' %} </h6> </div> </div>
                                         <div class="input-group">
-                                            <input placeholder="{% now "SHORT_DATETIME_FORMAT" %}" name="today_date" class="form-control field left" type="text" readonly disabled>
+                                            <input placeholder="{% now 'SHORT_DATETIME_FORMAT' %}" name="today_date" class="form-control field left" type="text" readonly disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -95,7 +96,7 @@
                             <div class="form-group">
                                 <div class="container"> <div class="row"> <h6 class="ml-1"> {% trans 'dashboard_DProblem_label' %} </h6> </div> </div>
                                 <div class="input-group">
-                                    <textarea id="prblm_form" rows="5" class="form-control" style="max-height: 127px; min-height: 127px;" type="text" placeholder="{% trans 'dashboard_DescribeProblem_placeholder' %}"></textarea>
+                                    <textarea id="prblm_form" rows="4" class="form-control" style="max-height: 112px; min-height: 112px;" type="text" placeholder="{% trans 'dashboard_DescribeProblem_placeholder' %}"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -114,6 +115,50 @@
             </div>
         </div>
     </div>
+</div>
+
+
+
+<div class="modal fade pt-5 mt-5" id="postActionsModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <span class="d-flex d-inline">
+                    <i style="font-size: 30px;" class="material-icons">error</i>
+                    <h4 class="ml-3 modal-title">{% trans 'dashboard_PostActions_Title' %}</h4>
+                </span>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            
+            <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 pt-2">
+                                <div class="container"> 
+                                    <h6 id="post_action_label" class="ml-1"> </h6>
+                                 </div> 
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            
+            <div class="modal-footer mr-2">
+                <button data-dismiss="modal" class="btn border-secondary" type="button"> Cancelar </button> 
+                <form id="post_action_frm"> 
+                    <button id="modal_post_action_confirm" class="btn btn-danger px-3" type="submit"> </button> 
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="toastForm" class="toast mr-2 mb-2 shadow" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="true" data-delay="3000" style="position: fixed; bottom: 0; right:0;  z-index:1111;">
+    <div id="msg_header" class="toast-header text-white">
+        <i id="msg_icon" class=""></i> 
+        <strong id="msg_title" class="mr-auto">Title</strong>
+        <button id="msg_hide" type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+    </div>
+    <div id="msg_txt" class="toast-body">Msg text</div>
 </div>
 
 

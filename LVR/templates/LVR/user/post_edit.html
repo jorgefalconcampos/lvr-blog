@@ -132,6 +132,7 @@
                                                     <button type="submit" class="btn btn-primary btn-xl text-uppercase my-3"> <i class="material-icons align-top">save</i> {% trans 'Save' %} </button> 
                                                 </div>
                                                 {% endif %}
+                                            <button type="submit" class="btn btn-primary btn-xl text-uppercase my-3"> <i class="material-icons align-top">save</i> {% trans 'Save' %} </button> 
                                             {% else %}
                                             <button type="submit" class="btn btn-primary btn-xl text-uppercase my-3"> <i class="material-icons align-top">save</i> {% trans 'Save' %} </button> 
                                             {% endif %}
@@ -204,13 +205,13 @@
                             <h5 class="text-danger"> <i class="material-icons align-middle">warning</i> {% trans 'post_DangerZone' %} </h3>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <a type="button" class="mb-2 mb-sm-0 mb-md-0 mb-lg-0 mb-xl-0 btn btn-danger mr-2 text-white" data-toggle="modal" data-target="#deletePostModal"> 
+                    <div class="card-body my-auto">
+                        <a id="deleteBtn_in_post_edit" type="button" class="btn btn-danger mr-2 my-1 text-white" data-postid="{{post.pk}}" data-posttitle="{{post.title}}" data-toggle="modal" data-target="#postActionsModal"> 
                            {% trans 'post_deletePost' %}
                         </a>
 
                         {% if not post.status == 3 %}
-                        <a type="button" class="btn btn-danger text-white" data-toggle="modal" data-target="#deletePostModal"> 
+                        <a type="button" class="btn btn-danger my-1 text-white" data-toggle="modal" data-target="#deletePostModal"> 
                             {% trans 'post_archivePost' %}
                          </a>
                         {% endif %}
@@ -218,7 +219,7 @@
                 </div>
             </div>
 
-            <div class="modal fade" id="deletePostModal">
+            <div class="modal fade pt-5 mt-5" id="deletePostModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -226,7 +227,6 @@
                                 <i style="font-size: 30px;" class="material-icons">error</i>
                                 <h4 class="ml-3 modal-title"> {% trans 'dashboard_PostDelete_Title' %}? </h4>
                             </span>
-
                             <button type="button" class="close" data-dismiss="modal">×</button>
                         </div>
                         
@@ -246,7 +246,7 @@
                         
                         <div class="modal-footer mr-2">
                             <button type="button" class="btn border-secondary" data-dismiss="modal"> {% trans 'dashboard_DProblem_cancel' %} </button>
-                            <a href="{% url 'post_delete' post.slug %}" class="btn btn-danger"> {% trans 'dashboard_ConfirmDelete' %} </a>
+                            <a href="{% url 'post_actions' 'del' post.pk %}" class="btn btn-danger"> {% trans 'dashboard_ConfirmDelete' %} </a>
                         </div>
                     </div>
                 </div>

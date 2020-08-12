@@ -19,7 +19,7 @@ class CategoryAdmin(admin.ModelAdmin):
 #Blog post
 class PostAdmin(SummernoteModelAdmin):
     list_display = ('title', 'subtitle', 'author', 'created_date', 'published_date', 'status')
-    exclude = ('slug', 'vote_fav', 'vote_util', 'vote_tmbup', 'vote_tmbdn',)
+    exclude = ('slug', 'vote_fav', 'vote_util', 'vote_tmbup', 'vote_tmbdn', 'send_to_newsletter',)
     summernote_fields = ('post_body')
     list_filter = ('author', 'status')
     search_fields = ['title', 'subtitle'] #author name has the double underscore bc is a foreign key

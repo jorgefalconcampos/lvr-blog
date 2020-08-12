@@ -12,7 +12,7 @@
     <h1 class="mt-4"> {% trans 'dashboard_AllPostsTitle' %} </h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active"> 
-            <a href="{% url 'dashboard' %}"> {% trans 'dashboard_mainTitle_dashboard' %}</a> / Todos mis posts 
+            <a href="{% url 'dashboard' %}"> {% trans 'dashboard_mainTitle_dashboard' %}</a>&nbsp/ Todos mis posts 
         </li>
     </ol>
 
@@ -42,7 +42,7 @@
                         <th> {% trans 'dashboard_tableTitle_PostImage' %} </th>
                         <th> {% trans 'dashboard_tableTitle_PostPublishedDate' %} </th>
                         <th> {% trans 'dashboard_tableTitle_PostComments' %} </th>
-                        <th> {% trans 'dashboard_tableTitle_PostApproved' %} </th>
+                        <th> {% trans 'dashboard_tableTitle_PostStatus' %} </th>
                         <th> {% trans 'dashboard_tableTitle_PostActions' %} </th>
                     </tr>
                 </thead>
@@ -104,7 +104,7 @@
                             
                             {% if post.status == 3 %}
                             <div class="" data-toggle="tooltip" data-html="true" data-placement='bottom' title="{% trans 'status_archived_desc' %}">
-                                <i class="px-0 material-icons align-top md-inactive">clear</i>!
+                                <i class="px-0 material-icons-outlined align-top md-inactive">archive</i>
                             </div>
                             {% endif %}
                             
@@ -121,7 +121,11 @@
                             <div class="py-2"> 
                                 <a data-toggle="modal" data-target="#deletePostModal"> 
                                     <button type="button" class="btn btn-sm btn-outline-secondary"> 
-                                        <i class="material-icons align-top">archive</i> 
+                                        {% if post.status == 3 %}
+                                        <i class="material-icons align-top">unarchive</i> 
+                                        {% else %}
+                                        <i class="material-icons align-top">archive</i>
+                                        {% endif %}
                                     </button> 
                                 </a> 
                             </div>

@@ -107,6 +107,7 @@
         </div>
     </div>
 
+    {% if not request.user.is_superuser %}
     <div class="card mb-4">
         <div class="card-header">
             <div class="row d-flex d-inline justify-content-between mx-1">
@@ -132,9 +133,9 @@
                             <th> {% trans 'dashboard_tableTitle_PostTitle' %} </th>
                             <th> {% trans 'dashboard_tableTitle_PostSubtitle' %} </th>
                             <th> {% trans 'dashboard_tableTitle_PostImage' %} </th>
-                            <th> {% trans 'dashboard_tableTitle_PostPublishedDate' %} </th>
+                            <th> {% trans 'dashboard_tableTitle_PostCreatedOrPublishedDate' %} </th>
                             <th> {% trans 'dashboard_tableTitle_PostComments' %} </th>
-                            <th> {% trans 'dashboard_tableTitle_PostApproved' %} </th>
+                            <th> {% trans 'dashboard_tableTitle_PostStatus' %} </th>
                             <th> {% trans 'dashboard_tableTitle_PostActions' %} </th>
                         </tr>
                     </thead>
@@ -163,7 +164,21 @@
                                </div>
                             </td>
 
-                            <td> {{ post.published_date }} </td>
+                            <td> 
+
+                                <div>
+                                    {% trans 'CreatedDate' %}: {{ post.created_date }}
+                                    <hr>
+                                    {% if post.status == 1 %}
+                                    {% trans 'PublishedDate' %}: {{ post.published_date }}
+                                    {% else %}
+                                    <b> {% trans 'NotApprovedYet' %} </b>
+                                    {% endif %}
+
+                                </div>
+
+                                
+                            </td>
                             
                             <td>
                                 {% if post.all_cmts %}
@@ -180,7 +195,6 @@
                            
                            
                             <td class="text-center"> 
-
                                 {% if post.status == 0 %}
                                 <div class="" data-toggle="tooltip" data-html="true" data-placement='bottom' title="{% trans 'status_draft_desc' %}">
                                     <i class="px-0 material-icons align-top md-inactive">access_time</i>  
@@ -201,7 +215,7 @@
 
                                 {% if post.status == 3 %}
                                 <div class="" data-toggle="tooltip" data-html="true" data-placement='bottom' title="{% trans 'status_archived_desc' %}">
-                                    <i class="px-0 material-icons align-top md-inactive">clear</i>!
+                                    <i class="px-0 material-icons-outlined align-top md-inactive">archive</i>
                                 </div>
                                 {% endif %}
 
@@ -216,61 +230,14 @@
                                 </div>
 
                                 <div class="pt-1">
-                                    <button id="deletePost_btn" class="btn btn-sm btn-outline-danger" type="button" data-postid="{{post.pk}}" data-posttitle="{{post.title}}" data-toggle="modal" data-target="#deletePostModal" > 
+                                    <button id="deleteBtn_in_dshbrd" class="btn btn-sm btn-outline-danger" type="button" data-postid="{{post.pk}}" data-posttitle="{{post.title}}" data-toggle="modal" data-target="#postActionsModal"> 
                                         <i class="material-icons align-top">delete</i> 
-                                    </button> 
+                                    </button>
                                 </div>
                             </td>
                         </tr>
-
                         
                         {% endfor %}
-
-                        
-                        <div class="modal fade" id="deletePostModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <span class="d-flex d-inline">
-                                            <i style="font-size: 30px;" class="material-icons">error</i>
-                                            <h4 class="ml-3 modal-title"> {% trans 'dashboard_PostDelete_Title' %}? </h4>
-                                        </span>
-                                        
-                                        <button type="button" class="close" data-dismiss="modal">×</button>
-                                    </div>
-                                    
-                                    <div class="modal-body">
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col-12 pt-2">
-                                                    <div class="container">
-                                                        
-                                                        <h6 class="ml-1">¿Realmente deseas borrar el post
-                                                            <span id="titleHolder" name="titleHolder" class="font-weight-bold"></span>? 
-                                                        </h6>
-                                                        <h6 class="ml-1">Esta acción no se puede deshacer.</h6>
-                                                        
-                                                    </div> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="modal-footer mr-2">
-                                        <a type="button" class="btn border-secondary" data-dismiss="modal"> {% trans 'dashboard_DProblem_cancel' %} </a>
-
-
-                                            <a id="deletePostConfirm_btns" href="" type="button" class="btn btn-danger">{% trans 'dashboard_ConfirmDelete' %}</a>
-
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                          
-                        <!-- Delete post Modal -->
-                     
                         
                         
                     </tbody>
@@ -278,6 +245,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
 </div>
 
 

@@ -52,6 +52,7 @@ urlpatterns = [
     path('user/posts/', views.post_list, name='post_list'),
     path('user/post/new', views.post_new, name='post_new'),
     path('user/post/delete/<int:pk>', views.post_delete, name='post_delete'),
+    path('user/post/perform-action/<str:post_action>/<int:pk>', views.post_actions, name='post_actions'),
     path('user/post/edit/<slug:slug_text>', views.post_edit, name='post_edit'),
     path('activate/<str:uidb64>/<str:token>/', views.activate, name='activate'),
     path('user/account-activated/<str:user>', views.signup_account_activated, name='account_activated'),
