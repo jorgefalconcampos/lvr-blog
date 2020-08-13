@@ -14,8 +14,10 @@ $("#settings_notifications, #settings_widgets, #settings_delete_acc").click(func
 });
 
 
+// $('#post_list_empty').removeAttr('style')
 
-var success_title = 'Cambios guardados con éxito', success_text = 'Los cambios fueron guardados. ', success_reloading = 'Recargando esta página...';
+
+var success_title = 'Cambios guardados con éxito', success_text = 'Los cambios fueron guardados. ', success_reloading = ' Recargando esta página...';
 
 
 function success(title, text, param){
@@ -35,7 +37,6 @@ function success(title, text, param){
     switch (param) {
         case 0: window.setTimeout( function() { window.location.reload(true); }, 1500);  break;
         case 1: 
-        
             if (sender === 'detail'){
                 window.setTimeout( function() { window.location.href = '/user/dashboard'; }, 1500); 
             }
@@ -208,21 +209,33 @@ $(document).on('submit', '#newCatego_frm',function(e){
 
 
 $('#deleteBtn_in_post_edit, #deleteBtn_in_dshbrd').on('click', function(){ 
-    // sender_id = $(this).attr('id');
     postID = $(this).data('postid');
     posttitle = $(this).data('posttitle');
     iconName = 'delete'; 
-    // alert($(this).data('posttitle'));
-
     if ($(this).attr('id') === 'deleteBtn_in_post_edit'){ post_action_config(1,1); }
     else{ post_action_config(1,2); }
-
-  
-
-    // alert(sender_id);
 });
 
-// 1: delete, 2: archive, 3: reject
+
+
+
+$('#archiveBtn_in_post_edit').on('click', function(){ 
+    postID = $(this).data('postid');
+    posttitle = $(this).data('posttitle');
+    iconName = 'archive'; 
+    if ($(this).attr('id') === 'archiveBtn_in_post_edit'){ post_action_config(2,1); }
+    else{ post_action_config(2,2); }
+});
+
+$('#unarchive_in_post_edit').on('click', function(){ 
+    postID = $(this).data('postid');
+    posttitle = $(this).data('posttitle');
+    iconName = 'unarchive';
+    if ($(this).attr('id') === 'unarchive_in_post_edit'){ post_action_config(3,1); }
+    else{ post_action_config(3,2); }
+});
+
+
 
 var post_action, iconName, url, where_from, postID, posttitle, sender;
 
@@ -231,38 +244,55 @@ function post_action_config(val, where_f){
     icon = `<i class="material-icons align-top mr-1 md-20">${iconName}</i>`;
     buttonText = $('#modal_post_action_confirm')
     label = $('#post_action_label');    
-    // sndr = document.getElementById(sender_id);
-    // postID = $(sndr).data('postid');
-    // posttitle = $(sndr).data('posttitle');
 
-    switch (where_f) {
-        case 1: sender = 'detail'; break;
-        case 2: sender = 'dashboard'; break;
-    }
+    switch (where_f) { case 1: sender = 'detail'; break; case 2: sender = 'dashboard'; break; default: sender = null; break; }
 
-    switch (val) {
+    switch (val) { // 1: delete, 2: archive, 3: unarchive, 4: reject
         case 1: 
             post_action = 'delete'; 
             frm.attr('method', 'DELETE');
             label.html(`¿Realmente deseas eliminar el post <b>${posttitle}</b>? (ID: ${postID})<br><br>Esta acción no se puede deshacer.`)
             buttonText.html(`${icon} Si, eliminar`);
         break;
+
+        case 2: 
+            post_action = 'archive'; 
+            frm.attr('method', 'POST');
+            label.html(`¿Realmente deseas archivar el post <b>${posttitle}</b>? (ID: ${postID})`)
+            buttonText.html(`${icon} Si, archivar`);
+        break;
+
+        case 3: 
+            post_action = 'unarchive'; 
+            frm.attr('method', 'POST');
+            label.html(`¿Sacar del archivo el post <b>${posttitle}</b>? (ID: ${postID})`)
+            buttonText.html(`${icon} Si, desarchivar`);
+        break;
       
-        default: paction = 'action_null'; break;
+        default: break;
       }
 }
 
 
 $(document).on('submit', '#postActionsModal',function(e){
-    var param;
-
+    var param; // Param is sent to success function. 0 reloads the page, 1 deletes the row 
     switch (post_action) {
         case 'delete': 
-            param = 1; 
-            success_text = 'El post fue eliminado correctamente.';
+            param = 1; success_text = 'El post fue eliminado.';
             if (sender === 'detail') { success_text += ' Redireccionando...'; }
         break;
-        
+
+        case 'archive': 
+            param = 0;  success_text = 'El post fue archivado.';
+            if (sender === 'detail') { success_text += success_reloading }
+        break;
+
+        case 'unarchive': 
+            param = 0; success_text = 'El post fue desarchivado.';
+            if (sender === 'detail') { success_text += success_reloading }
+        break;
+
+        default: break;        
     }
 
     e.preventDefault();

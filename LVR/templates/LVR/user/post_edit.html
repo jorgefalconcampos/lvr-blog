@@ -86,10 +86,26 @@
                                         {{postForm.subtitle}}
                                     </div>
 
-                                    <div class="form-group py-1"> 
-                                        <label class="ml-1" for="post_image">{{postForm.image.label}}</label>
+                                    <div class="form-group py-1">
+                                        <div class="d-flex d-inline justify-content-between">
+                                            <label class="ml-1" for="post_image">{{postForm.image.label}}</label>
+                                            <div class="d-flex d-inline mt-1"> 
+                                                <div class="">
+                                                    <div data-toggle="tooltip" data-html="true" data-placement='bottom' title="https://unsplash.com">
+                                                        <a href="https://unsplash.com" target="_blank"><i class="fab fa-unsplash fa-lg"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="ml-3 mr-2">
+                                                    <div data-toggle="tooltip" data-html="true" data-placement='bottom' title="https://www.fileconverto.com/image-compressor">
+                                                        <a href="https://www.fileconverto.com/image-compressor" target="_blank"><i class="fas fa-compress-arrows-alt fa-lg"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        
                                         <div class="img-upload"> 
-                                            <div class="py-1" data-toggle="tooltip" data-html="true" data-placement='right' title="{% for e in postForm.image.errors %} {% if postForm.image.errors|length == 1 %} <span> {{ e }} </span> {% else %} <li class='ml-1'>  {{ e }} </li> {% endif %} {% endfor %}">
+                                            <div class="pt-1" data-toggle="tooltip" data-html="true" data-placement='right' title="{% for e in postForm.image.errors %} {% if postForm.image.errors|length == 1 %} <span> {{ e }} </span> {% else %} <li class='ml-1'>  {{ e }} </li> {% endif %} {% endfor %}">
                                                 {{ postForm.image }}  
                                             </div>
                                         </div>
@@ -144,19 +160,16 @@
                            
                             
                             {% for message in messages %}
-                            <div id="toastMessage" class="toast fade show mr-2 mb-2" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false" data-delay="7000" style="position: fixed; bottom: 0; right:0;  z-index:1111;">
-                                <div class="toast-header bg-info text-white">
-                                    <svg class="bd-placeholder-img rounded mr-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="red"></rect></svg>
-                                    <strong class="mr-auto">Error</strong>
-                                    <!-- <small>11 mins ago</small> -->
+                            <div id="toastMessage" class="toast mr-2 mb-2 show shadow" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false" data-delay="7000" style="position: fixed; bottom: 0; right:0;  z-index:1111;">
+                                <div class="toast-header bg-danger text-white">
+                                    <i clas="fa-exclamation-circle mr-1"></i>
+                                    <b class="mr-auto">Ocurrió un error</b>
                                     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"> <span aria-hidden="true">×</span> </button>
                                 </div>
                                 <div class="toast-body"> {{ message }}
                                 </div>
                             </div>
-                            {% endfor %}
-                            
-                            
+                            {% endfor %}                            
                         </form>
 
                     </div>
@@ -192,7 +205,13 @@
                 <div class="d-flex d-inline" data-toggle="tooltip" data-html="true" data-placement='top' title="{% trans 'status_archived_desc' %}">
                     <i class="ml-1 px-0 material-icons align-top md-inactive">archive</i>  
                     <h6> {% trans 'status_archived' %} </h6>
-                </div>               
+
+                </div>    
+                <a id="unarchive_in_post_edit" class="h6 ml-3 border bg-warning-light px-2" style="cursor: pointer;" data-postid="{{post.pk}}" data-posttitle="{{post.title}}" data-toggle="modal" data-target="#postActionsModal">Desarchivar</a>
+
+              
+
+
                 {% endif %}
             </div>
 
@@ -211,7 +230,7 @@
                         </a>
 
                         {% if not post.status == 3 %}
-                        <a type="button" class="btn btn-danger my-1 text-white" data-toggle="modal" data-target="#deletePostModal"> 
+                        <a id="archiveBtn_in_post_edit" type="button" class="btn btn-danger my-1 text-white" data-postid="{{post.pk}}" data-posttitle="{{post.title}}" data-toggle="modal" data-target="#postActionsModal"> 
                             {% trans 'post_archivePost' %}
                          </a>
                         {% endif %}

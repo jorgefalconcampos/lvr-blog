@@ -150,8 +150,20 @@
                         </tr>
                     </tfoot> -->
                     <tbody>
-                        {% for post in posts_by_author %}
+                        <!-- <tr id="post_list_empty" style="display: none;">
+                            <td colspan="8">
+                                <div class="text-center">
+                                    <button class="btn btn-primary my-5" type="button" onclick='window.location.reload(true);'> 
+                                        <i class="material-icons align-top">replay</i> Recarga la página para mostrar más posts 
+                                    </button>
+                                </div>
+                            </td>
+                        </tr> -->
+
+                    
                         
+                        {% for post in posts_by_author %}
+
                         <tr id="{{post.pk}}">
                             <td class="text-center"> <a href="{% url 'post_detail' post.category post.slug %}" target="_blank"> <i class="material-icons align-top md-inactive">open_in_new</i> </a> </td>
                             

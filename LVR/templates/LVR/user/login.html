@@ -112,7 +112,6 @@ $('#login_frm').submit(function(e){
         },
         success:function(json){
         if(json.status){
-            console.log('# --- JS: OK --- #')
             $('#login_form_loading').fadeIn(100).css({'display': 'block'}).delay(3500).fadeOut(750);
             window.location.href = 'dashboard'; 
         }

@@ -79,7 +79,7 @@ class blog_post(m.Model):
     created_date = m.DateTimeField(default=timezone.now)
     published_date = m.DateTimeField(blank=True, null=True)
     status = m.IntegerField(choices=post_status, default=0)
-    # Reactions and votes for a blog post, in the same order: thumbs, fav, util, thumbs down 
+    # Reactions and votes for a blog post: fav, util, thumbs up & thumbs down 
     vote_fav = m.IntegerField(default=0) 
     vote_util = m.IntegerField(default=0)     
     vote_tmbup = m.IntegerField(default=0) 
@@ -101,6 +101,10 @@ class blog_post(m.Model):
 
     def archive_post(self):
         self.status = 3
+        self.save()
+
+    def unarchive_post(self):
+        self.status = 0
         self.save()
 
     def all_cmts(self):
@@ -149,7 +153,7 @@ class blog_postComment(m.Model):
         return 'Comment {} by {}'.format(self.comment_body, self.author)
 
 
-# blog_crew model, used for displaying vip within about page
+# blog_crew model, used for displaying VIP within about page
 class blog_crew(m.Model):
     name = m.CharField(max_length=25)
     title = m.CharField(max_length=35)

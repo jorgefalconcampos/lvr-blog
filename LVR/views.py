@@ -946,9 +946,6 @@ def post_edit(request, slug_text):
     context = {'postForm': form, 'is_edit': True, 'post':post }
     return render (request, template, context)
 
-
-
-
 # This method deletes, archives or rejects a blog post - Only superuser can reject
 def post_actions(request, post_action, pk):
     response_data = {'success': False}
@@ -957,26 +954,52 @@ def post_actions(request, post_action, pk):
         if request.user == post.author.name:
             if post_action == 'delete':
                 post.delete()
-                print('Borrado')
                 response_data['success'] = True
             elif post_action == 'archive':
-                post.status = 3
-                post.save()
-                print('Archivado')
+                post.archive_post()
+                response_data['success'] = True
+            elif post_action == 'unarchive':
+                post.unarchive_post()
                 response_data['success'] = True
         elif request.user == request.user.is_superuser:
             if post_action == 'reject':
-                post.status = 2
-                post.save()
-                print('Rechazado')
+                post.reject_post()
                 response_data['success'] = True
         else: 
-            response_data['invalid_request'] = f"{request.user} cannot perform action - is not the author"
+            response_data['invalid_request'] = f"{request.user} cannot perform this action - is not the author"
     except Exception as e:
         response_data['err'] = str(e)
     finally:
         return JsonResponse(response_data)
-        return redirect('dashboard')
+       
+
+
+
+
+
+# def post_actions_lol(request, post_action, pk):
+#     response_data = {'success': True}
+#     post = blog_post.objects.filter(pk=pk).first()
+#     try:
+#         if request.user == post.author.name:
+#             if post_action == 'delete':
+#                 post.delete()
+#             elif post_action == 'archive':
+#                 post.archive_post()
+#             elif post_action == 'unarchive':
+#                 post.unarchive_post()
+#         elif request.user == request.user.is_superuser:
+#             if post_action == 'reject':
+#                 post.reject_post()
+#         else:
+#             response_data['success'] = False
+#             response_data['invalid_request'] = f"{request.user} cannot perform this action - is not the author"
+#     except Exception as e:
+#         response_data['success'] = False
+#         response_data['err'] = str(e)
+#     finally:
+#         return JsonResponse(response_data)
+       
 
     
 
