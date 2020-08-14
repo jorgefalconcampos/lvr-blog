@@ -46,16 +46,18 @@
                         <th> {% trans 'dashboard_tableTitle_PostActions' %} </th>
                     </tr>
                 </thead>
-                <!-- <tfoot>
+                <tfoot class="bg-dark text-white">
                     <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
+                        <th> {% trans 'dashboard_tableTitle_PostDetail' %} </th>
+                        <th> {% trans 'dashboard_tableTitle_PostTitle' %} </th>
+                        <th> {% trans 'dashboard_tableTitle_PostSubtitle' %} </th>
+                        <th> {% trans 'dashboard_tableTitle_PostImage' %} </th>
+                        <th> {% trans 'dashboard_tableTitle_PostPublishedDate' %} </th>
+                        <th> {% trans 'dashboard_tableTitle_PostComments' %} </th>
+                        <th> {% trans 'dashboard_tableTitle_PostStatus' %} </th>
+                        <th> {% trans 'dashboard_tableTitle_PostActions' %} </th>
                     </tr>
-                </tfoot> -->
+                </tfoot>
                 <tbody>
                     {% for post in post_list %}
                     
@@ -112,7 +114,7 @@
                         
                         
                         <td class="text-center">
-                            <div > 
+                            <div> 
                                 <a class="btn btn-sm btn-outline-info" href="{% url 'post_edit' post.slug %}" target="_blank"> 
                                     <i class="material-icons align-top">edit</i> 
                                 </a> 
@@ -138,41 +140,7 @@
                             
                         </td>
                     </tr>
-                    
-                    <div class="modal fade" id="deletePostModal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <span class="d-flex d-inline">
-                                        <i style="font-size: 30px;" class="material-icons">error</i>
-                                        <h4 class="ml-3 modal-title"> {% trans 'dashboard_PostDelete_Title' %}? </h4>
-                                    </span>
-                                    
-                                    <button type="button" class="close" data-dismiss="modal">×</button>
-                                </div>
-                                
-                                <div class="modal-body">
-                                    <form>
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col-12 pt-2">
-                                                    <div class="container"> 
-                                                        <h6 class="ml-1"> {% trans 'dashboard_PostDelete' %} <b>{{post.title}}</b>? </h6>
-                                                    </div> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                
-                                <div class="modal-footer mr-2">
-                                    <button type="button" class="btn border-secondary" data-dismiss="modal"> {% trans 'dashboard_DProblem_cancel' %} </button>
-                                    <a href="{% url 'post_delete' post.slug %}" class="btn btn-danger"> {% trans 'dashboard_ConfirmDelete' %} </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
+                                        
                     {% endfor %}
                 </tbody>
             </table>
@@ -183,13 +151,11 @@
         <div class="container py-5 my-5">
             <div class="row my-5">
                 <div class="col-lg-6 text-center mb-5 mb-lg-0">
-                    <h3> Parece que aún no escribes ningún artículo...</h3>
+                    <h3>Parece que aún no escribes ningún artículo...</h3>
                     <a href="{% url 'post_new' %}" class="h3 font-weight-bold">¿Porqué no escribes uno nuevo ahora?</a>
                     <div class="row pt-3 pt-lg-5">
                         <div class="col">
-                            <a href="{% url 'post_new' %}" class="btn btn-primary rounded mt-2">
-                                <i class="material-icons align-top mr-1">add_box</i> {% trans 'NewPost' %}
-                            </a>
+                            <a href="{% url 'post_new' %}" class="btn btn-primary rounded mt-2"> <i class="material-icons align-top mr-1">add_box</i>{% trans 'NewPost' %}</a>
                         </div>
                     </div>
                 </div>   
@@ -209,10 +175,10 @@
             {% if post_list.has_other_pages %}
             <ul class="pagination pagination-lg justify-content-center">
                 {% if post_list.has_previous %}
-                <li><a href="?page={{ post_list.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+                <li><a href="?page={{ post_list.previous_page_number }}" class="page-link">&laquo; ANTERIOR</a></li>
                 {% endif %}
                 {% if post_list.has_next %}
-                <li><a href="?page={{ post_list.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+                <li><a href="?page={{ post_list.next_page_number }}" class="page-link">SIGUIENTE &raquo;</a></li>
                 {% endif %}
             </ul>
             {% endif %}

@@ -110,13 +110,12 @@
     {% if not request.user.is_superuser %}
     <div class="card mb-4">
         <div class="card-header">
-            <div class="row d-flex d-inline justify-content-between mx-1">
+            <div class="row d-flex d-inline justify-content-between mx-1" >
                 <span class="d-flex d-inline">
                     <i class="material-icons align-top mr-2">view_compact</i> 
-                    <h6> {% trans 'dashboard_table_MyLatestPosts' %} </h6>
+                    <h6 class="my-auto"> {% trans 'dashboard_table_MyLatestPosts' %} </h6>
                 </span>
-
-                <a href="{% url 'post_list' %}" class="h6"> {% trans 'dashboard_table_AllMyPosts' %} </a>
+                <a href="{% url 'post_list' %}" class="h6 my-auto"> {% trans 'dashboard_table_AllMyPosts' %} </a>
             </div>
         </div> 
 
@@ -139,16 +138,7 @@
                             <th> {% trans 'dashboard_tableTitle_PostActions' %} </th>
                         </tr>
                     </thead>
-                    <!-- <tfoot>
-                        <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
-                        </tr>
-                    </tfoot> -->
+                   
                     <tbody>
                         <!-- <tr id="post_list_empty" style="display: none;">
                             <td colspan="8">

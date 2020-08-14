@@ -544,7 +544,7 @@ a.text-hover-warning {
     color: #ffc107 !important; }
 
 .bg-warning-light {
-  background-color: #fff8e1; }
+  background-color: #FFE793; }
 
 .border-warning {
   border-color: #ffc107 !important; }
@@ -1056,13 +1056,15 @@ a.text-hover-dark {
   border-radius: 0.25rem; }
 
 .navbar-light .navbar-brand {
-  color: #EBEBEB; }
+  color: #EBEBEB;
+  transition: all 0.3s; }
   .navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
-    color: #767676;
-    transition: all 0.3s; }
+    color: #767676; }
     .navbar-light .navbar-brand:hover span, .navbar-light .navbar-brand:focus span {
       color: #F52B2B;
       transition: all 0.3s; }
+      .navbar-light .navbar-brand:hover span:hover, .navbar-light .navbar-brand:hover span:focus, .navbar-light .navbar-brand:focus span:hover, .navbar-light .navbar-brand:focus span:focus {
+        transition: all 0.7s; }
 
 .navbar-light .navbar-nav .nav-link {
   color: #767676;
@@ -1090,7 +1092,8 @@ a.text-hover-dark {
   color: rgba(0, 0, 0, 0.9); }
 
 .navbar-dark .navbar-brand {
-  color: #fff; }
+  color: #fff;
+  transition: all 0.3s; }
   .navbar-dark .navbar-brand:hover, .navbar-dark .navbar-brand:focus {
     color: #fff; }
 
@@ -1275,6 +1278,26 @@ a.text-hover-dark {
 
 .show > .btn-info.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5); }
+
+.btn-warning-light {
+  color: #212529;
+  background-color: #FFE793;
+  border-color: #FFE793;
+  box-shadow: 0 2px 2px rgba(255, 200, 70, 0.2) !important; }
+  .btn-warning-light:hover {
+    color: #212529;
+    background-color: #EACD86;
+    border-color: #EACD86; }
+  .btn-warning-light:focus, .btn-warning-light.focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 200, 70, 0.5); }
+  .btn-warning-light.disabled, .btn-warning-light:disabled {
+    color: #212529;
+    background-color: #FFE793;
+    border-color: #FFE793; }
+  .btn-warning-light:not(:disabled):not(.disabled):active, .btn-warning-light:not(:disabled):not(.disabled).active {
+    color: #212529;
+    background-color: #FFE793;
+    border-color: #FFE793; }
 
 .btn-warning {
   color: #212529;

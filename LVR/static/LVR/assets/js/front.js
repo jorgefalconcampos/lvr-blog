@@ -11,6 +11,14 @@ $(function() {
   });
 
 
+//   $("li").click(
+//     function(event) {
+//       $('li').removeClass('active');
+//       $(this).addClass('active');
+//       event.preventDefault()
+//     }
+// );
+
 
 function restart_ctct_btns(isSent){
   $('#contact_frm_sending').css({'display': 'none'}).fadeOut(800);

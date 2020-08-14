@@ -685,16 +685,12 @@ def settings(request):
             prof_user.save()
             prof_author = profile_author_form.save(commit=False)
             prof_author.save()
-            print('llego a todo segun')
             response_data['success'] = True
             return JsonResponse(response_data)
         else:
             return JsonResponse({'success': False})
     else:
         profile_user_form = ProfileEditUserForm(instance=request.user)
-        # profile_author_form = ProfileEditAuthorForm(instance=request.user)
-
-
 
     if request.POST.get('action') == 'account_Form':
         acc_form = AccountEditUserForm(request.POST, instance=request.user)
@@ -710,7 +706,6 @@ def settings(request):
     else:
         acc_form = AccountEditUserForm(instance=request.user)
 
-
     account_frm_initial = { 'username': request.user, 'email': request.user.email }
     profile_frm_user_initial = { 'first_name': request.user.first_name, 'last_name': request.user.last_name }
     profile_frm_author_initial = { 'title': author.title, 'bio': author.bio, 'email': author.email, 'image':author.image, 'facebook_URL': author.facebook_URL, 'twitter_URL': author.twitter_URL, 'linkedin_URL': author.linkedin_URL }
@@ -723,7 +718,7 @@ def settings(request):
         'ProfileAuthorUserForm': ProfileEditAuthorForm(initial=profile_frm_author_initial),
     }
 
-
+    print(author.slug)
 
 
     if not request.user.is_superuser:
@@ -825,9 +820,6 @@ def sign_up(request):
 def moderate_posts(request):
     template = 'LVR/user/moderate_posts.html'
     all_post_list = blog_post.objects.filter(status=0).order_by('-created_date')
-
-
-
     paginator = Paginator(all_post_list, 10)
     page = request.GET.get('page')
     try:
@@ -839,6 +831,41 @@ def moderate_posts(request):
     context = {'post_list': post_list}
     return render(request, template, context)
 
+
+
+# This method deletes, archives or rejects a blog post - Only superuser can reject
+@login_required(login_url='login')
+def post_actions(request, post_action, pk):
+    response_data = {'success': False}
+    post = blog_post.objects.filter(pk=pk).first()
+    if request.user.is_authenticated:
+        try:
+            if request.user == post.author.name:
+                if post_action == 'delete':
+                    post.delete()
+                    response_data['success'] = True
+                elif post_action == 'archive':
+                    post.archive_post()
+                    response_data['success'] = True
+                elif post_action == 'unarchive':
+                    post.unarchive_post()
+                    response_data['success'] = True
+            elif request.user.is_superuser:
+                if post_action == 'reject':
+                    post.reject_post()
+                    response_data['success'] = True
+                elif post_action == 'approve':
+                    post.approve_post()
+                    response_data['success'] = True
+            else: 
+                response_data['invalid_request'] = f"{request.user} cannot perform this action - is not the author"
+        except Exception as e:
+            response_data['err'] = str(e)
+        finally:
+            return JsonResponse(response_data)
+    else:
+        return redirect('index')
+ 
 
 
 
@@ -941,62 +968,6 @@ def post_edit(request, slug_text):
     context = {'postForm': form, 'is_edit': True, 'post':post }
     return render (request, template, context)
 
-# This method deletes, archives or rejects a blog post - Only superuser can reject
-def post_actions(request, post_action, pk):
-    response_data = {'success': False}
-    post = blog_post.objects.filter(pk=pk).first()
-    try:
-        if request.user == post.author.name:
-            if post_action == 'delete':
-                post.delete()
-                response_data['success'] = True
-            elif post_action == 'archive':
-                post.archive_post()
-                response_data['success'] = True
-            elif post_action == 'unarchive':
-                post.unarchive_post()
-                response_data['success'] = True
-        elif request.user == request.user.is_superuser:
-            if post_action == 'reject':
-                post.reject_post()
-                response_data['success'] = True
-        else: 
-            response_data['invalid_request'] = f"{request.user} cannot perform this action - is not the author"
-    except Exception as e:
-        response_data['err'] = str(e)
-    finally:
-        return JsonResponse(response_data)
-       
-
-
-
-
-
-# def post_actions_lol(request, post_action, pk):
-#     response_data = {'success': True}
-#     post = blog_post.objects.filter(pk=pk).first()
-#     try:
-#         if request.user == post.author.name:
-#             if post_action == 'delete':
-#                 post.delete()
-#             elif post_action == 'archive':
-#                 post.archive_post()
-#             elif post_action == 'unarchive':
-#                 post.unarchive_post()
-#         elif request.user == request.user.is_superuser:
-#             if post_action == 'reject':
-#                 post.reject_post()
-#         else:
-#             response_data['success'] = False
-#             response_data['invalid_request'] = f"{request.user} cannot perform this action - is not the author"
-#     except Exception as e:
-#         response_data['success'] = False
-#         response_data['err'] = str(e)
-#     finally:
-#         return JsonResponse(response_data)
-       
-
-    
 
 
 
@@ -1014,6 +985,7 @@ def post_delete(request, pk):
         response_data['err'] = str(e)
     finally:
         return JsonResponse(response_data)
+
 
 
 @login_required(login_url='login')

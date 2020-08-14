@@ -41,7 +41,7 @@
                                     {% if request.user == post.author.name %}
                                     <div class="alert {% if post.status == 0 %}alert-warning{% endif %}{% if post.status == 1 %}alert-success{% endif %}{% if post.status == 2 %}alert-danger{% endif %}{% if post.status == 3 %}alert-dark{% endif %}">                                    
                                         <div class="row d-flex justify-content-center justify-content-lg-between align-items-center">
-                                            <div class="col-12 col-lg-9 pr-0">
+                                            <div class="col-12 col-lg-8 pr-0">
                                                 <div class="text-center text-lg-left py-2" style="font-size: 14px;">
                                                     <b>
                                                         {% if post.status == 0 %}{% trans 'post_draftStatus' %}{% endif %}
@@ -54,14 +54,14 @@
                                                 </div>
                                             </div>
                                             
-                                            <div class="col-12 col-lg-3 pl-4 text-center">
+                                            <div class="col-12 col-lg-4 pl-0 d-flex justify-content-center  justify-content-lg-end">
                                                 <div class="col-fluid text-center">
                                                     {% if post.status == 1 %}
                                                     <div data-toggle="tooltip" data-html="true" data-placement='top' title="{% trans 'post_alreadyApprovedMsg' %}">
                                                         <a class="btn btn-dark" href="{% url 'post_edit' post.slug %}"><i class="material-icons align-top">edit</i> Editar post </a>
                                                     </div>
                                                     {% else %}
-                                                    <a class="btn btn-dark" href="{% url 'post_edit' post.slug %}"><i class="material-icons align-top">edit</i> Editar post </a>
+                                                    <a class="btn btn-dark" href="{% url 'post_edit' post.slug %}"><i class="material-icons align-top">edit</i> Editar post</a>
                                                     {% endif %}
                                                 </div>
                                             </div>
@@ -216,7 +216,7 @@
                         </div>
                     </div>
                     
-                    <div class="card mt-3 d-none d-sm-block ">
+                    <div class="card mt-3 mb-5 d-none d-sm-block ">
                         <div class="card-body bg-platinum">
                             <h4 class="h4 mb-2 text-center text-lg-left">Buscar</h4>
                             <hr class="mt-1 mb-3">
@@ -234,6 +234,16 @@
                                             </div>
                                         </div>                                    
                                     </form>                         
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+                    
+                    <div class="mt-5">
+                        <div class="mt-5 mb-5 bg-success rounded">
+                            <div class="row">
+                                <div class="col text-center">
+                                    <p class="h6 py-2"> Anuncio patrocinado</p>
                                 </div>
                             </div>
                         </div>
@@ -345,6 +355,14 @@
             </div>
         </section>
         {% endif %}
+
+        <div class="mt-5 mb-5 bg-success rounded">
+            <div class="row">
+                <div class="col text-center">
+                    <p class="h6 py-2"> Anuncio patrocinado</p>
+                </div>
+            </div>
+        </div>
         
         
         {% if post.status == 1 %}

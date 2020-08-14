@@ -30,15 +30,17 @@
                         <th>{% trans 'dashboard_tableTitle_PostActions' %}</th>
                     </tr>
                 </thead>
+
+                <tfoot class="bg-dark text-white">
+                    <th>{% trans 'dashboard_tableTitle_PostDetail' %}</th>
+                    <th>{% trans 'dashboard_tableTitle_PostTitle' %}</th>
+                    <th>{% trans 'dashboard_tableTitle_PostImage' %}</th>
+                    <th>{% trans 'dashboard_tableTitle_PostCreatedDate' %}</th>
+                    <th>{% trans 'dashboard_tableTitle_PostActions' %}</th>
+                </tfoot>
                 <tbody>
                     {% for post in post_list %}
-                    <tr>
-                        <!-- <td class="text-center">  
-                            <div class="custom-control custom-checkbox ml-2" style="transform: scale(1.4);">
-                                <input class="custom-control-input" id="customCheckbox1" type="checkbox">
-                                <label class="custom-control-label" for="customCheckbox1"></label>
-                              </div>            
-                        </td> -->
+                    <tr id="{{post.pk}}">
                         <td class="text-center"> <a href="{% url 'post_detail' post.category post.slug %}" target="_blank"> <i class="material-icons align-top md-inactive">open_in_new</i> </a> </td>
                         <td style="max-width: 350px;"> {{ post.title }} </td>
                         <td class="text-center"> 
@@ -48,21 +50,21 @@
                         </td>
                         <td> {{ post.created_date }} </td>
                         <td class="text-center">
-                            <a class="btn btn-sm btn-outline-success" href=""> <i class="material-icons align-top">check</i> </a> 
+
+                            <button id="approveBtn_in_moderate" class="btn btn-sm btn-outline-success" type="button" data-postid="{{post.pk}}" data-posttitle="{{post.title}}" data-toggle="modal" data-target="#postActionsModal">
+                                <i class="material-icons align-top">check</i>                                 
+                            </button>
+
                             <div class="py-2">
                                 <a class="btn btn-sm btn-outline-success px-1" href=""> 
                                     <i class="material-icons align-top">check</i> <sup><i class="small material-icons align-middle md-18">email</i></sup>
-                                </a> 
-
-                               
+                                </a>
                             </div>
-                            <a data-toggle="modal" data-target="#deletePostModal"> 
-                                <button type="button" class="btn btn-sm btn-outline-danger"> <i class="material-icons align-top">close</i> </button> 
-                            </a> 
+                            <button id="rejectBtn_in_moderate" class="btn btn-sm btn-outline-danger" type="button" data-postid="{{post.pk}}" data-posttitle="{{post.title}}" data-toggle="modal" data-target="#postActionsModal">
+                                <i class="material-icons align-top">close</i>                                 
+                            </button>
                         </td>
                     </tr>
-                  
-                    
                     {% endfor %}
                 </tbody>
             </table>
@@ -70,7 +72,7 @@
         
         {% else %}
         <div class="container mt-3 py-lg-2">
-            <h3 class="mt-5 text-center"> Parece que aún no se ha escrito ningún artículo...</h3>            
+            <h3 class="mt-5 text-center">Parece que aún no se ha escrito ningún artículo...</h3>            
             <div class="row d-flex justify-content-center py-1 py-sm-5 py-md-3 py-lg-1">
                 <div class="col-lg-xs-12 col-lg-sm-12 col-lg-md-8 col-lg-5 col-lg-xl-6">
                     <div class="col text-center mt-3"> 

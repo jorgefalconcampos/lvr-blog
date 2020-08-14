@@ -233,13 +233,28 @@ $('#unarchiveBtn_in_post_edit, #unarchiveBtn_in_post_list').on('click', function
     else{ post_action_config(3,2); }
 });
 
+$('#rejectBtn_in_moderate').on('click', function(){ 
+    postID = $(this).data('postid');
+    posttitle = $(this).data('posttitle');
+    iconName = 'close';
+    post_action_config(4,2)
+});
+
+$('#approveBtn_in_moderate').on('click', function(){ 
+    postID = $(this).data('postid');
+    posttitle = $(this).data('posttitle');
+    iconName = 'check';
+    post_action_config(5,2)
+});
+
 var post_action, iconName, url, where_from, postID, posttitle, sender;
 
 function post_action_config(val, where_f){
     frm = $('#post_action_frm');
-    icon = `<i class="material-icons align-top mr-1 md-20">${iconName}</i>`;
-    buttonText = $('#modal_post_action_confirm')
-    label = $('#post_action_label');    
+    icon = `<i class="material-icons align-top">${iconName}</i>`;
+    button = $('#modal_post_action_confirm')
+    label = $('#post_action_label');   
+     
 
     switch (where_f) { case 1: sender = 'detail'; break; case 2: sender = 'dashboard'; break; default: sender = null; break; }
 
@@ -248,21 +263,35 @@ function post_action_config(val, where_f){
             post_action = 'delete'; 
             frm.attr('method', 'DELETE');
             label.html(`¿Realmente deseas eliminar el post <b>${posttitle}</b>? (ID: ${postID})<br><br>Esta acción no se puede deshacer.`)
-            buttonText.html(`${icon} Si, eliminar`);
+            button.attr('class', 'btn btn-danger px-3'); button.html(`${icon} Si, eliminar`);
         break;
 
         case 2: 
             post_action = 'archive'; 
             frm.attr('method', 'POST');
             label.html(`¿Realmente deseas archivar el post <b>${posttitle}</b>? (ID: ${postID})`)
-            buttonText.html(`${icon} Si, archivar`);
+            button.attr('class', 'btn btn-warning-light px-3'); button.html(`${icon} Si, archivar`);
         break;
 
         case 3: 
             post_action = 'unarchive'; 
             frm.attr('method', 'POST');
             label.html(`¿Sacar del archivo el post <b>${posttitle}</b>? (ID: ${postID})`)
-            buttonText.html(`${icon} Si, desarchivar`);
+            button.attr('class', 'btn btn-warning-light px-3'); button.html(`${icon} Si, desarchivar`);
+        break;
+
+        case 4: 
+            post_action = 'reject'; 
+            frm.attr('method', 'POST');
+            label.html(`¿Rechazar el post <b>${posttitle}</b>? (ID: ${postID})`)
+            button.attr('class', 'btn btn-danger px-3'); button.html(`${icon} Si, rechazar`);
+        break;
+
+        case 5: 
+            post_action = 'approve'; 
+            frm.attr('method', 'POST');
+            label.html(`¿Aprobar el post <b>${posttitle}</b>? (ID: ${postID})`)
+            button.attr('class', 'btn btn-success px-3'); button.html(`${icon} Si, aprobar`);
         break;
       
         default: break;
@@ -275,9 +304,7 @@ $(document).on('submit', '#postActionsModal',function(e){
     switch (post_action) {
         case 'delete': 
             param = 1; success_text = 'El post fue eliminado.';
-            if (sender === 'detail') { 
-                success_text += ' Redireccionando...'; 
-            }
+            if (sender === 'detail') { success_text += ' Redireccionando...'; }
         break;
 
         case 'archive': 
@@ -289,6 +316,10 @@ $(document).on('submit', '#postActionsModal',function(e){
             param = 0; success_text = 'El post fue desarchivado.';
             if (sender === 'detail') { success_text += success_reloading }
         break;
+
+        case 'reject': param = 1; success_text = 'El post fue rechazado.'; break;
+
+        case 'approve': param = 1; success_text = 'El post fue aprobado.'; break;
 
         default: break;        
     }
