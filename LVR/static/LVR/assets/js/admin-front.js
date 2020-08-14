@@ -35,10 +35,10 @@ function success(title, text, param){
     // 2: deletes a post inside the dashboard/all posts page, keeps in url but removes the element
     // 3: archives a post and ... (?)
     switch (param) {
-        case 0: window.setTimeout( function() { window.location.reload(true); }, 1500);  break;
+        case 0: window.setTimeout( function() { $('#postActionsModal').modal('hide'); window.location.reload(true); }, 750);  break;
         case 1: 
             if (sender === 'detail'){
-                window.setTimeout( function() { window.location.href = '/user/dashboard'; }, 1500); 
+                window.setTimeout( function() { window.location.href = '/user/dashboard'; }, 750); 
             }
             else {
                 $('#postActionsModal').modal('hide');
@@ -208,7 +208,7 @@ $(document).on('submit', '#newCatego_frm',function(e){
 
 
 
-$('#deleteBtn_in_post_edit, #deleteBtn_in_dshbrd').on('click', function(){ 
+$('#deleteBtn_in_post_edit, #deleteBtn_in_post_list, #deleteBtn_in_dshbrd').on('click', function(){ 
     postID = $(this).data('postid');
     posttitle = $(this).data('posttitle');
     iconName = 'delete'; 
@@ -217,9 +217,7 @@ $('#deleteBtn_in_post_edit, #deleteBtn_in_dshbrd').on('click', function(){
 });
 
 
-
-
-$('#archiveBtn_in_post_edit').on('click', function(){ 
+$('#archiveBtn_in_post_edit, #archiveBtn_in_post_list').on('click', function(){ 
     postID = $(this).data('postid');
     posttitle = $(this).data('posttitle');
     iconName = 'archive'; 
@@ -227,15 +225,13 @@ $('#archiveBtn_in_post_edit').on('click', function(){
     else{ post_action_config(2,2); }
 });
 
-$('#unarchive_in_post_edit').on('click', function(){ 
+$('#unarchiveBtn_in_post_edit, #unarchiveBtn_in_post_list').on('click', function(){ 
     postID = $(this).data('postid');
     posttitle = $(this).data('posttitle');
     iconName = 'unarchive';
-    if ($(this).attr('id') === 'unarchive_in_post_edit'){ post_action_config(3,1); }
+    if ($(this).attr('id') === 'unarchiveBtn_in_post_edit'){ post_action_config(3,1); }
     else{ post_action_config(3,2); }
 });
-
-
 
 var post_action, iconName, url, where_from, postID, posttitle, sender;
 
@@ -279,7 +275,9 @@ $(document).on('submit', '#postActionsModal',function(e){
     switch (post_action) {
         case 'delete': 
             param = 1; success_text = 'El post fue eliminado.';
-            if (sender === 'detail') { success_text += ' Redireccionando...'; }
+            if (sender === 'detail') { 
+                success_text += ' Redireccionando...'; 
+            }
         break;
 
         case 'archive': 

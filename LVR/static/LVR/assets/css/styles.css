@@ -592,7 +592,7 @@ a.text-hover-dark {
     color: #343a40 !important; }
 
 .bg-dark-light {
-  background-color: #e7e7e8; }
+  background-color: #2626bb !important; }
 
 .border-dark {
   border-color: #343a40 !important; }
@@ -2667,7 +2667,7 @@ h1, h2, h3, h4 {
   border-radius: 5px;
   padding: 5px 0px 5px 10px; }
   .img-upload * {
-    margin: 10px 0px 10px 0px; }
+    margin: 10px 10px 10px 0px; }
 
 .no-underline a:hover {
   text-decoration: none; }

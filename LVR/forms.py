@@ -15,13 +15,15 @@ class PostForm(f.ModelForm):
         model = blog_post
         title_attrs = {'class':'form-control form-control-lg', 'id':'post_title', 'type': 'text', 'name':'title', 'placeholder': 'Escribe el título del post'}
         subtitle_attrs = {'class':'form-control form-control-lg', 'id':'post_subtitle', 'type': 'text', 'name':'subtitle', 'placeholder': 'Escribe el subtítulo del post',}
+        unsplash_url_attrs = {'class':'form-control form-control-lg mr-2', 'id':'post_unsplash_url', 'type': 'URL', 'name':'unsplash_url', 'placeholder': 'https://unsplash.com/photos/urldelafoto',}
         category_attrs = {'class':'selectpicker', 'id':'post_category', 'name':'category', 'data-style':'bs-select-form-control', 'data-title':'Selecciona una categoría', 'data-width':'100%' }
         tags_attrs = {'class': 'form-control form-control-lg,', 'id': 'post_tags', 'type': 'text', 'name': 'tags', 'placeholder': 'Una lista de etiquetas separadas por coma'}
-        fields = ('title', 'subtitle', 'image', 'post_body', 'category', 'tags')
+        fields = ('title', 'subtitle', 'image', 'unsplash_URL', 'post_body', 'category', 'tags')
         labels = {
             'title': 'Título del post',
             'subtitle': 'Subtítulo del post',
             'image': 'Imagen',
+            'unsplash_URL': 'URL de imagen Unsplash',
             'category': 'Categoría',
             'tags': 'Tags',
             'post_body': 'Cuerpo del post'
@@ -30,6 +32,7 @@ class PostForm(f.ModelForm):
         widgets = {
             'title': f.TextInput(attrs=title_attrs),
             'subtitle': f.TextInput(attrs=subtitle_attrs),
+            'unsplash_URL': f.URLInput(attrs=unsplash_url_attrs),
             'category': f.Select(attrs=category_attrs),
             'tags': TagWidget(attrs=tags_attrs),
             'post_body': SummernoteWidget(),
@@ -70,11 +73,10 @@ class CreateUserForm(UserCreationForm):
 
 #Search inside the blog
 class SearchForm(f.Form):
-    q_attrs = {'id':'search_input', 'type': 'text', 'class':'form-control border-0 mr-2', 'placeholder': 'Busca entre todos los posts'}
+    q_attrs = {'type': 'text', 'class':'form-control border-0 mr-2', 'placeholder': 'Busca entre todos los posts'}
     q = f.CharField(label='Escribe una o más palabras clave', max_length=128, widget=f.TextInput(attrs=q_attrs))
-
     def __init__(self, *args, **kwargs):
-        super (SearchForm, self).__init__(*args, **kwargs)
+        super (SearchForm, self).__init__(auto_id=True, *args, **kwargs)
         all_posts = str(blog_post.objects.filter(status=1).count()) #counting all-time posts
         self.fields['q'].widget.attrs['placeholder'] = 'Busca entre +'+all_posts+' posts'
 

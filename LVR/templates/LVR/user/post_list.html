@@ -59,7 +59,7 @@
                 <tbody>
                     {% for post in post_list %}
                     
-                    <tr>
+                    <tr id="{{post.pk}}">
                         <td class="text-center"> <a href="{% url 'post_detail' post.category post.slug %}" target="_blank"> <i class="material-icons align-top md-inactive">open_in_new</i> </a> </td>
                         <td style="max-width: 350px;"> {{ post.title }} </td>
                         <td> {{ post.subtitle }} </td>
@@ -119,23 +119,21 @@
                             </div>
                             
                             <div class="py-2"> 
-                                <a data-toggle="modal" data-target="#deletePostModal"> 
-                                    <button type="button" class="btn btn-sm btn-outline-secondary"> 
-                                        {% if post.status == 3 %}
-                                        <i class="material-icons align-top">unarchive</i> 
-                                        {% else %}
-                                        <i class="material-icons align-top">archive</i>
-                                        {% endif %}
-                                    </button> 
-                                </a> 
+                                {% if post.status == 3 %}
+                                <button id="unarchiveBtn_in_post_list" class="btn btn-sm btn-outline-secondary" type="button" data-postid="{{post.pk}}" data-posttitle="{{post.title}}" data-toggle="modal" data-target="#postActionsModal">
+                                    <i class="material-icons align-top">unarchive</i>
+                                </button> 
+                                {% else %}
+                                <button id="archiveBtn_in_post_list" class="btn btn-sm btn-outline-secondary" type="button" data-postid="{{post.pk}}" data-posttitle="{{post.title}}" data-toggle="modal" data-target="#postActionsModal">
+                                    <i class="material-icons align-top">archive</i> 
+                                </button> 
+                                {% endif %}
                             </div>
                             
                             <div> 
-                                <a data-toggle="modal" data-target="#deletePostModal"> 
-                                    <button type="button" class="btn btn-sm btn-outline-danger"> 
-                                        <i class="material-icons align-top">delete</i> 
-                                    </button> 
-                                </a> 
+                                <button id="deleteBtn_in_post_list" class="btn btn-sm btn-outline-danger" type="button" data-postid="{{post.pk}}" data-posttitle="{{post.title}}" data-toggle="modal" data-target="#postActionsModal">                             
+                                    <i class="material-icons align-top">delete</i> 
+                                </button> 
                             </div>
                             
                         </td>

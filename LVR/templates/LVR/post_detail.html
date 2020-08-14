@@ -86,8 +86,10 @@
     
                                 <hr>
                                 <img itemprop="image" class="img-detail img-fluid rounded" src="{{ post.image.url }}" alt="{{post.title}}"> 
-                                {% if unsplash_URL %}<p class="small text-right m-0 mt-1 mr-2">Foto: <a href="{{ post.unsplash_URL }}" target="_blank">UNSPLASH</a> </p>                                
-                                {% else %} <p class="small text-right m-0 mt-1 mr-2">Foto: <b>UNSPLASH</b> </p>
+                                {% if post.unsplash_URL %}
+                                <p class="small text-right m-0 mt-1 mr-2">Foto: <a class="font-weight-bold" href="{{ post.unsplash_URL }}" target="_blank">UNSPLASH</a> </p>                                
+                                {% else %} 
+                                <p class="small text-right m-0 mt-1 mr-2">Foto: <b>UNSPLASH</b> </p>
                                 {% endif %}
                                 <hr class="mt-1">
     
@@ -97,15 +99,15 @@
                                 <div id="reactions_holder" class="row d-flex d-inline py-3 mb-1 justify-content-center hide">     
                                     <div class="col">
                                         <div id="new_reaction_success" style="display:none; font-size: 14px;" class="alert alert-success text-center mx-3" role="alert"> <i class="material-icons align-bottom md-18 mr-1" id="new_reaction_success_icon"></i> {% trans 'post_reaction_added' %} </div>    
-                                        <ul id="reactions" class="list-inline mb-0 text-center">
-                                            <form id="addReaction" method="POST">
-                                                {% csrf_token %}
-                                                <li class="list-inline-item py-1"> <button id="vote_fav" name="fav" type="submit" class="btn btn-outline-secondary px-3"> <i class="material-icons align-bottom md-20 mr-1">grade</i> {% trans 'favReaction' %} <span class="ml-1 badge badge-light border"> {{post.vote_fav}} </span> </button> </li>
+                                        <form id="addReaction" method="POST">
+                                            {% csrf_token %}
+                                            <ul id="reactions" class="list-inline mb-0 text-center">
+                                                <li class="list-inline-item py-1"> <button id="vote_fav" name="fav" type="submit" class="btn  btn-outline-secondary px-3"> <i class="material-icons align-bottom md-20 mr-1 text-shadow">grade</i> {% trans 'favReaction' %} <span class="ml-1 badge badge-light border"> {{post.vote_fav}} </span> </button> </li>
                                                 <li class="list-inline-item py-1"> <button id="vote_util" name="util" type="submit" class="btn btn-outline-info px-3 mx-1"> <i class="material-icons align-bottom md-20 mr-1">done</i> {% trans 'utilReaction' %} <span class="ml-1 badge badge-light border"> {{post.vote_util}} </span> </button> </li>
-                                                <li class="list-inline-item py-1"> <button id="vote_tmbup" name="up" type="submit" class="btn btn-outline-success px-3 mx-1"> <i class="material-icons align-bottom md-20 mr-1">thumb_up</i> {% trans 'upReaction' %} <span class="ml-1 badge badge-light border"> {{post.vote_tmbup}} </span> </button> </li>
-                                                <li class="list-inline-item py-1"> <button id="vote_tmbdn" name="down" type="submit" class="btn btn-outline-danger px-3"> <i class="material-icons align-bottom md-20 mr-1">thumb_down</i> {% trans 'downReaction' %} <span class="ml-1 badge badge-light border"> {{post.vote_tmbdn}} </span> </button> </li>
-                                            </form>
-                                        </ul>
+                                                <li class="list-inline-item py-1"> <button id="vote_tmbup" name="up" type="submit" class="btn btn-outline-success px-3 mx-1"> <i class="material-icons align-bottom md-20 mr-1 text-shadow">thumb_up</i> {% trans 'upReaction' %} <span class="ml-1 badge badge-light border"> {{post.vote_tmbup}} </span> </button> </li>
+                                                <li class="list-inline-item py-1"> <button id="vote_tmbdn" name="down" type="submit" class="btn btn-outline-danger px-3"> <i class="material-icons align-bottom md-20 mr-1 text-shadow">thumb_down</i> {% trans 'downReaction' %} <span class="ml-1 badge badge-light border"> {{post.vote_tmbdn}} </span> </button> </li>
+                                            </ul>
+                                        </form>
                                     </div>
                                 </div>
                                 {% endif %}
@@ -113,13 +115,13 @@
                                 <div class="row align-middle text-center">
                                     <div class="col-12">
                                         <div itemprop="keywords"> 
-                                            <h5 class="mx-2 d-inline-block align-middle"> Temas: </h5>
+                                            <p class="h5 mx-2 d-inline-block align-middle"> Temas: </p>
                                             {% if post.category %}
                                             <a class="h6 badge badge-pill bg-steel text-white reset-anchor-inherit px-2" href="{% url 'categories_detail' post.category.slug %}"> 
                                                 {{ post.category }}
                                             </a>
                                             {% else %}
-                                            <h6 class="lead mx-2 d-inline-block align-middle"> Al parecer este post no pertenece a ninguna categoría. </h6>
+                                            <p class="h6 lead mx-2 d-inline-block align-middle"> Al parecer este post no pertenece a ninguna categoría. </p>
                                             {% endif %}
                                             
                                             
@@ -130,7 +132,7 @@
                                             </a>
                                             {% endfor %}
                                             {% else %}
-                                            <h6 class="lead mx-2 d-inline-block align-middle"> No hay tags relacionados con este post. </h6>
+                                            <p class="lead mx-2 d-inline-block align-middle"> No hay tags relacionados con este post. </p>
                                             {% endif %}
                                         </div>
                                     </div>
@@ -144,7 +146,7 @@
                 <div class="col-lg-4">
                     <div class="card mt-4 mt-lg-0 mt-xl-0 text-center text-lg-left">
                         <div class="card-body pb-1 pb-lg-3">
-                            <h6 itemprop="dateCreated"> <small> {% trans 'post_detail_PublishedDate' %}: {% if post.published_date %} {{ post.published_date }} {% endif %} </small> </h6>
+                            <p class="h6" itemprop="dateCreated"> <small> {% trans 'post_detail_PublishedDate' %}: {% if post.published_date %} {{ post.published_date }} {% endif %} </small> </p>
                             <div itemprop="creator">
                                 <div class="row mt-3 pt-1 mb-1">
                                     <div class="col-12 col-lg-4">
@@ -220,8 +222,9 @@
                             <hr class="mt-1 mb-3">
                             <div class="row">
                                 <div class="col-lg-12 mx-0">
+                                    <!-- En detalle post -->
                                     <form method="GET" action="{% url 'search' %}" name="" class="mx-0 mb-2 rounded">
-                                        <label class="col bg-platinum p-0 pt-1 text-left ml-1 par" for="search_input">{{searchForm.q.label}}</label>
+                                        <label class="col bg-platinum p-0 pt-1 text-left ml-1 par" for="{{searchForm.q.id_for_label}}">{{searchForm.q.label}}</label>
                                         <div class="bg-white p-2 rounded">
                                             <div class="input-group">
                                                 {{searchForm.q}}
@@ -350,7 +353,7 @@
                 <div class="container card-body">
             
                     <h3 class="py-1 my-3"> <b> {{ comments.count }} </b> {% trans 'post_detail_CountingComments' %} </h3>
-                    <a id="new_cmt_btn" class="my-2 mb-4 btn btn-secondary" href="#newCmt" role="button" data-toggle="collapse" aria-expanded="false" aria-control="newCmt">Escribe un comentario</a>
+                    <a id="new_cmt_btn" class="my-2 mb-4 btn btn-secondary" href="#newCmt" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="newCmt">Escribe un comentario</a>
                     <div id="new_cmt_success" style="display:none;" class="alert alert-success" role="alert"> {% trans 'post_detail_AwaitingModeration' %} </div>
                     <div class="collapse" id="newCmt">
                         <div class="py-3">

@@ -72,9 +72,10 @@
                 <div class="dropdown-header text-center px-1 mx-2 py-2">
                   <h5 class="py-1 font-weight-bold">Busca en el blog</h5>
                   <form method="GET" action="{% url 'search' %}" class="mt-2 mb-1 rounded" >
-                    <label class="bg-platinum py-1 text-center par" for="search_input">{{searchForm.q.label}} {{todos_lmp}} </label>
+                    <label class="bg-platinum py-1 text-center par" for="{{searchForm.q.id_for_label}}">{{searchForm.q.label}} </label>
                     <div class="bg-white p-2 rounded">
                       <div class="input-group">
+                        <!-- In base -->
                         {{searchForm.q}} 
                         <div class="input-group-append rounded">
                           <button class="btn btn-primary rounded d-block d-sm-none" type="submit"><i class="fas fa-search"></i></button>

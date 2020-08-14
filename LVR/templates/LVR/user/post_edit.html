@@ -101,12 +101,16 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
                                         </div>
                                         
                                         <div class="img-upload"> 
                                             <div class="pt-1" data-toggle="tooltip" data-html="true" data-placement='right' title="{% for e in postForm.image.errors %} {% if postForm.image.errors|length == 1 %} <span> {{ e }} </span> {% else %} <li class='ml-1'>  {{ e }} </li> {% endif %} {% endfor %}">
                                                 {{ postForm.image }}  
+
+                                                <!-- {{postForm.image.label}} -->
+
+                                                <!-- {{ postForm.unsplash_URL.label }} -->
+                                                {{ postForm.unsplash_URL }}
                                             </div>
                                         </div>
                                     </div>
@@ -142,13 +146,10 @@
                                         {% if nocategs %}
                                         <button type="button" class="btn btn-primary btn-xl disabled text-uppercase my-3" > <i class="material-icons align-top">save</i> {% trans 'Save' %} </button> 
                                         {% else %}
-                                            {% if is_edit %}
-                                                {% if post.status == 1 %}
+                                            {% if is_edit and post.status == 1 %}
                                                 <div class="float-right" data-toggle="tooltip" data-html="true" data-placement='bottom' title="Este post ya está aprobado, si lo guardas tendrás que esperar a que se apruebe nuevamente.">
                                                     <button type="submit" class="btn btn-primary btn-xl text-uppercase my-3"> <i class="material-icons align-top">save</i> {% trans 'Save' %} </button> 
                                                 </div>
-                                                {% endif %}
-                                            <button type="submit" class="btn btn-primary btn-xl text-uppercase my-3"> <i class="material-icons align-top">save</i> {% trans 'Save' %} </button> 
                                             {% else %}
                                             <button type="submit" class="btn btn-primary btn-xl text-uppercase my-3"> <i class="material-icons align-top">save</i> {% trans 'Save' %} </button> 
                                             {% endif %}
@@ -207,7 +208,7 @@
                     <h6> {% trans 'status_archived' %} </h6>
 
                 </div>    
-                <a id="unarchive_in_post_edit" class="h6 ml-3 border bg-warning-light px-2" style="cursor: pointer;" data-postid="{{post.pk}}" data-posttitle="{{post.title}}" data-toggle="modal" data-target="#postActionsModal">Desarchivar</a>
+                <a id="unarchiveBtn_in_post_edit" class="h6 ml-3 border bg-warning-light px-2" style="cursor: pointer;" data-postid="{{post.pk}}" data-posttitle="{{post.title}}" data-toggle="modal" data-target="#postActionsModal">Desarchivar</a>
 
               
 

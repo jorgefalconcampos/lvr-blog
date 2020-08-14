@@ -97,10 +97,6 @@ def cm(request):
 def search(request):
     template = 'LVR/search.html'
 
-
-    form = SearchForm(request)
-    form.fields['q'].widget.attrs['placeholder'] = 'PUTO'
-
     if request.method == 'GET':
         search_term = request.GET.get('q')
         bad_query = False
@@ -274,11 +270,8 @@ def index(request):
     template_name = 'LVR/index.html'
     all_posts = blog_post.objects.filter(published_date__lte=timezone.now(), status=1).order_by('-published_date') #creating the 'all posts' variable, inside it we'll pass the result of the Query Set
 
-
     # all_osts = str(all_posts.count()) #counting all-time posts
     # print(f"TODOS LOS POSTS: {all_osts}")
-
-
 
     common_tags = blog_post.tags.most_common()[:3] #Getting the latest n trending tags
     trending = []
@@ -304,7 +297,7 @@ def index(request):
         diccionario = {}
 
     # print(diccionario)
-    paginator = Paginator(all_posts, 6) #n posts in each page
+    paginator = Paginator(all_posts, 9) #n posts in each page
     page = request.GET.get('page')
     try:
         post_list = paginator.page(page)
@@ -317,6 +310,8 @@ def index(request):
 
 
 
+
+
 #This method shows the detail of the selected post of the blog
 @check_recaptcha
 def post_detail(request, category_text, slug_text):
@@ -324,7 +319,7 @@ def post_detail(request, category_text, slug_text):
     post = get_object_or_404(blog_post, slug=slug_text)
 
     # if post isn't approved yet, only the author and superuser can see it in detail, otherwise redirect to index
-    if post.status != '1':
+    if post.status != 1:
         if not ((request.user == post.author.name) or (request.user.is_superuser)):
             return redirect('index')
 
@@ -397,7 +392,7 @@ def authors(request):
         dicc['author'] = author
         dicc['posts'] = num
         details.append(dicc)
-    paginator = Paginator(details, 2) #n authors in each page
+    paginator = Paginator(details, 9) #n authors in each page
     page = request.GET.get('page')
     try:
         authors_list = paginator.page(page)
@@ -931,7 +926,7 @@ def post_edit(request, slug_text):
     slug = post.slug
     title = post.title
     if request.method == 'POST':
-        form = PostForm(request.POST, instance=post)
+        form = PostForm(request.POST, instance=post, files=request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
             get_author = blog_author.objects.get(name=request.user)
