@@ -49,51 +49,19 @@
                         <td> {{ post.created_date }} </td>
                         <td class="text-center">
                             <a class="btn btn-sm btn-outline-success" href=""> <i class="material-icons align-top">check</i> </a> 
-                            <a class="btn btn-sm btn-outline-success px-2" href=""> <i class="material-icons align-top">check</i> <sup> <i class="material-icons align-middle md-18">email</i> </sup> </a> 
                             <div class="py-2">
-                                <a data-toggle="modal" data-target="#deletePostModal"> 
-                                    <button type="button" class="btn btn-sm btn-outline-secondary"> <i class="material-icons align-top">archive</i> </button> 
+                                <a class="btn btn-sm btn-outline-success px-1" href=""> 
+                                    <i class="material-icons align-top">check</i> <sup><i class="small material-icons align-middle md-18">email</i></sup>
                                 </a> 
+
+                               
                             </div>
                             <a data-toggle="modal" data-target="#deletePostModal"> 
                                 <button type="button" class="btn btn-sm btn-outline-danger"> <i class="material-icons align-top">close</i> </button> 
                             </a> 
                         </td>
                     </tr>
-                    
-                    <div class="modal fade" id="deletePostModal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <span class="d-flex d-inline">
-                                        <i style="font-size: 30px;" class="material-icons">error</i>
-                                        <h4 class="ml-3 modal-title"> {% trans 'dashboard_PostDelete_Title' %}? </h4>
-                                    </span>
-                                    
-                                    <button type="button" class="close" data-dismiss="modal">×</button>
-                                </div>
-                                
-                                <div class="modal-body">
-                                    <form>
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col-12 pt-2">
-                                                    <div class="container"> 
-                                                        <h6 class="ml-1"> {% trans 'dashboard_PostDelete' %} <b>{{post.title}}</b>? </h6>
-                                                    </div> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                
-                                <div class="modal-footer mr-2">
-                                    <button type="button" class="btn border-secondary" data-dismiss="modal"> {% trans 'dashboard_DProblem_cancel' %} </button>
-                                    <a href="{% url 'post_delete' post.slug %}" class="btn btn-danger"> {% trans 'dashboard_ConfirmDelete' %} </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  
                     
                     {% endfor %}
                 </tbody>
