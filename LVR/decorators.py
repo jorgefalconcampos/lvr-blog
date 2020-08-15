@@ -10,9 +10,10 @@ def check_recaptcha(view_func):
     @wraps(view_func)
     def _wrapped_view(request, *args, **kwargs):
         request.recaptcha_is_valid = None
-        if request.POST.get('action') == 'newCmt_Form':
-            print('\n\n# --- PY: decorator is working! trying to verify captcha... --- #')
+        # recaptcha_response = None
+        if request.method == 'POST':
             recaptcha_response = request.POST.get('grecaptcha_response')
+            print('\n\n# --- PY: decorator is working! trying to verify captcha... --- #')
             url = 'https://www.google.com/recaptcha/api/siteverify'
             values = {
                 'secret': config('GOOGLE_RECAPTCHA_SECRET_KEY'),

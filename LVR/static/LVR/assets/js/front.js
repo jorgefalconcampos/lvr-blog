@@ -1,23 +1,21 @@
 $(function() {
-    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-      history.pushState({}, '', e.target.hash);
-    });
-  
-    var hash = document.location.hash;
-    var prefix = "tab_";
-    if (hash) {
-      $('.list-group a[href="'+hash.replace(prefix,"")+'"]').tab('show');
-    }
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    history.pushState({}, '', e.target.hash);
   });
+  
+  var hash = document.location.hash;
+  var prefix = "tab_";
+  if (hash) {
+    $('.list-group a[href="'+hash.replace(prefix,"")+'"]').tab('show');
+  }
+});
 
-
-//   $("li").click(
-//     function(event) {
-//       $('li').removeClass('active');
-//       $(this).addClass('active');
-//       event.preventDefault()
-//     }
-// );
+var ctct_widget, cmnt_widget;
+var CaptchaCallback = function() {
+  var sk = "6Le7PK0ZAAAAAB35Ahoq-zY-OWb1y_4hBqiQEg3l";
+  ctct_widget = grecaptcha.render('recaptcha_ctct', {'sitekey' : sk});
+  cmnt_widget = grecaptcha.render('recaptcha_cmnt', {'sitekey' : sk});
+};
 
 
 function restart_ctct_btns(isSent){
@@ -35,7 +33,7 @@ $(document).on('submit', '#contact_frm',function(e){
   e.preventDefault();
   $.ajax({
     type:'POST',
-    url:'contact',
+    url:'/contact',
     dataType: 'json',
     data:{
       name:$('#contact_fullName').val(),
@@ -44,7 +42,7 @@ $(document).on('submit', '#contact_frm',function(e){
       msg:$('#contact_message').val(),
       csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
       action: 'sendCtct_Form',
-      grecaptcha_response:grecaptcha.getResponse()
+      grecaptcha_response:grecaptcha.getResponse(ctct_widget)
     },
     success:function(json){
       if(json.success){
@@ -124,7 +122,7 @@ $('#new_comment').submit(function(e){
       comment_body: $('#comment_body').val(),
       csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
       action: 'newCmt_Form',
-      grecaptcha_response:grecaptcha.getResponse()
+      grecaptcha_response:grecaptcha.getResponse(cmnt_widget)
     },
     success:function(json){
       if(json.success){
