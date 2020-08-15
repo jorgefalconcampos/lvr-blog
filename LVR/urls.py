@@ -41,6 +41,7 @@ urlpatterns = [
     path('user/login', views.login, name='login'),
     path('user/signup', views.sign_up, name='signup'),
     path('user/moderate', views.moderate_posts, name='moderate'),
+    path('user/moderate-comments', views.moderate_comments, name='moderate_comments'),
     path('user/category/new', views.new_category, name='new_category'),
     path('user/profile', views.profile, name='profile'),    
     path('user/settings', views.settings, name='settings'),

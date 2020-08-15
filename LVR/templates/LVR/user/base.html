@@ -48,7 +48,7 @@
                         <a class="dropdown-item" href="#"> <i class="material-icons align-top">view_list</i> {% trans 'dashboard_DropDown_Activity' %} </a>
                         <a class="dropdown-item" href="#" type="button" data-toggle="modal" data-target="#problemModal"> <i class="material-icons align-top">error</i> {% trans 'dashboard_DProblem' %} </a>
                         {% if request.user.is_superuser %}
-                        <a class="dropdown-item" href="{{ HTTP_HOST }}/admin"> <i class="material-icons align-top">admin_panel_settings</i> {% trans 'dashboard_DropDown_DjangoAdmin' %} </a>
+                        <a class="dropdown-item" href="{{ HTTP_HOST }}/admin"> <i class="material-icons align-top">admin_panel_settings</i> {% trans 'lbl_DjangoAdmin' %} </a>
                         {% endif %}
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url 'logout' %}"> <i class="material-icons align-top">exit_to_app</i> {% trans 'dashboard_DropDown_Logout' %} </a>
@@ -223,12 +223,20 @@
                     <small> {% trans 'dashboard_Addons' %} </small>
                 </li>
                 <!-- /END Separator -->
+                <a href="{% url 'moderate_comments' %}" class="bg-dark list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <i class="material-icons md-18 mr-2">mark_chat_read</i> 
+                        <span class="menu-collapsed">Moderar comentarios</span>
+                    </div>
+                </a>
+
                 <a href="{% url 'calendar' %}" class="bg-dark list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <i class="material-icons md-18 mr-2">date_range</i> 
                         <span class="menu-collapsed">Calendar</span>
                     </div>
                 </a>
+                
                 <a href="{% url 'tasks' %}" class="bg-dark list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-start align-items-center">
                         <i class="material-icons md-18 mr-2">grading</i> 
@@ -281,7 +289,14 @@
 
             <!-- Content imported from "user/moderate" with the block of code "moderate" -->
             <div>
-                {% block moderate %}
+                {% block moderate_posts %}
+                {% endblock %}
+            </div>
+
+
+            <!-- Content imported from "user/moderate_comments" with the block of code "moderate_comments" -->
+            <div>
+                {% block moderate_comments %}
                 {% endblock %}
             </div>
             

@@ -608,10 +608,11 @@ def profile(request):
             reactions['tmbdn'] += post.vote_tmbdn
         elif post.status == 2:
             posts['rejected'] += 1
-        elif post.status == 2:
+        elif post.status == 3:
             posts['archived'] += 1
 
     total_reactions = sum([int(i) for i in reactions.values()])
+    total_posts = sum([int(i) for i in posts.values()])
 
     context = {'author': author, 'posts': posts, 'total_posts': total_post_list.count(), 'reactions': reactions, 'total_reactions': total_reactions}
     return render (request, 'LVR/user/profile.html', context)
@@ -816,13 +817,13 @@ def sign_up(request):
     return render (request, template, context)
 
 
-
+# Allow superuser accepts, rejects, approves posts
 @login_required(login_url='login')
 @user_passes_test(lambda u: u.is_superuser)
 def moderate_posts(request):
     template = 'LVR/user/moderate_posts.html'
     all_post_list = blog_post.objects.filter(status=0).order_by('-created_date')
-    paginator = Paginator(all_post_list, 10)
+    paginator = Paginator(all_post_list, 15)
     page = request.GET.get('page')
     try:
         post_list = paginator.page(page)
@@ -830,7 +831,15 @@ def moderate_posts(request):
         post_list = paginator.page(1)
     except EmptyPage:
         post_list = paginator.page(paginator.num_pages)
-    context = {'post_list': post_list}
+    context = {'post_list': post_list, 'all_post_list': all_post_list.count()}
+    return render(request, template, context)
+
+
+# Allow superuser or post's user/author accepts or rejects comments inside a post
+@login_required(login_url='login')
+def moderate_comments(request):
+    template = 'LVR/user/moderate_comments.html'
+    context = { }
     return render(request, template, context)
 
 

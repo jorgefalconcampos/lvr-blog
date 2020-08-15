@@ -3,16 +3,16 @@
 {% load i18n %}
 
 
-{% block moderate_posts %}
+{% block moderate_comments %}
 
 
 
 
 <div class="container-fluid">
-    <h1 class="mt-4">{% trans 'ModeratePosts' %}</h1>
+    <h1 class="mt-4">{% trans 'ModerateComments' %}</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active"> 
-            <a href="{% url 'dashboard' %}"> {% trans 'dashboard_mainTitle_dashboard' %}</a>&nbsp/&nbsp{% trans 'ModeratePosts' %} 
+            <a href="{% url 'dashboard' %}"> {% trans 'dashboard_mainTitle_dashboard' %}</a>&nbsp/&nbsp{% trans 'ModerateComments' %} 
         </li>
     </ol>
 
@@ -75,7 +75,7 @@
         
         {% else %}
         <div class="container mt-3 py-lg-2">
-            <h3 class="mt-5 text-center">Parece que aún no se ha escrito ningún artículo...</h3>            
+            <h3 class="mt-5 text-center">Parece que aún no se ha escrito ningún comentario...</h3>            
             <div class="row d-flex justify-content-center py-1 py-sm-5 py-md-3 py-lg-1">
                 <div class="col-lg-xs-12 col-lg-sm-12 col-lg-md-8 col-lg-5 col-lg-xl-6">
                     <div class="col text-center mt-3"> 

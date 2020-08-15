@@ -33,7 +33,29 @@
               <div class="card-body px-4 py-4">
                   <div class="d-flex d-inline justify-content-center text-shadow-light">
                       <i class="material-icons mr-2 text-primary">fact_check</i> 
-                      <h2 class="h5"> <a class="stretched-link reset-anchor-inherit" href="{% url 'moderate' %}"> {% trans 'ModeratePosts' %}</a></h2>
+                      <h2 class="h5"> <a class="stretched-link reset-anchor-inherit" href="{% url 'moderate' %}">{% trans 'ModeratePosts' %}</a></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 py-1 pb-3">
+            <div class="card border-1 categories-item shadow-sm border-secondary-light bg-gray-200">
+              <div class="card-body px-4 py-4">
+                  <div class="d-flex d-inline justify-content-center text-shadow-light">
+                      <i class="material-icons mr-2 text-primary">mark_chat_read</i> 
+                      <h2 class="h5"> <a class="stretched-link reset-anchor-inherit" href="{% url 'moderate_comments' %}">{% trans 'ModerateComments' %}</a></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 py-1 pb-3">
+            <div class="card border-1 categories-item shadow-sm border-secondary-light bg-gray-200">
+              <div class="card-body px-4 py-4">
+                  <div class="d-flex d-inline justify-content-center text-shadow-light">
+                      <i class="material-icons mr-2 text-primary">email</i> 
+                      <h2 class="h5"> <a class="stretched-link reset-anchor-inherit" href=""> {% trans 'SendNewMail' %}</a></h2>
                     </div>
                 </div>
             </div>
@@ -50,12 +72,38 @@
             </div>
         </div>
 
+
+        <div class="col-xl-3 col-md-6 py-1 pb-3">
+            <div class="card border-1 categories-item shadow-sm border-secondary-light bg-gray-200">
+              <div class="card-body px-4 py-4">
+                  <div class="d-flex d-inline justify-content-center text-shadow-light">
+                      <i class="material-icons mr-2 text-primary">grading</i> 
+                      <h2 class="h5"> <a class="stretched-link reset-anchor-inherit" href=""> {% trans 'AddNewTask' %}</a></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+       
+
         <div class="col-xl-3 col-md-6 py-1 pb-3">
             <div class="card border-1 categories-item shadow-sm border-secondary-light bg-gray-200">
               <div class="card-body px-4 py-4">
                   <div class="d-flex d-inline justify-content-center text-shadow-light">
                       <i class="material-icons mr-2 text-primary">category</i> 
                       <h2 class="h5"> <a class="stretched-link reset-anchor-inherit" href="{% url 'new_category' %}"> {% trans 'AddNewCategory' %}</a></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 py-1 pb-3">
+            <div class="card border-1 categories-item shadow-sm border-secondary-light bg-gray-200">
+              <div class="card-body px-4 py-4">
+                  <div class="d-flex d-inline justify-content-center text-shadow-light">
+                      <i class="material-icons mr-2 text-primary">admin_panel_settings</i> 
+                      <h2 class="h5"> <a class="stretched-link reset-anchor-inherit" href="{{ HTTP_HOST }}/admin""> {% trans 'lbl_DjangoAdmin' %}</a></h2>
                     </div>
                 </div>
             </div>
