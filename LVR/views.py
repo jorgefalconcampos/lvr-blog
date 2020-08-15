@@ -99,12 +99,15 @@ def search(request):
     if request.method == 'GET':
         search_term = request.GET.get('q')
         bad_query = False
+        bad_query_len = False 
 
         if not search_term:
             return render(request, template, {'empty_search':True})
 
         if len(search_term) <= 2:
             bad_query = True
+        elif len(search_term) > 50:
+            bad_query_len = True 
         else:
             queryset = []
             queries = search_term.split(" ") #python install 2019 --> [python, install, 2019]
@@ -119,7 +122,7 @@ def search(request):
 
             context = {'results': queryset, 'number': len(queryset), 'query': search_term}
             return render(request, template, context)
-    return render(request, template, {'bad_query':bad_query} )
+    return render(request, template, {'bad_query':bad_query, 'bad_query_len':bad_query_len} )
 
 
 

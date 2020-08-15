@@ -10,7 +10,7 @@
     {% if empty_search %}
         Haz una búsqueda | Le vélo rouge 
     {% else %}
-        {% if bad_query%}
+        {% if bad_query or bad_query_len %}
             Búsqueda imprecisa | Le vélo rouge
         {% else %}
             Búsqueda: {{query}} | Le vélo rouge 
@@ -30,13 +30,13 @@
                 <div class="row my-5 justify-content-start"> 
                     <div class="col">
                         {% if empty_search %}
-                        <h3 class="font-weight-bold">BUSCA LO QUE SEA DENTRO DE <b> LE VÉLO ROUGE</b> </h3>
+                        <h3 class="font-weight-bold">BUSCA LO QUE SEA DENTRO DE <b>LE VÉLO ROUGE</b> </h3>
                         <h5 class="pt-2 pb-1"> Escribe una o más palabras clave relacionadas con tu búsqueda</h5>
                         {% else %}
-                        {% if not bad_query %}
-                        <h3 class="font-weight-bold">RESULTADOS DE LA BÚSQUEDA: "<b>{{query}}</b>"</h3>
+                        {% if bad_query or bad_query_len %}
+                        <h3 class="font-weight-bold">SIN RESULTADOS</h3>
                         {% else %}
-                        <h3 class="font-weight-bold">RESULTADOS DE LA BÚSQUEDA</h3>
+                        <h3 class="font-weight-bold">RESULTADOS DE LA BÚSQUEDA: "<b>{{query}}</b>"</h3>
                         {% endif %}
                         {% if results %}
                         {% if number == 1 %}
@@ -114,21 +114,18 @@
                         {% for post in results %}
                         <div class="row">
                             <div class="pt-3 mx-1">
-
                                 <div class="col-8">
                                     <div class="card">
                                         <div class="img-post img-zoom">    
-                                            <a href="{% url 'post_detail' post.category post.slug %}"> <img class="card-img-top" src="{{ post.image.url }}" alt="{{ post.title }}"> </a>
+                                            <a href="{% url 'post_detail' post.category post.slug %}"> <img class="card-img-top" src="{{ post.image.url }}" alt="{{ post.title }}"></a>
                                         </div>
-                                        <div class="card-body">
+                                        <div class="card-body position-relative">
                                             <h5  class="post-title"> <a href=" {% url 'post_detail' post.category post.slug %}" class="stretched-link"> {{ post.title|highlight:query }} </a> </h5>
                                             <h6 class="post-subtitle mt-3 mb-3"> {{ post.subtitle|highlight:query }} </h6>
                                             <p class="mt-2 card-subtitle text-muted ">Publicado: {{ post.published_date }}</p>
                                         </div>
                                     </div>  
                                 </div>
-
-                               
                             </div>
                         </div>
                         {% endfor %}
@@ -155,12 +152,17 @@
                                 <div class="bd-callout bd-callout-secondary">
                                     <h4>Por favor, introduce al menos una palabra de 3 letras para una búsqueda más precisa</h4>
                                 </div>
-
                                 {% else %}
-                                <div class="bd-callout bd-callout-secondary">
-                                    <h4>Intenta de nuevo cambiando la(s) palabra(s) clave</h4>
-                                    <h6 class="pt-2"> O si lo prefieres, puedes <a href="{% url 'categories' %}">ver todas las categorías</a> </h5>
-                                </div>
+                                    {% if bad_query_len %}
+                                    <div class="bd-callout bd-callout-secondary">
+                                        <h4>Por favor, introduce un término de búsqueda más corto (de máximo 50 caracteres) para una búsqueda más precisa</h4>
+                                    </div>
+                                    {% else %}
+                                    <div class="bd-callout bd-callout-secondary">
+                                        <h4>Intenta de nuevo cambiando la(s) palabra(s) clave</h4>
+                                        <h6 class="pt-2"> O si lo prefieres, puedes <a href="{% url 'categories' %}">ver todas las categorías</a> </h5>
+                                    </div>
+                                    {% endif %}
                                 {% endif %}
                             </div>
                         </div>
