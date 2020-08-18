@@ -99,7 +99,7 @@ def search(request):
     if request.method == 'GET':
         search_term = request.GET.get('q')
         bad_query = False
-        bad_query_len = False 
+        bad_query_len = False
 
         if not search_term:
             return render(request, template, {'empty_search':True})
@@ -107,7 +107,7 @@ def search(request):
         if len(search_term) <= 2:
             bad_query = True
         elif len(search_term) > 50:
-            bad_query_len = True 
+            bad_query_len = True
         else:
             queryset = []
             queries = search_term.split(" ") #python install 2019 --> [python, install, 2019]
@@ -839,9 +839,51 @@ def moderate_posts(request):
 @login_required(login_url='login')
 def moderate_comments(request):
     template = 'LVR/user/moderate_comments.html'
-    context = { }
+    all_comments = blog_postComment.objects.filter(is_approved=False).order_by('-created_date')
+
+    all_posts = {}
+    details = []
+
+    for comment in all_comments:
+        comment_detail = {}
+        comment_detail['pk'] = comment.pk
+        comment_detail['author'] = comment.author
+        comment_detail['author_email'] = comment.author_email
+        comment_detail['body'] = comment.comment_body
+        comment_detail['created'] = comment.created_date
+
+        if not comment.in_post in all_posts:
+            all_posts[comment.in_post] = []
+
+        for k, v in all_posts.items():
+            if k == comment.in_post:
+                print(f"agregar comment al post {k}")
+                all_posts[k].append(comment_detail)
+
+    print(f"\n\n\nDiccionario final: \n\n{all_posts}")
+
+    context = {'all_comments': all_comments, 'all_posts': all_posts}
     return render(request, template, context)
 
+
+
+
+{'articulo2': [
+        {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, 
+        {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, 
+        {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, 
+        {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, 
+        {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, 
+        {'autor': 'pepe', 'autor_email': 's@lol.cpm'}
+    ], 
+'articulo1': [
+    {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, 
+    {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, 
+    {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, 
+    {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, 
+    {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, 
+    {'autor': 'pepe', 'autor_email': 's@lol.cpm'}], 
+'articulo3': [{'autor': 'pepe', 'autor_email': 's@lol.cpm'}, {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, {'autor': 'pepe', 'autor_email': 's@lol.cpm'}]}
 
 
 # This method deletes, archives or rejects a blog post - Only superuser can reject
@@ -868,7 +910,7 @@ def post_actions(request, post_action, pk):
                 elif post_action == 'approve':
                     post.approve_post()
                     response_data['success'] = True
-            else: 
+            else:
                 response_data['invalid_request'] = f"{request.user} cannot perform this action - is not the author"
         except Exception as e:
             response_data['err'] = str(e)
@@ -876,7 +918,7 @@ def post_actions(request, post_action, pk):
             return JsonResponse(response_data)
     else:
         return redirect('index')
- 
+
 
 
 
@@ -990,7 +1032,7 @@ def post_delete(request, pk):
         if request.user == post.author.name:
             post.delete()
             response_data['success'] = True
-        else: 
+        else:
             response_data['invalid_request'] = f"{request.user} cannot perform this action - is not the author"
     except Exception as e:
         response_data['err'] = str(e)
@@ -1008,7 +1050,7 @@ def post_archive(request, pk):
             post.status = 3
             post.save()
             response_data['success'] = True
-        else: 
+        else:
             response_data['invalid_request'] = f"{request.user} cannot perform this action - is not the author"
     except Exception as e:
         response_data['err'] = str(e)

@@ -149,8 +149,8 @@ class blog_postComment(m.Model):
     def approved_comments(self):
         return self.blog_postComment.objects.filter(is_approved=True)
 
-    def __str__(self):
-        return 'Comment {} by {}'.format(self.comment_body, self.author)
+    # def __str__(self):
+        # return 'Comment {} by {}'.format(self.comment_body, self.author)
 
 
 # blog_crew model, used for displaying VIP within about page
