@@ -840,6 +840,7 @@ def moderate_posts(request):
 def moderate_comments(request):
     template = 'LVR/user/moderate_comments.html'
     all_comments = blog_postComment.objects.filter(is_approved=False).order_by('-created_date')
+    all_comments_user = blog_postComment.objects.filter(is_approved=False, in_post__author__name=request.user).order_by('-created_date')
 
     all_posts = {}
     details = []
@@ -853,7 +854,8 @@ def moderate_comments(request):
         comment_detail['created'] = comment.created_date
 
         if not comment.in_post in all_posts:
-            all_posts[comment.in_post] = []
+            if ((request.user.is_superuser) or (request.user == comment.in_post.author.name)):
+                all_posts[comment.in_post] = []
 
         for k, v in all_posts.items():
             if k == comment.in_post:
@@ -864,7 +866,7 @@ def moderate_comments(request):
 
     print(f"\n\n\nDiccionario final: \n\n{all_posts}")
 
-    context = {'all_comments': all_comments, 'all_posts': all_posts}
+    context = {'all_comments': all_comments, 'all_comments_user':all_comments_user, 'all_posts': all_posts}
     return render(request, template, context)
 
 

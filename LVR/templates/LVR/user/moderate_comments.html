@@ -19,7 +19,9 @@
     <section class="pb-4">
         {% if all_comments %}
 
-        <h3 class="text-center text-lg-left"> <b>{{ all_comments.count }}</b> {% trans 'CommentsWithNoModeration' %}</h3>
+        <h3 class="text-center text-lg-left"> 
+            {% if request.user.is_superuser %}<b>{{ all_comments.count }}</b> {% else %}<b>{{ all_comments_user.count }}</b> {% endif %}{% trans 'CommentsWithNoModeration' %}
+        </h3>
         <hr>
 
         {% for post, v in all_posts.items %}
