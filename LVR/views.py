@@ -857,8 +857,10 @@ def moderate_comments(request):
 
         for k, v in all_posts.items():
             if k == comment.in_post:
-                print(f"agregar comment al post {k}")
-                all_posts[k].append(comment_detail)
+                # print(f"user dj: {request.user}")
+                # print(f"user author: {k.author.user}")
+                # if ((request.user.is_superuser) or (request.user == k.author)):
+                    all_posts[k].append(comment_detail)
 
     print(f"\n\n\nDiccionario final: \n\n{all_posts}")
 

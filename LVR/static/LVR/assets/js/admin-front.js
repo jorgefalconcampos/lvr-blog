@@ -17,8 +17,7 @@ $("#settings_notifications, #settings_widgets, #settings_delete_acc").click(func
 // $('#post_list_empty').removeAttr('style')
 
 
-var success_title = 'Cambios guardados con éxito', success_text = 'Los cambios fueron guardados. ', success_reloading = ' Recargando esta página...';
-
+var success_title = 'Cambios guardados con éxito', success_text = 'Los cambios fueron guardados. ', success_reloading = ' Recargando...';
 
 function success(title, text, param){
     if($("#toastForm").hasClass("border-danger")){$("#toastForm").removeClass('border-danger'); $("#toastForm").addClass('border-success'); }
@@ -64,19 +63,36 @@ function error(title, text){
 
 
 
+var sthInput = false;
+
+function img_profile_filename(elemID){
+    if (elemID === 'profile_image'){
+        var path = document.getElementById('profile_image').value;//take path
+        var tokens = path.split('\\');//split path
+        var filename = tokens[tokens.length-1]
+        var output = filename.substr(0, filename.lastIndexOf('.')) || filename;
+        return(output);
+    }
+    else{ if(sthInput == true) { var output = elemID.substr(0, elemID.lastIndexOf('.')) || elemID; 
+        alert('el default es: ' +output) 
+        } else{ return false;}
+    }   
+}
 
 
 //Profile form
 $(window).on('load',function(){
+
     //Default values (marked with the prefix 'd'.) They're displayed directly from db
     var d_fname = $('#profile_firstName').val(), 
         d_lname = $('#profile_lastName').val(), 
         d_title = $('#profile_title').val(), 
         d_bio = $('#profile_bio').val(), 
+        d_img = img_profile_filename($('#profile_author_img').text()), 
         d_pemail = $('#profile_email').val(), 
         d_fb = $('#profile_facebook').val(), 
         d_tw = $('#profile_twitter').val(),
-        d_li = $('#proprofile_linkedin').val();
+        d_li = $('#proprofile_linkedin').val();     
 
      //If user leaves the section, get default values again and fill inputs...
      $("#settings_profile").click(function(){
@@ -89,6 +105,22 @@ $(window).on('load',function(){
         $("#profile_twitter").val(d_tw); 
         $("#proprofile_linkedin").val(d_li); 
     });
+
+
+    $("#profile_image").change(function () {
+        var validExtensions = ["jpg","jpeg","png"]
+        var file = $(this).val().split('.').pop().toLowerCase();
+
+        if (validExtensions.indexOf(file) == -1) { 
+            error('Formato incorrecto', 'Solo se aceptan formatos de imagen.\nRecomendamos usar '+ validExtensions.join(', ')+'.');
+            $(this).filestyle('clear'); sthInput = false; 
+        } else{  if (this.files[0].size > 2097152) {
+            size = (this.files[0].size/Math.pow(1024,2)).toFixed(2).slice('0, -1');
+            error('Imagen demasiado grande', `La imagen seleccionada tiene un tamaño aproximado de ${size} MB, y excede el límite de tamaño permitido (2 MB).`);
+            $(this).filestyle('clear'); sthInput = false; } else{ sthInput = true; }        
+        }
+    });
+
     
     $(document).on('submit', '#profile_frm',function(e){
         var data = new FormData($('#profile_frm').get(0));
@@ -99,12 +131,13 @@ $(window).on('load',function(){
         var n_lname = $('#profile_lastName').val();
         var n_title = $('#profile_title').val();
         var n_bio = $('#profile_bio').val();
+        var n_img = img_profile_filename('profile_image');
         var n_pemail = $('#profile_email').val();
         var n_fb = $('#profile_facebook').val();
         var n_tw = $('#profile_twitter').val();
         var n_li = $('#proprofile_linkedin').val();
 
-        if ((n_fname != d_fname)||(n_lname != d_lname)||(n_title != d_title)||(n_bio != d_bio)||(n_pemail != d_pemail)||(n_fb != d_fb)||(n_tw != d_tw)||(n_li != d_li)){            
+        if ((n_fname != d_fname)||(n_lname != d_lname)||(sthInput != false)||((n_img!="")&&(n_img!=d_img))||(n_title != d_title)||(n_bio != d_bio)||(n_pemail != d_pemail)||(n_fb != d_fb)||(n_tw != d_tw)||(n_li != d_li)){
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
@@ -121,8 +154,7 @@ $(window).on('load',function(){
                 },
             });
         }
-        else { 
-            error('Error en los datos', 'No se detectaron cambios');}
+        else {  error('Error en los datos', 'No se detectaron cambios'); }
     });
 });
 

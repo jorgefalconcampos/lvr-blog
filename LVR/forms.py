@@ -114,8 +114,16 @@ class ProfileEditAuthorForm(f.ModelForm):
     title_attrs = {'class':'form-control', 'id':'profile_title', 'type':'text', 'placeholder':'Redactor, ingeniero, padre de familia, maestro Jedi...' }
     bio_attrs = {'class':'form-control txtarea-maxh-200', 'id':'profile_bio', 'rows':'2', 'placeholder':'Cuéntale a los lectores un poco de ti y de tu vida :)'}
     email_attrs = {'class':'form-control', 'id':'profile_email', 'name':'email_url', 'type':'email', 'placeholder':'usuario@dominio.com'}
-    image_attrs = { 'class':'filestyle', 'id':'profile_image', 'type':'file', 'data-buttonBefore':'true', 'data-size':'sm', 'data-text':'Subir foto',
-        "data-icon":"<i class='fas fa-file-image pr-2'></i>", 'data-btnClass':'btn-dark px-3', 'data-placeholder':'Ningún archivo seleccionado' }
+    image_attrs = { 
+        'class':'filestyle', 
+        'id':'profile_image', 
+        'type':'file', 
+        'data-buttonBefore':'true', 
+        'data-size':'sm', 
+        'data-text':'Subir foto',
+        "data-icon":"<i class='fas fa-file-image pr-2'></i>", 
+        'data-btnClass':'btn-dark px-3', 
+        'data-placeholder':'Ningún archivo seleccionado' }
     fb_attrs = {'class':'form-control', 'id':'profile_facebook', 'name':'facebook_url', 'type':'url', 'placeholder':'https://www.facebook.com/myprofile' }
     tw_attrs = {'class':'form-control', 'id':'profile_twitter', 'name':'twitter_url', 'type':'url', 'placeholder':'https://www.twitter.com/myprofile' }
     li_attrs = {'class':'form-control', 'id':'profile_linkedin', 'name':'linkedin_url', 'type':'url', 'placeholder':'https://www.linkedin.com/myprofile' }
@@ -123,7 +131,7 @@ class ProfileEditAuthorForm(f.ModelForm):
     title = f.CharField(label='Título', max_length=32, widget=f.TextInput(attrs=title_attrs))
     bio = f.CharField(label='Biografía', max_length=128, widget=f.Textarea(attrs=bio_attrs))
     email = f.EmailField(label='Email público', max_length=32, widget=f.EmailInput(attrs=email_attrs), required=False)
-    image = f.ImageField(widget=f.FileInput(attrs=image_attrs), required=False, help_text='Sube una foto cuadrada de 300x300 píxeles en formato .jpg o .png. El tamaño de la foto debe ser menor a 2 MB.' )
+    image = f.ImageField(widget=f.FileInput(attrs=image_attrs), required=False, help_text='Sube una foto cuadrada de 300x300 píxeles en formato [jpg], [jpeg] o [png]. El tamaño de la foto debe ser menor a 2 MB.' )
     facebook_URL = f.URLField(max_length=256, widget=f.TextInput(attrs=fb_attrs), required=False)
     twitter_URL = f.CharField(max_length=256, widget=f.TextInput(attrs=tw_attrs), required=False)
     linkedin_URL = f.CharField(max_length=256, widget=f.TextInput(attrs=li_attrs), required=False)

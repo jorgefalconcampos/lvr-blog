@@ -1,3 +1,4 @@
+import os 
 from django.db import models as m
 # Importing pre_save to auto-generate the post slug and post_save to auto generate/update the blog_author model
 from django.db.models.signals import pre_save, post_save 
@@ -33,6 +34,9 @@ class blog_author(m.Model):
         if created:
             blog_author.objects.create(name=instance)
         instance.blog_author.save()
+
+    def image_filename(self):
+        return os.path.basename(self.image.name)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name.first_name+' '+self.name.last_name)
