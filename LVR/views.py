@@ -414,7 +414,7 @@ def author_detail(request, pinchiautor):
     template = 'LVR/author_detail.html'
     author = get_object_or_404(blog_author, slug=pinchiautor)
     posts_by_author = blog_post.objects.filter(author__slug=pinchiautor, status=1).order_by('-published_date')  #Getting al posts by the current author
-    paginator = Paginator(posts_by_author, 5)
+    paginator = Paginator(posts_by_author, 6)
     page = request.GET.get('page')
     try:
         post_list = paginator.page(page)
@@ -450,7 +450,7 @@ def tags_detail(request, slug):
         post_list = paginator.page(1)
     except EmptyPage:
         post_list = paginator.page(paginator.num_pages)
-    context = { 'tag': tag, 'posts': posts, 'post_list': post_list }
+    context = { 'tag': tag, 'post_list': post_list }
     return render(request, template, context)
 
 
@@ -482,7 +482,7 @@ def categories_detail(request, slug):
     except EmptyPage:
         post_list = paginator.page(paginator.num_pages)
 
-    context = { 'category': category, 'posts': posts, 'post_list': post_list}
+    context = { 'category': category, 'post_list': post_list}
     return render(request, template, context)
 
 

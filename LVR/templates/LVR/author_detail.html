@@ -80,6 +80,12 @@
                                     <img class="card-img-top" src="{{ post.image.url }}" alt="{{ post.title }}">
                                 </a>
                             </div>
+
+                            <div class="post-category p-3">
+                                <a href="{% url 'categories_detail' post.category.slug %}" class="stretched-link reset-anchor-inherit">
+                                    {{post.category|truncatechars:20}}
+                                </a>
+                            </div>
                 
                             <div class="card-body">
                                 <h5 class="post-title"><a href=" {% url 'post_detail' post.category post.slug %} "> {{ post.title }} </a></h5>         
