@@ -74,7 +74,7 @@ function img_profile_filename(elemID){
         return(output);
     }
     else{ if(sthInput == true) { var output = elemID.substr(0, elemID.lastIndexOf('.')) || elemID; 
-        alert('el default es: ' +output) 
+        // alert('el default es: ' +output) 
         } else{ return false;}
     }   
 }
