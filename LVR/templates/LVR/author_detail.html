@@ -115,7 +115,7 @@
 
 {% if post_list %}
 <div class="col d-flex justify-content-center">
-    <div class="pt-2 pb-5 mb-5">
+    <div class="pt-2 mb-5">
         {% if post_list.has_other_pages %}
         <ul class="pagination pagination-lg justify-content-center">
             {% if post_list.has_previous %}
@@ -130,6 +130,17 @@
     </div>
 </div>
 {% endif %}
+
+
+<div class="container">
+    <div class="mt-5 mb-5 bg-success rounded">
+        <div class="row">
+            <div class="col text-center">
+                <p class="h6 py-2"> Anuncio patrocinado</p>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 {% endblock %}
