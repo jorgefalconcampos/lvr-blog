@@ -1,34 +1,31 @@
 $(window).on('load',function(){
     $('#inProgressModal').modal('show');
     $('#noCategoModal').modal('show');
-    // $('#postActionsModal').modal('show');
+    $('[data-toggle="tooltip"]').tooltip(); 
     // alert(window.location.origin); //http://localhost:9000
 
     $('[id^="cmt_counter"]').each(function() {
-        //getting only the numeric pat
-        var post_id = $(this).attr('id').replace(/[^\d]+/, '');
-        //addint the post_id with the number of comments
-        post_details[post_id] = parseInt($(this).html());
-        console.log(JSON.stringify(post_details));
+        //getting only the numeric part
+        var post_id = $(this).attr('id').replace(/[^\d]+/, ''); 
+        //adding to a JSON object the post_id with the number of comments inside that post
+        post_details[post_id] = parseInt($(this).html()); 
+        // console.log(JSON.stringify(post_details));
     });
-
 });
 
+
+
 var post_details = {}
-
-
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip(); 
-}); 
 
 $("#settings_notifications, #settings_widgets, #settings_delete_acc").click(function(){
     $("#toastMessage").toast('show'); 
 });
 
 
-// $('#post_list_empty').removeAttr('style')
 
 
+
+// START TOAST MESSAGES SECTION //
 var success_title = 'Cambios guardados con éxito', success_text = 'Los cambios fueron guardados. ', success_reloading = ' Recargando...';
 
 function success(title, text, param, rowID, modal_ID){
@@ -55,6 +52,7 @@ function success(title, text, param, rowID, modal_ID){
                 $(modal_ID).modal('hide');
                 $(`#${rowID}`).delay(500).fadeOut(1000, function(){$(this).remove();}); //removing the whole table row element
 
+                // below code only applies when we're moderating comments
                 var general_cmts = parseInt($('#general_cmt_counter').html());
                 general_cmts -= 1;
                 $(`#general_cmt_counter`).text(general_cmts).delay(500).fadeIn(700);
@@ -62,7 +60,7 @@ function success(title, text, param, rowID, modal_ID){
                 post_details[postcmtID] = post_details[postcmtID]-1;
                 $(`#cmt_counter_${postcmtID}`).text(post_details[postcmtID]).delay(500).fadeIn(700);
 
-                if (post_details[postcmtID] < 1){
+                if (post_details[postcmtID] < 1){ 
                     $(`#accordion_${postcmtID}`).delay(500).fadeOut(1000, function(){$(this).remove();}); //removing the whole accordion element
                 }
 
@@ -75,8 +73,6 @@ function success(title, text, param, rowID, modal_ID){
       
         default:  break;
       }
-    
-    
 }
 
 
@@ -88,11 +84,14 @@ function error(title, text){
     $("#msg_txt").text(text); 
     $("#toastForm").toast('show');
 }
+// END TOAST MESSAGES SECTION //
 
 
 
+
+
+// This function works with Profile settings form
 var sthInput = false;
-
 function img_profile_filename(elemID){
     if (elemID === 'profile_image'){
         var path = document.getElementById('profile_image').value;//take path
@@ -102,13 +101,11 @@ function img_profile_filename(elemID){
         return(output);
     }
     else{ if(sthInput == true) { var output = elemID.substr(0, elemID.lastIndexOf('.')) || elemID; 
-        // alert('el default es: ' +output) 
         } else{ return false;}
     }   
 }
 
-
-//Profile form
+//Profile settings form
 $(window).on('load',function(){
 
     //Default values (marked with the prefix 'd'.) They're displayed directly from db
@@ -122,7 +119,7 @@ $(window).on('load',function(){
         d_tw = $('#profile_twitter').val(),
         d_li = $('#proprofile_linkedin').val();     
 
-     //If user leaves the section, get default values again and fill inputs...
+     //If user leaves the section, get default values again and fill inputs
      $("#settings_profile").click(function(){
         $("#profile_firstName").val(d_fname); 
         $("#profile_lastName").val(d_lname); 
@@ -154,7 +151,7 @@ $(window).on('load',function(){
         var data = new FormData($('#profile_frm').get(0));
         data.append('action', 'profile_Form');
         e.preventDefault();
-        //New values introduced by user. If they're different than the default, then they've been changed, then update to db
+        //New values introduced by user. If they're different than the default, then they've been changed, so we update them to db
         var n_fname = $('#profile_firstName').val();
         var n_lname = $('#profile_lastName').val();
         var n_title = $('#profile_title').val();
@@ -190,16 +187,14 @@ $(window).on('load',function(){
 
 
 
-
-//Account form 
-
+//Account settings form 
 $(window).on('load',function(){
 
     //Default values (marked with the prefix 'd'.) They're displayed directly from db
     var d_usr = $('#acc_username').val(); 
     var d_email = $('#acc_email').val();
     var hasChanged = false;
-    //If user leaves the section, get default values again and fill inputs...
+    //If user leaves the section, get default values again and fill inputs
     $("#settings_account").click(function(){
         $("#acc_username").val(d_usr); 
         $("#acc_email").val(d_email); 
@@ -207,7 +202,7 @@ $(window).on('load',function(){
     
     $(document).on('submit', '#account_frm',function(e){
         e.preventDefault();
-        //New values introduced by user. If they're different than the default, then they've been changed, then update to db
+        //New values introduced by user. If they're different than the default, then they've been changed, so we update them to db
         var n_user = $('#acc_username').val();
         var n_email = $('#acc_email').val();
         if ((n_user != d_usr)||(n_email != d_email)){ 
@@ -238,6 +233,8 @@ $(window).on('load',function(){
 
 
 
+
+// New category form
 $(document).on('submit', '#newCatego_frm',function(e){
     var data = new FormData($('#newCatego_frm').get(0));
     e.preventDefault();
@@ -267,9 +264,11 @@ $(document).on('submit', '#newCatego_frm',function(e){
 });
 
 
-// START COMMENTS //
-var cmtID, postcmtID, cmt_author, cmt_body, comment_action;
 
+
+
+// START MODERATE COMMENTS SECTION //
+var cmtID, postcmtID, cmt_author, cmt_body, comment_action;
 
 $('[id^="approveCommentBtn_in_moderate"]').click(function() {
     postcmtID = $(this).data('postcmtid');
@@ -288,7 +287,6 @@ $('[id^="rejectCommentBtn_in_moderate"]').click(function() {
     iconName = 'delete';
     cmts_action_config(2)
  });
-
 
 function cmts_action_config(val){
     frm = $('#comment_action_frm');
@@ -315,7 +313,6 @@ function cmts_action_config(val){
       }
 }
 
-
 $(document).on('submit ', '#commentActionsModal',function(e){
     var param; // Param is sent to success function. 0 reloads the page, 1 deletes the row 
     switch (comment_action) {
@@ -339,55 +336,43 @@ $(document).on('submit ', '#commentActionsModal',function(e){
         });
 
 });
+// END COMMENTS SECTION //
 
 
-// END COMMENTS //
 
 
 
+// START MANAGE/MODERATE POSTS SECTION //
 $('#deleteBtn_in_post_edit, #deleteBtn_in_post_list, #deleteBtn_in_dshbrd').on('click', function(){ 
-    postID = $(this).data('postid');
-    posttitle = $(this).data('posttitle');
-    iconName = 'delete'; 
+    postID = $(this).data('postid'); posttitle = $(this).data('posttitle'); iconName = 'delete'; 
     if ($(this).attr('id') === 'deleteBtn_in_post_edit'){ post_action_config(1,1); }
     else{ post_action_config(1,2); }
-
 });
 
 
 $('#archiveBtn_in_post_edit, #archiveBtn_in_post_list').on('click', function(){ 
-    postID = $(this).data('postid');
-    posttitle = $(this).data('posttitle');
-    iconName = 'archive'; 
+    postID = $(this).data('postid'); posttitle = $(this).data('posttitle'); iconName = 'archive'; 
     if ($(this).attr('id') === 'archiveBtn_in_post_edit'){ post_action_config(2,1); }
     else{ post_action_config(2,2); }
 });
 
 $('#unarchiveBtn_in_post_edit, #unarchiveBtn_in_post_list').on('click', function(){ 
-    postID = $(this).data('postid');
-    posttitle = $(this).data('posttitle');
-    iconName = 'unarchive';
+    postID = $(this).data('postid'); posttitle = $(this).data('posttitle'); iconName = 'unarchive';
     if ($(this).attr('id') === 'unarchiveBtn_in_post_edit'){ post_action_config(3,1); }
     else{ post_action_config(3,2); }
 });
 
 
 $('[id^="rejectBtn_in_moderate"]').click(function() {
-    postID = $(this).data('postid');
-    posttitle = $(this).data('posttitle');
-    iconName = 'close';
-    // alert(postID+' '+posttitle+' '+iconName);
-    post_action_config(4,2)
+    postID = $(this).data('postid'); posttitle = $(this).data('posttitle');
+    iconName = 'close'; post_action_config(4,2)
  });
+
 
 $('[id^="approveBtn_in_moderate_"]').click(function() {
-    postID = $(this).data('postid');
-    posttitle = $(this).data('posttitle');
-    iconName = 'check';
-    // alert(postID+' '+posttitle+' '+iconName);
-    post_action_config(5,2)
+    postID = $(this).data('postid'); posttitle = $(this).data('posttitle');
+    iconName = 'check'; post_action_config(5,2)
  });
-
 
 var post_action, iconName, url, where_from, postID, posttitle, sender;
 
@@ -395,11 +380,9 @@ var frm = $('#post_action_frm');
 var button = $('#modal_post_action_confirm'); 
 var label = $('#post_action_label');   
 
-
 function post_action_config(val, where_f){
-    
     icon = `<i class="material-icons align-top">${iconName}</i>`;
-
+    // where_f means where from, the sender (can be details page or dashboard page)
     switch (where_f) { case 1: sender = 'detail'; break; case 2: sender = 'dashboard'; break; default: sender = null; break; }
 
     switch (val) { // 1: delete, 2: archive, 3: unarchive, 4: reject
@@ -441,7 +424,6 @@ function post_action_config(val, where_f){
         default: break;
       }
 }
-
 
 $(document).on('submit', '#postActionsModal',function(e){
     var param; // Param is sent to success function. 0 reloads the page, 1 deletes the row 
@@ -490,9 +472,7 @@ $(document).on('submit', '#postActionsModal',function(e){
         });
 
 });
-
-
-
+// END MANAGE/MODERATE POSTS SECTION //
 
 
 
@@ -517,15 +497,15 @@ function getCookie(name) {
 var csrftoken = getCookie('csrftoken');
 
 function csrfSafeMethod(method) {
-        // these HTTP methods do not require CSRF protection
-        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-    }
-    $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            }
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
         }
-    });
+    }
+});
 
 
