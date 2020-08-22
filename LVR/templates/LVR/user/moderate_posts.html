@@ -52,8 +52,7 @@
                         </td>
                         <td> {{ post.created_date }} </td>
                         <td class="text-center">
-
-                            <button id="approveBtn_in_moderate" class="btn btn-sm btn-outline-success" type="button" data-postid="{{post.pk}}" data-posttitle="{{post.title}}" data-toggle="modal" data-target="#postActionsModal">
+                            <button id="approveBtn_in_moderate_{{post.pk}}" class="btn btn-sm btn-outline-success mx-1" type="button" data-postid="{{post.pk}}" data-posttitle="{{post.title}}" data-toggle="modal" data-target="#postActionsModal">
                                 <i class="material-icons align-top">check</i>                                 
                             </button>
 
@@ -63,7 +62,7 @@
                                 </a>
                             </div> -->
 
-                            <button id="rejectBtn_in_moderate" class="btn btn-sm btn-outline-danger" type="button" data-postid="{{post.pk}}" data-posttitle="{{post.title}}" data-toggle="modal" data-target="#postActionsModal">
+                            <button id="rejectBtn_in_moderate_{{post.pk}}" class="btn btn-sm btn-outline-danger mx-1" type="button" data-postid="{{post.pk}}" data-posttitle="{{post.title}}" data-toggle="modal" data-target="#postActionsModal">
                                 <i class="material-icons align-top">close</i>                                 
                             </button>
                         </td>

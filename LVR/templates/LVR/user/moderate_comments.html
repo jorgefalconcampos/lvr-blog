@@ -8,6 +8,41 @@
 
 
 
+
+<div class="modal fade pt-5 mt-5" id="commentActionsModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-gray-400">
+                <span class="d-flex d-inline">
+                    <i style="font-size: 30px;" class="material-icons">error</i>
+                    <h4 class="ml-3 modal-title">Confirmar acción sobre comentario</h4>
+                </span>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            
+            <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 pt-2">
+                                <div class="container"> 
+                                    <h6 id="cmt_action_label" class="ml-1"> </h6>
+                                 </div> 
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            
+            <div class="modal-footer mr-2">
+                <button data-dismiss="modal" class="btn border-secondary" type="button"> Cancelar </button> 
+                <form id="comment_action_frm"> 
+                    <button id="modal_comment_action_confirm" type="submit"> </button> 
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="container-fluid">
     <h1 class="mt-4">{% trans 'ModerateComments' %}</h1>
     <ol class="breadcrumb mb-4">
@@ -19,9 +54,7 @@
     <section class="pb-4">
         {% if all_comments %}
 
-        <h3 class="text-center text-lg-left"> 
-            {% if request.user.is_superuser %}<b>{{ all_comments.count }}</b> {% else %}<b>{{ all_comments_user.count }}</b> {% endif %}{% trans 'CommentsWithNoModeration' %}
-        </h3>
+        <h3 class="text-center text-lg-left"><b id="general_cmt_counter">{{ all_comments.count }}</b> {% trans 'CommentsWithNoModeration' %}</h3>
         <hr>
 
         {% for post, v in all_posts.items %}
@@ -33,10 +66,16 @@
                             <div class="row d-flex justify-content-between" data-toggle="collapse" data-target="#collapse_cmts_{{post.pk}}" style="cursor: pointer;">
                                 <span class="h4 my-auto font-weight-bold text-center text-lg-left">
                                     <i class="material-icons align-middle md-26">chat_bubble</i> 
-                                    {{post.non_approved_cmts}}
+                                    <p id="cmt_counter_{{post.pk}}" class="d-inline">{{post.non_approved_cmts}}</p>
                                     <button class="btn btn-link pl-2" data-toggle="collapse" data-target="#collapse_cmts_{{post.pk}}" aria-expanded="true"> 
-                                        <i class="material-icons align-top">keyboard_arrow_down</i> 
-                                        <div class="d-inline">{{post|truncatechars:80}}</div>                                                                     
+                                        <i class="material-icons align-top">keyboard_arrow_down</i>
+                                        {% if request.user.is_superuser %}
+                                            <div class="d-inline" data-toggle="tooltip" data-html="true" data-placement='top' title="{{post.author.name.get_full_name|default:post.author.name}}">
+                                                {{post|truncatechars:80}}
+                                            </div>
+                                            {% else%}
+                                            <div class="d-inline">{{post|truncatechars:80}}</div>                                                                     
+                                        {% endif %}
                                     </button>
                                 </span>
                                 
@@ -71,12 +110,12 @@
                                             <td class="text-center">{{cmt.body}}</td>
                                             <td class="text-center" style="max-width: 350px;">{{cmt.created}}</td>
                                             <td class="text-center">
-                                                <button id="approveCommentBtn_in_moderate" class="btn btn-sm btn-outline-success mx-1" type="button" data-postid="{{post.pk}}" data-posttitle="{{post.title}}" data-toggle="modal" data-target="#postActionsModal">
-                                                    <i class="material-icons align-top">check</i>                                 
+                                                <button id="approveCommentBtn_in_moderate_{{cmt.pk}}" class="btn btn-sm btn-outline-success mx-1" type="button" data-postcmtid="{{post.pk}}" data-cmtid="{{cmt.pk}}" data-cmtauthor="{{cmt.author}}" data-cmtbody="{{cmt.body}}" data-toggle="modal" data-target="#commentActionsModal">
+                                                    <i class="material-icons align-top">check</i>
                                                 </button>
                                         
-                                                <button id="rejectCommentBtn_in_moderate" class="btn btn-sm btn-outline-danger mx-1" type="button" data-postid="{{post.pk}}" data-posttitle="{{post.title}}" data-toggle="modal" data-target="#postActionsModal">
-                                                    <i class="material-icons align-top">close</i>                                 
+                                                <button id="rejectCommentBtn_in_moderate_{{cmt.pk}}" class="btn btn-sm btn-outline-danger mx-1" type="button" data-postcmtid="{{post.pk}}" data-cmtid="{{cmt.pk}}" data-cmtauthor="{{cmt.author}}" data-cmtbody="{{cmt.body}}" data-toggle="modal" data-target="#commentActionsModal">
+                                                    <i class="material-icons align-top">close</i>
                                                 </button>
                                             </td>
                                         </tr>
@@ -91,9 +130,6 @@
         </div>
         {% endfor %}
 
-        
-        
-        
         {% else %}
         <div class="container mt-3 py-lg-2">
             <h3 class="mt-5 text-center">Parece que aún no se ha escrito ningún comentario...</h3>            
@@ -114,23 +150,7 @@
     </section>
 
 
-    {% if post_list %}
-    <div class="row container d-flex justify-content-center align-items-center mt-3 py-3 bottom-pagination">
-        <div class="pt-4 pb-5 mb-5">
-            {% if post_list.has_other_pages %}
-            <ul class="pagination pagination-lg justify-content-center">
-                {% if post_list.has_previous %}
-                <li><a href="?page={{ post_list.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
-                {% endif %}
-                {% if post_list.has_next %}
-                <li><a href="?page={{ post_list.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
-                {% endif %}
-            </ul>
-            {% endif %}
-            <span class="row d-flex- justify-content-center lead text-muted"> Página {{ post_list.number }} de {{ post_list.paginator.num_pages }}</span>
-        </div>
-    </div>
-    {% endif %}
+
 
 </div>
 

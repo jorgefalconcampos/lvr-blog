@@ -839,8 +839,11 @@ def moderate_posts(request):
 @login_required(login_url='login')
 def moderate_comments(request):
     template = 'LVR/user/moderate_comments.html'
-    all_comments = blog_postComment.objects.filter(is_approved=False).order_by('-created_date')
-    all_comments_user = blog_postComment.objects.filter(is_approved=False, in_post__author__name=request.user).order_by('-created_date')
+    all_comments = None
+    if request.user.is_superuser:
+        all_comments = blog_postComment.objects.filter(is_approved=False, in_post__status=1).order_by('-created_date')
+    elif request.user.is_authenticated:
+        all_comments = blog_postComment.objects.filter(is_approved=False, in_post__status=1, in_post__author__name=request.user).order_by('-created_date')
 
     all_posts = {}
     details = []
@@ -859,35 +862,12 @@ def moderate_comments(request):
 
         for k, v in all_posts.items():
             if k == comment.in_post:
-                # print(f"user dj: {request.user}")
-                # print(f"user author: {k.author.user}")
-                # if ((request.user.is_superuser) or (request.user == k.author)):
                     all_posts[k].append(comment_detail)
 
-    print(f"\n\n\nDiccionario final: \n\n{all_posts}")
+    # print(f"\n\n\nDiccionario final: \n\n{all_posts}")
 
-    context = {'all_comments': all_comments, 'all_comments_user':all_comments_user, 'all_posts': all_posts}
+    context = {'all_comments': all_comments, 'all_posts': all_posts}
     return render(request, template, context)
-
-
-
-
-{'articulo2': [
-        {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, 
-        {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, 
-        {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, 
-        {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, 
-        {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, 
-        {'autor': 'pepe', 'autor_email': 's@lol.cpm'}
-    ], 
-'articulo1': [
-    {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, 
-    {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, 
-    {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, 
-    {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, 
-    {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, 
-    {'autor': 'pepe', 'autor_email': 's@lol.cpm'}], 
-'articulo3': [{'autor': 'pepe', 'autor_email': 's@lol.cpm'}, {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, {'autor': 'pepe', 'autor_email': 's@lol.cpm'}, {'autor': 'pepe', 'autor_email': 's@lol.cpm'}]}
 
 
 # This method deletes, archives or rejects a blog post - Only superuser can reject
@@ -916,6 +896,33 @@ def post_actions(request, post_action, pk):
                     response_data['success'] = True
             else:
                 response_data['invalid_request'] = f"{request.user} cannot perform this action - is not the author"
+        except Exception as e:
+            response_data['err'] = str(e)
+        finally:
+            return JsonResponse(response_data)
+    else:
+        return redirect('index')
+
+
+
+# This method approves or deletes a comment inside a blog post
+@login_required(login_url='login')
+def comment_actions(request, comment_action, pk):
+
+    response_data = {'success': False}
+    comment = blog_postComment.objects.filter(pk=pk).first()
+    if request.user.is_authenticated:
+        try:
+            if ((request.user == comment.in_post.author.name) or (request.user.is_superuser)):
+                print('si es el mismo xd')
+                if comment_action == 'approve':
+                    comment.approve()
+                    response_data['success'] = True
+                elif comment_action == 'delete':
+                    comment.delete()
+                    response_data['success'] = True
+            else:
+                response_data['invalid_request'] = f"{request.user} cannot perform this action"
         except Exception as e:
             response_data['err'] = str(e)
         finally:

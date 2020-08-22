@@ -49,7 +49,7 @@ $(document).on('submit', '#contact_frm',function(e){
         document.getElementById("contact_frm").reset();
         restart_ctct_btns(true);
         console.log('# --- JS: Captcha OK --- #')
-        grecaptcha.reset();
+        grecaptcha.reset(ctct_widget);
       }
       else if(json.err_code === 'invalid_captcha'){
         $('#ctct_form_errorCaptcha').fadeIn(1000).css({'display': 'block'}).delay(2500).fadeOut(1000);
@@ -131,11 +131,11 @@ $('#new_comment').submit(function(e){
         $('#newCmt').collapse('toggle');
         $('#new_cmt_success').fadeIn(1000).css({'display': 'block'}).delay(2500).fadeOut(1000);
         console.log('# --- JS: Comment Captcha OK --- #')
-        grecaptcha.reset();
+        grecaptcha.reset(cmnt_widget);
       }
       else if(json.err_code === 'invalid_captcha'){
         $('#new_cmt_errorCaptcha').fadeIn(1000).css({'display': 'block'}).delay(2500).fadeOut(1000);
-        console.log('# --- JS: Comment failed captcha --- #')
+        console.log('# --- JS: Comment failed captcha --- #');
       }
     },
     error : function(xhr,errmsg,err) {

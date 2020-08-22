@@ -3,7 +3,19 @@ $(window).on('load',function(){
     $('#noCategoModal').modal('show');
     // $('#postActionsModal').modal('show');
     // alert(window.location.origin); //http://localhost:9000
+
+    $('[id^="cmt_counter"]').each(function() {
+        //getting only the numeric pat
+        var post_id = $(this).attr('id').replace(/[^\d]+/, '');
+        //addint the post_id with the number of comments
+        post_details[post_id] = parseInt($(this).html());
+        console.log(JSON.stringify(post_details));
+    });
+
 });
+
+var post_details = {}
+
 
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip(); 
@@ -19,7 +31,7 @@ $("#settings_notifications, #settings_widgets, #settings_delete_acc").click(func
 
 var success_title = 'Cambios guardados con éxito', success_text = 'Los cambios fueron guardados. ', success_reloading = ' Recargando...';
 
-function success(title, text, param){
+function success(title, text, param, rowID, modal_ID){
     if($("#toastForm").hasClass("border-danger")){$("#toastForm").removeClass('border-danger'); $("#toastForm").addClass('border-success'); }
     if($("#msg_header").hasClass("bg-danger")){$("#msg_header").removeClass('bg-danger'); $("#msg_header").addClass('bg-success'); }
     $("#toastForm").addClass('border-success'); 
@@ -40,8 +52,24 @@ function success(title, text, param){
                 window.setTimeout( function() { window.location.href = '/user/dashboard'; }, 750); 
             }
             else {
-                $('#postActionsModal').modal('hide');
-                $(`#${postID}`).delay(500).fadeOut(1000, function(){$(this).remove();}); //removing the whole table row element
+                $(modal_ID).modal('hide');
+                $(`#${rowID}`).delay(500).fadeOut(1000, function(){$(this).remove();}); //removing the whole table row element
+
+                var general_cmts = parseInt($('#general_cmt_counter').html());
+                general_cmts -= 1;
+                $(`#general_cmt_counter`).text(general_cmts).delay(500).fadeIn(700);
+
+                post_details[postcmtID] = post_details[postcmtID]-1;
+                $(`#cmt_counter_${postcmtID}`).text(post_details[postcmtID]).delay(500).fadeIn(700);
+
+                if (post_details[postcmtID] < 1){
+                    $(`#accordion_${postcmtID}`).delay(500).fadeOut(1000, function(){$(this).remove();}); //removing the whole accordion element
+                }
+
+                if (general_cmts < 1){ setTimeout(function() { alert('No hay más comentarios para moderar'); window.location.reload(true);} , 3750); }
+                    
+                console.log('update: '+JSON.stringify(post_details));
+                console.log('update: '+general_cmts);
             }
             break;
       
@@ -239,6 +267,83 @@ $(document).on('submit', '#newCatego_frm',function(e){
 });
 
 
+// START COMMENTS //
+var cmtID, postcmtID, cmt_author, cmt_body, comment_action;
+
+
+$('[id^="approveCommentBtn_in_moderate"]').click(function() {
+    postcmtID = $(this).data('postcmtid');
+    cmtID = $(this).data('cmtid');
+    cmt_author = $(this).data('cmtauthor');
+    cmt_body = $(this).data('cmtbody');
+    iconName = 'check';
+    cmts_action_config(1)
+ });
+
+$('[id^="rejectCommentBtn_in_moderate"]').click(function() {
+    postcmtID = $(this).data('postcmtid');
+    cmtID = $(this).data('cmtid');
+    cmt_author = $(this).data('cmtauthor');
+    cmt_body = $(this).data('cmtbody');
+    iconName = 'delete';
+    cmts_action_config(2)
+ });
+
+
+function cmts_action_config(val){
+    frm = $('#comment_action_frm');
+    icon = `<i class="material-icons align-top">${iconName}</i>`;
+    button = $('#modal_comment_action_confirm')
+    label = $('#cmt_action_label');   
+     
+    switch (val) { // 1: approve, 2: delete,
+        case 1: 
+            comment_action = 'approve'; 
+            frm.attr('method', 'POST');
+            label.html(`¿Aprobar el comentario de <b>${cmt_author}</b>? (ID: ${cmtID})<br><br><b>"</b>${cmt_body}</div><b>"</b>`)
+            button.attr('class', 'btn btn-success px-3'); button.html(`${icon} Si, aprobar`);
+        break;
+
+        case 2: 
+            comment_action = 'delete'; 
+            frm.attr('method', 'DELETE');
+            label.html(`¿Eliminar el comentario de <b>${cmt_author}</b>? (ID: ${cmtID})<br><br><b>"</b>${cmt_body}<b>"</b>`)
+            button.attr('class', 'btn btn-danger px-3'); button.html(`${icon} Si, eliminar`);
+        break;
+
+        default: break;
+      }
+}
+
+
+$(document).on('submit ', '#commentActionsModal',function(e){
+    var param; // Param is sent to success function. 0 reloads the page, 1 deletes the row 
+    switch (comment_action) {
+        case 'approve':  param = 1; success_text = 'El comentario fue aprobado.'; break;
+        case 'delete': param = 1;  success_text = 'El comentario fue eliminado.'; break;
+        default: break;        
+    }
+    e.preventDefault();
+    $.ajax({
+        url: `/user/comment/perform-action/${comment_action}/${cmtID}`,
+        type: $(this).attr('method'),
+        dataType: 'json',
+        beforeSend: function (xhr) { xhr.setRequestHeader("X-CSRFToken", csrftoken);},
+        success:function(json){
+          if(json.success){success(success_title, success_text, param, cmtID, $('#commentActionsModal'));
+        }
+        },
+        error : function(xhr,errmsg,err) {
+          console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+        }
+        });
+
+});
+
+
+// END COMMENTS //
+
+
 
 $('#deleteBtn_in_post_edit, #deleteBtn_in_post_list, #deleteBtn_in_dshbrd').on('click', function(){ 
     postID = $(this).data('postid');
@@ -246,6 +351,7 @@ $('#deleteBtn_in_post_edit, #deleteBtn_in_post_list, #deleteBtn_in_dshbrd').on('
     iconName = 'delete'; 
     if ($(this).attr('id') === 'deleteBtn_in_post_edit'){ post_action_config(1,1); }
     else{ post_action_config(1,2); }
+
 });
 
 
@@ -265,28 +371,34 @@ $('#unarchiveBtn_in_post_edit, #unarchiveBtn_in_post_list').on('click', function
     else{ post_action_config(3,2); }
 });
 
-$('#rejectBtn_in_moderate').on('click', function(){ 
+
+$('[id^="rejectBtn_in_moderate"]').click(function() {
     postID = $(this).data('postid');
     posttitle = $(this).data('posttitle');
     iconName = 'close';
+    // alert(postID+' '+posttitle+' '+iconName);
     post_action_config(4,2)
-});
+ });
 
-$('#approveBtn_in_moderate').on('click', function(){ 
+$('[id^="approveBtn_in_moderate_"]').click(function() {
     postID = $(this).data('postid');
     posttitle = $(this).data('posttitle');
     iconName = 'check';
+    // alert(postID+' '+posttitle+' '+iconName);
     post_action_config(5,2)
-});
+ });
+
 
 var post_action, iconName, url, where_from, postID, posttitle, sender;
 
+var frm = $('#post_action_frm');
+var button = $('#modal_post_action_confirm'); 
+var label = $('#post_action_label');   
+
+
 function post_action_config(val, where_f){
-    frm = $('#post_action_frm');
+    
     icon = `<i class="material-icons align-top">${iconName}</i>`;
-    button = $('#modal_post_action_confirm')
-    label = $('#post_action_label');   
-     
 
     switch (where_f) { case 1: sender = 'detail'; break; case 2: sender = 'dashboard'; break; default: sender = null; break; }
 
@@ -366,7 +478,11 @@ $(document).on('submit', '#postActionsModal',function(e){
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
         },
         success:function(json){
-          if(json.success){success(success_title, success_text, param);}
+          if(json.success){
+              success(success_title, success_text, param, postID, $('#postActionsModal'));
+            //   postID = ""; posttitle = ""; iconName = ""; post_action = ""; frm.attr('method', '');
+            //   label.html(""); button.attr('class', ''); button.html("");
+            }
         },
         error : function(xhr,errmsg,err) {
           console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
