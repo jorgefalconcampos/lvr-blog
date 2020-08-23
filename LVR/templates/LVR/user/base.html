@@ -117,6 +117,67 @@
     </div>
 </div>
 
+<div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="d-flex d-inline">
+                    <i style="font-size: 30px;" class="material-icons">help</i>
+                    <h4 class="ml-3 modal-title">{% trans 'LVR_Help' %}</h4>
+                </span>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body px-lg-5">
+
+            <div class="row">
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-sm-12 pt-2"">
+                            <div id="accordion">
+                                <div class="card">
+                                    <div class="card-header" id="show_permissions">
+                                        <h3 class="card-title mb-0">
+                                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapse_perms" aria-expanded="true" aria-controls="collapseTwo">
+                                                <i class="material-icons align-top">keyboard_arrow_down</i> {% trans 'dashboard_Settings_SM_show' %} 
+                                            </button>
+                                        </h3>
+                                    </div>
+                                    <div id="collapse_perms" class="collapse" aria-labelledby="show_permissions" data-parent="#accordion">
+                                        <div class="py-2 px-2 container">
+                                            <button type="button" class="btn btn-secondary btn-block"><i class="material-icons align-top">warning</i> Ayuda 1</button>
+                                            <button type="button" class="btn btn-secondary btn-block"><i class="material-icons align-top">warning</i> Ayuda 1</button>
+                                            <button type="button" class="btn btn-secondary btn-block"><i class="material-icons align-top">warning</i> Ayuda 1</button>
+                                            <button type="button" class="btn btn-secondary btn-block"><i class="material-icons align-top">warning</i> Ayuda 1</button>
+                                            <button type="button" class="btn btn-secondary btn-block"><i class="material-icons align-top">warning</i> Ayuda 1</button>
+                                            <button type="button" class="btn btn-secondary btn-block"><i class="material-icons align-top">warning</i> Ayuda 1</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>   
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 pt-1">
+                    <a href="{% url 'rules' %}" target="_blank" class="py-2 btn btn-secondary btn-block"><i class="material-icons align-top mr-1">rule</i>Reglas de Redacción</a>
+                    <a href="{% url 'tutorial' %}" target="_blank" class="py-2 btn btn-secondary btn-block"><i class="material-icons align-top mr-1">extension</i>Tutorial</a>
+                    <a href="{% url 'privacy_policy' %}" target="_blank" class="py-2 btn btn-secondary btn-block"><i class="material-icons align-top mr-1">privacy_tip</i>Política de Privacidad</a>
+                    <a href="{% url 'privacy_policy' %}" class="py-2 btn btn-danger btn-block"  data-dismiss="modal" data-toggle="modal" data-target="#problemModal"><i class="material-icons align-top mr-1">warning</i>Reportar problema</a>
+
+
+                </div>
+            </div>
+
+            <!-- <button type="button" class="my-3 btn btn-danger btn-block" data-dismiss="modal" data-toggle="modal" data-target="#problemModal" ><i class="material-icons align-top">warning</i> level button</button> -->
+
+            <div class="modal-footer mt-3 justify-content-end px-sm-0 px-md-0 px-lg-0">
+                <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">{% trans 'Close' %}</button>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 <div class="modal fade pt-5 mt-5" id="postActionsModal">
@@ -247,7 +308,8 @@
                 <!-- Separator without title -->
                 <li class="list-group-item sidebar-separator menu-collapsed"></li>            
                 <!-- /END Separator -->
-                <a href="#" class="bg-dark list-group-item list-group-item-action">
+
+                <a href="#" class="bg-dark list-group-item list-group-item-action" data-toggle="modal" data-target="#helpModal">
                     <div class="py-1 d-flex w-100 justify-content-start align-items-center">
                         <i class="material-icons md-22 mr-2">help</i> 
                         <span class="menu-collapsed"> {% trans 'dashboard_help' %} </span>                          

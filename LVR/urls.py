@@ -32,6 +32,7 @@ urlpatterns = [
     path('authors/<slug:pinchiautor>', views.author_detail, name='author_detail'),
     #misc:
     path('da-rules', views.rules, name='rules'),
+    path('tutorial', views.tutorial, name='tutorial'),
     path('cookies', views.cookies, name='cookies'),
     path('service-terms', views.service_terms, name='service_terms'),
     path('comments-terms', views.comments_terms, name='comments_terms'),

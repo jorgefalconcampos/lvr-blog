@@ -8,12 +8,13 @@
 {% block title %}{{misc.name}} | Le vélo rouge{% endblock %}
 
 
-{% block service_terms %}
 
 
-<section class="bg-cover bg-center" style="background-image: url({{misc.bgImage}}); background-attachment: fixed;">
+{% block tuto %}
+
+<section class="bg-cover bg-center" style="background-image: url({{misc.bgImage}}); background-attachment: fixed;" >
     <div class="container">
-         <div class="row align-items-end">
+        <div class="row align-items-end">
             <div class="col-lg-12 py-5">
                 <h1 class="misc-hero-title text-shadow-contrast text-white font-weight-bold py-2">{{misc.name}}</h1>
                 <h6 class="h6 text-white text-shadow-contrast lead mb-3 pb-3">Ultima vez actualizado: {{misc.date}}</h6>
@@ -29,13 +30,16 @@
                 <div class="row">
                     <div class="col-12 text-left my-4">
                         <h3 class="section-heading font-weight-bold text-uppercase"> {{misc.name}} de <strong> Le vélo rouge</strong> </h3>
-                        <h5 class="my-5 pr-5"> {{misc.content|safe}} </h5>
+                        <h5 class="my-5 pr-5">
+                            {{misc.content|safe}}
+                        </h5>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 
 
 {% endblock %}

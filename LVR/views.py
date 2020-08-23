@@ -547,6 +547,14 @@ def rules(request):
     return render(request, template, context)
 
 
+@login_required(login_url='login')
+def tutorial(request):
+    template =  'LVR/misc/tutorial.html'
+    tutorial = blog_misc.objects.filter(Q(name__contains="tutorial")|Q(head_desc__contains="tutorial")).first()
+    context = { 'misc': tutorial }
+    return render(request, template, context)
+
+
 
 
 # ==================================#

@@ -29,9 +29,9 @@
           <img src="{% static 'LVR/assets/img/R.png' %}" alt="LVR-logo" width="45" alt="" class="d-inline-block align-middle mr-2">
           Le vélo <span class="font-weight-bold"> rouge </span> 
         </a>
-           
+        
         <ul class="navbar-nav ml-auto"> 
-          <li class="nav-item"> <a class="btn btn-secondary" href="#"> <i class="fas fa-arrow-left"></i></a> </li>
+          <li id="actionBtn" class="nav-item"> <a class="btn btn-secondary text-white"> <i id="aikon"></i></a> </li>
         </ul>
       </div>
     </nav>
@@ -40,60 +40,52 @@
   <!-- Content imported from "misc/comments_terms.html" with the block of code "comments_terms" -->
   {% block comments_terms %} 
   {% endblock %} 
-         
-
+  
+  
   <!-- Content imported from "misc/service_terms.html" with the block of code "service_terms" -->
   {% block service_terms %} 
   {% endblock %} 
-
-
-
-
+  
+  
   <!-- Content imported from "misc/cookies.html" with the block of code "cookies" -->
   {% block cookies %}
   {% endblock %}
-
-
-
+  
+  
   <!-- Content imported from "misc/privacy_policy.html" with the block of code "privacy_policy" -->
   {% block privacy_policy %}
   {% endblock %}
-
-
-
+  
+  
   <!-- Content imported from "misc/rules.html" with the block of code "rules" -->
   {% block rules %}
   {% endblock %}
+
+
+  <!-- Content imported from "misc/rules.html" with the block of code "rules" -->
+  {% block tuto %}
+  {% endblock %}
   
-
-
 </body>
 
 
-
-
 <footer>
-
-
   <div class="bg-gray-1000 footer-copyright text-center text-white-secondary pt-3 pb-2">
     Copyright © {% now 'Y' %} LVR
     <div class="my-2"> &#60 / &#62 with ❤️ in CD<b>MX</b>. </div>
   </div>
 </footer>
 
-
-
-
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-
-
-
-
-
 <script src="https://kit.fontawesome.com/0b5e6aae1f.js" crossorigin="anonymous"></script>
-
 <script> $(document).ready(function(){ $('[data-toggle="tooltip"]').tooltip(); }); </script>
+<script>
+  $(window).on('load',function(){
+    if(1 < history.length) { $("#aikon").addClass('fas fa-arrow-left'); $('#actionBtn').attr('onclick', 'history.back()'); }
+    else { $("#aikon").addClass('fas fa-home'); $('#actionBtn').attr('onclick', "window.location.href='/'"); }
+  });
+</script>
 
 </html>
