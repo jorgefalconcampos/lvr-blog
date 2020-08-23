@@ -46,7 +46,7 @@
                         <a class="dropdown-item" href="{% url 'profile' %}"> <i class="material-icons align-top">person</i> {% trans 'dashboard_DropDown_Profile' %} </a>
                         <a class="dropdown-item" href="{% url 'settings' %}"> <i class="material-icons align-top">settings</i> {% trans 'dashboard_DropDown_Settings' %} </a>
                         <a class="dropdown-item" href="#"> <i class="material-icons align-top">view_list</i> {% trans 'dashboard_DropDown_Activity' %} </a>
-                        <a class="dropdown-item" href="#" type="button" data-toggle="modal" data-target="#problemModal"> <i class="material-icons align-top">error</i> {% trans 'dashboard_DProblem' %} </a>
+                        <a class="dropdown-item" href="#" type="button" data-toggle="modal" data-target="#problemModal"> <i class="material-icons align-top">warning|</i> {% trans 'dashboard_DProblem' %} </a>
                         {% if request.user.is_superuser %}
                         <a class="dropdown-item" href="{{ HTTP_HOST }}/admin"> <i class="material-icons align-top">admin_panel_settings</i> {% trans 'lbl_DjangoAdmin' %} </a>
                         {% endif %}
@@ -163,8 +163,6 @@
                     <a href="{% url 'tutorial' %}" target="_blank" class="py-2 btn btn-secondary btn-block"><i class="material-icons align-top mr-1">extension</i>Tutorial</a>
                     <a href="{% url 'privacy_policy' %}" target="_blank" class="py-2 btn btn-secondary btn-block"><i class="material-icons align-top mr-1">privacy_tip</i>Política de Privacidad</a>
                     <a href="{% url 'privacy_policy' %}" class="py-2 btn btn-danger btn-block"  data-dismiss="modal" data-toggle="modal" data-target="#problemModal"><i class="material-icons align-top mr-1">warning</i>Reportar problema</a>
-
-
                 </div>
             </div>
 
