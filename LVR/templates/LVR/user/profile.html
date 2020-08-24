@@ -19,7 +19,7 @@
                         </div>
                     </div>
                     {% if not request.user.is_superuser %}
-                    <a href="{% url 'author_detail' author.slug %}" target="_blank" class="btn btn-sm btn-primary my-2"> {% trans 'dashboard_Settings_seeProfile' %} </a> 
+                    <a href="{% url 'author_detail' author.slug %}" target="_blank" class="btn btn-sm btn-primary my-2"> {% trans 'str_dashboard_seeProfile' %} </a> 
                     {% endif %}
                 </div>
             
@@ -67,8 +67,8 @@
                             </div>
                         </div>
                         <hr>
-                        <h6 class="text-muted text-shadow-dark"> <small>{% trans 'dashboard_Settings_joinedDate' %}: {{ request.user.date_joined }}</small> </h6>
-                        <h6 class="text-muted text-shadow-dark"> <small>{% trans 'dashboard_Settings_lastLogin' %}: {{ request.user.last_login }}</small> </h6>
+                        <h6 class="text-muted text-shadow-dark"> <small>{% trans 'str_dashboard_settings_joinedDate' %}: {{ request.user.date_joined }}</small> </h6>
+                        <h6 class="text-muted text-shadow-dark"> <small>{% trans 'str_dashboard_settings_lastLogin' %}: {{ request.user.last_login }}</small> </h6>
                     </div>
                 </div>
             </div>

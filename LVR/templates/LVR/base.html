@@ -245,11 +245,12 @@
       </div>
        
       <div class="py-3 d-flex d-inline">
-          <label class="lead mr-2" for="changeLang">Idioma:</label>
+          <label class="lead mr-3" for="changeLang">Idioma:</label>
 
         <form action="{% url 'set_language' %}" method="post">
           {% csrf_token %}
-          <select name="language" class="form-control form-control-sm" id="changeLang" style="max-width: 110px; height: 30px;" onchange="this.form.submit()">
+          <input name="next" type="hidden" value="{{ request.get_full_path }}"/>
+          <select name="language" class="selectpicker" data-style=" btn-light bg-white px-2 mr-1" data-width="fit" id="changeLang" style="max-width: 110px; height: 30px;" onchange="this.form.submit()">
             {% get_language_info_list for LANGUAGES as languages %}
             {% for language in languages %}
             <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>

@@ -9,10 +9,10 @@
 
 
 <div class="container-fluid">
-    <h1 class="mt-4"> {% trans 'dashboard_AllPostsTitle' %} </h1>
+    <h1 class="mt-4">{% trans 'str_dashboard_allMyPosts' %}</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active"> 
-            <a href="{% url 'dashboard' %}"> {% trans 'dashboard_mainTitle_dashboard' %}</a>&nbsp/ Todos mis posts 
+            <a href="{% url 'dashboard' %}"> {% trans 'dashboard_mainTitle_dashboard' %}</a>&nbsp/ {% trans 'str_dashboard_allMyPosts' %} 
         </li>
     </ol>
 
@@ -23,7 +23,7 @@
                     <i class="material-icons align-top md-22">add_box</i> Filtrar aprobados
                 </a>
                 <a href="{% url 'post_new' %}" class="btn btn-primary btn-lg rounded">
-                    <i class="material-icons align-top md-30 mr-2">add_box</i> {% trans 'NewPost' %}
+                    <i class="material-icons align-top md-30 mr-2">add_box</i> {% trans 'str_NewPost'  %}
                 </a>
             </div>
         </div>
@@ -36,26 +36,26 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead class="bg-dark text-white">
                     <tr>
-                        <th> {% trans 'dashboard_tableTitle_PostDetail' %} </th>
-                        <th> {% trans 'dashboard_tableTitle_PostTitle' %} </th>
-                        <th> {% trans 'dashboard_tableTitle_PostSubtitle' %} </th>
-                        <th> {% trans 'dashboard_tableTitle_PostImage' %} </th>
+                        <th> {% trans 'str_dashboard_tableTitle_postDetail' %} </th>
+                        <th> {% trans 'str_dashboard_tableTitle_postTitle' %} </th>
+                        <th> {% trans 'str_dashboard_tableTitle_postSubtitle' %} </th>
+                        <th> {% trans 'str_dashboard_tableTitle_postImage' %} </th>
                         <th> {% trans 'dashboard_tableTitle_PostPublishedDate' %} </th>
-                        <th> {% trans 'dashboard_tableTitle_PostComments' %} </th>
-                        <th> {% trans 'dashboard_tableTitle_PostStatus' %} </th>
-                        <th> {% trans 'dashboard_tableTitle_PostActions' %} </th>
+                        <th> {% trans 'str_dashboard_tableTitle_postCommentss' %} </th>
+                        <th> {% trans 'str_dashboard_tableTitle_postStatus' %} </th>
+                        <th> {% trans 'str_dashboard_tableTitle_postActions' %} </th>
                     </tr>
                 </thead>
                 <tfoot class="bg-dark text-white">
                     <tr>
-                        <th> {% trans 'dashboard_tableTitle_PostDetail' %} </th>
-                        <th> {% trans 'dashboard_tableTitle_PostTitle' %} </th>
-                        <th> {% trans 'dashboard_tableTitle_PostSubtitle' %} </th>
-                        <th> {% trans 'dashboard_tableTitle_PostImage' %} </th>
+                        <th> {% trans 'str_dashboard_tableTitle_postDetail' %} </th>
+                        <th> {% trans 'str_dashboard_tableTitle_postTitle' %} </th>
+                        <th> {% trans 'str_dashboard_tableTitle_postSubtitle' %} </th>
+                        <th> {% trans 'str_dashboard_tableTitle_postImage' %} </th>
                         <th> {% trans 'dashboard_tableTitle_PostPublishedDate' %} </th>
-                        <th> {% trans 'dashboard_tableTitle_PostComments' %} </th>
-                        <th> {% trans 'dashboard_tableTitle_PostStatus' %} </th>
-                        <th> {% trans 'dashboard_tableTitle_PostActions' %} </th>
+                        <th> {% trans 'str_dashboard_tableTitle_postCommentss' %} </th>
+                        <th> {% trans 'str_dashboard_tableTitle_postStatus' %} </th>
+                        <th> {% trans 'str_dashboard_tableTitle_postActions' %} </th>
                     </tr>
                 </tfoot>
                 <tbody>
@@ -80,7 +80,7 @@
                                 {% trans 'dashboard_table_NonApprovedComments' %}: {{ post.non_approved_cmts }}
                             </span>
                             {% else %}
-                            <p> {% trans 'NoComments' %} </p>
+                            <p> {% trans 'str_noComments' %} </p>
                             {% endif %}
                         </td>
                         
@@ -155,7 +155,7 @@
                     <a href="{% url 'post_new' %}" class="h3 font-weight-bold">¿Porqué no escribes uno nuevo ahora?</a>
                     <div class="row pt-3 pt-lg-5">
                         <div class="col">
-                            <a href="{% url 'post_new' %}" class="btn btn-primary rounded mt-2"> <i class="material-icons align-top mr-1">add_box</i>{% trans 'NewPost' %}</a>
+                            <a href="{% url 'post_new' %}" class="btn btn-primary rounded mt-2"> <i class="material-icons align-top mr-1">add_box</i>{% trans 'str_NewPost'  %}</a>
                         </div>
                     </div>
                 </div>   

@@ -69,6 +69,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -119,11 +120,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
                 'LVR.ctxt_processors.searchPosts',
                 'LVR.ctxt_processors.contactMsg',
                 'LVR.ctxt_processors.newComment',
                 'LVR.ctxt_processors.subscribeNewsletter',
                 'LVR.ctxt_processors.newCategory',
+
             ],
             # 'loaders': [
             #     ('django.template.loaders.cached.Loader', [
@@ -207,12 +210,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 from django.utils.translation import ugettext_lazy as _
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'es'
 
 LANGUAGES = (
-    ('en', _('English')),
     ('es', _('Spanish')),
-    ('fr', _('French')),
+    ('en', _('English')),
 )
 
 TIME_ZONE = 'UTC'

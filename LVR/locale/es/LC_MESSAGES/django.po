@@ -1,0 +1,856 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-08-23 22:01-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\templates\LVR\about.html:20
+msgid "about_title"
+msgstr ""
+
+#: .\templates\LVR\about.html:39
+msgid "about_MTTeam_title"
+msgstr ""
+
+#: .\templates\LVR\about.html:40
+msgid "about_MTTeam_subtitle"
+msgstr ""
+
+#: .\templates\LVR\about.html:76
+msgid "about_meetEditors"
+msgstr ""
+
+#: .\templates\LVR\author_detail.html:72
+msgid "author_detail_AllPostsBy"
+msgstr ""
+
+#: .\templates\LVR\author_detail.html:99 .\templates\LVR\post_detail.html:146
+msgid "post_detail_PublishedDate"
+msgstr ""
+
+#: .\templates\LVR\author_detail.html:107
+msgid "author_detail_NoPostsYet"
+msgstr ""
+
+#: .\templates\LVR\authors.html:27
+msgid "authors_NewAuthor"
+msgstr ""
+
+#: .\templates\LVR\authors.html:60
+msgid "authors_PublishedPosts"
+msgstr ""
+
+#: .\templates\LVR\authors.html:62
+msgid "authors_NoPostsYet"
+msgstr ""
+
+#: .\templates\LVR\base_nav.html:24 .\templates\LVR\user\base.html:240
+msgid "str_Home"
+msgstr "Inicio"
+
+#: .\templates\LVR\base_nav.html:27
+msgid "str_About"
+msgstr "Acerca de"
+
+#: .\templates\LVR\base_nav.html:30
+msgid "str_Contact"
+msgstr "Contacto"
+
+#: .\templates\LVR\base_nav.html:68
+msgid "str_loggedInAs"
+msgstr "Iniciar sesión"
+
+#: .\templates\LVR\base_nav.html:70 .\templates\LVR\user\base.html:232
+msgid "str_Dashboard"
+msgstr "Panel de Control"
+
+#: .\templates\LVR\base_nav.html:71 .\templates\LVR\user\base.html:35
+#: .\templates\LVR\user\base.html:244 .\templates\LVR\user\dashboard.html:114
+#: .\templates\LVR\user\post_list.html:26
+#: .\templates\LVR\user\post_list.html:158
+msgid "str_NewPost"
+msgstr "Nuevo post"
+
+#: .\templates\LVR\base_nav.html:73 .\templates\LVR\user\base.html:52
+msgid "str_dashboard_logout"
+msgstr "Cerrar sesión"
+
+#: .\templates\LVR\categories.html:15
+msgid "allCategos_title"
+msgstr ""
+
+#: .\templates\LVR\categories.html:61
+msgid "NewCatego_label"
+msgstr ""
+
+#: .\templates\LVR\categories.html:64
+#: .\templates\LVR\user\new_category.html:54
+msgid "addCatego_CTA"
+msgstr ""
+
+#: .\templates\LVR\categories_detail.html:35
+#: .\templates\LVR\tags_detail.html:35
+msgid "post_detail_PostPublishedDate"
+msgstr ""
+
+#: .\templates\LVR\categories_detail.html:36 .\templates\LVR\index.html:86
+#: .\templates\LVR\index.html:134 .\templates\LVR\index.html:175
+#: .\templates\LVR\post_detail.html:160 .\templates\LVR\post_detail.html:319
+#: .\templates\LVR\post_detail.html:344 .\templates\LVR\tags_detail.html:36
+msgid "PostBy"
+msgstr ""
+
+#: .\templates\LVR\http_states\404.html:10
+msgid "page404_title"
+msgstr ""
+
+#: .\templates\LVR\http_states\404.html:11
+msgid "page404_subtitle"
+msgstr ""
+
+#: .\templates\LVR\http_states\404.html:12
+msgid "page404_goHome"
+msgstr ""
+
+#: .\templates\LVR\index.html:23
+msgid "index_greeting_title"
+msgstr ""
+
+#: .\templates\LVR\index.html:24
+msgid "index_greeting_subtitle1"
+msgstr ""
+
+#: .\templates\LVR\index.html:25
+msgid "index_greeting_subtitle2"
+msgstr ""
+
+#: .\templates\LVR\index.html:26
+msgid "index_greeting_button"
+msgstr ""
+
+#: .\templates\LVR\index.html:108
+msgid "index_Trending"
+msgstr ""
+
+#: .\templates\LVR\index.html:150
+msgid "index_LatestEntries"
+msgstr ""
+
+#: .\templates\LVR\index.html:205
+msgid "index_Categoriess"
+msgstr ""
+
+#: .\templates\LVR\mails\blog\average-mail.html:169
+#: .\templates\LVR\mails\blog\confirm-mail.html:212
+#: .\templates\LVR\mails\user\activate-email.html:213
+msgid "Hello"
+msgstr ""
+
+#: .\templates\LVR\mails\blog\average-mail.html:192
+#: .\templates\LVR\mails\blog\confirm-mail.html:239
+#: .\templates\LVR\mails\user\activate-email.html:245
+#: .\templates\LVR\mails\user\pswd\reset-pass-mail.html:199
+msgid "greetings"
+msgstr ""
+
+#: .\templates\LVR\mails\blog\confirm-mail.html:183
+#: .\templates\LVR\mails\user\activate-email.html:183
+msgid "EmailWelcome_Title"
+msgstr ""
+
+#: .\templates\LVR\mails\blog\confirm-mail.html:229
+msgid "Confirm"
+msgstr ""
+
+#: .\templates\LVR\mails\user\account-activated.html:28
+msgid "Account_ActivatedSuccess"
+msgstr ""
+
+#: .\templates\LVR\mails\user\account-activated.html:36
+msgid "Account_Activated_Msg1"
+msgstr ""
+
+#: .\templates\LVR\mails\user\account-activated.html:40
+msgid "Account_Activated_Msg2"
+msgstr ""
+
+#: .\templates\LVR\mails\user\account-activated.html:49
+#: .\templates\LVR\user\login.html:25 .\templates\LVR\user\login.html:86
+msgid "str_login"
+msgstr "Iniciar sesión"
+
+#: .\templates\LVR\mails\user\activate-email.html:213
+msgid "good_news"
+msgstr ""
+
+#: .\templates\LVR\mails\user\activate-email.html:216
+msgid "EmailWelcome_Header"
+msgstr ""
+
+#: .\templates\LVR\mails\user\activate-email.html:218
+msgid "EmailWelcome_Step1"
+msgstr ""
+
+#: .\templates\LVR\mails\user\activate-email.html:219
+msgid "EmailWelcome_Step2"
+msgstr ""
+
+#: .\templates\LVR\mails\user\activate-email.html:220
+msgid "EmailWelcome_Step3_part1"
+msgstr ""
+
+#: .\templates\LVR\mails\user\activate-email.html:220
+msgid "EmailWelcome_Step3_part2"
+msgstr ""
+
+#: .\templates\LVR\mails\user\activate-email.html:235
+msgid "Activate"
+msgstr ""
+
+#: .\templates\LVR\mails\user\email-sent.html:33
+msgid "EmailSent_success"
+msgstr ""
+
+#: .\templates\LVR\mails\user\email-sent.html:36
+msgid "EmailSent_AfewStepsMore"
+msgstr ""
+
+#: .\templates\LVR\mails\user\email-sent.html:43
+msgid "EmailSent_Step1_part1"
+msgstr ""
+
+#: .\templates\LVR\mails\user\email-sent.html:43
+msgid "EmailSent_Step1_part2"
+msgstr ""
+
+#: .\templates\LVR\mails\user\email-sent.html:44
+msgid "EmailSent_Step2"
+msgstr ""
+
+#: .\templates\LVR\mails\user\email-sent.html:45
+msgid "EmailSent_Step3"
+msgstr ""
+
+#: .\templates\LVR\mails\user\email-sent.html:55
+msgid "EmailSent_CTA_newAuthor"
+msgstr ""
+
+#: .\templates\LVR\mails\user\email-sent.html:56
+#: .\templates\LVR\mails\user\email-sent.html:100
+#: .\templates\LVR\user\base.html:34 .\templates\LVR\user\base.html:417
+msgid "str_dashboard_goToPage"
+msgstr "Ir a la página"
+
+#: .\templates\LVR\mails\user\email-sent.html:57
+#: .\templates\LVR\mails\user\email-sent.html:101
+msgid "EmailSent_CTA_gotoDashboard"
+msgstr ""
+
+#: .\templates\LVR\mails\user\email-sent.html:73
+msgid "EmailSent_failed"
+msgstr ""
+
+#: .\templates\LVR\mails\user\email-sent.html:75
+msgid "Clic2Retry"
+msgstr ""
+
+#: .\templates\LVR\mails\user\email-sent.html:76
+msgid "EmailSent_failed_tryThis"
+msgstr ""
+
+#: .\templates\LVR\mails\user\email-sent.html:86
+msgid "EmailFailed_Step1"
+msgstr ""
+
+#: .\templates\LVR\mails\user\email-sent.html:87
+msgid "EmailFailed_Step2"
+msgstr ""
+
+#: .\templates\LVR\mails\user\email-sent.html:88
+msgid "EmailFailed_Step3"
+msgstr ""
+
+#: .\templates\LVR\mails\user\email-sent.html:99
+msgid "EmailFailed_CTA_newAuthor"
+msgstr ""
+
+#: .\templates\LVR\mails\user\pswd\reset-pass-mail-subj.txt:2
+msgid "LVR: Solicitud de restablecimiento de contraseña"
+msgstr ""
+
+#: .\templates\LVR\mails\user\wrong-link.html:28
+msgid "EmailActivationFailed_title"
+msgstr ""
+
+#: .\templates\LVR\mails\user\wrong-link.html:35
+msgid "EmailActivationFailed_msg"
+msgstr ""
+
+#: .\templates\LVR\mails\user\wrong-link.html:44
+msgid "Account_AlreadyActivated"
+msgstr ""
+
+#: .\templates\LVR\mails\user\wrong-link.html:46
+msgid "EmailActivationFailed_newLink"
+msgstr ""
+
+#: .\templates\LVR\misc\comment_terms.html:19
+#: .\templates\LVR\misc\cookies.html:19
+#: .\templates\LVR\misc\privacy_policy.html:19
+#: .\templates\LVR\misc\rules.html:19
+#: .\templates\LVR\misc\service_terms.html:19
+#: .\templates\LVR\misc\tutorial.html:20
+msgid "str_lastUpdate"
+msgstr "Última actualización"
+
+#: .\templates\LVR\misc\comment_terms.html:21
+#: .\templates\LVR\misc\cookies.html:21
+#: .\templates\LVR\misc\privacy_policy.html:21
+#: .\templates\LVR\misc\rules.html:21
+#: .\templates\LVR\misc\service_terms.html:21
+#: .\templates\LVR\misc\tutorial.html:22
+msgid "str_photo"
+msgstr "Foto"
+
+#: .\templates\LVR\post_detail.html:44 .\templates\LVR\post_detail.html:47
+msgid "post_draftStatus"
+msgstr ""
+
+#: .\templates\LVR\post_detail.html:45
+msgid "post_approvedStatus"
+msgstr ""
+
+#: .\templates\LVR\post_detail.html:46
+msgid "post_rejectedStatus"
+msgstr ""
+
+#: .\templates\LVR\post_detail.html:48
+msgid "post_archivedStatus"
+msgstr ""
+
+#: .\templates\LVR\post_detail.html:57
+msgid "post_alreadyApprovedMsg"
+msgstr ""
+
+#: .\templates\LVR\post_detail.html:98
+msgid "post_reaction_added"
+msgstr ""
+
+#: .\templates\LVR\post_detail.html:102 .\templates\LVR\user\profile.html:138
+msgid "favReaction"
+msgstr ""
+
+#: .\templates\LVR\post_detail.html:103 .\templates\LVR\user\profile.html:144
+msgid "utilReaction"
+msgstr ""
+
+#: .\templates\LVR\post_detail.html:104
+msgid "upReaction"
+msgstr ""
+
+#: .\templates\LVR\post_detail.html:105
+msgid "downReaction"
+msgstr ""
+
+#: .\templates\LVR\post_detail.html:256
+msgid "post_detail_MoreFrom"
+msgstr ""
+
+#: .\templates\LVR\post_detail.html:295 .\templates\LVR\post_detail.html:298
+msgid "mayInterested"
+msgstr ""
+
+#: .\templates\LVR\post_detail.html:370
+msgid "post_detail_CountingComments"
+msgstr ""
+
+#: .\templates\LVR\post_detail.html:372
+msgid "post_detail_AwaitingModeration"
+msgstr ""
+
+#: .\templates\LVR\post_detail.html:436
+msgid "reportComment"
+msgstr ""
+
+#: .\templates\LVR\post_detail.html:440
+msgid "reportedComment"
+msgstr ""
+
+#: .\templates\LVR\post_detail.html:454 .\templates\LVR\user\base.html:139
+#: .\templates\LVR\user\settings.html:240
+msgid "dashboard_Settings_SM_show"
+msgstr ""
+
+#: .\templates\LVR\tags.html:15
+msgid "allTags_title"
+msgstr ""
+
+#: .\templates\LVR\user\base.html:11 .\templates\LVR\user\dashboard.html:13
+#: .\templates\LVR\user\dashboard.html:15
+#: .\templates\LVR\user\moderate_comments.html:50
+#: .\templates\LVR\user\moderate_posts.html:15
+#: .\templates\LVR\user\post_list.html:15
+msgid "dashboard_mainTitle_dashboard"
+msgstr ""
+
+#: .\templates\LVR\user\base.html:42
+msgid "str_Hello"
+msgstr "Hola"
+
+#: .\templates\LVR\user\base.html:44 .\templates\LVR\user\base.html:253
+#: .\templates\LVR\user\dashboard.html:147
+#: .\templates\LVR\user\settings.html:41
+msgid "str_dashboard_profile"
+msgstr "Perfil"
+
+#: .\templates\LVR\user\base.html:45 .\templates\LVR\user\base.html:260
+#: .\templates\LVR\user\settings.html:28
+msgid "str_dashboard_settings"
+msgstr "Ajustes"
+
+#: .\templates\LVR\user\base.html:46 .\templates\LVR\user\base.html:247
+msgid "str_dashboard_activity"
+msgstr "Actividad"
+
+#: .\templates\LVR\user\base.html:47
+msgid "str_dashboard_reportProblem"
+msgstr "Reportar problema"
+
+#: .\templates\LVR\user\base.html:49 .\templates\LVR\user\dashboard.html:102
+msgid "str_dashboard_DjangoAdmin"
+msgstr "Administración de Django"
+
+#: .\templates\LVR\user\base.html:75 .\templates\LVR\user\login.html:61
+msgid "str_user"
+msgstr ""
+
+#: .\templates\LVR\user\base.html:85
+msgid "str_dashboard_reportProblem_date"
+msgstr ""
+
+#: .\templates\LVR\user\base.html:95
+msgid "str_dashboard_reportProblem_label"
+msgstr ""
+
+#: .\templates\LVR\user\base.html:97
+msgid "dashboard_DescribeProblem_placeholder"
+msgstr ""
+
+#: .\templates\LVR\user\base.html:105 .\templates\LVR\user\post_edit.html:267
+msgid "str_dashboard_reportProblem_cancel"
+msgstr ""
+
+#: .\templates\LVR\user\base.html:106
+msgid "str_dashboard_reportProblem_send"
+msgstr ""
+
+#: .\templates\LVR\user\base.html:124
+msgid "LVR_Help"
+msgstr ""
+
+#: .\templates\LVR\user\base.html:168
+msgid "Close"
+msgstr ""
+
+#: .\templates\LVR\user\base.html:183
+msgid "dashboard_PostActions_Title"
+msgstr ""
+
+#: .\templates\LVR\user\base.html:225
+msgid "str_dashboard_QuickActions"
+msgstr "Acciones rápidas"
+
+#: .\templates\LVR\user\base.html:263 .\templates\LVR\user\login.html:73
+msgid "str_pass"
+msgstr "Contraseña"
+
+#: .\templates\LVR\user\base.html:269 .\templates\LVR\user\dashboard.html:125
+#: .\templates\LVR\user\settings.html:53
+msgid "str_dashboard_notifications"
+msgstr "Notificaciones"
+
+#: .\templates\LVR\user\base.html:278
+msgid "dashboard_Addons"
+msgstr ""
+
+#: .\templates\LVR\user\base.html:284 .\templates\LVR\user\dashboard.html:47
+#: .\templates\LVR\user\moderate_comments.html:47
+#: .\templates\LVR\user\moderate_comments.html:50
+msgid "str_dashboard_moderateComments"
+msgstr "Moderar comentarios"
+
+#: .\templates\LVR\user\base.html:291 .\templates\LVR\user\dashboard.html:136
+msgid "str_dashboard_calendar"
+msgstr "Calendario"
+
+#: .\templates\LVR\user\base.html:299
+msgid "str_dashboard_tasks"
+msgstr "Tareas"
+
+#: .\templates\LVR\user\base.html:309
+msgid "str_dashboard_help"
+msgstr "Ayuda"
+
+#: .\templates\LVR\user\base.html:315
+msgid "str_dashboard_sidenavHide"
+msgstr "Ocultar"
+
+#: .\templates\LVR\user\dashboard.html:25
+msgid "AddUserAuthor"
+msgstr ""
+
+#: .\templates\LVR\user\dashboard.html:36
+#: .\templates\LVR\user\moderate_posts.html:12
+#: .\templates\LVR\user\moderate_posts.html:15
+msgid "ModeratePosts"
+msgstr ""
+
+#: .\templates\LVR\user\dashboard.html:58
+msgid "SendNewMail"
+msgstr ""
+
+#: .\templates\LVR\user\dashboard.html:69
+msgid "AddNewEvent"
+msgstr ""
+
+#: .\templates\LVR\user\dashboard.html:80
+msgid "AddNewTask"
+msgstr ""
+
+#: .\templates\LVR\user\dashboard.html:91
+msgid "AddNewCategory"
+msgstr ""
+
+#: .\templates\LVR\user\dashboard.html:160
+msgid "str_dashboard_myLatestPosts"
+msgstr "Mis últimos posts"
+
+#: .\templates\LVR\user\dashboard.html:162
+msgid "str_dashboard_seeAllMyPosts"
+msgstr "Ver todos mis posts"
+
+#: .\templates\LVR\user\dashboard.html:175
+#: .\templates\LVR\user\moderate_posts.html:26
+#: .\templates\LVR\user\moderate_posts.html:35
+#: .\templates\LVR\user\post_list.html:39
+#: .\templates\LVR\user\post_list.html:51
+msgid "str_dashboard_tableTitle_postDetail"
+msgstr "Ver a detalle"
+
+#: .\templates\LVR\user\dashboard.html:176
+#: .\templates\LVR\user\moderate_posts.html:27
+#: .\templates\LVR\user\moderate_posts.html:36
+#: .\templates\LVR\user\post_list.html:40
+#: .\templates\LVR\user\post_list.html:52
+msgid "str_dashboard_tableTitle_postTitle"
+msgstr "Título"
+
+#: .\templates\LVR\user\dashboard.html:177
+#: .\templates\LVR\user\post_list.html:41
+#: .\templates\LVR\user\post_list.html:53
+msgid "str_dashboard_tableTitle_postSubtitle"
+msgstr "Subtítulo"
+
+#: .\templates\LVR\user\dashboard.html:178
+#: .\templates\LVR\user\moderate_posts.html:28
+#: .\templates\LVR\user\moderate_posts.html:37
+#: .\templates\LVR\user\post_list.html:42
+#: .\templates\LVR\user\post_list.html:54
+msgid "str_dashboard_tableTitle_postImage"
+msgstr "Imagen"
+
+#: .\templates\LVR\user\dashboard.html:179
+msgid "str_dashboard_tableTitle_postCreatedOrPublishedDate"
+msgstr "Fecha de creación/publicación"
+
+#: .\templates\LVR\user\dashboard.html:180
+#: .\templates\LVR\user\post_list.html:44
+#: .\templates\LVR\user\post_list.html:56
+msgid "str_dashboard_tableTitle_postCommentss"
+msgstr "Comentarios"
+
+#: .\templates\LVR\user\dashboard.html:181
+#: .\templates\LVR\user\post_list.html:45
+#: .\templates\LVR\user\post_list.html:57
+msgid "str_dashboard_tableTitle_postStatus"
+msgstr "Status"
+
+#: .\templates\LVR\user\dashboard.html:182
+#: .\templates\LVR\user\moderate_comments.html:98
+#: .\templates\LVR\user\moderate_posts.html:30
+#: .\templates\LVR\user\moderate_posts.html:39
+#: .\templates\LVR\user\post_list.html:46
+#: .\templates\LVR\user\post_list.html:58
+msgid "str_dashboard_tableTitle_postActions"
+msgstr "Acciones"
+
+#: .\templates\LVR\user\dashboard.html:216
+msgid "str_createdDate"
+msgstr "Fecha de creación"
+
+#: .\templates\LVR\user\dashboard.html:219
+msgid "str_publishedDate"
+msgstr ""
+
+#: .\templates\LVR\user\dashboard.html:221
+msgid "str_notApprovedYet"
+msgstr "Fecha de publicación"
+
+#: .\templates\LVR\user\dashboard.html:232
+#: .\templates\LVR\user\post_list.html:77
+msgid "dashboard_table_TotalComments"
+msgstr ""
+
+#: .\templates\LVR\user\dashboard.html:234
+#: .\templates\LVR\user\post_list.html:79
+msgid "dashboard_table_ApprovedComments"
+msgstr ""
+
+#: .\templates\LVR\user\dashboard.html:235
+#: .\templates\LVR\user\post_list.html:80
+msgid "dashboard_table_NonApprovedComments"
+msgstr ""
+
+#: .\templates\LVR\user\dashboard.html:238
+#: .\templates\LVR\user\post_list.html:83
+msgid "str_noComments"
+msgstr "Sin comentarios"
+
+#: .\templates\LVR\user\dashboard.html:245
+#: .\templates\LVR\user\post_edit.html:185
+#: .\templates\LVR\user\post_list.html:90
+msgid "status_draft_desc"
+msgstr ""
+
+#: .\templates\LVR\user\dashboard.html:251
+#: .\templates\LVR\user\post_edit.html:192
+#: .\templates\LVR\user\post_list.html:96
+msgid "status_approved_desc"
+msgstr ""
+
+#: .\templates\LVR\user\dashboard.html:257
+#: .\templates\LVR\user\post_edit.html:199
+#: .\templates\LVR\user\post_list.html:102
+msgid "status_rejected_desc"
+msgstr ""
+
+#: .\templates\LVR\user\dashboard.html:263
+#: .\templates\LVR\user\post_edit.html:206
+#: .\templates\LVR\user\post_list.html:108
+msgid "status_archived_desc"
+msgstr ""
+
+#: .\templates\LVR\user\login.html:27
+msgid "login_Subtitle"
+msgstr ""
+
+#: .\templates\LVR\user\login.html:32
+#: .\templates\LVR\user\new_category.html:20
+#: .\templates\LVR\user\sign_up.html:20
+msgid "str_goBack"
+msgstr "Regresar"
+
+#: .\templates\LVR\user\login.html:74
+msgid "str_forgottenPass"
+msgstr "Olvidé mi contraseña"
+
+#: .\templates\LVR\user\moderate_comments.html:57
+msgid "CommentsWithNoModeration"
+msgstr ""
+
+#: .\templates\LVR\user\moderate_comments.html:95
+msgid "moderateCmts_author"
+msgstr ""
+
+#: .\templates\LVR\user\moderate_comments.html:96
+msgid "moderateCmts_coment"
+msgstr ""
+
+#: .\templates\LVR\user\moderate_comments.html:97
+#: .\templates\LVR\user\moderate_posts.html:29
+#: .\templates\LVR\user\moderate_posts.html:38
+msgid "dashboard_tableTitle_PostCreatedDate"
+msgstr ""
+
+#: .\templates\LVR\user\new_category.html:15
+msgid "addNew_Category"
+msgstr ""
+
+#: .\templates\LVR\user\post_edit.html:61
+msgid "post_edit_Title"
+msgstr ""
+
+#: .\templates\LVR\user\post_edit.html:62
+msgid "post_edit_Subtitle"
+msgstr ""
+
+#: .\templates\LVR\user\post_edit.html:145
+msgid "Cancel"
+msgstr ""
+
+#: .\templates\LVR\user\post_edit.html:147
+#: .\templates\LVR\user\post_edit.html:151
+#: .\templates\LVR\user\post_edit.html:154
+msgid "Save"
+msgstr ""
+
+#: .\templates\LVR\user\post_edit.html:182
+msgid "postStatus"
+msgstr ""
+
+#: .\templates\LVR\user\post_edit.html:187
+msgid "status_draft"
+msgstr ""
+
+#: .\templates\LVR\user\post_edit.html:194
+msgid "status_approved"
+msgstr ""
+
+#: .\templates\LVR\user\post_edit.html:201
+msgid "status_rejected"
+msgstr ""
+
+#: .\templates\LVR\user\post_edit.html:208
+msgid "status_archived"
+msgstr ""
+
+#: .\templates\LVR\user\post_edit.html:224
+msgid "post_DangerZone"
+msgstr ""
+
+#: .\templates\LVR\user\post_edit.html:229
+msgid "post_deletePost"
+msgstr ""
+
+#: .\templates\LVR\user\post_edit.html:234
+msgid "post_archivePost"
+msgstr ""
+
+#: .\templates\LVR\user\post_edit.html:247
+msgid "dashboard_PostDelete_Title"
+msgstr ""
+
+#: .\templates\LVR\user\post_edit.html:258
+msgid "dashboard_PostDelete"
+msgstr ""
+
+#: .\templates\LVR\user\post_edit.html:268
+msgid "dashboard_ConfirmDelete"
+msgstr ""
+
+#: .\templates\LVR\user\post_list.html:12
+#: .\templates\LVR\user\post_list.html:15
+msgid "str_dashboard_allMyPosts"
+msgstr "Todos mis posts"
+
+#: .\templates\LVR\user\post_list.html:43
+#: .\templates\LVR\user\post_list.html:55
+msgid "dashboard_tableTitle_PostPublishedDate"
+msgstr ""
+
+#: .\templates\LVR\user\profile.html:22 .\templates\LVR\user\settings.html:98
+msgid "str_dashboard_seeProfile"
+msgstr "Ver perfil"
+
+#: .\templates\LVR\user\profile.html:70 .\templates\LVR\user\settings.html:222
+msgid "str_dashboard_settings_joinedDate"
+msgstr "Te uniste el"
+
+#: .\templates\LVR\user\profile.html:71 .\templates\LVR\user\settings.html:223
+msgid "str_dashboard_settings_lastLogin"
+msgstr "Último inicio de sesión"
+
+#: .\templates\LVR\user\profile.html:83
+msgid "dashboard_stats_titlePosts"
+msgstr ""
+
+#: .\templates\LVR\user\profile.html:87
+msgid "dashboard_stats_allPosts"
+msgstr ""
+
+#: .\templates\LVR\user\profile.html:94
+msgid "dashboard_stats_approvedPosts"
+msgstr ""
+
+#: .\templates\LVR\user\profile.html:100
+msgid "dashboard_stats_holdingPosts"
+msgstr ""
+
+#: .\templates\LVR\user\profile.html:106
+msgid "dashboard_stats_archivedPosts"
+msgstr ""
+
+#: .\templates\LVR\user\profile.html:112
+msgid "dashboard_stats_rejectedPosts"
+msgstr ""
+
+#: .\templates\LVR\user\profile.html:121
+msgid "dashboard_stats_titleReactions"
+msgstr ""
+
+#: .\templates\LVR\user\profile.html:128
+msgid "dashboard_stats_allReactions"
+msgstr ""
+
+#: .\templates\LVR\user\profile.html:150
+msgid "goodReaction"
+msgstr ""
+
+#: .\templates\LVR\user\profile.html:156
+msgid "badReaction"
+msgstr ""
+
+#: .\templates\LVR\user\settings.html:46
+msgid "dashboard_Settings_accountSettings"
+msgstr ""
+
+#: .\templates\LVR\user\settings.html:50
+msgid "dashboard_Settings_securityPass"
+msgstr ""
+
+#: .\templates\LVR\user\settings.html:69
+msgid "setting_language"
+msgstr ""
+
+#: .\templates\LVR\user\settings.html:150
+msgid "Ok"
+msgstr ""
+
+#: .\templates\LVR\user\settings.html:195
+#: .\templates\LVR\user\settings.html:226
+msgid "saveChanges"
+msgstr ""
+
+#: .\templates\LVR\user\sign_up.html:15
+msgid "signup_Title"
+msgstr ""
+
+#: .\templates\LVR\user\sign_up.html:78
+msgid "signup_CTA"
+msgstr ""
+
+#: .\views.py:770
+msgid "EmailWelcome_Subject"
+msgstr ""
+
+#: .\views.py:823
+msgid "ErrorCreatingUser"
+msgstr ""
+
+#: .\views.py:1009
+msgid "EmptyFields"
+msgstr ""
