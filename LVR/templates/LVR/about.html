@@ -1,11 +1,9 @@
 {% extends 'LVR/base.html' %}
 {% load static %}
 {% load i18n %}
-{% load crispy_forms_tags %} 
 
 
-
-{% block title %} Acerca de | Le vélo rouge {% endblock %}
+{% block title %} {% trans 'str_About' %} | Le vélo rouge {% endblock %}
 
 
 
@@ -17,27 +15,20 @@
                 <div class="mx-0 mx-sm-2 mx-lg-3">
                     <div class="row d-flex justify-content-center justify-content-md-start justify-content-lg-start">
                         <div class="col-lg-7 text-center text-lg-left my-5">
-                            <h3 class="font-weight-bold text-uppercase"> {% trans 'about_title' %} <b> Le vélo rouge</b> </h3>
-                            <h5 class="my-5 pr-0 pr-md-3 pr-lg-5 text-left">
-                                El blog nació con la idea de compartir conocimiento con el mundo. Aquí hablamos de todo con todos, la ubicación 
-                                o idiomas no son barrera para estar informados y conocer otro punto de vista. Los temas son selectos cuidadosamente 
-                                si es que se consideran relevantes, desde información que puede ser útil hasta temas selectos para inversionistas, 
-                                pasando por tutoriales, reviews, consejos, etc. Son temas diferentes pero que tienen algo en común: estar disponibles 
-                                a los lectores y a todo el público en general. <br> <br>  Explora el blog a tu antojo, lee los posts que gustes, dejan
-                                algún comentario y conoce toda la información que está disponible para ti. 
-                            </h5>
+                            <h3 class="font-weight-bold text-uppercase"> {% trans 'str_about_title' %} <b> Le vélo rouge</b> </h3>
+                            <h5 class="my-5 pr-0 pr-md-3 pr-lg-5 text-left">{% trans 'str_about_pitch' %}<br><br>{% trans 'str_about_pitch2' %}</h5>
 
                             <div class="row d-flex justify-content-center justify-content-lg-start">
                                 <div class="col">
-                                    <a href="{% url 'tags' %}" class="btn btn-primary btn-xl text-uppercase mr-0 mr-md-2 mr-lg-2 my-2"> <i class="material-icons align-top">label</i> Explora los tags</a>
-                                    <a href="{% url 'categories' %}" class="btn btn-primary btn-xl text-uppercase my-2"> <i class="material-icons align-top">category</i> Explora las categorías</a>    
+                                    <a href="{% url 'tags' %}" class="btn btn-primary btn-xl text-uppercase mr-0 mr-md-2 mr-lg-2 my-2"> <i class="material-icons align-top">label</i>{% trans 'str_exploreTags' %}</a>
+                                    <a href="{% url 'categories' %}" class="btn btn-primary btn-xl text-uppercase my-2"> <i class="material-icons align-top">category</i>{% trans 'str_exploreCategories '%}</a>    
                                 </div>
                             </div>        
                         </div>
     
                         <div class="col-lg-5 text-center text-lg-left my-5 pt-5 pt-lg-0">
-                            <h3 class="font-weight-bold text-uppercase"> {% trans 'about_MTTeam_title' %} </h3>
-                            <h6 class="text-muted mb-5">{% trans 'about_MTTeam_subtitle' %}<b>&nbspLE VÉLO ROUGE</b>!</h6>
+                            <h3 class="font-weight-bold text-uppercase"> {% trans 'str_about_MTTeam_title' %} </h3>
+                            <h6 class="text-muted mb-5">{% trans 'str_about_MTTeam_subtitle' %}<b>&nbspLE VÉLO ROUGE</b></h6>
                             {% for crew_member in crew %}
                             <div class="row d-flex justify-content-center justify-content-lg-start pb-4">     
                                 <div class="col-auto px-lg-1 mx-sm-2">
@@ -45,7 +36,6 @@
                                         <img class="circle-rounded" src="{{crew_member.image.url}}" width="110" height="110">
                                     </div>
                                 </div>
-                                
                                 <div class="col-auto">
                                     <div class="detailsAuthor text-lg-left">
                                         <div class="px-2 px-md-2 px-lg-0 mx-0 mt-3">
@@ -73,7 +63,7 @@
                                 </div>                           
                             </div>
                             {% endfor %}  
-                            <a href="{% url 'authors' %}" class="btn btn-primary btn-xl text-uppercase my-3 mt-4"> {% trans 'about_meetEditors' %} </a>
+                            <a href="{% url 'authors' %}" class="btn btn-primary btn-xl text-uppercase my-3 mt-4"> {% trans 'str_about_meetEditors' %} </a>
                         </div>
                     </div>
                 </div>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-23 22:01-0500\n"
+"POT-Creation-Date: 2020-08-24 22:43-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,101 +18,270 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\templates\LVR\about.html:20
-msgid "about_title"
-msgstr ""
+#: .\forms.py:51 .\forms.py:157
+msgid "str_fullName_placeholder"
+msgstr "Escribe tu nombre"
 
-#: .\templates\LVR\about.html:39
-msgid "about_MTTeam_title"
-msgstr ""
+#: .\forms.py:52 .\forms.py:88 .\forms.py:158
+msgid "str_yourEmail_placeholder"
+msgstr "Escribe tu email"
 
-#: .\templates\LVR\about.html:40
-msgid "about_MTTeam_subtitle"
-msgstr ""
+#: .\forms.py:78
+msgid "str_searchForm_label"
+msgstr "Escribe una o más palabras clave"
 
-#: .\templates\LVR\about.html:76
-msgid "about_meetEditors"
-msgstr ""
+#: .\forms.py:82
+msgid "str_searchAmong"
+msgstr "Busca entre +"
 
-#: .\templates\LVR\author_detail.html:72
-msgid "author_detail_AllPostsBy"
-msgstr ""
+#: .\forms.py:159
+msgid "str_contactForm_subject_placeholder"
+msgstr "Escribe un asunto"
 
-#: .\templates\LVR\author_detail.html:99 .\templates\LVR\post_detail.html:146
-msgid "post_detail_PublishedDate"
-msgstr ""
+#: .\forms.py:160
+msgid "str_contactForm_message_placeholder"
+msgstr "Escribe el mensaje (máx. 500 caracteres)"
 
-#: .\templates\LVR\author_detail.html:107
-msgid "author_detail_NoPostsYet"
-msgstr ""
+#: .\forms.py:162
+msgid "str_contactForm_fullName"
+msgstr "Nombre y Apellido"
 
-#: .\templates\LVR\authors.html:27
-msgid "authors_NewAuthor"
-msgstr ""
+#: .\forms.py:163
+msgid "str_email"
+msgstr "Email"
 
-#: .\templates\LVR\authors.html:60
-msgid "authors_PublishedPosts"
-msgstr ""
+#: .\forms.py:164
+msgid "str_subject"
+msgstr "Asunto"
 
-#: .\templates\LVR\authors.html:62
-msgid "authors_NoPostsYet"
-msgstr ""
+#: .\forms.py:165
+msgid "str_message"
+msgstr "Mensaje"
 
-#: .\templates\LVR\base_nav.html:24 .\templates\LVR\user\base.html:240
-msgid "str_Home"
-msgstr "Inicio"
+#: .\forms.py:170
+msgid "str_subNewsletter_yourEmail"
+msgstr "Escribe tu dirección de emaail"
 
-#: .\templates\LVR\base_nav.html:27
+#: .\forms.py:171
+msgid "str_subNewsletter_title"
+msgstr "Suscríbete al Newsletter"
+
+#: .\templates\LVR\about.html:6 .\templates\LVR\base_nav.html:26
 msgid "str_About"
 msgstr "Acerca de"
 
-#: .\templates\LVR\base_nav.html:30
+#: .\templates\LVR\about.html:18
+msgid "str_about_title"
+msgstr "Acerca de"
+
+#: .\templates\LVR\about.html:19
+msgid "str_about_pitch"
+msgstr ""
+"El blog de LVR nace con la idea de compartir conocimiento con el mundo, "
+"gratis y al alcance de todos. Aquí hablamos de todo y con todos, la "
+"ubicación o idiomas no son barrera para informar y conocer un punto de vista "
+"diferente. Hablamos de temas selectos considerados como relevantes, desde "
+"información que te puede ser útil hasta temas especializados para "
+"inversionistas, pasando por tutoriales, reviews, consejos, etc."
+
+#: .\templates\LVR\about.html:19
+msgid "str_about_pitch2"
+msgstr ""
+"Tocamos temas diferentes, pero siguiendo la misma filosofía: información "
+"relevante a tu alcance. Así que ya lo sabes, explora el blog a tu antojo, "
+"lee los posts que gustes, deja algún comentario y conoce toda la información "
+"que está disponible para ti."
+
+#: .\templates\LVR\about.html:23
+msgid "str_exploreTags"
+msgstr "Explora los tags"
+
+#: .\templates\LVR\about.html:24
+msgid "str_exploreCategories "
+msgstr "Explora las categorías"
+
+#: .\templates\LVR\about.html:30
+msgid "str_about_MTTeam_title"
+msgstr "Conoce al equipo"
+
+#: .\templates\LVR\about.html:31
+msgid "str_about_MTTeam_subtitle"
+msgstr "Su trabajo mantiene a rodando a"
+
+#: .\templates\LVR\about.html:66
+msgid "str_about_meetEditors"
+msgstr "Conoce a los redactores"
+
+#: .\templates\LVR\author_detail.html:72
+msgid "str_author_detail_AllPostsBy"
+msgstr "Todos los posts por"
+
+#: .\templates\LVR\author_detail.html:99
+#: .\templates\LVR\categories_detail.html:34
+#: .\templates\LVR\post_detail.html:146 .\templates\LVR\post_detail.html:270
+#: .\templates\LVR\post_detail.html:318 .\templates\LVR\search.html:125
+#: .\templates\LVR\user\dashboard.html:219
+msgid "str_publishedDate"
+msgstr "Fecha de publicación"
+
+#: .\templates\LVR\author_detail.html:107 .\templates\LVR\authors.html:62
+msgid "str_author_NoPostsYet"
+msgstr "Este autor aún no escribe ningún post"
+
+#: .\templates\LVR\authors.html:27
+msgid "str_newAuthor"
+msgstr "Agregar redactor"
+
+#: .\templates\LVR\authors.html:60
+msgid "str_author_PublishedPosts"
+msgstr "Posts publicados"
+
+#: .\templates\LVR\base.html:16
+msgid "str_metaDescription"
+msgstr ""
+"Le Vélo Rouge es un blog de noticias, tecnología, emprendimiento y "
+"actualidad. Creado para el lector inteligente del mañana."
+
+#: .\templates\LVR\base.html:114
+msgid "str_CookiesTitle"
+msgstr "¿Una galletita joven?"
+
+#: .\templates\LVR\base.html:114
+msgid "str_CookiesExplanaition"
+msgstr ""
+"Usamos cookies para mejorar tu experiencia en este sitio web. Al seguir "
+"navegando, aceptas la"
+
+#: .\templates\LVR\base.html:114 .\templates\LVR\base.html:239
+msgid "str_CookiesPolicy"
+msgstr "Política de Cookies"
+
+#: .\templates\LVR\base.html:115
+msgid "str_accept"
+msgstr "Aceptar"
+
+#: .\templates\LVR\base.html:123 .\templates\LVR\user\base.html:64
+msgid "str_ContactWithUs"
+msgstr "Contacta con"
+
+#: .\templates\LVR\base.html:163 .\templates\LVR\user\base.html:104
+msgid "str_cancel"
+msgstr "Cancelar"
+
+#: .\templates\LVR\base.html:164 .\templates\LVR\user\base.html:105
+msgid "str_send"
+msgstr "Enviar"
+
+#: .\templates\LVR\base.html:167 .\templates\LVR\user\base.html:108
+msgid "str_sending"
+msgstr "Enviando"
+
+#: .\templates\LVR\base.html:210
+msgid "str_subNewsletter_explanaition"
+msgstr "Recibe un email cuando escribamos un nuevo post. Sin spam garantizado."
+
+#: .\templates\LVR\base.html:211
+msgid "str_subNewsletter_done"
+msgstr ""
+"Listo, enviamos un mensaje a tu email para que verifiques tu suscripción"
+
+#: .\templates\LVR\base.html:212
+msgid "str_subNewsletter_error"
+msgstr "Ocurrió un error al enviar el email, intenta de nuevo más tarde"
+
+#: .\templates\LVR\base.html:213
+msgid "str_subNewsletter_emailAlreadyInUse"
+msgstr "Parece que este email ya está registrado en el newsletter"
+
+#: .\templates\LVR\base.html:238 .\templates\LVR\user\base.html:159
+msgid "str_PrivacyPolicy"
+msgstr "Política de Privacidad"
+
+#: .\templates\LVR\base.html:240
+msgid "str_ServiceTerms"
+msgstr "Términos del Servicio"
+
+#: .\templates\LVR\base.html:241
+msgid "str_StaffAuthors"
+msgstr "Redactores"
+
+#: .\templates\LVR\base.html:245 .\templates\LVR\user\settings.html:69
+msgid "str_language"
+msgstr "Idioma"
+
+#: .\templates\LVR\base.html:265
+msgid "str_with"
+msgstr "con"
+
+#: .\templates\LVR\base.html:265
+msgid "str_in"
+msgstr "en"
+
+#: .\templates\LVR\base_nav.html:23 .\templates\LVR\user\base.html:239
+msgid "str_Home"
+msgstr "Inicio"
+
+#: .\templates\LVR\base_nav.html:29
 msgid "str_Contact"
 msgstr "Contacto"
 
-#: .\templates\LVR\base_nav.html:68
+#: .\templates\LVR\base_nav.html:47 .\templates\LVR\post_detail.html:218
+#: .\templates\LVR\search.html:65 .\templates\LVR\search.html:144
+msgid "str_search"
+msgstr "Buscar"
+
+#: .\templates\LVR\base_nav.html:55 .\templates\LVR\index.html:219
+#: .\templates\LVR\search.html:163
+msgid "str_seeAllCatgories"
+msgstr "ver todas las categorías"
+
+#: .\templates\LVR\base_nav.html:67
 msgid "str_loggedInAs"
 msgstr "Iniciar sesión"
 
-#: .\templates\LVR\base_nav.html:70 .\templates\LVR\user\base.html:232
+#: .\templates\LVR\base_nav.html:69 .\templates\LVR\user\base.html:231
 msgid "str_Dashboard"
 msgstr "Panel de Control"
 
-#: .\templates\LVR\base_nav.html:71 .\templates\LVR\user\base.html:35
-#: .\templates\LVR\user\base.html:244 .\templates\LVR\user\dashboard.html:114
+#: .\templates\LVR\base_nav.html:70 .\templates\LVR\user\base.html:34
+#: .\templates\LVR\user\base.html:243 .\templates\LVR\user\dashboard.html:114
 #: .\templates\LVR\user\post_list.html:26
 #: .\templates\LVR\user\post_list.html:158
 msgid "str_NewPost"
 msgstr "Nuevo post"
 
-#: .\templates\LVR\base_nav.html:73 .\templates\LVR\user\base.html:52
+#: .\templates\LVR\base_nav.html:72 .\templates\LVR\user\base.html:51
 msgid "str_dashboard_logout"
 msgstr "Cerrar sesión"
 
 #: .\templates\LVR\categories.html:15
-msgid "allCategos_title"
-msgstr ""
+msgid "str_allCategos_title"
+msgstr "Categorías"
 
-#: .\templates\LVR\categories.html:61
-msgid "NewCatego_label"
-msgstr ""
+#: .\templates\LVR\categories.html:45
+msgid "str_noPosts_in_this_category"
+msgstr "No hay posts en esta categoría"
+
+#: .\templates\LVR\categories.html:46
+msgid "str_posts_in_this_category"
+msgstr "Posts en esta categoría"
+
+#: .\templates\LVR\categories.html:61 .\templates\LVR\user\dashboard.html:91
+#: .\templates\LVR\user\new_category.html:15
+msgid "str_addNew_Category"
+msgstr "Agregar nueva categoría"
 
 #: .\templates\LVR\categories.html:64
 #: .\templates\LVR\user\new_category.html:54
-msgid "addCatego_CTA"
-msgstr ""
+msgid "str_addCatego_CTA"
+msgstr "Agregar categoría"
 
-#: .\templates\LVR\categories_detail.html:35
-#: .\templates\LVR\tags_detail.html:35
-msgid "post_detail_PostPublishedDate"
-msgstr ""
-
-#: .\templates\LVR\categories_detail.html:36 .\templates\LVR\index.html:86
+#: .\templates\LVR\categories_detail.html:35 .\templates\LVR\index.html:86
 #: .\templates\LVR\index.html:134 .\templates\LVR\index.html:175
 #: .\templates\LVR\post_detail.html:160 .\templates\LVR\post_detail.html:319
 #: .\templates\LVR\post_detail.html:344 .\templates\LVR\tags_detail.html:36
-msgid "PostBy"
-msgstr ""
+msgid "str_postBy"
+msgstr "Por"
 
 #: .\templates\LVR\http_states\404.html:10
 msgid "page404_title"
@@ -251,7 +420,7 @@ msgstr ""
 
 #: .\templates\LVR\mails\user\email-sent.html:56
 #: .\templates\LVR\mails\user\email-sent.html:100
-#: .\templates\LVR\user\base.html:34 .\templates\LVR\user\base.html:417
+#: .\templates\LVR\user\base.html:33 .\templates\LVR\user\base.html:416
 msgid "str_dashboard_goToPage"
 msgstr "Ir a la página"
 
@@ -390,13 +559,81 @@ msgstr ""
 msgid "reportedComment"
 msgstr ""
 
-#: .\templates\LVR\post_detail.html:454 .\templates\LVR\user\base.html:139
+#: .\templates\LVR\post_detail.html:454 .\templates\LVR\user\base.html:138
 #: .\templates\LVR\user\settings.html:240
 msgid "dashboard_Settings_SM_show"
 msgstr ""
 
+#: .\templates\LVR\search.html:11
+msgid "str_search_titleHTML"
+msgstr "Haz una búsqueda"
+
+#: .\templates\LVR\search.html:14
+msgid "str_search_badQ"
+msgstr "Búsqueda imprecisa"
+
+#: .\templates\LVR\search.html:33
+msgid "str_search_title"
+msgstr "Haz una búsquda dentro de"
+
+#: .\templates\LVR\search.html:34
+msgid "str_search_subtitle"
+msgstr "Escribe una o más palabras clave relacionadas con tu búsqueda"
+
+#: .\templates\LVR\search.html:37
+msgid "str_search_noResults_title"
+msgstr "SIN RESULTADOS"
+
+#: .\templates\LVR\search.html:39
+msgid "str_search_results"
+msgstr "RESULTADOS DE LA BÚSQUEDA"
+
+#: .\templates\LVR\search.html:43
+msgid "str_search_wasFoundOne"
+msgstr "Se encontró"
+
+#: .\templates\LVR\search.html:43
+msgid "str_search_resultRelatedWithSearch"
+msgstr "resultado relacionado con tu búsqueda"
+
+#: .\templates\LVR\search.html:45
+msgid "str_search_wasFoundMoreThanOne"
+msgstr "Se encontraron"
+
+#: .\templates\LVR\search.html:45
+msgid "str_search_resultsRelatedWithSearch"
+msgstr "resultados relacionados con tu búsqueda"
+
+#: .\templates\LVR\search.html:48
+msgid "str_search_noResults_subtitle"
+msgstr "No se encontró nada relacionado con tu búsqueda"
+
+#: .\templates\LVR\search.html:153
+msgid "str_search_badQ_explanaition"
+msgstr ""
+"Por favor, introduce al menos una palabra de 3 letras para una búsqueda más "
+"precisa"
+
+#: .\templates\LVR\search.html:158
+msgid "str_search_badQ_len"
+msgstr ""
+"Por favor, introduce un término de búsqueda más corto (de máximo 50 "
+"caracteres) para una búsqueda más precisa"
+
+#: .\templates\LVR\search.html:162
+msgid "str_search_noResults_changeKeywords"
+msgstr "Intenta de nuevo cambiando la(s) palabras clave"
+
+#: .\templates\LVR\search.html:163
+msgid "str_search_OrIfUWant"
+msgstr "O si lo prefieres, puedes"
+
 #: .\templates\LVR\tags.html:15
 msgid "allTags_title"
+msgstr ""
+
+#: .\templates\LVR\tags_detail.html:35
+msgid "post_detail_PostPublishedDate"
 msgstr ""
 
 #: .\templates\LVR\user\base.html:11 .\templates\LVR\user\dashboard.html:13
@@ -407,105 +644,113 @@ msgstr ""
 msgid "dashboard_mainTitle_dashboard"
 msgstr ""
 
-#: .\templates\LVR\user\base.html:42
+#: .\templates\LVR\user\base.html:41
 msgid "str_Hello"
 msgstr "Hola"
 
-#: .\templates\LVR\user\base.html:44 .\templates\LVR\user\base.html:253
+#: .\templates\LVR\user\base.html:43 .\templates\LVR\user\base.html:252
 #: .\templates\LVR\user\dashboard.html:147
 #: .\templates\LVR\user\settings.html:41
 msgid "str_dashboard_profile"
 msgstr "Perfil"
 
-#: .\templates\LVR\user\base.html:45 .\templates\LVR\user\base.html:260
+#: .\templates\LVR\user\base.html:44 .\templates\LVR\user\base.html:259
 #: .\templates\LVR\user\settings.html:28
 msgid "str_dashboard_settings"
 msgstr "Ajustes"
 
-#: .\templates\LVR\user\base.html:46 .\templates\LVR\user\base.html:247
+#: .\templates\LVR\user\base.html:45 .\templates\LVR\user\base.html:246
 msgid "str_dashboard_activity"
 msgstr "Actividad"
 
-#: .\templates\LVR\user\base.html:47
+#: .\templates\LVR\user\base.html:46 .\templates\LVR\user\base.html:160
 msgid "str_dashboard_reportProblem"
 msgstr "Reportar problema"
 
-#: .\templates\LVR\user\base.html:49 .\templates\LVR\user\dashboard.html:102
+#: .\templates\LVR\user\base.html:48 .\templates\LVR\user\dashboard.html:102
 msgid "str_dashboard_DjangoAdmin"
 msgstr "Administración de Django"
 
-#: .\templates\LVR\user\base.html:75 .\templates\LVR\user\login.html:61
-msgid "str_user"
-msgstr ""
+#: .\templates\LVR\user\base.html:64
+msgid "str_techSupport"
+msgstr "Soporte Técnico"
 
-#: .\templates\LVR\user\base.html:85
+#: .\templates\LVR\user\base.html:74 .\templates\LVR\user\login.html:61
+msgid "str_user"
+msgstr "Nombre de usario"
+
+#: .\templates\LVR\user\base.html:84
 msgid "str_dashboard_reportProblem_date"
 msgstr ""
 
-#: .\templates\LVR\user\base.html:95
+#: .\templates\LVR\user\base.html:94
 msgid "str_dashboard_reportProblem_label"
 msgstr ""
 
-#: .\templates\LVR\user\base.html:97
+#: .\templates\LVR\user\base.html:96
 msgid "dashboard_DescribeProblem_placeholder"
 msgstr ""
 
-#: .\templates\LVR\user\base.html:105 .\templates\LVR\user\post_edit.html:267
-msgid "str_dashboard_reportProblem_cancel"
-msgstr ""
+#: .\templates\LVR\user\base.html:102
+msgid "str_msgSent"
+msgstr "Mensaje enviado"
 
-#: .\templates\LVR\user\base.html:106
-msgid "str_dashboard_reportProblem_send"
-msgstr ""
+#: .\templates\LVR\user\base.html:103
+msgid "str_sendProblem_error"
+msgstr "Ocurrió un error al enviar el mensaje, intenta de nuevo más tarde"
 
-#: .\templates\LVR\user\base.html:124
+#: .\templates\LVR\user\base.html:123
 msgid "LVR_Help"
 msgstr ""
 
-#: .\templates\LVR\user\base.html:168
+#: .\templates\LVR\user\base.html:157
+msgid "str_RedactionRules"
+msgstr "Reglas de Redacción"
+
+#: .\templates\LVR\user\base.html:167
 msgid "Close"
 msgstr ""
 
-#: .\templates\LVR\user\base.html:183
+#: .\templates\LVR\user\base.html:182
 msgid "dashboard_PostActions_Title"
 msgstr ""
 
-#: .\templates\LVR\user\base.html:225
+#: .\templates\LVR\user\base.html:224
 msgid "str_dashboard_QuickActions"
 msgstr "Acciones rápidas"
 
-#: .\templates\LVR\user\base.html:263 .\templates\LVR\user\login.html:73
+#: .\templates\LVR\user\base.html:262 .\templates\LVR\user\login.html:73
 msgid "str_pass"
 msgstr "Contraseña"
 
-#: .\templates\LVR\user\base.html:269 .\templates\LVR\user\dashboard.html:125
+#: .\templates\LVR\user\base.html:268 .\templates\LVR\user\dashboard.html:125
 #: .\templates\LVR\user\settings.html:53
 msgid "str_dashboard_notifications"
 msgstr "Notificaciones"
 
-#: .\templates\LVR\user\base.html:278
+#: .\templates\LVR\user\base.html:277
 msgid "dashboard_Addons"
 msgstr ""
 
-#: .\templates\LVR\user\base.html:284 .\templates\LVR\user\dashboard.html:47
+#: .\templates\LVR\user\base.html:283 .\templates\LVR\user\dashboard.html:47
 #: .\templates\LVR\user\moderate_comments.html:47
 #: .\templates\LVR\user\moderate_comments.html:50
 msgid "str_dashboard_moderateComments"
 msgstr "Moderar comentarios"
 
-#: .\templates\LVR\user\base.html:291 .\templates\LVR\user\dashboard.html:136
+#: .\templates\LVR\user\base.html:290 .\templates\LVR\user\dashboard.html:136
 msgid "str_dashboard_calendar"
 msgstr "Calendario"
 
-#: .\templates\LVR\user\base.html:299
+#: .\templates\LVR\user\base.html:298
 msgid "str_dashboard_tasks"
 msgstr "Tareas"
 
-#: .\templates\LVR\user\base.html:309
+#: .\templates\LVR\user\base.html:308
 msgid "str_dashboard_help"
 msgstr "Ayuda"
 
-#: .\templates\LVR\user\base.html:315
+#: .\templates\LVR\user\base.html:314
 msgid "str_dashboard_sidenavHide"
 msgstr "Ocultar"
 
@@ -529,10 +774,6 @@ msgstr ""
 
 #: .\templates\LVR\user\dashboard.html:80
 msgid "AddNewTask"
-msgstr ""
-
-#: .\templates\LVR\user\dashboard.html:91
-msgid "AddNewCategory"
 msgstr ""
 
 #: .\templates\LVR\user\dashboard.html:160
@@ -602,13 +843,9 @@ msgstr "Acciones"
 msgid "str_createdDate"
 msgstr "Fecha de creación"
 
-#: .\templates\LVR\user\dashboard.html:219
-msgid "str_publishedDate"
-msgstr ""
-
 #: .\templates\LVR\user\dashboard.html:221
 msgid "str_notApprovedYet"
-msgstr "Fecha de publicación"
+msgstr "No aprobado"
 
 #: .\templates\LVR\user\dashboard.html:232
 #: .\templates\LVR\user\post_list.html:77
@@ -655,8 +892,8 @@ msgid "status_archived_desc"
 msgstr ""
 
 #: .\templates\LVR\user\login.html:27
-msgid "login_Subtitle"
-msgstr ""
+msgid "str_login_subtitle"
+msgstr "Iniciar sesión"
 
 #: .\templates\LVR\user\login.html:32
 #: .\templates\LVR\user\new_category.html:20
@@ -684,10 +921,6 @@ msgstr ""
 #: .\templates\LVR\user\moderate_posts.html:29
 #: .\templates\LVR\user\moderate_posts.html:38
 msgid "dashboard_tableTitle_PostCreatedDate"
-msgstr ""
-
-#: .\templates\LVR\user\new_category.html:15
-msgid "addNew_Category"
 msgstr ""
 
 #: .\templates\LVR\user\post_edit.html:61
@@ -746,6 +979,10 @@ msgstr ""
 
 #: .\templates\LVR\user\post_edit.html:258
 msgid "dashboard_PostDelete"
+msgstr ""
+
+#: .\templates\LVR\user\post_edit.html:267
+msgid "str_dashboard_reportProblem_cancel"
 msgstr ""
 
 #: .\templates\LVR\user\post_edit.html:268
@@ -820,10 +1057,6 @@ msgstr ""
 
 #: .\templates\LVR\user\settings.html:50
 msgid "dashboard_Settings_securityPass"
-msgstr ""
-
-#: .\templates\LVR\user\settings.html:69
-msgid "setting_language"
 msgstr ""
 
 #: .\templates\LVR\user\settings.html:150

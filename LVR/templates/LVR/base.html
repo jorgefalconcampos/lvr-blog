@@ -13,7 +13,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="description" content="Le vélo rouge es un blog de noticias, tecnología y actualidad. Creado por millenials para millenials">
+  <meta name="description" content="{% trans 'str_metaDescription' %}">
 
   <meta name="theme-color" content="#F52B2B"/>
   <meta property="og:locale" content="{{LANGUAGE_CODE}}">
@@ -111,8 +111,8 @@
   
 
   <div class="alert text-center cookiealert h6" role="alert">
-    <b>¿Una galletita joven?</b> &#x1F36A; Usamos cookies para mejorar tu experiencia en este sitio web. Al seguir navegando, aceptas la <a href="{% url 'cookies' %}" target="_blank">política de cookies</a>.
-    <button type="button" class="btn btn-primary btn-sm acceptcookies my-1 my-sm-1 my-md-1 my-md-1 my-xl-1 "> Aceptar </button>
+    <b>{% trans 'str_CookiesTitle' %}</b> &#x1F36A; {% trans 'str_CookiesExplanaition' %} <a href="{% url 'cookies' %}" target="_blank"> {% trans 'str_CookiesPolicy' %}</a>.
+    <button type="button" class="btn btn-primary btn-sm acceptcookies my-1 my-sm-1 my-md-1 my-md-1 my-xl-1 ">{% trans 'str_accept' %}</button>
   </div>
 
   
@@ -120,7 +120,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header px-lg-5">
-          <h5 class="modal-title" id="contact_Label">Contacta con LVR </h5>
+          <h5 class="modal-title" id="contact_Label">{% trans 'str_ContactWithUs' %} <b>LVR</b></h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
         </div>
         <div class="modal-body px-lg-5">
@@ -160,11 +160,11 @@
             <div class="modal-footer justify-content-end px-sm-0 px-md-0 px-lg-0">
               <p id="ctct_form_success" style="display:none" class="mt-2 mr-2 small h6 font-weight-bold text-success"> <i class="fas fa-check mr-1"></i>Mensaje enviado</p>
               <p id="ctct_form_error" style="display:none" class="mt-2 mr-2 small h6 font-weight-bold text-danger"> <i class="fas fa-exclamation-circle mr-1"></i>Ocurrió un error al enviar el mensaje</p>
-              <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">Cancelar</button>
-              <button id="ctct_form_send" type="submit" class="btn btn-primary">Enviar</button>
+              <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">{% trans 'str_cancel' %}</button>
+              <button id="ctct_form_send" type="submit" class="btn btn-primary">{% trans 'str_send' %}</button>
               <button id="contact_frm_sending" class="btn btn-primary px-3" style="display: none;">
                 <div class="sp-pb spinner-grow spinner-grow-sm" role="status"><span class="sr-only"></span></div>
-                Enviando
+                {% trans 'str_sending' %}
               </button> 
             </div>
           </form>
@@ -180,15 +180,12 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/0b5e6aae1f.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
-  
+  <script type="application/javascript" src="{% static 'LVR/assets/js/bootstrap-select.js' %}"></script>
   <script src="https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit" async defer></script>
   <script type="application/javascript" src="{% static 'LVR/assets/js/pwa/idb.js' %}"></script>
   <script type="application/javascript" src="{% static 'LVR/assets/js/pwa/idbop.js' %}"></script>
   <script type="application/javascript" src="{% static 'LVR/assets/js/front.js' %}"></script>
   <!-- <script type="application/javascript" src="{% static 'LVR/assets/js/cookies.js' %}"></script> -->
-
-  <script type="application/javascript" src="{% static 'LVR/assets/js/bootstrap-select.js' %}"></script>
-  <script> $(document).ready(function(){ $('[data-toggle="tooltip"]').tooltip(); }); </script>
 </body>
 
 
@@ -210,10 +207,10 @@
           <form id="subscribe_frm" method="POST" class="form-group">
             {% csrf_token %}
             <label class="h4 pt-2 font-weight-bold" for="sub_email">{{subscribeForm.s_email.label}}</label>
-            <p class="small"> Recibe un email cuando escribamos un nuevo post. Sin spam garantizado.</p>
-            <h5 id="subscribe_success" style="display:none" class="my-3 h5 font-weight-bold text-success"> <i class="fas fa-check mr-2"></i>Listo, enviamos un mensaje a tu email para que verifiques tu suscripción</h5> 
-            <h5 id="subscribe_error" style="display: none;" class="my-3 h5 font-weight-bold text-danger"> <i class="fas fa-exclamation-circle mr-1"></i>Ocurrió un error al enviar el email, intenta de nuevo más tarde</h5>
-            <h5 id="subscribe_already_error" style="display: none;" class="my-3 h5 font-weight-bold text-danger"> <i class="fas fa-exclamation-circle mr-1"></i>Parece que este email ya está registrado en el newsletter</h5>
+            <p class="small">{% trans 'str_subNewsletter_explanaition' %}</p>
+            <h5 id="subscribe_success" style="display:none" class="my-3 h5 font-weight-bold text-success"> <i class="fas fa-check mr-2"></i>{% trans 'str_subNewsletter_done' %}</h5> 
+            <h5 id="subscribe_error" style="display: none;" class="my-3 h5 font-weight-bold text-danger"> <i class="fas fa-exclamation-circle mr-1"></i>{% trans 'str_subNewsletter_error' %}</h5>
+            <h5 id="subscribe_already_error" style="display: none;" class="my-3 h5 font-weight-bold text-danger"> <i class="fas fa-exclamation-circle mr-1"></i>{% trans 'str_subNewsletter_emailAlreadyInUse' %}</h5>
 
             <div class="input-group pt-2 align-items-center">
               {{subscribeForm.s_email}}
@@ -238,14 +235,14 @@
 
     <div class="row px-3 py-2 d-flex justify-content-center justify-content-sm-between justify-content-md-between justify-content-lg-between align-items-center text-white">
       <div class="text-center">
-        <a class="h6 small mr-1" href="{% url 'privacy_policy' %}">Política de Privacidad</a> |
-        <a class="h6 small mx-1" href="{% url 'cookies' %}">Política de Cookies</a> |
-        <a class="h6 small mx-1" href="{% url 'service_terms' %}">Términos del Servicio</a> |
-        <a class="h6 small ml-1" href="{% url 'login' %}">Redactores</a>
+        <a class="h6 small mr-1" href="{% url 'privacy_policy' %}">{% trans 'str_PrivacyPolicy' %}</a> |
+        <a class="h6 small mx-1" href="{% url 'cookies' %}">{% trans 'str_CookiesPolicy' %}</a> |
+        <a class="h6 small mx-1" href="{% url 'service_terms' %}">{% trans 'str_ServiceTerms' %}</a> |
+        <a class="h6 small ml-1" href="{% url 'login' %}">{% trans 'str_StaffAuthors' %}</a>
       </div>
        
       <div class="py-3 d-flex d-inline">
-          <label class="lead mr-3" for="changeLang">Idioma:</label>
+          <label class="lead mr-3" for="changeLang">{% trans 'str_language' %}:</label>
 
         <form action="{% url 'set_language' %}" method="post">
           {% csrf_token %}
@@ -265,7 +262,7 @@
 
   <div class="bg-gray-1000 footer-copyright text-center text-white-secondary pt-3 pb-2">
     Copyright © {% now 'Y' %} LVR
-    <div class="my-2"> &#60 / &#62 with ❤️ in CD<b>MX</b>. </div>
+    <div class="my-2"> &#60 / &#62 {% trans 'str_with' %} ❤️ {% trans 'str_in' %} CD<b>MX</b>.</div>
   </div>
 </footer>
 

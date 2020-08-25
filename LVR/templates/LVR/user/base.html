@@ -14,7 +14,6 @@
   <link rel="stylesheet" href="{% static 'LVR/assets/css/bootstrap-select.css' %}">  
   <link rel="shortcut icon" type="image/png" href="{% static 'LVR/assets/favicon/rneg-icon.ico' %}"/>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
-  <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
 </head>
 
 <header>
@@ -62,7 +61,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header px-lg-5">
-                <h5 class="modal-title" id="prblm_form_title">Contacta con soporte técnico</h5>
+                <h5 class="modal-title" id="prblm_form_title">{% trans 'str_ContactWithUs' %} {% trans 'str_techSupport' %}</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body px-lg-5">
@@ -100,13 +99,13 @@
                         </div>
                     </div>
                     <div class="modal-footer justify-content-end px-sm-0 px-md-0 px-lg-0">
-                        <p id="prblm_form_success" style="display:none" class="mt-2 mr-2 small h6 font-weight-bold text-success"> <i class="fas fa-check mr-1"></i>Mensaje enviado</p>
-                        <p id="prblm_form_error" style="display:none" class="mt-2 mr-2 small h6 font-weight-bold text-danger"> <i class="fas fa-exclamation-circle mr-1"></i>Ocurrió un error al enviar el mensaje</p>
-                        <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">{% trans 'str_dashboard_reportProblem_cancel' %}</button>
-                        <button id="prblm_form_send" type="submit" class="btn btn-primary">{% trans 'str_dashboard_reportProblem_send' %}</button>
+                        <p id="prblm_form_success" style="display:none" class="mt-2 mr-2 small h6 font-weight-bold text-success"> <i class="fas fa-check mr-1"></i>{% trans 'str_msgSent' %}</p>
+                        <p id="prblm_form_error" style="display:none" class="mt-2 mr-2 small h6 font-weight-bold text-danger"> <i class="fas fa-exclamation-circle mr-1"></i>{% trans 'str_sendProblem_error' %}</p>
+                        <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">{% trans 'str_cancel' %}</button>
+                        <button id="prblm_form_send" type="submit" class="btn btn-primary">{% trans 'str_send' %}</button>
                         <button id="contact_frm_sending" class="btn btn-primary px-3" style="display: none;">
                             <div class="sp-pb spinner-grow spinner-grow-sm" role="status"><span class="sr-only"></span></div>
-                            Enviando
+                            {% trans 'str_sending' %}
                         </button> 
                     </div>
                 </form>
@@ -155,10 +154,10 @@
                     </div>
                 </div>
                 <div class="col-4 pt-1">
-                    <a href="{% url 'rules' %}" target="_blank" class="py-2 btn btn-secondary btn-block"><i class="material-icons align-top mr-1">rule</i>Reglas de Redacción</a>
+                    <a href="{% url 'rules' %}" target="_blank" class="py-2 btn btn-secondary btn-block"><i class="material-icons align-top mr-1">rule</i>{% trans 'str_RedactionRules' %}</a>
                     <a href="{% url 'tutorial' %}" target="_blank" class="py-2 btn btn-secondary btn-block"><i class="material-icons align-top mr-1">extension</i>Tutorial</a>
-                    <a href="{% url 'privacy_policy' %}" target="_blank" class="py-2 btn btn-secondary btn-block"><i class="material-icons align-top mr-1">privacy_tip</i>Política de Privacidad</a>
-                    <a href="{% url 'privacy_policy' %}" class="py-2 btn btn-danger btn-block"  data-dismiss="modal" data-toggle="modal" data-target="#problemModal"><i class="material-icons align-top mr-1">warning</i>Reportar problema</a>
+                    <a href="{% url 'privacy_policy' %}" target="_blank" class="py-2 btn btn-secondary btn-block"><i class="material-icons align-top mr-1">privacy_tip</i>{% trans 'str_PrivacyPolicy' %}</a>
+                    <a href="{% url 'privacy_policy' %}" class="py-2 btn btn-danger btn-block"  data-dismiss="modal" data-toggle="modal" data-target="#problemModal"><i class="material-icons align-top mr-1">warning</i>{% trans 'str_dashboard_reportProblem' %}</a>
                 </div>
             </div>
 

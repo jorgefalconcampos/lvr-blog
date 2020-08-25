@@ -1,6 +1,7 @@
 from django import forms as f
 from taggit.forms import TagWidget
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from . models import blog_post, blog_author, blog_postComment, blog_category
 from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
@@ -47,9 +48,9 @@ class PostForm(f.ModelForm):
 class CommentForm(f.ModelForm):
     class Meta:
         model = blog_postComment
-        author_attrs = {'class':'form-control form-control-lg', 'id':'comment_fullName', 'type':'text', 'name':'full-name', 'placeholder': 'Escribe tu nombre'}
-        author_email_attrs = {'class':'form-control form-control-lg', 'id': 'comment_email', 'type': 'email', 'name':'author-email', 'placeholder':'Escribe tu dirección de email'}
-        comment_body_attrs = {'class': 'mt-2 mt-sm-0 mt-md-0 mt-lg-0 form-control form-control-lg txtarea-maxh-400', 'id':'comment_body', 'name':'comment-body', 'rows':'5','placeholder':'Escribe tu comentario'}
+        author_attrs = {'class':'form-control form-control-lg', 'id':'comment_fullName', 'type':'text', 'name':'full-name', 'placeholder': _('str_fullName_placeholder')}
+        author_email_attrs = {'class':'form-control form-control-lg', 'id': 'comment_email', 'type': 'email', 'name':'author-email', 'placeholder':_('str_yourEmail_placeholder')}
+        comment_body_attrs = {'class': 'mt-2 mt-sm-0 mt-md-0 mt-lg-0 form-control form-control-lg txtarea-maxh-400', 'id':'comment_body', 'name':'comment-body', 'rows':'5', 'placeholder':'Escribe tu comentario'}
         fields = ('author', 'author_email', 'comment_body')
         labels = {
             'author': 'Nombre',
@@ -73,18 +74,18 @@ class CreateUserForm(UserCreationForm):
 
 #Search inside the blog
 class SearchForm(f.Form):
-    q_attrs = {'type': 'text', 'class':'form-control border-0 mr-2', 'placeholder': 'Busca entre todos los posts'}
-    q = f.CharField(label='Escribe una o más palabras clave', max_length=128, widget=f.TextInput(attrs=q_attrs))
+    q_attrs = {'type': 'text', 'class':'form-control border-0 mr-2'}
+    q = f.CharField(label=_('str_searchForm_label'), max_length=128, widget=f.TextInput(attrs=q_attrs))
     def __init__(self, *args, **kwargs):
         super (SearchForm, self).__init__(auto_id=True, *args, **kwargs)
         all_posts = str(blog_post.objects.filter(status=1).count()) #counting all-time posts
-        self.fields['q'].widget.attrs['placeholder'] = 'Busca entre +'+all_posts+' posts'
+        self.fields['q'].widget.attrs['placeholder'] = _('str_searchAmong') + all_posts +' posts'
 
 
 #To edit the account form (in the account section)
 class AccountEditUserForm(UserChangeForm):
     usernme_attrs = {'class':'form-control', 'id':'acc_username', 'type': 'text', 'name':'username', 'placeholder': 'Escribe un nombre de usuario'}
-    email_attrs = {'class':'form-control', 'id':'acc_email', 'type': 'email', 'name':'email', 'placeholder': 'Escribe un email'}
+    email_attrs = {'class':'form-control', 'id':'acc_email', 'type': 'email', 'name':'email', 'placeholder': _('str_yourEmail_placeholder')}
         
     username = f.CharField(label='Nombre de usuario', max_length=32, widget=f.TextInput(attrs=usernme_attrs))
     email = f.EmailField(label='Email privado', max_length=64, widget=f.EmailInput(attrs=email_attrs))
@@ -153,21 +154,21 @@ class NewCategory(f.ModelForm):
 
 #Send contact mail
 class ContactForm(f.Form):
-    name_attrs = {'class':'form-control form-control-lg',  'id':'contact_fullName', 'type':'text', 'name': 'fullname', 'placeholder':'Escribe tu nombre'}
-    email_attrs = {'class':'form-control form-control-lg', 'id':'contact_email', 'type':'email', 'name':'email', 'placeholder':'Escribe tu email'}
-    subject_attrs = {'class':'form-control form-control-lg', 'id':'contact_subject', 'type':'text', 'name':'subject', 'placeholder':'Escibe un asunto'}
-    msg_attrs = {'class':'form-control form-control-lg txtarea-maxh-400', 'id':'contact_message', 'name':'message', 'rows':'2', 'placeholder':'Escribe tu mensaje (máx. 1000 caracteres)'}
+    name_attrs = {'class':'form-control form-control-lg',  'id':'contact_fullName', 'type':'text', 'name': 'fullname', 'placeholder':_('str_fullName_placeholder')}
+    email_attrs = {'class':'form-control form-control-lg', 'id':'contact_email', 'type':'email', 'name':'email', 'placeholder':_('str_yourEmail_placeholder')}
+    subject_attrs = {'class':'form-control form-control-lg', 'id':'contact_subject', 'type':'text', 'name':'subject', 'placeholder':_('str_contactForm_subject_placeholder')}
+    msg_attrs = {'class':'form-control form-control-lg txtarea-maxh-s', 'id':'contact_message', 'name':'message', 'rows':'2', 'placeholder':_('str_contactForm_message_placeholder')}
 
-    name = f.CharField(label='Nombre y apellido', max_length=128, widget=f.TextInput(attrs=name_attrs), required=True)
-    email = f.EmailField(label='Correo electrónico', max_length=128, widget=f.EmailInput(attrs=email_attrs), required=True)
-    subject = f.CharField(label='Asunto', max_length=128, widget=f.TextInput(attrs=subject_attrs), required=True)
-    msg = f.CharField(label='Mensaje', max_length=1024, widget=f.Textarea(attrs=msg_attrs), required=True)
+    name = f.CharField(label=_('str_contactForm_fullName'), max_length=128, widget=f.TextInput(attrs=name_attrs), required=True)
+    email = f.EmailField(label=_('str_email'), max_length=128, widget=f.EmailInput(attrs=email_attrs), required=True)
+    subject = f.CharField(label=_('str_subject'), max_length=128, widget=f.TextInput(attrs=subject_attrs), required=True)
+    msg = f.CharField(label=_('str_message'), max_length=1024, widget=f.Textarea(attrs=msg_attrs), required=True)
 
 
 #Subscribe to newsletter
 class SubscribeForm(f.Form):
-    s_email_attrs = {'class':'form-control bg-none border-dark text-white', 'id':'sub_email', 'type':'email', 'name':'sub_email', 'placeholder':'Escribe tu dirección de email'}
-    s_email = f.EmailField(label='Suscríbete al newsletter', max_length=128, widget=f.EmailInput(attrs=s_email_attrs), required=True)
+    s_email_attrs = {'class':'form-control bg-none border-dark text-white', 'id':'sub_email', 'type':'email', 'name':'sub_email', 'placeholder': _('str_subNewsletter_yourEmail')}
+    s_email = f.EmailField(label=_('str_subNewsletter_title'), max_length=128, widget=f.EmailInput(attrs=s_email_attrs), required=True)
 
 
 

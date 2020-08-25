@@ -24,7 +24,7 @@
                                 </div>    
                                 {% if request.user.is_superuser %}
                                 <div class="col-12 col-lg-4 text-center mt-4 mt-lg-0">
-                                    <a href="{% url 'signup' %}" class="float-lg-right"> <span> <button type="button" class="btn btn-dark"> <i class="material-icons align-top">add_box</i> {% trans 'authors_NewAuthor' %} </button> </span></a> 
+                                    <a href="{% url 'signup' %}" class="float-lg-right"> <span> <button type="button" class="btn btn-dark"> <i class="material-icons align-top">add_box</i> {% trans 'str_newAuthor' %} </button> </span></a> 
                                 </div>
                                 {% endif %}
                             </div>
@@ -57,9 +57,9 @@
                             <div class="row">
                                 <div class="col">
                                     {% if v %}
-                                    <h6> {% trans 'authors_PublishedPosts' %}: {{ v }} </h6>
+                                    <h6> {% trans 'str_author_PublishedPosts' %}: {{ v }} </h6>
                                     {% else %}
-                                    <h6> {% trans 'authors_NoPostsYet' %} </h6>
+                                    <h6> {% trans 'str_author_NoPostsYet' %} </h6>
                                     {% endif %}
                                 </div>
                             </div>
