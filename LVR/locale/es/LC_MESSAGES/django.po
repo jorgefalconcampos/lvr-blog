@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-24 22:43-0500\n"
+"POT-Creation-Date: 2020-08-24 23:01-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -120,7 +120,7 @@ msgstr "Todos los posts por"
 #: .\templates\LVR\categories_detail.html:34
 #: .\templates\LVR\post_detail.html:146 .\templates\LVR\post_detail.html:270
 #: .\templates\LVR\post_detail.html:318 .\templates\LVR\search.html:125
-#: .\templates\LVR\user\dashboard.html:219
+#: .\templates\LVR\tags_detail.html:35 .\templates\LVR\user\dashboard.html:219
 msgid "str_publishedDate"
 msgstr "Fecha de publicación"
 
@@ -629,12 +629,12 @@ msgid "str_search_OrIfUWant"
 msgstr "O si lo prefieres, puedes"
 
 #: .\templates\LVR\tags.html:15
-msgid "allTags_title"
-msgstr ""
+msgid "str_allTags_title"
+msgstr "Tags"
 
-#: .\templates\LVR\tags_detail.html:35
-msgid "post_detail_PostPublishedDate"
-msgstr ""
+#: .\templates\LVR\tags_detail.html:52
+msgid "str_noPosts2Show"
+msgstr "No hay posts para mostrar"
 
 #: .\templates\LVR\user\base.html:11 .\templates\LVR\user\dashboard.html:13
 #: .\templates\LVR\user\dashboard.html:15
