@@ -1,9 +1,15 @@
-// Cookie to know if the visitor visits our website for the 1st time
-Cookies.set("firsttimevisit", "false");
-var myCookie = Cookies.get("firsttimevisit");
-$('#closejumbotron').on('click', function(){ Cookies.set("firsttimevisit", "false"); });
-if(myCookie == "false"){ removeJumbotron(); }
-function removeJumbotron(){  $('#firsttimevisitor').remove(); }
+// $(document).ready(function() {
+
+$(window).on('load',function(){
+// document.addEventListener("DOMContentLoaded", function () {
+    // Cookie to know if the visitor visits our website for the 1st time
+    function alreadyVisited(val){Cookies.set('firsttimevisit', val, {expires:1068});}
+    var first_time = Cookies.get('firsttimevisit'); 
+    if(first_time == 'false'){removeJumbotron();}else{$('#firsttimevisitor').fadeIn(1000).css({'display': 'block'});}
+    $('#closejumbotron').on('click', function(e){e.preventDefault();alreadyVisited('false');});
+    function removeJumbotron(){  $('#firsttimevisitor').remove(); }
+});
+
 // Bootstrap Cookie Alert by Wruczek | https://github.com/Wruczek/Bootstrap-Cookie-Alert | Released under MIT license
 (function () {
     "use strict";

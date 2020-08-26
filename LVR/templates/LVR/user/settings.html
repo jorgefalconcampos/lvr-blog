@@ -43,11 +43,11 @@
                         {% endif %}
 
                         <a id="settings_account" class="list-group-item list-group-item-action {% if request.user.is_superuser %}active{% endif %}" data-toggle="list" href="#account" role="tab">
-                            <div class="h6"> {% trans 'dashboard_Settings_accountSettings' %} </div>
+                            <div class="h6"> {% trans 'str_dashboard_Settings_accountSettings' %} </div>
                         </a>
 
                         <a class="list-group-item list-group-item-action" data-toggle="list" href="#password" role="tab">
-                            <div class="h6"> {% trans 'dashboard_Settings_securityPass' %} </div>
+                            <div class="h6"> {% trans 'str_dashboard_Settings_securityPass' %} </div>
                         </a>
                         <a id="settings_notifications" class="list-group-item list-group-item-action" data-toggle="list" href="#under_dev" role="tab">
                             <div class="h6"> {% trans 'str_dashboard_notifications' %} </div>
@@ -192,7 +192,7 @@
                                             </div>
                                         </div>
                                     </div>                                    
-                                    <button type="submit" class="btn btn-primary my-1">{% trans 'saveChanges' %}</button>
+                                    <button type="submit" class="btn btn-primary my-1">{% trans 'str_saveChanges' %}</button>
                                 </form>
                             </div>
                         </div>    
@@ -212,7 +212,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="acc_email">{{AccountForm.username.label}}</label>
+                                        <label for="acc_email">{{AccountForm.email.label}}</label>
                                         {{AccountForm.email}}
                                     </div>
 
@@ -223,7 +223,7 @@
                                         <h6 class="text-muted"> <small> {% trans 'str_dashboard_settings_lastLogin' %}: {{ request.user.last_login }} </small> </h6>
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary my-1"> {% trans 'saveChanges' %} </button>    
+                                    <button type="submit" class="btn btn-primary my-1"> {% trans 'str_saveChanges' %} </button>    
                                 </form>
                             </div>
                         </div>
@@ -350,7 +350,7 @@
     <div id="toastMessage" class="toast mr-2 mb-2 shadow border-info" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="true" data-delay="3000" style="position: fixed; bottom: 0; right:0;  z-index:1111;">
         <div class="toast-header bg-info text-white">
             <i class="fas fa-info-circle fa-lg mr-1"></i> 
-            <strong class="mr-auto">En desarrollo</strong>
+            <strong class="mr-auto">{% trans 'str_inDevelopment' %}</strong>
             <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"> <span aria-hidden="true">×</span> </button>
         </div>
         <div class="toast-body">Esta función aún no se encuentra disponible</div>

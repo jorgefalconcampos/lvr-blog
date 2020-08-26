@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+  <title>{% trans 'str_login_g' %}</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <link rel="stylesheet" href="{% static 'LVR/assets/css/styles.css' %}">  
   <link rel="stylesheet" href="{% static 'LVR/assets/css/bootstrap-select.css' %}">  
@@ -22,7 +22,7 @@
             <div>
                 <div class="row">
                     <img src="{% static 'LVR/assets/img/R.png' %}" alt="LVR" width="55" class="mx-0 mx-sm-2 mx-md-2 mx-lg-2">
-                    <h2 class="mt-2 font-weight-bold"> {% trans 'str_login' %} </h2>
+                    <h2 class="mt-2 font-weight-bold">{% trans 'str_login_g' %}</h2>
                 </div>
                 <p> {% trans 'str_login_subtitle' %} </p>
             </div>
@@ -63,7 +63,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"> <i class="fas fa-user"></i> </span>
                                     </div>
-                                    <input id="login_username" name="user" class="form-control" placeholder="Username" type="text">
+                                    <input id="login_username" name="user" class="form-control" placeholder="{% trans 'str_user' %}" type="text">
                                 </div> 
                             </div> 
                             

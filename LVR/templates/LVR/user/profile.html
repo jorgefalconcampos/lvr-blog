@@ -80,36 +80,36 @@
             {% if not request.user.is_superuser %}
             <div class="col-lg-6">
                 <div class="py-3 d-flex justify-content-center align-items-center">
-                    <h3 class="text-uppercase">{% trans 'dashboard_stats_titlePosts' %} </h3>
+                    <h3 class="text-center text-uppercase">{% trans 'str_dashboard_stats_titlePosts' %} </h3>
                 </div>
                 <div class="py-4 d-flex justify-content-center align-items-center">
                     <i class="material-icons md-30 mr-2">line_weight</i>
-                    <h5 class="font-weight-bold mr-1">{% trans 'dashboard_stats_allPosts' %}: </h5>
+                    <h5 class="font-weight-bold mr-1">{% trans 'str_dashboard_stats_allPosts' %}: </h5>
                     <h5>{{total_posts}}</h5>
                 </div>
                 {% for k, v in posts.items %}
                 <div class="py-4 d-flex justify-content-center align-items-center">
                     {% if k == 'approved' %}
                     <i class="material-icons md-30 mr-2">done</i>
-                    <h5 class="font-weight-bold mr-1">{% trans 'dashboard_stats_approvedPosts' %}: </h5>
+                    <h5 class="font-weight-bold mr-1">{% trans 'str_dashboard_stats_approvedPosts' %}: </h5>
                     <h5>{{v}}</h5>
                     {% endif %}
 
                     {% if k == 'draft' %}
                     <i class="material-icons md-30 mr-2">access_time</i>
-                    <h5 class="font-weight-bold mr-1"> {% trans 'dashboard_stats_holdingPosts' %}: </h5>
+                    <h5 class="font-weight-bold mr-1"> {% trans 'str_dashboard_stats_DraftPosts' %}: </h5>
                     <h5>{{v}}</h5>
                     {% endif %}
                                      
                     {% if k == 'archived' %}
                     <i class="material-icons md-30 mr-2">archive</i>
-                    <h5 class="font-weight-bold mr-1">{% trans 'dashboard_stats_archivedPosts' %}: </h5>
+                    <h5 class="font-weight-bold mr-1">{% trans 'str_dashboard_stats_archivedPosts' %}: </h5>
                     <h5>{{v}}</h5>
                     {% endif %}
 
                     {% if k == 'rejected' %}
                     <i class="material-icons md-30 mr-2">clear</i>
-                    <h5 class="font-weight-bold mr-1">{% trans 'dashboard_stats_rejectedPosts' %}: </h5>
+                    <h5 class="font-weight-bold mr-1">{% trans 'str_dashboard_stats_rejectedPosts' %}: </h5>
                     <h5>{{v}}</h5>
                     {% endif %}
                 </div>
@@ -118,14 +118,14 @@
 
             <div class="col-lg-6">
                 <div class="py-3 d-flex justify-content-center align-items-center">
-                    <h3 class="pt-5 pt-lg-0 text-uppercase">{% trans 'dashboard_stats_titleReactions' %}</h3>
+                    <h3 class="pt-5 pt-lg-0 text-center text-uppercase">{% trans 'str_dashboard_stats_titleReactions' %}</h3>
                 </div>
             
                 <div class="py-4 d-flex justify-content-center align-items-center">
                     <div data-toggle="tooltip" data-html="true" data-placement='top' title="Las reacciones solos se pueden agregar a los posts publicados">
                         <div class="d-flex">
                             <i class="material-icons md-30 mr-2">line_weight</i>
-                            <h5 class="font-weight-bold mr-1">{% trans 'dashboard_stats_allReactions' %}: </h5>
+                            <h5 class="font-weight-bold mr-1">{% trans 'str_dashboard_stats_allReactions' %}: </h5>
                             <h5>{{total_reactions}}</h5>
                         </div>           
                     </div>
@@ -135,25 +135,25 @@
                 <div class="py-4 d-flex justify-content-center align-items-center">
                     {% if k == 'fav' %}
                     <i class="material-icons md-30 mr-2">star</i>
-                    <h5 class="font-weight-bold mr-1">{% trans 'favReaction' %}: </h5>
+                    <h5 class="font-weight-bold mr-1">{% trans 'str_favReaction' %}: </h5>
                     <h5>{{v}}</h5>
                     {% endif %}
 
                     {% if k == 'util' %}
                     <i class="material-icons md-30 mr-2">done</i>
-                    <h5 class="font-weight-bold mr-1">{% trans 'utilReaction' %}: </h5>
+                    <h5 class="font-weight-bold mr-1">{% trans 'str_utilReaction' %}: </h5>
                     <h5>{{v}}</h5>
                     {% endif %}
                   
                     {% if k == 'tmbup' %}
                     <i class="material-icons md-30 mr-2">thumb_up</i>
-                    <h5 class="font-weight-bold mr-1">{% trans 'goodReaction' %}: </h5>
+                    <h5 class="font-weight-bold mr-1">{% trans 'str_goodReaction' %}: </h5>
                     <h5>{{v}}</h5>
                     {% endif %}
 
                     {% if k == 'tmbdn' %}
                     <i class="material-icons md-30 mr-2">thumb_down</i>
-                    <h5 class="font-weight-bold mr-1">{% trans 'badReaction' %}: </h5>
+                    <h5 class="font-weight-bold mr-1">{% trans 'str_badReaction' %}: </h5>
                     <h5>{{v}}</h5>
                     {% endif %}
                 </div>

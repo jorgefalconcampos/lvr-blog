@@ -58,8 +58,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-left my-4">
-                        <h3 class="section-heading font-weight-bold text-uppercase"> {% trans 'post_edit_Title' %} </h3>
-                        <h4 class="section-subheading text-muted"> {% trans 'post_edit_Subtitle' %} :) </h4>
+                        <h3 class="section-heading font-weight-bold text-uppercase">{% trans 'str_postEdit_title' %}</h3>
+                        <h4 class="section-subheading text-muted">{% trans 'str_postEdit_subtitle' %} :)</h4>
                     </div>
                 </div>
                 
@@ -131,9 +131,9 @@
                                         <label class="ml-2" for="post_title">{{postForm.post_body.label}}</label>
                                         <div class="float-right mr-4">
                                             {% if post.status == 1 %}
-                                            <a href="{% url 'post_detail' post.category post.slug %}" target="_blank">Previsualizar</a>
+                                            <a href="{% url 'post_detail' post.category post.slug %}" target="_blank">{% trans 'str_preview' %}</a>
                                             {% else %}
-                                            <a href="" onclick='document.forms["PostForm"].submit(); return false;'>Previsualizar</a>
+                                            <a href="" onclick='document.forms["PostForm"].submit(); return false;'>{% trans 'str_preview' %}</a>
                                             {% endif %}
                                         </div>
                                         <div class="" data-toggle="tooltip" data-html="true" data-placement='right' title="{% for e in form.post_body.errors %} {% if form.subtitle.errors|length == 1 %} <span> {{ e }} </span> {% else %} <li class='ml-1'>  {{ e }} </li> {% endif %} {% endfor %}">
@@ -142,16 +142,16 @@
                                     </div>
                                     
                                     <div class="col-lg-12 text-right">
-                                        <a href="javascript:history.go(-1)" class="btn btn-outline-secondary btn-xl text-uppercase my-3 mx-2"> <i class="material-icons align-top">cancel</i> {% trans 'Cancel' %} </a>
+                                        <a href="javascript:history.go(-1)" class="btn btn-outline-secondary btn-xl text-uppercase my-3 mx-2"> <i class="material-icons align-top mr-1">cancel</i>{% trans 'str_cancel' %}</a>
                                         {% if nocategs %}
-                                        <button type="button" class="btn btn-primary btn-xl disabled text-uppercase my-3" > <i class="material-icons align-top">save</i> {% trans 'Save' %} </button> 
+                                        <button type="button" class="btn btn-primary btn-xl disabled text-uppercase my-3" > <i class="material-icons align-top mr-1">save</i>{% trans 'str_save' %}</button> 
                                         {% else %}
                                             {% if is_edit and post.status == 1 %}
                                                 <div class="float-right" data-toggle="tooltip" data-html="true" data-placement='bottom' title="Este post ya está aprobado, si lo guardas tendrás que esperar a que se apruebe nuevamente.">
-                                                    <button type="submit" class="btn btn-primary btn-xl text-uppercase my-3"> <i class="material-icons align-top">save</i> {% trans 'Save' %} </button> 
+                                                    <button type="submit" class="btn btn-primary btn-xl text-uppercase my-3"> <i class="material-icons align-top mr-1">save</i>{% trans 'str_save' %}</button> 
                                                 </div>
                                             {% else %}
-                                            <button type="submit" class="btn btn-primary btn-xl text-uppercase my-3"> <i class="material-icons align-top">save</i> {% trans 'Save' %} </button> 
+                                            <button type="submit" class="btn btn-primary btn-xl text-uppercase my-3"> <i class="material-icons align-top mr-1">save</i>{% trans 'str_save' %}</button> 
                                             {% endif %}
                                         {% endif %}
                                     </div>
@@ -182,28 +182,28 @@
                 <h6 class="ml-2 font-weight-bold"> {% trans 'postStatus' %}: </h6>
 
                 {% if post.status == 0 %}
-                <div class="d-flex d-inline" data-toggle="tooltip" data-html="true" data-placement='top' title="{% trans 'status_draft_desc' %}">
+                <div class="d-flex d-inline" data-toggle="tooltip" data-html="true" data-placement='top' title="{% trans 'str_status_draft_desc' %}">
                     <i class="ml-1 px-0 material-icons align-top md-inactive">access_time</i>  
                     <h6 > {% trans 'status_draft' %} </h6>
                 </div>
                 {% endif %}
 
                 {% if post.status == 1 %}
-                <div class="d-flex d-inline" data-toggle="tooltip" data-html="true" data-placement='top' title="{% trans 'status_approved_desc' %}">
+                <div class="d-flex d-inline" data-toggle="tooltip" data-html="true" data-placement='top' title="{% trans 'str_status_approved_desc' %}">
                     <i class="ml-1 px-0 material-icons align-top md-inactive">done</i>  
                     <h6> {% trans 'status_approved' %} </h6>
                 </div>
                 {% endif %}
 
                 {% if post.status == 2 %}
-                <div class="d-flex d-inline" data-toggle="tooltip" data-html="true" data-placement='top' title="{% trans 'status_rejected_desc' %}">
+                <div class="d-flex d-inline" data-toggle="tooltip" data-html="true" data-placement='top' title="{% trans 'str_status_rejected_desc' %}">
                     <i class="ml-1 px-0 material-icons align-top md-inactive">clear</i>  
                     <h6> {% trans 'status_rejected' %} </h6>
                 </div>
                 {% endif %}
 
                 {% if post.status == 3 %}
-                <div class="d-flex d-inline" data-toggle="tooltip" data-html="true" data-placement='top' title="{% trans 'status_archived_desc' %}">
+                <div class="d-flex d-inline" data-toggle="tooltip" data-html="true" data-placement='top' title="{% trans 'str_status_archived_desc' %}">
                     <i class="ml-1 px-0 material-icons align-top md-inactive">archive</i>  
                     <h6> {% trans 'status_archived' %} </h6>
                 </div>    

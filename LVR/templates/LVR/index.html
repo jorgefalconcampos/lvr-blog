@@ -18,12 +18,12 @@
 <div itemscope itemtype="https://schema.org/Blog">
 
     {% if post_list.number == 1 %}
-    <div id="firsttimevisitor" class="alert jumbotron alert-dismissible fade show py-5 my-4" role="alert">
+    <div id="firsttimevisitor" class="alert jumbotron alert-dismissible fade show py-5 my-4" role="alert" style="display: none;">
         <div class="mx-xs-1 mx-sm-3 mx-md-1 mx-lg-3">
-            <h2 class="font-weight-bold py-1"> {% trans 'index_greeting_title' %} 👋 </h2>
-            <p class="lead"> {% trans 'index_greeting_subtitle1' %} <b> LOCK IT. </b>
-            {% trans 'index_greeting_subtitle2' %} <br> <br>
-            <a href="{% url 'about' %}" class="btn btn-secondary btn-md"> {% trans 'index_greeting_button' %} </a>
+            <h2 class="font-weight-bold py-1"> {% trans 'str_index_greeting_title' %}! 👋 </h2>
+            <p class="lead"> {% trans 'str_index_greeting_subtitle1' %} <b class="font-weight-bold"> LE VÉLO ROUGE</b>.
+            {% trans 'str_index_greeting_subtitle2' %} <br> <br>
+            <a href="{% url 'about' %}" class="btn btn-secondary btn-md"> {% trans 'str_index_greeting_button' %} </a>
         </div>
         <button id="closejumbotron" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     </div>
@@ -100,12 +100,12 @@
             <div class="mt-5 bg-success rounded">
                 <div class="row">
                     <div class="col text-center">
-                        <p class="h6 py-2"> Anuncio patrocinado</p>
+                        <p class="h6 py-2"> {% trans 'str_sponsoredAd' %}</p>
                     </div>
                 </div>
             </div>
 
-            <h1 class="mt-5 py-3 font-weight-bold text-center"> {% trans 'index_Trending' %} 🔥 </h1>
+            <h1 class="mt-5 py-3 font-weight-bold text-center"> {% trans 'str_index_Trending' %} 🔥 </h1>
             <div class="row my-2">
                 {% for post in trending %}
                 <div class="col-md-4 my-4">
@@ -147,7 +147,7 @@
 
             {% endif %}
         
-        <h1 class="mt-5 py-3 font-weight-bold text-center"> {% trans 'index_LatestEntries' %} </h1>
+        <h1 class="mt-5 py-3 font-weight-bold text-center"> {% trans 'str_index_LatestEntries' %} </h1>
         <div class="row my-3">
         {% else %}
         <div class="col-md-4 my-4">
@@ -202,7 +202,7 @@
         <section class="pb-5 mb-5">
             {% if popular_categories %}
             <header class="text-center mb-5">
-                <h1 class="mt-5 py-3 font-weight-bold text-center"> {% trans 'index_Categoriess' %} </h1>
+                <h1 class="mt-5 py-3 font-weight-bold text-center"> {% trans 'str_allCategos_title' %} </h1>
             </header>
             <div class="row text-center justify-content-center">
                 {% for category, posts_number in popular_categories.items %}
@@ -216,7 +216,7 @@
                     </div>
                 </div>
                 {% endfor %}
-                <div class="col-lg-12 text-center pt-4"><a class="btn btn-primary" href="{% url 'categories' %}">{% trans 'str_seeAllCatgories' %}</a></div>
+                <div class="col-lg-12 pt-4 text-center"><a class="btn btn-primary" href="{% url 'categories' %}">{% trans 'str_seeAllCatgories' %}</a></div>
             </div>
             {% endif %}
         </section>
@@ -226,7 +226,7 @@
     <div class="mt-5 mb-5 bg-success rounded">
         <div class="row">
             <div class="col text-center">
-                <p class="h6 py-2"> Anuncio patrocinado</p>
+                <p class="h6 py-2">{% trans 'str_sponsoredAd' %}</p>
             </div>
         </div>
     </div>

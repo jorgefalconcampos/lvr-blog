@@ -12,7 +12,7 @@
     <h1 class="mt-4">{% trans 'str_dashboard_allMyPosts' %}</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active"> 
-            <a href="{% url 'dashboard' %}"> {% trans 'dashboard_mainTitle_dashboard' %}</a>&nbsp/ {% trans 'str_dashboard_allMyPosts' %} 
+            <a href="{% url 'dashboard' %}"> {% trans 'str_dashboard' %}</a>&nbsp/ {% trans 'str_dashboard_allMyPosts' %} 
         </li>
     </ol>
 
@@ -74,10 +74,10 @@
                         <td>
                             {% if post.all_cmts %}
                             <span class="d-flex d-inline justify-content-left"> <h6 class="font-weight-bold mr-1"> {{ post.all_cmts }} </h6> 
-                                {% trans 'dashboard_table_TotalComments' %} </span>
+                                {% trans 'str_dashboard_table_TotalComments' %} </span>
                                 <hr class=" mt-0 mb-2" style="margin:0px; max-width: 70px;"> 
-                                {% trans 'dashboard_table_ApprovedComments' %}: {{ post.approved_cmts }} <br>
-                                {% trans 'dashboard_table_NonApprovedComments' %}: {{ post.non_approved_cmts }}
+                                {% trans 'str_approvedComments' %}: {{ post.approved_cmts }} <br>
+                                {% trans 'str_nonApprovedComments' %}: {{ post.non_approved_cmts }}
                             </span>
                             {% else %}
                             <p> {% trans 'str_noComments' %} </p>
@@ -87,25 +87,25 @@
                         <td class="text-center"> 
                             
                             {% if post.status == 0 %}
-                            <div class="" data-toggle="tooltip" data-html="true" data-placement='bottom' title="{% trans 'status_draft_desc' %}">
+                            <div class="" data-toggle="tooltip" data-html="true" data-placement='bottom' title="{% trans 'str_status_draft_desc' %}">
                                 <i class="px-0 material-icons align-top md-inactive">access_time</i>  
                             </div>
                             {% endif %}
                             
                             {% if post.status == 1 %}
-                            <div class="" data-toggle="tooltip" data-html="true" data-placement='bottom' title="{% trans 'status_approved_desc' %}">
+                            <div class="" data-toggle="tooltip" data-html="true" data-placement='bottom' title="{% trans 'str_status_approved_desc' %}">
                                 <i class="px-0 material-icons align-top md-inactive">done</i>  
                             </div>
                             {% endif %}
                             
                             {% if post.status == 2 %}
-                            <div class="" data-toggle="tooltip" data-html="true" data-placement='bottom' title="{% trans 'status_rejected_desc' %}">
+                            <div class="" data-toggle="tooltip" data-html="true" data-placement='bottom' title="{% trans 'str_status_rejected_desc' %}">
                                 <i class="px-0 material-icons align-top md-inactive">clear</i>
                             </div>
                             {% endif %}
                             
                             {% if post.status == 3 %}
-                            <div class="" data-toggle="tooltip" data-html="true" data-placement='bottom' title="{% trans 'status_archived_desc' %}">
+                            <div class="" data-toggle="tooltip" data-html="true" data-placement='bottom' title="{% trans 'str_status_archived_desc' %}">
                                 <i class="px-0 material-icons-outlined align-top md-inactive">archive</i>
                             </div>
                             {% endif %}
