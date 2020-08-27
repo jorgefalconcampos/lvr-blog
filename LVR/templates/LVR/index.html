@@ -130,7 +130,7 @@
                             </div>
 
                             <div class="card-footer">
-                                <p itemprop="dateCreated" class="mt-2 card-subtitle text-muted ">Publicado: {{ post.published_date }} </p>
+                                <p itemprop="dateCreated" class="mt-2 card-subtitle text-muted ">{% trans 'str_publishedDate' %}: {{ post.published_date }} </p>
                                 <h6 itemprop="creator" class="mt-1 post-author"> {% trans 'str_postBy' %}:  <a href="{% url 'author_detail' post.author.slug %}"> {{ post.author.name.get_full_name }} </a> </h6>
                                 <hr>
                                 {% for tag in post.tags.all %}

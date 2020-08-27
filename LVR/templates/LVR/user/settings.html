@@ -66,12 +66,11 @@
 
                     <div class="card-footer">
                         <div class="container row d-flex d-inline">
-                            <div class="h6 text-muted mt-1 mr-2">{% trans 'str_language' %}:</div>
-                            
+                            <div class="h6 text-muted my-auto mr-2">{% trans 'str_language' %}:</div>
                             <form action="{% url 'set_language' %}" method="post">
                                 {% csrf_token %}
                                 <input name="next" type="hidden" value="{{ request.get_full_path }}"/>
-                                <select name="language" class="selectpicker" data-style=" btn-light shadow-xs bg-white px-2 mr-1" data-width="fit" id="changeLang" style="max-width: 110px; height: 30px;" onchange="this.form.submit()">
+                                <select name="language" class="selectpicker" data-style=" border-secondary shadow-xs bg-white px-2 mr-1" data-width="fit" id="changeLang" style="max-width: 110px; height: 30px;" onchange="this.form.submit()">
                                     {% get_language_info_list for LANGUAGES as languages %}
                                     {% for language in languages %}
                                     <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
@@ -79,8 +78,7 @@
                                     </option>
                                     {% endfor %}
                                 </select>
-                            </form> 
-
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -93,7 +91,7 @@
                     <div class="tab-pane fade show active" id="profile" role="tabpanel">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between">    
-                                <h5 class="card-title mb-0">Información pública</h5> 
+                                <h5 class="card-title my-auto">{% trans 'str_publicInfo' %}</h5> 
                                 <a href="{% url 'author_detail' author.slug %}" target="_blank" class="btn bnt-sm btn-primary"> 
                                     {% trans 'str_dashboard_seeProfile' %}
                                 </a> 
@@ -147,7 +145,7 @@
                                                                             </div> 
                                                                         </div>
                                                                         <div class="modal-footer justify-content-end px-sm-0 px-md-0 px-lg-0">
-                                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">{% trans 'Ok' %}</button>
+                                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">{% trans 'str_gotIt' %}</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -156,7 +154,7 @@
                                                     </div>
                                                 
                                                     <div class="form-group pt-2">    
-                                                        <label class="ml-1">Redes sociales</label>
+                                                        <label class="ml-1">{% trans 'str_socialMedia' %}</label>
                                                         <div class="input-group">                          
                                                             <div class="input-group-prepend"><span class="input-group-text"><i class="fab fa-facebook-square fa-lg"></i></span></div>
                                                             {{ProfileAuthorUserForm.facebook_URL}}
@@ -181,7 +179,7 @@
                                             <div class="text-center">
                                                 <div class="author-d-profile">
                                                     <img src="{{author.image.url}}" class="rounded-circle img-responsive my-3" width="128" height="128">
-                                                    <p>Actualmente:<br><b id="profile_author_img">{{author.image_filename}}</b></p>
+                                                    <p>{% trans 'str_currentPhoto' %}:<br><b id="profile_author_img">{{author.image_filename}}</b></p>
                                                     <div class="pb-3 mx-3">{{ProfileAuthorUserForm.image}}</div>
                                                 </div>
                                                 <div class="row mt-3"> 
@@ -202,7 +200,7 @@
                     <!-- Account -->
                     <div class="tab-pane fade {% if request.user.is_superuser %}show active{% endif %}" id="account" role="tabpanel">
                         <div class="card">
-                            <div class="card-header"> <h5 class="card-title mb-0"> Mi cuenta </h5> </div>
+                            <div class="card-header"> <h5 class="card-title mb-0">{% trans 'str_miAccount' %}</h5> </div>
                             <div class="card-body">
                                 <form id="account_frm">
                                     {% csrf_token %}
@@ -219,8 +217,8 @@
                                     <hr class="mx-1 my-4"> 
 
                                     <div class="mx-2 py-2 mb-4">
-                                        <h6 class="text-muted"> <small> {% trans 'str_dashboard_settings_joinedDate' %}: {{ request.user.date_joined }} </small> </h6>
-                                        <h6 class="text-muted"> <small> {% trans 'str_dashboard_settings_lastLogin' %}: {{ request.user.last_login }} </small> </h6>
+                                        <h6 class="text-muted"> <small> {% trans 'str_dashboard_joinedDate' %}: {{ request.user.date_joined }} </small> </h6>
+                                        <h6 class="text-muted"> <small> {% trans 'str_dashboard_lastLogin' %}: {{ request.user.last_login }} </small> </h6>
                                     </div>
 
                                     <button type="submit" class="btn btn-primary my-1"> {% trans 'str_saveChanges' %} </button>    
@@ -229,7 +227,7 @@
                         </div>
 
                         <div class="mt-3 card">
-                            <div class="card-header"> <h5 class="card-title mb-0"> Permisos que tiene mi cuenta </h5> </div>
+                            <div class="card-header"> <h5 class="card-title mb-0">{% trans 'str_myPermissions' %}</h5> </div>
                             <div class="card-body">
                                 <div id="accordion">
                                     
@@ -237,7 +235,7 @@
                                         <div class="card-header" id="show_permissions">
                                             <h3 class="card-title mb-0">
                                                 <button class="btn btn-link" data-toggle="collapse" data-target="#collapse_perms" aria-expanded="true" aria-controls="collapseTwo">
-                                                    <i class="material-icons align-top">keyboard_arrow_down</i> {% trans 'dashboard_Settings_SM_show' %} 
+                                                    <i class="material-icons align-top">keyboard_arrow_down</i> {% trans 'str_show' %} 
                                                 </button>
                                             </h3>
                                         </div>

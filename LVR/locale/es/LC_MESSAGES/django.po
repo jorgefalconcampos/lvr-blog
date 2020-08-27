@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-25 23:37-0500\n"
+"POT-Creation-Date: 2020-08-26 20:41-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,51 +18,172 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\forms.py:51 .\forms.py:157
+#: .\forms.py:18
+msgid "str_postForm_title_placeholder"
+msgstr "Escribe el título del post"
+
+#: .\forms.py:19
+msgid "str_postForm_subtitle_placeholder"
+msgstr "Escribe el subtítulo del post"
+
+#: .\forms.py:20 .\templates\LVR\misc\comment_terms.html:21
+#: .\templates\LVR\misc\cookies.html:21
+#: .\templates\LVR\misc\privacy_policy.html:21
+#: .\templates\LVR\misc\rules.html:21
+#: .\templates\LVR\misc\service_terms.html:21
+#: .\templates\LVR\misc\tutorial.html:22 .\templates\LVR\post_detail.html:87
+#: .\templates\LVR\post_detail.html:89
+msgid "str_photo"
+msgstr "foto"
+
+#: .\forms.py:21
+msgid "str_postForm_category_title"
+msgstr "Selecciona una categoría"
+
+#: .\forms.py:22
+msgid "str_postForm_tags_placeholder"
+msgstr "Una lista de etiquetas separadas por coma"
+
+#: .\forms.py:25
+msgid "str_postForm_title_label"
+msgstr "Título del post"
+
+#: .\forms.py:26
+msgid "str_postForm_subtitle_label"
+msgstr "Subtítulo del post"
+
+#: .\forms.py:27
+msgid "str_postForm_image_label"
+msgstr "Imagen"
+
+#: .\forms.py:28
+msgid "str_unsplashURL_label"
+msgstr "URL de imagen de Unsplash"
+
+#: .\forms.py:29
+msgid "str_postForm_category_label"
+msgstr "Categoría"
+
+#: .\forms.py:30
+msgid "str_postForm_tags_label"
+msgstr "Tags"
+
+#: .\forms.py:31
+msgid "str_postForm_postBody_label"
+msgstr "Cuerpo del post"
+
+#: .\forms.py:52 .\forms.py:158
 msgid "str_fullName_placeholder"
 msgstr "Escribe tu nombre"
 
-#: .\forms.py:52 .\forms.py:88 .\forms.py:158
+#: .\forms.py:53 .\forms.py:89 .\forms.py:118 .\forms.py:159 .\forms.py:171
 msgid "str_yourEmail_placeholder"
 msgstr "Escribe tu email"
 
-#: .\forms.py:78
-msgid "str_searchForm_label"
-msgstr "Escribe una o más palabras clave"
+#: .\forms.py:54
+msgid "str_commentForm_comment_placeholder"
+msgstr "Escribe tu comentario"
 
-#: .\forms.py:82
-msgid "str_searchAmong"
-msgstr "Busca entre +"
+#: .\forms.py:57 .\forms.py:106
+msgid "str_firstName"
+msgstr "Nombre"
 
-#: .\forms.py:159
-msgid "str_contactForm_subject_placeholder"
-msgstr "Escribe un asunto"
-
-#: .\forms.py:160
-msgid "str_contactForm_message_placeholder"
-msgstr "Escribe el mensaje (máx. 500 caracteres)"
-
-#: .\forms.py:162
-msgid "str_contactForm_fullName"
-msgstr "Nombre y Apellido"
-
-#: .\forms.py:163
+#: .\forms.py:58 .\forms.py:92 .\forms.py:126 .\forms.py:164
 msgid "str_email"
 msgstr "Email"
 
-#: .\forms.py:164
+#: .\forms.py:59
+msgid "str_commentForm_comment_label"
+msgstr "Tu comentario"
+
+#: .\forms.py:79
+msgid "str_searchForm_label"
+msgstr "Escribe una o más palabras clave"
+
+#: .\forms.py:83
+msgid "str_searchAmong"
+msgstr "Busca entre +"
+
+#: .\forms.py:88
+msgid "str_yourUsername_placeholder"
+msgstr "Escribe un nombre de usuario"
+
+#: .\forms.py:89 .\forms.py:92
+msgid "str_private"
+msgstr "privado"
+
+#: .\forms.py:91 .\templates\LVR\user\base.html:74
+#: .\templates\LVR\user\login.html:61 .\templates\LVR\user\login.html:66
+msgid "str_user"
+msgstr "Nombre de usuario"
+
+#: .\forms.py:103
+msgid "str_firstName_placeholder"
+msgstr "Escribe tu nombre"
+
+#: .\forms.py:104
+msgid "str_lastName_placeholder"
+msgstr "Escribe tu apellido"
+
+#: .\forms.py:107
+msgid "str_lastName"
+msgstr "Apellido"
+
+#: .\forms.py:116
+msgid "str_profileForm_title_placeholder"
+msgstr "Redactor, ingeniero, padre de familia, maestro Jedi..."
+
+#: .\forms.py:117
+msgid "str_profileForm_bio_placeholder"
+msgstr "Cuéntale a los lectores un poco de ti y de tu vida :)"
+
+#: .\forms.py:118 .\forms.py:126
+msgid "str_public"
+msgstr "público"
+
+#: .\forms.py:119
+msgid "str_uploadPhoto"
+msgstr "Subir foto"
+
+#: .\forms.py:119
+msgid "str_profileForm_image_placeholder"
+msgstr "Ningún archivo seleccionado"
+
+#: .\forms.py:124
+msgid "str_profileForm_title_label"
+msgstr "Título"
+
+#: .\forms.py:125
+msgid "str_profileForm_bio_label"
+msgstr "Biografía"
+
+#: .\forms.py:127
+msgid "str_profileForm_image_helpText"
+msgstr ""
+"Sube una foto cuadrada de 300x300 píxeles en formato [jpg], [jpeg] o [png]. "
+"El tamaño de la foto debe ser menor a 2 MB."
+
+#: .\forms.py:160
+msgid "str_contactForm_subject_placeholder"
+msgstr "Escribe un asunto"
+
+#: .\forms.py:161
+msgid "str_contactForm_message_placeholder"
+msgstr "Escribe el mensaje (máx. 500 caracteres)"
+
+#: .\forms.py:163
+msgid "str_contactForm_fullName"
+msgstr "Nombre y Apellido"
+
+#: .\forms.py:165
 msgid "str_subject"
 msgstr "Asunto"
 
-#: .\forms.py:165
+#: .\forms.py:166
 msgid "str_message"
 msgstr "Mensaje"
 
-#: .\forms.py:170
-msgid "str_subNewsletter_yourEmail"
-msgstr "Escribe tu dirección de emaail"
-
-#: .\forms.py:171
+#: .\forms.py:172
 msgid "str_subNewsletter_title"
 msgstr "Suscríbete al Newsletter"
 
@@ -117,7 +238,7 @@ msgid "str_author_detail_AllPostsBy"
 msgstr "Todos los posts publicados por"
 
 #: .\templates\LVR\author_detail.html:99
-#: .\templates\LVR\categories_detail.html:34
+#: .\templates\LVR\categories_detail.html:34 .\templates\LVR\index.html:133
 #: .\templates\LVR\post_detail.html:146 .\templates\LVR\post_detail.html:270
 #: .\templates\LVR\post_detail.html:318 .\templates\LVR\search.html:125
 #: .\templates\LVR\tags_detail.html:35 .\templates\LVR\user\dashboard.html:218
@@ -233,6 +354,10 @@ msgstr "Inicio"
 msgid "str_Contact"
 msgstr "Contacto"
 
+#: .\templates\LVR\base_nav.html:38
+msgid "str_searchInBlog"
+msgstr "Busca en el blog"
+
 #: .\templates\LVR\base_nav.html:47 .\templates\LVR\post_detail.html:218
 #: .\templates\LVR\search.html:65 .\templates\LVR\search.html:144
 msgid "str_search"
@@ -290,6 +415,11 @@ msgstr "Agregar categoría"
 #: .\templates\LVR\post_detail.html:344 .\templates\LVR\tags_detail.html:36
 msgid "str_postBy"
 msgstr "Por"
+
+#: .\templates\LVR\categories_detail.html:51
+#: .\templates\LVR\tags_detail.html:52
+msgid "str_noPosts2Show"
+msgstr "No hay posts para mostrar"
 
 #: .\templates\LVR\http_states\404.html:10
 msgid "page404_title"
@@ -430,7 +560,7 @@ msgstr ""
 #: .\templates\LVR\mails\user\email-sent.html:100
 #: .\templates\LVR\user\base.html:33 .\templates\LVR\user\base.html:416
 msgid "str_dashboard_goToPage"
-msgstr "Ir a la página"
+msgstr "Ir al sitio"
 
 #: .\templates\LVR\mails\user\email-sent.html:57
 #: .\templates\LVR\mails\user\email-sent.html:101
@@ -494,15 +624,6 @@ msgstr ""
 msgid "str_lastUpdate"
 msgstr "Última actualización"
 
-#: .\templates\LVR\misc\comment_terms.html:21
-#: .\templates\LVR\misc\cookies.html:21
-#: .\templates\LVR\misc\privacy_policy.html:21
-#: .\templates\LVR\misc\rules.html:21
-#: .\templates\LVR\misc\service_terms.html:21
-#: .\templates\LVR\misc\tutorial.html:22
-msgid "str_photo"
-msgstr "Foto"
-
 #: .\templates\LVR\post_detail.html:44 .\templates\LVR\post_detail.html:47
 msgid "post_draftStatus"
 msgstr ""
@@ -527,50 +648,70 @@ msgstr ""
 msgid "post_reaction_added"
 msgstr ""
 
-#: .\templates\LVR\post_detail.html:102
-msgid "favReaction"
-msgstr ""
+#: .\templates\LVR\post_detail.html:102 .\templates\LVR\user\profile.html:138
+msgid "str_favReaction"
+msgstr "Favorito"
 
-#: .\templates\LVR\post_detail.html:103
-msgid "utilReaction"
-msgstr ""
+#: .\templates\LVR\post_detail.html:103 .\templates\LVR\user\profile.html:144
+msgid "str_utilReaction"
+msgstr "Fue útil"
 
-#: .\templates\LVR\post_detail.html:104
-msgid "upReaction"
-msgstr ""
+#: .\templates\LVR\post_detail.html:104 .\templates\LVR\user\profile.html:150
+msgid "str_goodReaction"
+msgstr "Enhorabuena"
 
-#: .\templates\LVR\post_detail.html:105
-msgid "downReaction"
-msgstr ""
+#: .\templates\LVR\post_detail.html:105 .\templates\LVR\user\profile.html:156
+msgid "str_badReaction"
+msgstr "Podría mejorar"
+
+#: .\templates\LVR\post_detail.html:115
+msgid "str_topics"
+msgstr "Temas"
+
+#: .\templates\LVR\post_detail.html:175
+msgid "str_saveOrshare"
+msgstr "Comparte o guarda este post"
 
 #: .\templates\LVR\post_detail.html:256
-msgid "post_detail_MoreFrom"
-msgstr ""
+msgid "str_post_detail_moreFrom"
+msgstr "Más de"
 
 #: .\templates\LVR\post_detail.html:295 .\templates\LVR\post_detail.html:298
-msgid "mayInterested"
-msgstr ""
+msgid "str_mayInterested"
+msgstr "Te podría interesar..."
 
 #: .\templates\LVR\post_detail.html:370
 msgid "str_post_detail_CountingComments"
 msgstr "comentarios en este post"
 
+#: .\templates\LVR\post_detail.html:371
+msgid "str_write_a_comment"
+msgstr "Escribe un comentario"
+
 #: .\templates\LVR\post_detail.html:372
 msgid "post_detail_AwaitingModeration"
 msgstr ""
 
+#: .\templates\LVR\post_detail.html:391
+msgid "str_comment_terms"
+msgstr "reglas de participación"
+
+#: .\templates\LVR\post_detail.html:398
+msgid "str_comment_CTA"
+msgstr "Comentar"
+
 #: .\templates\LVR\post_detail.html:436
-msgid "reportComment"
-msgstr ""
+msgid "str_reportComment"
+msgstr "Reportar comentario"
 
 #: .\templates\LVR\post_detail.html:440
-msgid "reportedComment"
-msgstr ""
+msgid "str_reportedComment"
+msgstr "Este comentario ha sido reportado"
 
 #: .\templates\LVR\post_detail.html:454 .\templates\LVR\user\base.html:138
-#: .\templates\LVR\user\settings.html:240
-msgid "dashboard_Settings_SM_show"
-msgstr ""
+#: .\templates\LVR\user\settings.html:238
+msgid "str_show"
+msgstr "Mostrar"
 
 #: .\templates\LVR\search.html:11
 msgid "str_search_titleHTML"
@@ -640,10 +781,6 @@ msgstr "O si lo prefieres, puedes"
 msgid "str_allTags_title"
 msgstr "Conoce de lo que estamos hablando"
 
-#: .\templates\LVR\tags_detail.html:52
-msgid "str_noPosts2Show"
-msgstr "No hay posts para mostrar"
-
 #: .\templates\LVR\user\base.html:11 .\templates\LVR\user\dashboard.html:12
 #: .\templates\LVR\user\dashboard.html:14
 #: .\templates\LVR\user\moderate_comments.html:50
@@ -685,22 +822,17 @@ msgstr "Administración de Django"
 msgid "str_techSupport"
 msgstr "Soporte Técnico"
 
-#: .\templates\LVR\user\base.html:74 .\templates\LVR\user\login.html:61
-#: .\templates\LVR\user\login.html:66
-msgid "str_user"
-msgstr "Nombre de usuario"
-
 #: .\templates\LVR\user\base.html:84
 msgid "str_dashboard_reportProblem_date"
-msgstr ""
+msgstr "Fecha y hora del incidente"
 
 #: .\templates\LVR\user\base.html:94
 msgid "str_dashboard_reportProblem_label"
-msgstr ""
+msgstr "Descripción del problema"
 
 #: .\templates\LVR\user\base.html:96
-msgid "dashboard_DescribeProblem_placeholder"
-msgstr ""
+msgid "str_dashboard_DescribeProblem_placeholder"
+msgstr "Escribe una breve descripción del problema (máx. 500 caracteres)"
 
 #: .\templates\LVR\user\base.html:102
 msgid "str_msgSent"
@@ -711,8 +843,10 @@ msgid "str_sendProblem_error"
 msgstr "Ocurrió un error al enviar el mensaje, intenta de nuevo más tarde"
 
 #: .\templates\LVR\user\base.html:123
-msgid "LVR_Help"
-msgstr ""
+#, fuzzy
+#| msgid "str_Hello"
+msgid "str_LVR_Help"
+msgstr "¡Hola"
 
 #: .\templates\LVR\user\base.html:157
 msgid "str_RedactionRules"
@@ -740,8 +874,8 @@ msgid "str_dashboard_notifications"
 msgstr "Notificaciones"
 
 #: .\templates\LVR\user\base.html:277
-msgid "dashboard_Addons"
-msgstr ""
+msgid "str_dashboard_Addons"
+msgstr "Complementos"
 
 #: .\templates\LVR\user\base.html:283 .\templates\LVR\user\dashboard.html:46
 #: .\templates\LVR\user\moderate_comments.html:47
@@ -767,7 +901,7 @@ msgstr "Ocultar"
 
 #: .\templates\LVR\user\calendar.html:13
 #: .\templates\LVR\user\notifications.html:12
-#: .\templates\LVR\user\settings.html:353 .\templates\LVR\user\tasks.html:12
+#: .\templates\LVR\user\settings.html:351 .\templates\LVR\user\tasks.html:12
 msgid "str_inDevelopment"
 msgstr "En desarrollo"
 
@@ -796,7 +930,7 @@ msgstr ""
 
 #: .\templates\LVR\user\calendar.html:38
 #: .\templates\LVR\user\notifications.html:37
-#: .\templates\LVR\user\tasks.html:37
+#: .\templates\LVR\user\settings.html:148 .\templates\LVR\user\tasks.html:37
 msgid "str_gotIt"
 msgstr "¡Entendido!"
 
@@ -805,8 +939,10 @@ msgid "str_AddUserAuthor"
 msgstr "Agregar redactor"
 
 #: .\templates\LVR\user\dashboard.html:35
-msgid "str_ModeratePosts"
-msgstr "Moderar postsq"
+#: .\templates\LVR\user\moderate_posts.html:12
+#: .\templates\LVR\user\moderate_posts.html:15
+msgid "str_moderatePosts"
+msgstr "Moderar posts"
 
 #: .\templates\LVR\user\dashboard.html:57
 msgid "str_sendNewMail"
@@ -884,6 +1020,9 @@ msgid "str_dashboard_tableTitle_postActions"
 msgstr "Acciones"
 
 #: .\templates\LVR\user\dashboard.html:215
+#: .\templates\LVR\user\moderate_comments.html:97
+#: .\templates\LVR\user\moderate_posts.html:29
+#: .\templates\LVR\user\moderate_posts.html:38
 msgid "str_createdDate"
 msgstr "Fecha de creación"
 
@@ -965,16 +1104,13 @@ msgstr ""
 msgid "moderateCmts_coment"
 msgstr ""
 
-#: .\templates\LVR\user\moderate_comments.html:97
-#: .\templates\LVR\user\moderate_posts.html:29
-#: .\templates\LVR\user\moderate_posts.html:38
-msgid "dashboard_tableTitle_PostCreatedDate"
-msgstr ""
+#: .\templates\LVR\user\moderate_comments.html:135
+msgid "str_itSeems_anyComment"
+msgstr "Parece que aún no se ha escrito ningún comentario..."
 
-#: .\templates\LVR\user\moderate_posts.html:12
-#: .\templates\LVR\user\moderate_posts.html:15
-msgid "ModeratePosts"
-msgstr ""
+#: .\templates\LVR\user\moderate_posts.html:77
+msgid "str_itSeems_anyArticle"
+msgstr "Parece que aún no se ha escrito ningún post"
 
 #: .\templates\LVR\user\post_edit.html:61
 msgid "str_postEdit_title"
@@ -983,6 +1119,10 @@ msgstr "Crear o editar un post"
 #: .\templates\LVR\user\post_edit.html:62
 msgid "str_postEdit_subtitle"
 msgstr "Escribe algo que los demás amen leer"
+
+#: .\templates\LVR\user\post_edit.html:75
+msgid "str_author"
+msgstr "Autor"
 
 #: .\templates\LVR\user\post_edit.html:134
 #: .\templates\LVR\user\post_edit.html:136
@@ -1053,16 +1193,24 @@ msgstr "Todos mis posts"
 msgid "dashboard_tableTitle_PostPublishedDate"
 msgstr ""
 
-#: .\templates\LVR\user\profile.html:22 .\templates\LVR\user\settings.html:98
+#: .\templates\LVR\user\post_list.html:154
+msgid "str_itSeems_wAnyArticle"
+msgstr "Parece que aún no has escrito ningún post"
+
+#: .\templates\LVR\user\post_list.html:155
+msgid "str_whyNot_writeArticle"
+msgstr "¿Porqué no escribes uno ahora?"
+
+#: .\templates\LVR\user\profile.html:22 .\templates\LVR\user\settings.html:96
 msgid "str_dashboard_seeProfile"
 msgstr "Ver perfil"
 
-#: .\templates\LVR\user\profile.html:70 .\templates\LVR\user\settings.html:222
-msgid "str_dashboard_settings_joinedDate"
+#: .\templates\LVR\user\profile.html:70 .\templates\LVR\user\settings.html:220
+msgid "str_dashboard_joinedDate"
 msgstr "Te uniste el"
 
-#: .\templates\LVR\user\profile.html:71 .\templates\LVR\user\settings.html:223
-msgid "str_dashboard_settings_lastLogin"
+#: .\templates\LVR\user\profile.html:71 .\templates\LVR\user\settings.html:221
+msgid "str_dashboard_lastLogin"
 msgstr "Último inicio de sesión"
 
 #: .\templates\LVR\user\profile.html:83
@@ -1097,22 +1245,6 @@ msgstr "Estadísticas de reacciones"
 msgid "str_dashboard_stats_allReactions"
 msgstr "Total de reacciones"
 
-#: .\templates\LVR\user\profile.html:138
-msgid "str_favReaction"
-msgstr "Favorito"
-
-#: .\templates\LVR\user\profile.html:144
-msgid "str_utilReaction"
-msgstr "Fue útil"
-
-#: .\templates\LVR\user\profile.html:150
-msgid "str_goodReaction"
-msgstr "Enhorabuena"
-
-#: .\templates\LVR\user\profile.html:156
-msgid "str_badReaction"
-msgstr "Podría mejorar"
-
 #: .\templates\LVR\user\settings.html:46
 msgid "str_dashboard_Settings_accountSettings"
 msgstr "Configuración de la cuenta"
@@ -1121,14 +1253,30 @@ msgstr "Configuración de la cuenta"
 msgid "str_dashboard_Settings_securityPass"
 msgstr "Contraseña y seguridad"
 
-#: .\templates\LVR\user\settings.html:150
-msgid "Ok"
-msgstr ""
+#: .\templates\LVR\user\settings.html:94
+msgid "str_publicInfo"
+msgstr "Información pública"
 
-#: .\templates\LVR\user\settings.html:195
-#: .\templates\LVR\user\settings.html:226
+#: .\templates\LVR\user\settings.html:157
+msgid "str_socialMedia"
+msgstr "Redes sociales"
+
+#: .\templates\LVR\user\settings.html:182
+msgid "str_currentPhoto"
+msgstr "Foto actual"
+
+#: .\templates\LVR\user\settings.html:193
+#: .\templates\LVR\user\settings.html:224
 msgid "str_saveChanges"
 msgstr "Guardar cambios"
+
+#: .\templates\LVR\user\settings.html:203
+msgid "str_miAccount"
+msgstr "Mi cuenta"
+
+#: .\templates\LVR\user\settings.html:230
+msgid "str_myPermissions"
+msgstr "Permisos que tiene mi cuenta"
 
 #: .\templates\LVR\user\sign_up.html:15
 msgid "signup_Title"

@@ -35,7 +35,7 @@
             
             <div class="dropdown-menu dropdown-menu-right bg-platinum" aria-labelledby="searchDropdown" style="min-width:max-content;">
               <div class="dropdown-header text-center px-1 mx-2 py-2">
-                <h5 class="py-1 font-weight-bold">Busca en el blog</h5>
+                <h5 class="py-1 font-weight-bold">{% trans 'str_searchInBlog' %}</h5>
                 <form method="GET" action="{% url 'search' %}" class="mt-2 mb-1 rounded" >
                   <label class="bg-platinum py-1 text-center par" for="{{searchForm.q.id_for_label}}">{{searchForm.q.label}} </label>
                   <div class="bg-white p-2 rounded">

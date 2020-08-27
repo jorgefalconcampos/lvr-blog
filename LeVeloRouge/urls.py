@@ -35,7 +35,6 @@ urlpatterns = [
     path('', include('LVR.urls')),
     path('', include('pwa.urls')),
     path('summernote/', include('django_summernote.urls')),
-    url(r'^i18n/', include('django.conf.urls.i18n')),
     path('user/password-reset/', auth_views.PasswordResetView.as_view(
         template_name='LVR/user/pswd/password-reset.html', subject_template_name='LVR/mails/user/pswd/reset-pass-mail-subj.txt',
         html_email_template_name='LVR/mails/user/pswd/reset-pass-mail.html'),name='password_reset'),    
@@ -44,6 +43,7 @@ urlpatterns = [
     path('user/password-reset/complete', auth_views.PasswordResetCompleteView.as_view(template_name='LVR/user/pswd/password-reset-complete.html'),name='password_reset_complete'),
     path('user/password-change/', auth_views.PasswordChangeView.as_view(template_name='LVR/user/pswd/password-change.html',),name='password_change'),
     path('user/password-change/complete', auth_views.PasswordChangeDoneView.as_view(template_name='LVR/user/pswd/password-change-done.html'),name='password_change_done'),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
 ]
 
 handler404 = 'LVR.views.page_not_found_404'

@@ -321,9 +321,9 @@ def post_detail(request, category_text, slug_text):
     post = get_object_or_404(blog_post, slug=slug_text)
 
     # if post isn't approved yet, only the author and superuser can see it in detail, otherwise redirect to index
-    # if post.status != 1:
-    #     if not ((request.user == post.author.name) or (request.user.is_superuser)):
-    #         return redirect('index')
+    if post.status != 1:
+        if not ((request.user == post.author.name) or (request.user.is_superuser)):
+            return redirect('index')
 
     more_from_author = blog_post.objects.filter(author=post.author, status=1).exclude(slug=post.slug).order_by('-published_date')[:3]
     related = post.tags.similar_objects()[:3] #Getting the last 3 posts that contains the same tags that the current post
@@ -332,23 +332,23 @@ def post_detail(request, category_text, slug_text):
     response_data = {}
     response_data_r = {'success': True}
 
-    # if request.POST.get('action') == 'reaction_Form':
-    #     try:
-    #         if request.POST.get('reaction') == 'fav':
-    #             post.vote_fav = F('vote_fav')+1
-    #         elif request.POST.get('reaction') == 'util':
-    #             post.vote_util = F('vote_util')+1
-    #         elif request.POST.get('reaction') == 'thumbs_up':
-    #             post.vote_tmbup = F('vote_tmbup')+1
-    #         elif request.POST.get('reaction') == 'thumbs_down':
-    #             post.vote_tmbdn = F('vote_tmbdn')+1
-    #     except:
-    #         response_data_r['success'] = False
-    #     finally:
-    #         post.save()
-    #         return JsonResponse(response_data_r)
+    if request.POST.get('action') == 'reaction_Form':
+        try:
+            if request.POST.get('reaction') == 'fav':
+                post.vote_fav = F('vote_fav')+1
+            elif request.POST.get('reaction') == 'util':
+                post.vote_util = F('vote_util')+1
+            elif request.POST.get('reaction') == 'thumbs_up':
+                post.vote_tmbup = F('vote_tmbup')+1
+            elif request.POST.get('reaction') == 'thumbs_down':
+                post.vote_tmbdn = F('vote_tmbdn')+1
+        except:
+            response_data_r['success'] = False
+        finally:
+            post.save()
+            return JsonResponse(response_data_r)
 
-    if request.POST.get('action') == 'newCmt_Form':
+    elif request.POST.get('action') == 'newCmt_Form':
         cmt_form = CommentForm(data=request.POST)
         if cmt_form.is_valid() and request.recaptcha_is_valid:
             print('\n\n# --- PY: Form & Captcha passed --- #')

@@ -94,7 +94,7 @@
                                         <tr class="text-center">
                                             <th>{% trans 'moderateCmts_author' %}</th>
                                             <th>{% trans 'moderateCmts_coment' %}</th>
-                                            <th>{% trans 'dashboard_tableTitle_PostCreatedDate' %}</th>
+                                            <th>{% trans 'str_createdDate' %}</th>
                                             <th>{% trans 'str_dashboard_tableTitle_postActions' %}</th>
                                         </tr>
                                     </thead>
@@ -132,7 +132,7 @@
 
         {% else %}
         <div class="container mt-3 py-lg-2">
-            <h3 class="mt-5 text-center">Parece que aún no se ha escrito ningún comentario...</h3>            
+            <h3 class="mt-5 text-center">{% trans 'str_itSeems_anyComment' %}</h3>            
             <div class="row d-flex justify-content-center py-1 py-sm-5 py-md-3 py-lg-1">
                 <div class="col-lg-xs-12 col-lg-sm-12 col-lg-md-8 col-lg-5 col-lg-xl-6">
                     <div class="col text-center mt-3"> 

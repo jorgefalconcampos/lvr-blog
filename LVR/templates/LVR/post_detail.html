@@ -84,9 +84,9 @@
                                 <hr>
                                 <img itemprop="image" class="img-detail img-fluid rounded" src="{{ post.image.url }}" alt="{{post.title}}"> 
                                 {% if post.unsplash_URL %}
-                                <p class="small text-right m-0 mt-1 mr-2">Foto: <a class="font-weight-bold" href="{{ post.unsplash_URL }}" target="_blank">UNSPLASH</a> </p>                                
+                                <p class="small text-right text-capitalize m-0 mt-1 mr-2">{% trans 'str_photo' %}: <a class="font-weight-bold" href="{{ post.unsplash_URL }}" target="_blank">UNSPLASH</a> </p>                                
                                 {% else %} 
-                                <p class="small text-right m-0 mt-1 mr-2">Foto: <b>UNSPLASH</b> </p>
+                                <p class="small text-right text-capitalize m-0 mt-1 mr-2">{% trans 'str_photo' %}: <b>UNSPLASH</b> </p>
                                 {% endif %}
                                 <hr class="mt-1">
     
@@ -99,10 +99,10 @@
                                         <form id="addReaction" method="POST">
                                             {% csrf_token %}
                                             <ul id="reactions" class="list-inline mb-0 text-center">
-                                                <li class="list-inline-item py-1"> <button id="vote_fav" name="fav" type="submit" class="btn  btn-outline-secondary px-3"> <i class="material-icons align-bottom md-20 mr-1 text-shadow">grade</i> {% trans 'favReaction' %} <span class="ml-1 badge badge-light border"> {{post.vote_fav}} </span> </button> </li>
-                                                <li class="list-inline-item py-1"> <button id="vote_util" name="util" type="submit" class="btn btn-outline-info px-3 mx-1"> <i class="material-icons align-bottom md-20 mr-1">done</i> {% trans 'utilReaction' %} <span class="ml-1 badge badge-light border"> {{post.vote_util}} </span> </button> </li>
-                                                <li class="list-inline-item py-1"> <button id="vote_tmbup" name="up" type="submit" class="btn btn-outline-success px-3 mx-1"> <i class="material-icons align-bottom md-20 mr-1 text-shadow">thumb_up</i> {% trans 'upReaction' %} <span class="ml-1 badge badge-light border"> {{post.vote_tmbup}} </span> </button> </li>
-                                                <li class="list-inline-item py-1"> <button id="vote_tmbdn" name="down" type="submit" class="btn btn-outline-danger px-3"> <i class="material-icons align-bottom md-20 mr-1 text-shadow">thumb_down</i> {% trans 'downReaction' %} <span class="ml-1 badge badge-light border"> {{post.vote_tmbdn}} </span> </button> </li>
+                                                <li class="list-inline-item py-1"> <button id="vote_fav" name="fav" type="submit" class="btn  btn-outline-secondary px-3"> <i class="material-icons align-bottom md-20 mr-1 text-shadow">grade</i> {% trans 'str_favReaction' %} <span class="ml-1 badge badge-light border"> {{post.vote_fav}} </span> </button> </li>
+                                                <li class="list-inline-item py-1"> <button id="vote_util" name="util" type="submit" class="btn btn-outline-info px-3 mx-1"> <i class="material-icons align-bottom md-20 mr-1">done</i> {% trans 'str_utilReaction' %} <span class="ml-1 badge badge-light border"> {{post.vote_util}} </span> </button> </li>
+                                                <li class="list-inline-item py-1"> <button id="vote_tmbup" name="up" type="submit" class="btn btn-outline-success px-3 mx-1"> <i class="material-icons align-bottom md-20 mr-1 text-shadow">thumb_up</i> {% trans 'str_goodReaction' %} <span class="ml-1 badge badge-light border"> {{post.vote_tmbup}} </span> </button> </li>
+                                                <li class="list-inline-item py-1"> <button id="vote_tmbdn" name="down" type="submit" class="btn btn-outline-danger px-3"> <i class="material-icons align-bottom md-20 mr-1 text-shadow">thumb_down</i> {% trans 'str_badReaction' %} <span class="ml-1 badge badge-light border"> {{post.vote_tmbdn}} </span> </button> </li>
                                             </ul>
                                         </form>
                                     </div>
@@ -112,7 +112,7 @@
                                 <div class="row align-middle text-center">
                                     <div class="col-12">
                                         <div itemprop="keywords"> 
-                                            <p class="h5 mx-2 d-inline-block align-middle"> Temas: </p>
+                                            <p class="h5 mx-2 d-inline-block align-middle">{% trans 'str_topics' %}:</p>
                                             {% if post.category %}
                                             <a class="h6 badge badge-pill bg-steel text-white reset-anchor-inherit px-2" href="{% url 'categories_detail' post.category.slug %}"> 
                                                 {{ post.category }}
@@ -172,7 +172,7 @@
                     
                     <div class="card border-0 mt-3 shadow-sm mb-4 mb-lg-5 p-2 p-lg-0">
                         <div class="card-body p-lg-4 text-center text-lg-left">
-                            <h4 class="h4 mb-4">Comparte o guarda este post</h4>
+                            <h4 class="h4 mb-4">{% trans 'str_saveOrshare' %}</h4>
     
                              <!-- AddToAny BEGIN -->
                             <ul class="list-inline mb-0 a2a_kit a2a_kit_size_32 a2a_default_style">
@@ -253,7 +253,7 @@
                                 <div class="card-header" id="more_from">
                                     <h5 class="mb-0">
                                         <button class="btn btn-link" data-toggle="collapse" data-target="#collapse_mf" aria-expanded="true" aria-controls="collapseTwo">
-                                            <i class="material-icons align-top">keyboard_arrow_down</i> {% trans 'post_detail_MoreFrom' %} {{ post.author.name.get_full_name }}
+                                            <i class="material-icons align-top">keyboard_arrow_down</i> {% trans 'str_post_detail_moreFrom' %} {{ post.author.name.get_full_name }}
                                         </button>
                                     </h5>
                                 </div>
@@ -267,7 +267,7 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <h6 class="post-subtitle"><a href=" {% url 'post_detail' rpost.category rpost.slug %} "> {{ rpost.title }} </a></h6>         
-                                                    <p class="mt-2 card-subtitle text-muted ">{% trans 'str_publishedDate' %} :{{ rpost.published_date }} </p>
+                                                    <p class="mt-2 card-subtitle text-muted ">{% trans 'str_publishedDate' %}: {{ rpost.published_date }} </p>
                                                 </div>
                                             </div>  
                                         </div>
@@ -292,10 +292,10 @@
 
                     {% if post.status != 1 %}
                     <div data-toggle="tooltip" data-html="true" data-placement='top' title="Los posts relacionados se mostrarán cuando tu post sea aprobado. Los posts relacionados pueden cambiar dependiendo diversos factores.">
-                        <h1 class="mt-2 py-2 font-weight-bold"> {% trans 'mayInterested' %} </h1>                        
+                        <h1 class="mt-2 py-2 font-weight-bold"> {% trans 'str_mayInterested' %} </h1>                        
                     </div>
                     {% else %}
-                    <h1 class="mt-2 py-2 font-weight-bold"> {% trans 'mayInterested' %} </h1> 
+                    <h1 class="mt-2 py-2 font-weight-bold"> {% trans 'str_mayInterested' %} </h1> 
                     {% endif %}
                 </header>
                 <div class="row justify-content-center">
@@ -368,7 +368,7 @@
                 <div class="container card-body">
             
                     <h3 class="py-1 my-3"> <b> {{ comments.count }} </b> {% trans 'str_post_detail_CountingComments' %} </h3>
-                    <a id="new_cmt_btn" class="my-2 mb-4 btn btn-secondary" href="#newCmt" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="newCmt">Escribe un comentario</a>
+                    <a id="new_cmt_btn" class="my-2 mb-4 btn btn-secondary" href="#newCmt" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="newCmt">{% trans 'str_write_a_comment' %}</a>
                     <div id="new_cmt_success" style="display:none;" class="alert alert-success" role="alert"> {% trans 'post_detail_AwaitingModeration' %} </div>
                     <div class="collapse" id="newCmt">
                         <div class="py-3">
@@ -388,14 +388,14 @@
                 
                                     <div class="form-group col-12">
                                         <label class="ml-1" for="comment_body">{{commntForm.comment_body.label}}</label>
-                                        <small class="float-left float-sm-right float-md-right float-lg-right mx-2"> (Asegúrate que tu comentario siga las <a href="{% url 'comments_terms' %}"  target="_blank"> normas comunitarias</a>). </small>
+                                        <small class="float-left float-sm-right float-md-right float-lg-right mx-2"> (Asegúrate que tu comentario siga las <a href="{% url 'comments_terms' %}" target="_blank">{% trans 'str_comment_terms' %}</a>).</small>
                                         {{commntForm.comment_body}}
                                     </div>
             
                                     <div class="form-group col-12 m-0">
                                         <div id="recaptcha_cmnt" class="g-recaptcha"></div>
                                         <p id="new_cmt_errorCaptcha" style="display: none;" class="ml-1 mt-2 small h6 font-weight-bold text-danger"> <i class="fas fa-exclamation-circle"></i> Captcha incorrecto, intenta de nuevo</p>
-                                        <button class="mt-3 btn btn-primary" type="submit">Comentar</button>
+                                        <button class="mt-3 btn btn-primary" type="submit">{% trans 'str_comment_CTA' %}</button>
                                     </div>
                                     
             
@@ -433,11 +433,11 @@
                             <div class="col-2">                            
                                 <div class="row d-flex justify-content-end">
                                     {% if not comment.has_report %}
-                                    <div class="" data-toggle="tooltip" data-html="true" data-placement='right' title="{% trans 'reportComment' %}">
+                                    <div class="" data-toggle="tooltip" data-html="true" data-placement='right' title="{% trans 'str_reportComment' %}">
                                         <p class=""> <a href="#"> <i class="material-icons align-top md-22">report_problem</i></a> </p>
                                     </div>
                                     {% else %}
-                                    <div class="" data-toggle="tooltip" data-html="true" data-placement='right' title="{% trans 'reportedComment' %}">
+                                    <div class="" data-toggle="tooltip" data-html="true" data-placement='right' title="{% trans 'str_reportedComment' %}">
                                         <p> <a href="#" class="text-danger"> <i class="material-icons align-top">info</i></a> </p>
                                     </div>
                                     {% endif %}
@@ -451,7 +451,7 @@
                             <div>
                                 <h3 class="mb-1">
                                     <button class="btn btn-link btn-sm" data-toggle="collapse" data-target="#collapse_reportedComment" aria-expanded="true" >
-                                        <i class="material-icons align-top md-22 text-danger">keyboard_arrow_down</i> {% trans 'dashboard_Settings_SM_show' %} 
+                                        <i class="material-icons align-top md-22 text-danger">keyboard_arrow_down</i> {% trans 'str_show' %} 
                                     </button>
                                 </h3>
                                 

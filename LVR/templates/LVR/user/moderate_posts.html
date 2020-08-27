@@ -9,10 +9,10 @@
 
 
 <div class="container-fluid">
-    <h1 class="mt-4">{% trans 'ModeratePosts' %}</h1>
+    <h1 class="mt-4">{% trans 'str_moderatePosts' %}</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active"> 
-            <a href="{% url 'dashboard' %}"> {% trans 'str_dashboard' %}</a>&nbsp/&nbsp{% trans 'ModeratePosts' %} 
+            <a href="{% url 'dashboard' %}"> {% trans 'str_dashboard' %}</a>&nbsp/&nbsp{% trans 'str_moderatePosts' %} 
         </li>
     </ol>
 
@@ -26,7 +26,7 @@
                         <th>{% trans 'str_dashboard_tableTitle_postDetail' %}</th>
                         <th>{% trans 'str_dashboard_tableTitle_postTitle' %}</th>
                         <th>{% trans 'str_dashboard_tableTitle_postImage' %}</th>
-                        <th>{% trans 'dashboard_tableTitle_PostCreatedDate' %}</th>
+                        <th>{% trans 'str_createdDate' %}</th>
                         <th>{% trans 'str_dashboard_tableTitle_postActions' %}</th>
                     </tr>
                 </thead>
@@ -35,7 +35,7 @@
                     <th>{% trans 'str_dashboard_tableTitle_postDetail' %}</th>
                     <th>{% trans 'str_dashboard_tableTitle_postTitle' %}</th>
                     <th>{% trans 'str_dashboard_tableTitle_postImage' %}</th>
-                    <th>{% trans 'dashboard_tableTitle_PostCreatedDate' %}</th>
+                    <th>{% trans 'str_createdDate' %}</th>
                     <th>{% trans 'str_dashboard_tableTitle_postActions' %}</th>
                 </tfoot>
                 {% endif %}
@@ -74,7 +74,7 @@
         
         {% else %}
         <div class="container mt-3 py-lg-2">
-            <h3 class="mt-5 text-center">Parece que aún no se ha escrito ningún artículo...</h3>            
+            <h3 class="mt-5 text-center">{% trans 'str_itSeems_anyArticle' %}</h3>            
             <div class="row d-flex justify-content-center py-1 py-sm-5 py-md-3 py-lg-1">
                 <div class="col-lg-xs-12 col-lg-sm-12 col-lg-md-8 col-lg-5 col-lg-xl-6">
                     <div class="col text-center mt-3"> 

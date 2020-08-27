@@ -93,7 +93,7 @@
                             <div class="form-group">
                                 <div class="container"> <div class="row"> <h6 class="ml-1"> {% trans 'str_dashboard_reportProblem_label' %} </h6> </div> </div>
                                 <div class="input-group">
-                                    <textarea id="prblm_form" rows="4" class="form-control" style="max-height: 112px; min-height: 112px;" type="text" placeholder="{% trans 'dashboard_DescribeProblem_placeholder' %}"></textarea>
+                                    <textarea id="prblm_form" rows="4" class="form-control" style="max-height: 112px; min-height: 112px;" type="text" placeholder="{% trans 'str_dashboard_DescribeProblem_placeholder' %}"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -120,7 +120,7 @@
             <div class="modal-header">
                 <span class="d-flex d-inline">
                     <i style="font-size: 30px;" class="material-icons">help</i>
-                    <h4 class="ml-3 modal-title">{% trans 'LVR_Help' %}</h4>
+                    <h4 class="ml-3 modal-title">{% trans 'str_LVR_Help' %}</h4>
                 </span>
                 <button type="button" class="close" data-dismiss="modal">×</button>
             </div>
@@ -135,7 +135,7 @@
                                     <div class="card-header" id="show_permissions">
                                         <h3 class="card-title mb-0">
                                             <button class="btn btn-link" data-toggle="collapse" data-target="#collapse_perms" aria-expanded="true" aria-controls="collapseTwo">
-                                                <i class="material-icons align-top">keyboard_arrow_down</i> {% trans 'dashboard_Settings_SM_show' %} 
+                                                <i class="material-icons align-top">keyboard_arrow_down</i> {% trans 'str_show' %} 
                                             </button>
                                         </h3>
                                     </div>
@@ -274,7 +274,7 @@
                 </a>         
                 <!-- Separator with title -->
                 <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
-                    <small> {% trans 'dashboard_Addons' %} </small>
+                    <small> {% trans 'str_dashboard_Addons' %} </small>
                 </li>
                 <!-- /END Separator -->
                 <a href="{% url 'moderate_comments' %}" class="bg-dark list-group-item list-group-item-action">
