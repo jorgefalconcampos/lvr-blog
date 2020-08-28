@@ -1,12 +1,12 @@
 import random
 from django.core import mail
+from django.db import IntegrityError
 from django.core.mail import get_connection, send_mass_mail, EmailMessage
 from django.conf import settings as conf_settings
 from django.template.loader import render_to_string
-from django.core.mail.backends.smtp import EmailBackend
 from django.contrib.sites.shortcuts import get_current_site
-
-
+from . mailer import SendNewsletterConfirmation
+from . models import blog_subscriber
 
 def generate_random_digits():
     return "%0.12d" % random.randint(0, 999999999999)
@@ -40,6 +40,7 @@ def mail_newsletter(message_to, subject, template, context, is_massive, request)
                     msg = mail.EmailMessage(subject=mail_subject, body=message, from_email=host_username, to=[c[0]], connection=con)
                     msg.content_subtype = 'html'
                     mail_obj.send_messages([msg])
+
                     print(f'# --- PY: Message sent to <<{c[0]}>> --- #')
 
             except Exception as e:
@@ -59,9 +60,38 @@ def mail_newsletter(message_to, subject, template, context, is_massive, request)
             message_from = conf_settings.NEMAIL_HOST_USER
             msg = mail.EmailMessage(subject=mail_subject, body=message, from_email=host_username, to=[message_to], connection=con)
             msg.content_subtype = 'html'
-            mail_obj.send_messages([msg])                    
+            mail_obj.send_messages([msg])
+            
+
             print(f'\n\n# --- PY: Email sent successfully to <<{message_to}>> --- #\n')
             return True
     except Exception as e:
         print(f'\n\n# --- PY: There was an error sending the email: --- #\n{e} \nend of error')
         return False
+
+
+def mail_newsletterv2(subscriber_email, request):
+    rnd = generate_random_digits()
+    conf_url ="{}?id={}".format(request.build_absolute_uri('/confirm'), rnd)
+    print(f'\n\n# --- PY: Confirmation URL: --- #\n{conf_url}')
+    # if 2 users use the same email at the same time (weird scenario, but possible) then the 
+    # fastest request will get the confirm email, the second will get an error 
+    try:
+        sub = blog_subscriber(email=subscriber_email, conf_num=rnd)
+        sub.save()
+    except IntegrityError as e:
+        if 'UNIQUE constraint' in str(e.args):
+            return False
+
+    context = {'email': subscriber_email, 'confirmation_url': conf_url}
+
+    if SendNewsletterConfirmation(subscriber_email, context).send_email():
+        return True
+    else:
+        sub.delete()
+        return False
+  
+        
+
+       
+                   

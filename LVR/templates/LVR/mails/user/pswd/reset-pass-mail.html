@@ -196,10 +196,9 @@
                                             </tr>
 
                                         </table>
-                                        <p style="line-height: 24px"> <br> - {% trans 'greetings' %} <b>LVR</b>. </p>
+                                        <p style="line-height: 24px"> <br> - {% trans 'str_greetings' %} <b>LVR</b>. </p>
                                         <hr>
-                                        <p style="font-size: 12px; margin-top: 25px">Este mensaje se envió a <b>{{user.email}}</b>. Si no hiciste esta solicitud, ignora este mensaje.
-                                        </p>
+                                        <p style="font-size: 12px; margin-top: 25px">{% trans 'str_mails_msgWasSentTo' %} <b>{{user.email}}</b>. {% trans 'str_mails_notMakeThisReq' %}.</p>
                                     </td>
                                 </tr>
                             </table>

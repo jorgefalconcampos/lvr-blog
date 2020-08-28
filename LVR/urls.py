@@ -20,7 +20,7 @@ urlpatterns = [
     path('getdata', views.getdata, name='getdata'),
     #subscriber
     path('subscribe', views.subscribe, name='subscribe'),
-    path('confirm/', views.confirm_subscribe, name='confirm'),
+    path('confirm', views.confirm_subscribe, name='confirm'),
     path('unsubscribe/', views.unsubscribe, name='unsubscribe'),
     #blog
     path('about', views.about, name='about'),  

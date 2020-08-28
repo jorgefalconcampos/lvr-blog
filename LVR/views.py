@@ -12,7 +12,7 @@ from . forms import PostForm, CommentForm, CreateUserForm, AccountEditUserForm, 
 from django.utils.translation import gettext as _
 from django.conf import settings as conf_settings #To read reCaptcha's key
 from . decorators import check_recaptcha
-from . helpers import generate_random_digits, mail_newsletter
+from . helpers import mail_newsletterv2
 from taggit.models import Tag
 from django.db.models import Count, Q, F
 from django.db.models.functions import Upper
@@ -169,24 +169,11 @@ def subscribe(request):
         if subscribe_form.is_valid():
             subscriber_email = request.POST.get('s_email')
             if not blog_subscriber.objects.filter(email=subscriber_email):
-                rnd = generate_random_digits()
-                conf_url ="{}?id={}".format(request.build_absolute_uri('/confirm/'), rnd)
-                print(f'\n\n# --- PY: Confirmation URL: --- #\n{conf_url}')
-                sub = blog_subscriber(email=subscriber_email, conf_num=rnd)
-                sub.save()
-
-                subj = 'Confirma tu email'
-                template = 'LVR/mails/blog/confirm-mail.html'
-                context = {'email': subscriber_email, 'confirmation_url': conf_url}
-
-                # The 'mail_newsletter' method expects the following: message_to, subject, template, ctxt, is_massive):
-                if mail_newsletter(subscriber_email, subj, template, context, False, request):
+                if mail_newsletterv2(subscriber_email, request):
                     response_data['success'] = True
                 else:
                     response_data['success'] = False
-                    sub.delete()
                 return JsonResponse(response_data)
-
             else:
                 print(f'\n\n# --- PY: The email <<{subscriber_email}>> is already subscribed to newsletter --- #\n')
                 return JsonResponse({'success': False, 'already_exists': True})

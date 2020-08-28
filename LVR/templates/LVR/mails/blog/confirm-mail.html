@@ -180,7 +180,7 @@
                             class="main-header">
 
                             <div style="line-height: 35px">
-                                {% trans 'EmailWelcome_Title' %} a la familia de <span style="color: #F52B2B;"> Le vélo <b> rouge</b> </span>!
+                                {% trans 'str_mails_welcomeTitle' %} <br> <span style="color: #F52B2B;"> LE VÉLO <b>ROUGE</b></span>!
                             </div>
                         </td>
                     </tr>
@@ -209,12 +209,12 @@
                                 <tr>
                                     <td align="left" style="color: #888888; font-size: 16px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
 
-                                        <p style="line-height: 24px; margin-bottom:3px;"> {% trans 'Hello' %}, gracias por suscribirte!</p>
+                                        <p style="line-height: 24px; margin-bottom:3px;"> {% trans 'str_Hello' %}, gracias por suscribirte!</p>
                                         <p style="line-height: 24px;margin-bottom:25px;">
                                             Estás cerca de recibir en tu email las últimas historias de <b>LVR</b>. 
-                                            <br><br> - Para finalizar, solo debes hacer clic en el botón de abajo para confirmar tu cuenta y listo! 👏</li>
+                                            <br><br> - {% trans 'str_mails_clickBtnBelow' %}👏</li>
                                             <br>
-                                            <p style="font-size: 14px;"> Si el botón no funciona, copia y pega el siguiente enlace en tu navegador: <a href="{{confirmation_url}}">{{confirmation_url}}</a></p>
+                                            <p style="font-size: 14px;">{% trans 'str_mails_btnNotWorksCopyPaste' %}: <a href="{{confirmation_url}}">{{confirmation_url}}</a></p>
                                             <br><br>
                                         </p>
 
@@ -226,7 +226,7 @@
                                             <tr>
                                                 <td align="center" style="color: #ffffff; font-size: 16px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 22px; letter-spacing: 2px;">
                                                     <div style="line-height: 22px;">
-                                                        <a href="{{confirmation_url}}" style="color: #ffffff; text-decoration: none;">{% trans 'Confirm' %}</a>
+                                                        <a href="{{confirmation_url}}" style="color: #ffffff; text-decoration: none;">{% trans 'str_confirm' %}</a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -236,8 +236,9 @@
                                             </tr>
 
                                         </table>
-                                        <p style="line-height: 24px"> <br> - {% trans 'greetings' %} <b>LVR</b>. </p>
-                                        <br><hr>
+                                        <p style="line-height: 24px"> <br> - {% trans 'str_greetings' %}, <b>LVR</b>. </p>
+                                        <hr>
+                                        <p style="font-size: 12px; margin-top: 25px">{% trans 'str_mails_msgWasSentTo' %} <b>{{email}}</b>. {% trans 'str_mails_notMakeThisReq' %}.</p>
                                     </td>
                                 </tr>
                             </table>
