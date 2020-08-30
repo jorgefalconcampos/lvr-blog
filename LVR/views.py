@@ -12,7 +12,7 @@ from . forms import PostForm, CommentForm, CreateUserForm, AccountEditUserForm, 
 from django.utils.translation import gettext as _
 from django.conf import settings as conf_settings #To read reCaptcha's key
 from . decorators import check_recaptcha
-from . helpers import mail_newsletterv2
+from . helpers import mail_newsletterv2, send_activation_linkv2
 from taggit.models import Tag
 from django.db.models import Count, Q, F
 from django.db.models.functions import Upper
@@ -23,11 +23,10 @@ from django.views.decorators.http import require_GET
 from django.utils.text import slugify
 from django.contrib import messages #To customize login & signup forms
 from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
-from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import authenticate, login as do_login, logout as do_logout
 from django.contrib.auth.decorators import login_required, user_passes_test # upt is to restrict to super user only
-from django.utils.encoding import force_bytes, force_text
-from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+from django.utils.encoding import force_bytes, force_text #2delete because of mailer
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode #2delete because of mailer
 from django.template.loader import render_to_string
 from . tokens import account_activation_token
 from django.core.mail import EmailMessage, get_connection, send_mail
@@ -77,14 +76,14 @@ def cm(request):
     # context = {'action': 'deleted'}
     # return render(request, 'LVR/mails/blog/confirm-mail.html')
 
-    # return render(request, 'LVR/mails/user/pswd/reset-pass-mail.html')
+    return render(request, 'LVR/mails/user/pswd/reset-pass-mail.html')
     # return render(request, 'LVR/user/pswd/password-reset-done.html')
     # return render(request, 'LVR/user/pswd/password-reset-complete.html')
 
 
     # return render(request, 'LVR/mails/user/pswd/reset-pass.html')
 
-    return render(request, 'LVR/mails/user/wrong-link.html')
+    # return render(request, 'LVR/mails/user/wrong-link.html')
 
 
 
@@ -746,37 +745,6 @@ def edit_account_info(request):
         return render(reques, 'LVR/user/settings.html', context)
 
 
-
-
-def send_activation_link(user, user_email, first_name, last_name, domain):
-    template = 'LVR/mails/user/activate-email.html'
-    try:
-        uid = urlsafe_base64_encode(force_bytes(user.id))
-        token = account_activation_token.make_token(user)
-        url = domain + reverse('activate', kwargs={ 'uidb64':uid, 'token':token })
-        mail_subject = _('EmailWelcome_Subject')+first_name+' '+last_name
-        message = render_to_string(template, {
-            'name': first_name,
-            'user': user,
-            'url':url,
-            'uid': uid,
-            'token': token
-            })
-        message_to = user_email
-        email = EmailMessage(mail_subject, message, to=[message_to])
-        email.content_subtype = 'html'
-        email.send()
-        print('Email sent successfully')
-        return True
-    except:
-        print('The email was not sent')
-        return False
-    print('reached2')
-    return None
-
-
-
-
 @login_required(login_url='login')
 @user_passes_test(lambda u: u.is_superuser)
 def sign_up(request):
@@ -786,20 +754,16 @@ def sign_up(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.is_active = False #Preventing non-confirmed users to login
+            user.is_active = False #To prevent login to non-confirmed users
             user.save()
-            # user = form.cleaned_data.get('username')
-            # messages.success(request, 'Account ' + user + ' created successfully')
-            first_name = form.cleaned_data.get('first_name')
-            last_name = form.cleaned_data.get('last_name')
-            user_email = form.cleaned_data.get('email')
-            domain = get_current_site(request).domain
-            template = 'LVR/mails/user/email-sent.html'
-            sent_successfully = False
-            context = {'email': user_email, 'first_name': first_name, 'last_name': last_name, 'sent_successfully': sent_successfully }
 
-            if send_activation_link(user, user_email, first_name, last_name, domain):
-                context['sent_successfully']=True # Updating the value 'sent_successfully' to True in the 'context' dictionary
+            sent_successfully = False
+            template = 'LVR/mails/user/email-sent.html'
+            # context passed to the HttpResponse
+            context = {'email': user.email, 'first_name': user.first_name, 'sent_successfully': sent_successfully }
+            
+            if send_activation_linkv2(user, request):
+                context['sent_successfully'] = True 
                 rendered = render_to_string(template, context)
                 return HttpResponse(rendered)
             else:

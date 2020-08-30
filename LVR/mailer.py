@@ -1,9 +1,11 @@
 import logging, random
 from django.core import mail #EmailMessage lives here
 from django.http import JsonResponse
+from django.utils.text import format_lazy as fl
 from django.conf import settings as conf_settings
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
+
 from django.core.mail.backends.smtp import EmailBackend
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail, get_connection, send_mass_mail
@@ -76,7 +78,7 @@ class SendNewsletterConfirmation(BaseMailer):
             context,
             subject = _('str_confirmYourEmail'), 
             template = 'LVR/mails/blog/confirm-mail.html',
-            sndr_host= conf_settings.EMAIL_HOST, 
+            sndr_host = conf_settings.EMAIL_HOST, 
             # ---- change only username and pass
             sndr_username = conf_settings.NEWSLETTER_HOST_USER, 
             sndr_pass = conf_settings.NEWSLETTER_HOST_PASSWORD, 
@@ -85,5 +87,22 @@ class SendNewsletterConfirmation(BaseMailer):
             sndr_tls = conf_settings.EMAIL_USE_TLS,
             **substitutions
             )
+
+class SendConfirmationMail(BaseMailer):
+    def __init__(self, message_to, context, **substitutions):
+        super().__init__(
+            message_to,
+            context,
+            subject = fl('{} {} {}', _('str_mails_activationMail4'), substitutions["first_name"], substitutions["last_name"]),
+            template = 'LVR/mails/user/activate-email.html',
+            sndr_host = conf_settings.EMAIL_HOST,
+            # ---- change only username and pass
+            sndr_username = conf_settings.USERS_HOST_USER, 
+            sndr_pass = conf_settings.USERS_HOST_PASSWORD, 
+            # change only username and pass ----
+            sndr_port = conf_settings.EMAIL_PORT,
+            sndr_tls = conf_settings.EMAIL_USE_TLS,
+            **substitutions         
+        )
 
 

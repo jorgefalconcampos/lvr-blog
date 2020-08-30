@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-28 13:22-0500\n"
+"POT-Creation-Date: 2020-08-29 20:44-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -187,9 +187,13 @@ msgstr "Mensaje"
 msgid "str_subNewsletter_title"
 msgstr "Suscríbete al Newsletter"
 
-#: .\mailer.py:77
+#: .\mailer.py:79
 msgid "str_confirmYourEmail"
 msgstr "Confirma tu email - LVR"
+
+#: .\mailer.py:96
+msgid "str_mails_activationMail4"
+msgstr "Email de activación para "
 
 #: .\templates\LVR\about.html:6 .\templates\LVR\base_nav.html:26
 msgid "str_About"
@@ -466,53 +470,65 @@ msgid "str_index_LatestEntries"
 msgstr "Últimas entradas"
 
 #: .\templates\LVR\mails\blog\average-mail.html:169
-#: .\templates\LVR\mails\user\activate-email.html:213
 msgid "Hello"
 msgstr ""
 
 #: .\templates\LVR\mails\blog\average-mail.html:192
-#: .\templates\LVR\mails\blog\confirm-mail.html:239
-#: .\templates\LVR\mails\user\activate-email.html:245
+#: .\templates\LVR\mails\blog\confirm-mail.html:277
+#: .\templates\LVR\mails\user\activate-email.html:285
 #: .\templates\LVR\mails\user\pswd\reset-pass-mail.html:199
 msgid "str_greetings"
-msgstr "Saludos"
+msgstr "Con cariño, el equipo de"
 
-#: .\templates\LVR\mails\blog\confirm-mail.html:183
-#: .\templates\LVR\mails\user\activate-email.html:183
+#: .\templates\LVR\mails\blog\confirm-mail.html:114
+#: .\templates\LVR\mails\user\activate-email.html:113
 msgid "str_mails_welcomeTitle"
 msgstr "¡Te damos la bienvenida a la familia de"
 
-#: .\templates\LVR\mails\blog\confirm-mail.html:212
+#: .\templates\LVR\mails\blog\confirm-mail.html:166
+#: .\templates\LVR\mails\user\activate-email.html:164
 #: .\templates\LVR\user\base.html:41 .\templates\LVR\user\calendar.html:26
 #: .\templates\LVR\user\notifications.html:25
 #: .\templates\LVR\user\tasks.html:25
 msgid "str_Hello"
 msgstr "¡Hola"
 
+#: .\templates\LVR\mails\blog\confirm-mail.html:166
+msgid "str_mails_thanks4sub"
+msgstr "gracias por suscribirte"
+
+#: .\templates\LVR\mails\blog\confirm-mail.html:173
+msgid "str_mails_close2getLastNews"
+msgstr "Estás cerca de recibir en tu email las últimas historias de"
+
 #: .\templates\LVR\mails\blog\confirm-mail.html:215
 msgid "str_mails_clickBtnBelow"
 msgstr ""
-"Para finalizar, solo debes hacer clic en el botón de abajo para confirmar tu "
-"cuenta y listo!"
+"Para finalizar, haz clic en el botón de abajo para confirmar tu email y "
+"listo!"
 
-#: .\templates\LVR\mails\blog\confirm-mail.html:217
+#: .\templates\LVR\mails\blog\confirm-mail.html:222
 msgid "str_mails_btnNotWorksCopyPaste"
 msgstr ""
 "Si el botón no funciona, copia y pega el siguiente enlace en tu navegador"
 
-#: .\templates\LVR\mails\blog\confirm-mail.html:229
+#: .\templates\LVR\mails\blog\confirm-mail.html:267
 msgid "str_confirm"
 msgstr "Confirmar"
 
-#: .\templates\LVR\mails\blog\confirm-mail.html:241
+#: .\templates\LVR\mails\blog\confirm-mail.html:293
 #: .\templates\LVR\mails\user\pswd\reset-pass-mail.html:201
 msgid "str_mails_msgWasSentTo"
 msgstr "Este mensaje se envió a"
 
-#: .\templates\LVR\mails\blog\confirm-mail.html:241
+#: .\templates\LVR\mails\blog\confirm-mail.html:293
 #: .\templates\LVR\mails\user\pswd\reset-pass-mail.html:201
 msgid "str_mails_notMakeThisReq"
 msgstr "Si tu no hiciste esta solicitud, ignora este mensaje"
+
+#: .\templates\LVR\mails\user\account-activated.html:11
+msgid "str_accountActivated_success"
+msgstr "Cuenta activada con éxito"
 
 #: .\templates\LVR\mails\user\account-activated.html:28
 msgid "Account_ActivatedSuccess"
@@ -531,33 +547,40 @@ msgstr ""
 msgid "str_login"
 msgstr "Iniciar sesión"
 
-#: .\templates\LVR\mails\user\activate-email.html:213
-msgid "good_news"
-msgstr ""
+#: .\templates\LVR\mails\user\activate-email.html:164
+msgid "str_good_news"
+msgstr "Buenas noticias"
 
-#: .\templates\LVR\mails\user\activate-email.html:216
-msgid "EmailWelcome_Header"
+#: .\templates\LVR\mails\user\activate-email.html:171
+msgid "str_mails_welcomeHeader"
 msgstr ""
+"Ahora eres parte de nuestra comunidad de redactores, lo único que debes "
+"hacer es activar tu cuenta. Hazlo siguiendo estas instrucciones"
 
-#: .\templates\LVR\mails\user\activate-email.html:218
-msgid "EmailWelcome_Step1"
+#: .\templates\LVR\mails\user\activate-email.html:214
+msgid "str_mails_welcome_step1"
 msgstr ""
+"Haz clic en el botón de abajo para activar tu cuenta. Si eso no "
+"funciona, haz clic en el siguiente enlace o bien, puedes copiarlo y pegarlo "
+"en tu navegador"
 
-#: .\templates\LVR\mails\user\activate-email.html:219
-msgid "EmailWelcome_Step2"
+#: .\templates\LVR\mails\user\activate-email.html:222
+msgid "str_mails_welcome_step2"
 msgstr ""
+"Verás un mensaje indicando que tu cuenta ha sido activada, entonces podrás "
+"iniciar sesión"
 
-#: .\templates\LVR\mails\user\activate-email.html:220
-msgid "EmailWelcome_Step3_part1"
-msgstr ""
+#: .\templates\LVR\mails\user\activate-email.html:230
+msgid "str_mails_welcome_step3_p1"
+msgstr "¡Listo, es todo! Te recordamos que tu nombre de usuario es"
 
-#: .\templates\LVR\mails\user\activate-email.html:220
-msgid "EmailWelcome_Step3_part2"
-msgstr ""
+#: .\templates\LVR\mails\user\activate-email.html:230
+msgid "str_mails_welcome_step3_p2"
+msgstr "ahora ve y escribe algo genial"
 
-#: .\templates\LVR\mails\user\activate-email.html:235
-msgid "Activate"
-msgstr ""
+#: .\templates\LVR\mails\user\activate-email.html:275
+msgid "str_activate"
+msgstr "Activar"
 
 #: .\templates\LVR\mails\user\email-sent.html:33
 msgid "EmailSent_success"
@@ -869,7 +892,7 @@ msgstr "Ocurrió un error al enviar el mensaje, intenta de nuevo más tarde"
 
 #: .\templates\LVR\user\base.html:123
 msgid "str_LVR_Help"
-msgstr "¡Hola"
+msgstr "Hola"
 
 #: .\templates\LVR\user\base.html:157
 msgid "str_RedactionRules"
@@ -1309,17 +1332,21 @@ msgstr ""
 msgid "signup_CTA"
 msgstr ""
 
-#: .\views.py:759
-msgid "EmailWelcome_Subject"
-msgstr ""
-
-#: .\views.py:812
+#: .\views.py:774
 msgid "ErrorCreatingUser"
 msgstr ""
 
-#: .\views.py:998
+#: .\views.py:960
 msgid "EmptyFields"
 msgstr ""
+
+#~ msgid "str_mails_welcomeTitle_users"
+#~ msgstr "Ahora eres parte de la comunidad de redactores de"
+
+#, fuzzy
+#~| msgid "str_in"
+#~ msgid "str_"
+#~ msgstr "en"
 
 #~ msgid "str_dashboard_stats_holdingPosts"
 #~ msgstr "Estadísticas de reacciones"

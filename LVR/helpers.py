@@ -1,12 +1,19 @@
 import random
 from django.core import mail
+from . models import blog_subscriber
 from django.db import IntegrityError
+from django.shortcuts import reverse
+
+from . tokens import account_activation_token
 from django.core.mail import get_connection, send_mass_mail, EmailMessage
 from django.conf import settings as conf_settings
 from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes, force_text
 from django.contrib.sites.shortcuts import get_current_site
-from . mailer import SendNewsletterConfirmation
-from . models import blog_subscriber
+from . mailer import SendNewsletterConfirmation, SendConfirmationMail
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+
+
 
 def generate_random_digits():
     return "%0.12d" % random.randint(0, 999999999999)
@@ -92,6 +99,25 @@ def mail_newsletterv2(subscriber_email, request):
         return False
   
         
+
+
+def send_activation_linkv2(user, request):
+    uid = urlsafe_base64_encode(force_bytes(user.id))
+    token = account_activation_token.make_token(user)    
+    url_args = reverse('activate', kwargs={ 'uidb64':uid, 'token':token })
+    url = request.build_absolute_uri(url_args)
+    # context passed to HTML template
+    context = {'name': user.first_name, 'username': user.username, 'url':url, 'uid': uid, 'token': token }  
+   
+    if SendConfirmationMail(user.email, context, first_name=user.first_name, last_name=user.last_name).send_email():
+        return True
+    else:
+        return False
+
+
+
+
+
 
        
                    
