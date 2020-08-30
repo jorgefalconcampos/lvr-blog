@@ -1,38 +1,33 @@
-from django.utils import timezone
 import datetime, math, json, urllib, smtplib
+from django.utils import timezone
 from django.template.defaultfilters import date
 from django.contrib.auth.models import User
-from django.core import serializers, mail
+from django.core import serializers
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404, HttpResponseRedirect, HttpResponse, JsonResponse
-from django.urls import reverse_lazy
-from django.shortcuts import redirect, render, get_object_or_404, reverse
-from . models import blog_post, blog_category, blog_author, blog_postComment, blog_crew, blog_misc, blog_subscriber  #Importing the models
-from . forms import PostForm, CommentForm, CreateUserForm, AccountEditUserForm, ProfileEditUserForm, ProfileEditAuthorForm, ContactForm, SubscribeForm, NewCategory, SearchForm
+from django.shortcuts import redirect, render, get_object_or_404
 from django.utils.translation import gettext as _
-from django.conf import settings as conf_settings #To read reCaptcha's key
-from . decorators import check_recaptcha
-from . helpers import mail_newsletterv2, send_activation_linkv2
 from taggit.models import Tag
 from django.db.models import Count, Q, F
-from django.db.models.functions import Upper
 from decouple import config
 from django.views.decorators.http import require_GET
+from . decorators import check_recaptcha
+from . helpers import mail_newsletterv2, send_activation_linkv2, send_contact_message
+from . models import blog_post, blog_category, blog_author, blog_postComment, blog_crew, blog_misc, blog_subscriber  #Importing the models
+from . forms import PostForm, CommentForm, CreateUserForm, AccountEditUserForm, ProfileEditUserForm, ProfileEditAuthorForm, ContactForm, SubscribeForm, NewCategory, SearchForm
 
 #User, Admin & Superuser
 from django.utils.text import slugify
 from django.contrib import messages #To customize login & signup forms
-from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
 from django.contrib.auth import authenticate, login as do_login, logout as do_logout
 from django.contrib.auth.decorators import login_required, user_passes_test # upt is to restrict to super user only
-from django.utils.encoding import force_bytes, force_text #2delete because of mailer
-from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode #2delete because of mailer
 from django.template.loader import render_to_string
 from . tokens import account_activation_token
-from django.core.mail import EmailMessage, get_connection, send_mail
-from django.core.mail.backends.smtp import EmailBackend
-from django.contrib.auth.tokens import default_token_generator
+
 # from LeVeloRouge.settings import NEMAIL_HOST_USER
+# from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
+# from django.utils.encoding import force_bytes, force_text #2delete because of mailer
+# from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode #2delete because of mailer
 
 
 
@@ -133,26 +128,15 @@ def contact(request):
         ctct_form = ContactForm(data=request.POST)
         if ctct_form.is_valid() and request.recaptcha_is_valid:
             print('\n\n# --- PY: Form & Captcha passed --- #')
-            template = 'LVR/user/contact-mail.html'
             msg_sender = request.POST.get('name')
             msg_email = request.POST.get('email')
             msg_subject = request.POST.get('subject')
             msg_msg = request.POST.get('msg')
-
-            response_data['success'] = True
-            response_data['name'] = msg_sender
-            response_data['email'] = msg_email
-            response_data['subject'] = msg_subject
-            response_data['msg'] = msg_msg
-
             context = {'name': msg_sender, 'email': msg_email, 'subject': msg_subject, 'msg': msg_msg }
-            mail_subject = msg_subject
-            message = render_to_string(template, context)
-            message_to = config('EMAIL_TO')
-            email = EmailMessage(mail_subject, message, to=[message_to])
-            email.content_subtype = 'html'
-            email.send()
-            print(f"\n# --- Form & Captcha were valid. More info: --- #\n{response_data}")
+            if send_contact_message(context, msg_subject):
+                response_data['success'] = True
+            else:
+                response_data['success'] = False
             return JsonResponse(response_data)
         else:
             return JsonResponse({'success': False, 'err_code': 'invalid_captcha'})
@@ -561,10 +545,7 @@ def login(request):
                 user = authenticate(request, username=username, password=password)
                 if user is not None and user.is_active:
                     do_login(request, user)
-
-                    # return HttpResponse(json.dumps({'status': True}), content_type='application/json')
                     return JsonResponse({'status': True})
-                    # return redirect('dashboard')
                 else:
                     return JsonResponse({'status': False, 'err_code': 'login_failed'})
             else:
@@ -759,6 +740,7 @@ def sign_up(request):
 
             sent_successfully = False
             template = 'LVR/mails/user/email-sent.html'
+
             # context passed to the HttpResponse
             context = {'email': user.email, 'first_name': user.first_name, 'sent_successfully': sent_successfully }
             
@@ -911,8 +893,6 @@ def activate(request, uidb64, token):
         user.blog_author.activated_account = True
         toslug = user.first_name + ' ' + user.last_name
         user.blog_author.slug = slugify(toslug)
-        user.blog_author.email = user.email
-        # The user is being activated now, so in previous line we take meanwhile the private email and set it as the public one - can be changed later in settings
         user.save()
         return redirect('account_activated', user=user)
     else:

@@ -161,10 +161,12 @@ function restart_subcribe_btns(isSent){
 $(document).on('submit', '#subscribe_frm',function(e){
   $('#subscribe_send').css({'display': 'none'}).fadeOut(800);
   $('#subscribe_sending').css({'display': 'inline-block'}).fadeIn(800);
+  urll = window.location.origin + '/subscribe'
+  alert
   e.preventDefault();
   $.ajax({
     type: 'POST',
-    url:'subscribe',
+    url: '/subscribe',
     dataType: 'json',
     data:{
       s_email: $('#sub_email').val(),

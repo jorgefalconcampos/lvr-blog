@@ -88,6 +88,7 @@ class SendNewsletterConfirmation(BaseMailer):
             **substitutions
             )
 
+
 class SendConfirmationMail(BaseMailer):
     def __init__(self, message_to, context, **substitutions):
         super().__init__(
@@ -105,4 +106,21 @@ class SendConfirmationMail(BaseMailer):
             **substitutions         
         )
 
+
+class SendContactMail(BaseMailer):
+    def __init__(self, message_to, context, **substitutions):
+        super().__init__(
+            message_to,
+            context,
+            subject = fl('{}: {}', _('str_mails_newMail'), substitutions["subj"]),
+            template = 'LVR/user/contact-mail.html',
+            sndr_host = conf_settings.EMAIL_HOST,
+            # ---- change only username and pass
+            sndr_username = conf_settings.CONTACT_HOST_USER, 
+            sndr_pass = conf_settings.CONTACT_HOST_PASSWORD, 
+            # change only username and pass ----
+            sndr_port = conf_settings.EMAIL_PORT,
+            sndr_tls = conf_settings.EMAIL_USE_TLS,
+            **substitutions
+        )
 

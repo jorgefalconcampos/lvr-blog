@@ -10,7 +10,7 @@ from django.conf import settings as conf_settings
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
 from django.contrib.sites.shortcuts import get_current_site
-from . mailer import SendNewsletterConfirmation, SendConfirmationMail
+from . mailer import SendNewsletterConfirmation, SendConfirmationMail, SendContactMail
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
 
@@ -98,9 +98,6 @@ def mail_newsletterv2(subscriber_email, request):
         sub.delete()
         return False
   
-        
-
-
 def send_activation_linkv2(user, request):
     uid = urlsafe_base64_encode(force_bytes(user.id))
     token = account_activation_token.make_token(user)    
@@ -110,6 +107,14 @@ def send_activation_linkv2(user, request):
     context = {'name': user.first_name, 'username': user.username, 'url':url, 'uid': uid, 'token': token }  
    
     if SendConfirmationMail(user.email, context, first_name=user.first_name, last_name=user.last_name).send_email():
+        return True
+    else:
+        return False
+
+
+def send_contact_message(context, subject):
+    send_to = conf_settings.USERS_HOST_USER
+    if SendContactMail(send_to, context, subj=subject).send_email():
         return True
     else:
         return False

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-29 20:44-0500\n"
+"POT-Creation-Date: 2020-08-29 22:59-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -89,6 +89,7 @@ msgid "str_firstName"
 msgstr "Nombre"
 
 #: .\forms.py:58 .\forms.py:92 .\forms.py:126 .\forms.py:164
+#: .\templates\LVR\user\settings.html:138
 msgid "str_email"
 msgstr "Email"
 
@@ -137,7 +138,7 @@ msgstr "Redactor, ingeniero, padre de familia, maestro Jedi..."
 msgid "str_profileForm_bio_placeholder"
 msgstr "Cuéntale a los lectores un poco de ti y de tu vida :)"
 
-#: .\forms.py:118 .\forms.py:126
+#: .\forms.py:118 .\forms.py:126 .\templates\LVR\user\settings.html:138
 msgid "str_public"
 msgstr "público"
 
@@ -195,6 +196,10 @@ msgstr "Confirma tu email - LVR"
 msgid "str_mails_activationMail4"
 msgstr "Email de activación para "
 
+#: .\mailer.py:115
+msgid "str_mails_newMail"
+msgstr "Nuevo email"
+
 #: .\templates\LVR\about.html:6 .\templates\LVR\base_nav.html:26
 msgid "str_About"
 msgstr "Acerca de"
@@ -249,7 +254,7 @@ msgstr "Todos los posts publicados por"
 #: .\templates\LVR\categories_detail.html:34 .\templates\LVR\index.html:133
 #: .\templates\LVR\post_detail.html:146 .\templates\LVR\post_detail.html:270
 #: .\templates\LVR\post_detail.html:318 .\templates\LVR\search.html:125
-#: .\templates\LVR\tags_detail.html:35 .\templates\LVR\user\dashboard.html:218
+#: .\templates\LVR\tags_detail.html:35 .\templates\LVR\user\dashboard.html:215
 msgid "str_publishedDate"
 msgstr "Publicado"
 
@@ -386,6 +391,7 @@ msgstr "Panel de Control"
 
 #: .\templates\LVR\base_nav.html:70 .\templates\LVR\user\base.html:34
 #: .\templates\LVR\user\base.html:243 .\templates\LVR\user\dashboard.html:113
+#: .\templates\LVR\user\dashboard.html:296
 #: .\templates\LVR\user\post_list.html:26
 #: .\templates\LVR\user\post_list.html:158
 msgid "str_NewPost"
@@ -560,9 +566,9 @@ msgstr ""
 #: .\templates\LVR\mails\user\activate-email.html:214
 msgid "str_mails_welcome_step1"
 msgstr ""
-"Haz clic en el botón de abajo para activar tu cuenta. Si eso no "
-"funciona, haz clic en el siguiente enlace o bien, puedes copiarlo y pegarlo "
-"en tu navegador"
+"Haz clic en el botón de abajo para activar tu cuenta. Si eso no funciona, "
+"haz clic en el siguiente enlace o bien, puedes copiarlo y pegarlo en tu "
+"navegador"
 
 #: .\templates\LVR\mails\user\activate-email.html:222
 msgid "str_mails_welcome_step2"
@@ -1010,7 +1016,7 @@ msgstr "Mis últimos posts"
 msgid "str_dashboard_seeAllMyPosts"
 msgstr "Ver todos mis posts"
 
-#: .\templates\LVR\user\dashboard.html:174
+#: .\templates\LVR\user\dashboard.html:171
 #: .\templates\LVR\user\moderate_posts.html:26
 #: .\templates\LVR\user\moderate_posts.html:35
 #: .\templates\LVR\user\post_list.html:39
@@ -1018,7 +1024,7 @@ msgstr "Ver todos mis posts"
 msgid "str_dashboard_tableTitle_postDetail"
 msgstr "Ver a detalle"
 
-#: .\templates\LVR\user\dashboard.html:175
+#: .\templates\LVR\user\dashboard.html:172
 #: .\templates\LVR\user\moderate_posts.html:27
 #: .\templates\LVR\user\moderate_posts.html:36
 #: .\templates\LVR\user\post_list.html:40
@@ -1026,13 +1032,13 @@ msgstr "Ver a detalle"
 msgid "str_dashboard_tableTitle_postTitle"
 msgstr "Título"
 
-#: .\templates\LVR\user\dashboard.html:176
+#: .\templates\LVR\user\dashboard.html:173
 #: .\templates\LVR\user\post_list.html:41
 #: .\templates\LVR\user\post_list.html:53
 msgid "str_dashboard_tableTitle_postSubtitle"
 msgstr "Subtítulo"
 
-#: .\templates\LVR\user\dashboard.html:177
+#: .\templates\LVR\user\dashboard.html:174
 #: .\templates\LVR\user\moderate_posts.html:28
 #: .\templates\LVR\user\moderate_posts.html:37
 #: .\templates\LVR\user\post_list.html:42
@@ -1040,23 +1046,23 @@ msgstr "Subtítulo"
 msgid "str_dashboard_tableTitle_postImage"
 msgstr "Imagen"
 
-#: .\templates\LVR\user\dashboard.html:178
+#: .\templates\LVR\user\dashboard.html:175
 msgid "str_dashboard_tableTitle_postCreatedOrPublishedDate"
 msgstr "Fecha de creación/publicación"
 
-#: .\templates\LVR\user\dashboard.html:179
+#: .\templates\LVR\user\dashboard.html:176
 #: .\templates\LVR\user\post_list.html:44
 #: .\templates\LVR\user\post_list.html:56
 msgid "str_dashboard_tableTitle_postCommentss"
 msgstr "Comentarios"
 
-#: .\templates\LVR\user\dashboard.html:180
+#: .\templates\LVR\user\dashboard.html:177
 #: .\templates\LVR\user\post_list.html:45
 #: .\templates\LVR\user\post_list.html:57
 msgid "str_dashboard_tableTitle_postStatus"
 msgstr "Status"
 
-#: .\templates\LVR\user\dashboard.html:181
+#: .\templates\LVR\user\dashboard.html:178
 #: .\templates\LVR\user\moderate_comments.html:98
 #: .\templates\LVR\user\moderate_posts.html:30
 #: .\templates\LVR\user\moderate_posts.html:39
@@ -1065,60 +1071,70 @@ msgstr "Status"
 msgid "str_dashboard_tableTitle_postActions"
 msgstr "Acciones"
 
-#: .\templates\LVR\user\dashboard.html:215
+#: .\templates\LVR\user\dashboard.html:212
 #: .\templates\LVR\user\moderate_comments.html:97
 #: .\templates\LVR\user\moderate_posts.html:29
 #: .\templates\LVR\user\moderate_posts.html:38
 msgid "str_createdDate"
 msgstr "Fecha de creación"
 
-#: .\templates\LVR\user\dashboard.html:220
+#: .\templates\LVR\user\dashboard.html:217
 msgid "str_notApprovedYet"
 msgstr "No aprobado aún"
 
-#: .\templates\LVR\user\dashboard.html:231
+#: .\templates\LVR\user\dashboard.html:228
 #: .\templates\LVR\user\post_list.html:77
 msgid "str_dashboard_table_TotalComments"
 msgstr "en total"
 
-#: .\templates\LVR\user\dashboard.html:233
+#: .\templates\LVR\user\dashboard.html:230
 #: .\templates\LVR\user\post_list.html:79
 msgid "str_approvedComments"
 msgstr "Aprobados"
 
-#: .\templates\LVR\user\dashboard.html:234
+#: .\templates\LVR\user\dashboard.html:231
 #: .\templates\LVR\user\post_list.html:80
 msgid "str_nonApprovedComments"
 msgstr "Por aprobar"
 
-#: .\templates\LVR\user\dashboard.html:237
+#: .\templates\LVR\user\dashboard.html:234
 #: .\templates\LVR\user\post_list.html:83
 msgid "str_noComments"
 msgstr "Sin comentarios"
 
-#: .\templates\LVR\user\dashboard.html:244
+#: .\templates\LVR\user\dashboard.html:241
 #: .\templates\LVR\user\post_edit.html:185
 #: .\templates\LVR\user\post_list.html:90
 msgid "str_status_draft_desc"
 msgstr "En espera"
 
-#: .\templates\LVR\user\dashboard.html:250
+#: .\templates\LVR\user\dashboard.html:247
 #: .\templates\LVR\user\post_edit.html:192
 #: .\templates\LVR\user\post_list.html:96
 msgid "str_status_approved_desc"
 msgstr "Este post ha sido aprobado"
 
-#: .\templates\LVR\user\dashboard.html:256
+#: .\templates\LVR\user\dashboard.html:253
 #: .\templates\LVR\user\post_edit.html:199
 #: .\templates\LVR\user\post_list.html:102
 msgid "str_status_rejected_desc"
 msgstr "Este post no fue aprobado"
 
-#: .\templates\LVR\user\dashboard.html:262
+#: .\templates\LVR\user\dashboard.html:259
 #: .\templates\LVR\user\post_edit.html:206
 #: .\templates\LVR\user\post_list.html:108
 msgid "str_status_archived_desc"
 msgstr "Este post fue archivado"
+
+#: .\templates\LVR\user\dashboard.html:292
+#: .\templates\LVR\user\post_list.html:154
+msgid "str_itSeems_wAnyArticle"
+msgstr "Parece que aún no has escrito ningún post"
+
+#: .\templates\LVR\user\dashboard.html:293
+#: .\templates\LVR\user\post_list.html:155
+msgid "str_whyNot_writeArticle"
+msgstr "¿Porqué no escribes uno ahora?"
 
 #: .\templates\LVR\user\login.html:10 .\templates\LVR\user\login.html:25
 msgid "str_login_g"
@@ -1239,14 +1255,6 @@ msgstr "Todos mis posts"
 msgid "dashboard_tableTitle_PostPublishedDate"
 msgstr ""
 
-#: .\templates\LVR\user\post_list.html:154
-msgid "str_itSeems_wAnyArticle"
-msgstr "Parece que aún no has escrito ningún post"
-
-#: .\templates\LVR\user\post_list.html:155
-msgid "str_whyNot_writeArticle"
-msgstr "¿Porqué no escribes uno ahora?"
-
 #: .\templates\LVR\user\profile.html:22 .\templates\LVR\user\settings.html:96
 msgid "str_dashboard_seeProfile"
 msgstr "Ver perfil"
@@ -1303,6 +1311,29 @@ msgstr "Contraseña y seguridad"
 msgid "str_publicInfo"
 msgstr "Información pública"
 
+#: .\templates\LVR\user\settings.html:138
+msgid "str_whatIs"
+msgstr "¿Qué c$!#/% es el"
+
+#: .\templates\LVR\user\settings.html:144
+msgid "str_dashboard_settings_emailsExplanaition_p1"
+msgstr ""
+"Al crear la cuenta, tu email privado (al que llegó el email de activación) "
+"se asocia a tu cuenta para realizar actividades importantes con él. Por otro "
+"lado, el email público tiene como propósito ser un medio de contacto y se "
+"asocia a"
+
+#: .\templates\LVR\user\settings.html:144
+msgid "str_yourublicProfile"
+msgstr "tu perfil público"
+
+#: .\templates\LVR\user\settings.html:144
+msgid "str_dashboard_settings_emailsExplanaition_p2"
+msgstr ""
+"Por defecto el email público no está definido pero puedes configurar uno "
+"(diferente al privado) o puedes omitirlo dejando en blanco el cuadro de "
+"texto; esta acción no afectará a tu email privado."
+
 #: .\templates\LVR\user\settings.html:157
 msgid "str_socialMedia"
 msgstr "Redes sociales"
@@ -1332,11 +1363,11 @@ msgstr ""
 msgid "signup_CTA"
 msgstr ""
 
-#: .\views.py:774
+#: .\views.py:791
 msgid "ErrorCreatingUser"
 msgstr ""
 
-#: .\views.py:960
+#: .\views.py:975
 msgid "EmptyFields"
 msgstr ""
 

@@ -135,13 +135,13 @@
                                                             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header px-lg-5">
-                                                                        <h5 class="modal-title" id="prblm_form_title">¿Qué es el email público?</h5>
+                                                                        <h5 class="modal-title font-weight-bold text-uppercase" id="prblm_form_title">{% trans 'str_whatIs' %} {% trans 'str_email' %} {% trans 'str_public' %}?</h5>
                                                                         <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                                                                     </div>
                                                                     <div class="modal-body px-lg-5">
                                                                           <div class="row my-3">
                                                                             <div class="col">
-                                                                                <h6>Al crear tu cuenta, el email público y privado es el mismo (y ninguno aparecerá en <a href="" target="_blank">tu perfil</a> hasta que guardes los cambios). Puedes configurar un email público diferente al privado o puedes omitirlo dejando en blanco el cuadro de texto; esta acción no afectará a tu email privado.</h6>
+                                                                                <h6> {% trans 'str_dashboard_settings_emailsExplanaition_p1' %} <a href="{% url 'author_detail' author.slug %}" target="_blank"> {% trans 'str_yourublicProfile' %}</a>. {% trans 'str_dashboard_settings_emailsExplanaition_p2' %}
                                                                             </div> 
                                                                         </div>
                                                                         <div class="modal-footer justify-content-end px-sm-0 px-md-0 px-lg-0">
