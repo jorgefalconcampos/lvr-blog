@@ -7,15 +7,13 @@
 
 
 
-{% block og_url %}{{ request.build_absolute_uri }}{{ object.get_absolute_url }}{% endblock %}
-{% block og_title %}{{post.title}}{% endblock %}
 {% block og_type %}article{% endblock %}
-{% block og_desc %}{{ post.subtitle}}{% endblock %}
-{% block og_image %}{% fullstatic post.image.url %}{% endblock %}
-{% block og_image_secure %}{% fullstatic post.image.url %}{% endblock %}
+{% block og_url %}{{request.build_absolute_uri}}{% endblock %}
+{% block og_title %}{{post.title}}{% endblock %}
+{% block og_desc %}{{post.subtitle}}{% endblock %}
+{% block og_image %}{{request.scheme}}://{{request.get_host}}/media/{{post.image}}{% endblock %}
 {% block og_image_alt %}{{post.title}}{% endblock %}
-{% block title %} {{post.title}} | Le vélo rouge {% endblock %}
-
+{% block title %}{{post.title}} | Le vélo rouge {% endblock %}
 
 
 
@@ -69,9 +67,7 @@
     
                                     <div class="row">
                                         <div class="col-12">
-                                            <div class="bg-info py-3">
-                                                <h5>{% fullstatic post.image.url %}</h5>
-                                            </div>
+                                            <!-- <div class="bg-info py-3"><h5>{% fullstatic post.image.url %}</h5></div> -->
                                             <div itemprop="headline"> <h2 class="text-center text-lg-left font-weight-bold"> {{ post.title }} </h2> </div> 
                                         </div>
                                         <div class="col-12">
@@ -149,7 +145,7 @@
                                     <div class="col-12 col-lg-4">
                                         <div class="author mr-3" style="padding-left: 1px;">
                                             <a href="{% url 'author_detail' post.author.slug %}">
-                                                <img class="circle-rounded" src="{{ post.author.image.url }}" alt="{{post.author.name.get_full_name}}" width="100">
+                                                <img class="circle-rounded" src="{{ post.author.image.url }}" alt="{{post.author.name.get_full_name}}" width="100" height="100">
                                             </a>
                                         </div>
                                     </div>

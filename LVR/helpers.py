@@ -1,6 +1,6 @@
 import random
 from django.core import mail
-from . models import blog_subscriber
+from . models import blog_subscriber, blog_post
 from django.db import IntegrityError
 from django.shortcuts import reverse
 
@@ -10,7 +10,7 @@ from django.conf import settings as conf_settings
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
 from django.contrib.sites.shortcuts import get_current_site
-from . mailer import SendNewsletterConfirmation, SendConfirmationMail, SendContactMail
+from . mailer import SendNewsletterConfirmation, SendConfirmationMail, SendContactMail, SendNewsletterMessage
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
 
@@ -48,7 +48,7 @@ def mail_newsletter(message_to, subject, template, context, is_massive, request)
                     msg.content_subtype = 'html'
                     mail_obj.send_messages([msg])
 
-                    print(f'# --- PY: Message sent to <<{c[0]}>> --- #')
+                    print(f'# --- Message sent to <<{c[0]}>> --- #')
 
             except Exception as e:
                 print(f'\n\n# --- PY: Error sending massive email: --- #\n{e}')
@@ -119,6 +119,43 @@ def send_contact_message(context, subject):
     else:
         return False
 
+
+
+def send_newsletter_mail(post, request):
+    # getting all the subs and its conf_number, the conf_number must be sent to allow users unsubscribe
+    abs_url = request.build_absolute_uri('/')[:-1] # absolute_url
+    post_url = '{}{}/{}'.format(f"{abs_url}/post/", post.category, post.slug)
+    post_preview = post.post_body
+    post_bg_img = '{}{}'.format(abs_url, post.image.url)
+    privacy_url = f"{abs_url}/privacy-policy"
+    subs = blog_subscriber.objects.values_list('email', 'conf_num').filter(confirmed=True)
+    
+    # ctxt = []    
+    context = {}
+    for sub in subs.iterator():
+        unsubscribe_url = '{}?id={}'.format(f"{abs_url}/unsubscribe", sub[1])
+        context[sub[0]] = unsubscribe_url
+        # context[sub[0]] = sub[1]
+        # print(sub[0])
+        # lista=list(sub)
+        # ctxt.append(lista)
+
+    print(f"final context: {context}")
+
+    # To delete later (maybe) - START
+    subscribers = []
+    print(f'\n\n# --- PY: List of all subscribers email: --- #\n')
+    for (i, element) in enumerate([i[0] for i in subs], start=1):
+        subscribers.append(element)
+        print(f'> {i}: {element}')
+    # print(f"subs: {subscribers}")
+   
+    if SendNewsletterMessage(subscribers, context, index_url=abs_url, post_title=post.title, post_url=post_url, post_preview=post_preview, post_bg_img=post_bg_img, privacy_url=privacy_url).send_massive_email():
+        return True
+        print('okey sent segun massive')
+    else:
+        return False
+        print('neeel massive')
 
 
 

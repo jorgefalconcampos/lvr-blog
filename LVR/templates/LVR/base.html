@@ -12,18 +12,15 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <meta name="description" content="{% trans 'str_metaDescription' %}">
-
   <meta name="theme-color" content="#F52B2B"/>
   <meta property="og:locale" content="{{LANGUAGE_CODE}}">
+  <meta property="og:type" content="{% block og_type %}{% endblock %}">
   <meta property="og:site_name" content="LE VÉLO ROUGE">
   <meta property="og:url" content="{% block og_url %}{% endblock %}">
   <meta property="og:title" content="{% block og_title %}{% endblock %}">
-  <meta property="og:type" content="{% block og_type %}{% endblock %}">
   <meta property="og:description" content="{% block og_desc %}{% endblock %}">
   <meta property="og:image" content="{% block og_image %}{% endblock %}">
-  <meta property="og:image:secure_url" content="{% block og_image_secure %}{% endblock %}">
   <meta property="og:image:width" content="1280">
   <meta property="og:image:height" content="720">
   <meta property="og:image:alt" content="{% block og_image_alt %}{% endblock %}">

@@ -3,12 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+#: .\templates\LVR\mails\blog\avg-mail.html:682
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-29 22:59-0500\n"
+"POT-Creation-Date: 2020-09-01 13:29-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -188,15 +189,19 @@ msgstr "Mensaje"
 msgid "str_subNewsletter_title"
 msgstr "Suscríbete al Newsletter"
 
-#: .\mailer.py:79
+#: .\mailer.py:93
+msgid "str_mails_newsletterNewMail"
+msgstr "Nuevo post en LVR"
+
+#: .\mailer.py:116
 msgid "str_confirmYourEmail"
 msgstr "Confirma tu email - LVR"
 
-#: .\mailer.py:96
+#: .\mailer.py:135
 msgid "str_mails_activationMail4"
 msgstr "Email de activación para "
 
-#: .\mailer.py:115
+#: .\mailer.py:154
 msgid "str_mails_newMail"
 msgstr "Nuevo email"
 
@@ -335,7 +340,10 @@ msgstr "Ocurrió un error al enviar el email, intenta de nuevo más tarde"
 msgid "str_subNewsletter_emailAlreadyInUse"
 msgstr "Parece que este email ya está registrado en el newsletter"
 
-#: .\templates\LVR\base.html:228 .\templates\LVR\user\base.html:159
+#: .\templates\LVR\base.html:228 .\templates\LVR\mails\blog\avg-mail.html:512
+#: .\templates\LVR\mails\blog\avg2-mail.html:494
+#: .\templates\LVR\mails\blog\avg22-mail.html:361
+#: .\templates\LVR\user\base.html:159
 msgid "str_PrivacyPolicy"
 msgstr "Política de Privacidad"
 
@@ -475,22 +483,19 @@ msgstr "Tendencias"
 msgid "str_index_LatestEntries"
 msgstr "Últimas entradas"
 
-#: .\templates\LVR\mails\blog\average-mail.html:169
+#: .\templates\LVR\mails\blog\average-mail.html:171
 msgid "Hello"
 msgstr ""
 
-#: .\templates\LVR\mails\blog\average-mail.html:192
+#: .\templates\LVR\mails\blog\average-mail.html:194
 #: .\templates\LVR\mails\blog\confirm-mail.html:277
 #: .\templates\LVR\mails\user\activate-email.html:285
 #: .\templates\LVR\mails\user\pswd\reset-pass-mail.html:199
 msgid "str_greetings"
 msgstr "Con cariño, el equipo de"
 
-#: .\templates\LVR\mails\blog\confirm-mail.html:114
-#: .\templates\LVR\mails\user\activate-email.html:113
-msgid "str_mails_welcomeTitle"
-msgstr "¡Te damos la bienvenida a la familia de"
-
+#: .\templates\LVR\mails\blog\avg-mail.html:118
+#: .\templates\LVR\mails\blog\avg22-mail.html:89
 #: .\templates\LVR\mails\blog\confirm-mail.html:166
 #: .\templates\LVR\mails\user\activate-email.html:164
 #: .\templates\LVR\user\base.html:41 .\templates\LVR\user\calendar.html:26
@@ -498,6 +503,51 @@ msgstr "¡Te damos la bienvenida a la familia de"
 #: .\templates\LVR\user\tasks.html:25
 msgid "str_Hello"
 msgstr "¡Hola"
+
+#: .\templates\LVR\mails\blog\avg-mail.html:121
+#: .\templates\LVR\mails\blog\avg22-mail.html:90
+msgid "str_mails_newAvgMail_title"
+msgstr "Escribimos un nuevo post en el blog"
+
+#: .\templates\LVR\mails\blog\avg-mail.html:280
+#: .\templates\LVR\mails\blog\avg22-mail.html:192
+msgid "str_readPost"
+msgstr "Leer post"
+
+#: .\templates\LVR\mails\blog\avg-mail.html:355
+#: .\templates\LVR\mails\blog\avg22-mail.html:251
+msgid "str_mail_readPreview"
+msgstr "Lee un pequeño adelanto"
+
+#: .\templates\LVR\mails\blog\avg-mail.html:383
+#: .\templates\LVR\mails\blog\avg22-mail.html:271
+msgid "str_readCompletePost"
+msgstr "Leer post completo"
+
+#: .\templates\LVR\mails\blog\avg-mail.html:679
+#: .\templates\LVR\mails\blog\avg22-mail.html:479
+msgid "str_mails_footer_whyWatchingThis"
+msgstr ""
+"Estás viendo este mensaje porque te suscribiste al Newsletter de LE VÉLO "
+"ROUGE con el email"
+
+#: .\templates\LVR\mails\blog\avg-mail.html:682
+#: .\templates\LVR\mails\blog\avg22-mail.html:481
+msgid "str_clickHere"
+msgstr "haz click aquí"
+
+#: .\templates\LVR\mails\blog\avg22-mail.html:182
+msgid "str_mails_canReadThisInSite"
+msgstr "Puedes leer este y otros posts en"
+
+#: .\templates\LVR\mails\blog\avg22-mail.html:481
+msgid "str_mails_footer_cancelSub"
+msgstr "Si ya no deseas recibir este tipo de mensajes"
+
+#: .\templates\LVR\mails\blog\confirm-mail.html:114
+#: .\templates\LVR\mails\user\activate-email.html:113
+msgid "str_mails_welcomeTitle"
+msgstr "¡Te damos la bienvenida a la familia de"
 
 #: .\templates\LVR\mails\blog\confirm-mail.html:166
 msgid "str_mails_thanks4sub"
@@ -1363,11 +1413,11 @@ msgstr ""
 msgid "signup_CTA"
 msgstr ""
 
-#: .\views.py:791
+#: .\views.py:763
 msgid "ErrorCreatingUser"
 msgstr ""
 
-#: .\views.py:975
+#: .\views.py:947
 msgid "EmptyFields"
 msgstr ""
 

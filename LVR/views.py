@@ -12,10 +12,9 @@ from django.db.models import Count, Q, F
 from decouple import config
 from django.views.decorators.http import require_GET
 from . decorators import check_recaptcha
-from . helpers import mail_newsletterv2, send_activation_linkv2, send_contact_message
+from . helpers import mail_newsletterv2, send_activation_linkv2, send_contact_message, send_newsletter_mail
 from . models import blog_post, blog_category, blog_author, blog_postComment, blog_crew, blog_misc, blog_subscriber  #Importing the models
 from . forms import PostForm, CommentForm, CreateUserForm, AccountEditUserForm, ProfileEditUserForm, ProfileEditAuthorForm, ContactForm, SubscribeForm, NewCategory, SearchForm
-
 #User, Admin & Superuser
 from django.utils.text import slugify
 from django.contrib import messages #To customize login & signup forms
@@ -23,11 +22,8 @@ from django.contrib.auth import authenticate, login as do_login, logout as do_lo
 from django.contrib.auth.decorators import login_required, user_passes_test # upt is to restrict to super user only
 from django.template.loader import render_to_string
 from . tokens import account_activation_token
-
-# from LeVeloRouge.settings import NEMAIL_HOST_USER
-# from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
-# from django.utils.encoding import force_bytes, force_text #2delete because of mailer
-# from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode #2delete because of mailer
+from django.utils.encoding import force_text
+from django.utils.http import urlsafe_base64_decode
 
 
 
@@ -70,8 +66,10 @@ def cm(request):
     # return render(request, 'LVR/user/contact-mail.html', {})
     # context = {'action': 'deleted'}
     # return render(request, 'LVR/mails/blog/confirm-mail.html')
+    newsletter_send_new(request)
+    return redirect('index')
 
-    return render(request, 'LVR/mails/user/pswd/reset-pass-mail.html')
+    # return render(request, 'LVR/mails/user/pswd/reset-pass-mail.html')
     # return render(request, 'LVR/user/pswd/password-reset-done.html')
     # return render(request, 'LVR/user/pswd/password-reset-complete.html')
 
@@ -167,29 +165,38 @@ def subscribe(request):
 
 
 
-#This method notifies when a new post is accepted by superuser, so subscribers know when a new post is published (accepted)
-def notify_new(request):
-    #Creating a subs object full of tuples with subscribers info from 'blog_subscriber'
-    subs = blog_subscriber.objects.values_list('email', 'conf_num').filter(confirmed=True)
-    ctxt = []
-    for sub in subs.iterator():
-        lista=list(sub)
-        ctxt.append(lista)
-    subscribers = []
-    print(f'\n\n# --- PY: (views.py) List of all subscribers email: --- #\n')
-    for (i, element) in enumerate([i[0] for i in subs], start=1):
-        subscribers.append(element)
-        print(f'> {i}: {element}')
+#This method sends an email to all newsletter subs. When a new post is accepted by superuser, subscribers will know 
+def newsletter_send_new(request):
+    pk = 52
+    post = get_object_or_404(blog_post, pk=pk)
+    
+    if send_newsletter_mail(post, request):
+        return True
+    else: 
+        return False
+    
+    
+    # #Creating a subs object full of tuples with subscribers info from 'blog_subscriber'
+    # subs = blog_subscriber.objects.values_list('email', 'conf_num').filter(confirmed=True)
+    # ctxt = []
+    # for sub in subs.iterator():
+    #     lista=list(sub)
+    #     ctxt.append(lista)
+    # subscribers = []
+    # print(f'\n\n# --- PY: (views.py) List of all subscribers email: --- #\n')
+    # for (i, element) in enumerate([i[0] for i in subs], start=1):
+    #     subscribers.append(element)
+    #     print(f'> {i}: {element}')
 
-    print(subscribers)
+    # print(subscribers)
 
-    subj = 'Nuevo post en LVR: titulo del post'
-    template = 'LVR/mails/blog/average-mail.html'
+    # subj = 'Nuevo post en LVR: titulo del post'
+    # template = 'LVR/mails/blog/average-mail.html'
 
-    if mail_newsletter(subscribers, subj, template, ctxt, True, request):
-        print('Massive sent OK')
-    else:
-        print('Massive sent failed')
+    # if mail_newsletter(subscribers, subj, template, ctxt, True, request):
+    #     print('Massive sent OK')
+    # else:
+    #     print('Massive sent failed')
 
 
 
@@ -1034,7 +1041,6 @@ def send_newsletter_msg(request):
 
 def logout(request):
     do_logout(request)
-    # Login redirect, implement later a variable to allow user decide if go to login or index
     return redirect('index')
 
 
