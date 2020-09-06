@@ -38,7 +38,7 @@
                 <h5 class="py-1 font-weight-bold">{% trans 'str_searchInBlog' %}</h5>
                 <form method="GET" action="{% url 'search' %}" class="mt-2 mb-1 rounded" >
                   <label class="bg-platinum py-1 text-center par" for="{{searchForm.q.id_for_label}}">{{searchForm.q.label}} </label>
-                  <div class="bg-white mx-1 p-1 rounded">
+                  <div class="bg-white mx-1 p-2 rounded">
                     <div class="input-group">
                       <!-- In base -->
                       {{searchForm.q}} 

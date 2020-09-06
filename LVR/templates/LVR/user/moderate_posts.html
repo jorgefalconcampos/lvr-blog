@@ -56,11 +56,11 @@
                                 <i class="material-icons align-top">check</i>                                 
                             </button>
 
-                            <!-- <div class="py-2">
+                            <div class="py-2">
                                 <a class="btn btn-sm btn-outline-success px-1" href=""> 
                                     <i class="material-icons align-top">check</i> <sup><i class="small material-icons align-middle md-18">email</i></sup>
                                 </a>
-                            </div> -->
+                            </div>
 
                             <button id="rejectBtn_in_moderate_{{post.pk}}" class="btn btn-sm btn-outline-danger mx-1" type="button" data-postid="{{post.pk}}" data-posttitle="{{post.title}}" data-toggle="modal" data-target="#postActionsModal">
                                 <i class="material-icons align-top">close</i>                                 
@@ -105,7 +105,7 @@
                 {% endif %}
             </ul>
             {% endif %}
-            <span class="row d-flex- justify-content-center lead text-muted"> Página {{ post_list.number }} de {{ post_list.paginator.num_pages }}</span>
+            <span class="row d-flex- justify-content-center lead text-muted"> {% trans 'str_page' %} {{ post_list.number }} {% trans 'str_of' %} {{ post_list.paginator.num_pages }}</span>
         </div>
     </div>
     {% endif %}

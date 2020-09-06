@@ -3,7 +3,6 @@ from django.core import mail
 from . models import blog_subscriber, blog_post
 from django.db import IntegrityError
 from django.shortcuts import reverse
-
 from . tokens import account_activation_token
 from django.core.mail import get_connection, send_mass_mail, EmailMessage
 from django.conf import settings as conf_settings
@@ -19,7 +18,7 @@ def generate_random_digits():
     return "%0.12d" % random.randint(0, 999999999999)
 
 
-
+# To delete later
 def mail_newsletter(message_to, subject, template, context, is_massive, request):
     try:
         con = mail.get_connection()
@@ -57,8 +56,6 @@ def mail_newsletter(message_to, subject, template, context, is_massive, request)
             # for (i, sub) in enumerate(message_to, start=1):
             #     print(f"> {i}: {sub['email']}, {sub['conf_num']}")
                 
-         
-
             print('A todos los del Newsletter')
             return True
         else:
@@ -75,6 +72,7 @@ def mail_newsletter(message_to, subject, template, context, is_massive, request)
     except Exception as e:
         print(f'\n\n# --- PY: There was an error sending the email: --- #\n{e} \nend of error')
         return False
+
 
 
 def mail_newsletterv2(subscriber_email, request):
@@ -98,6 +96,8 @@ def mail_newsletterv2(subscriber_email, request):
         sub.delete()
         return False
   
+
+
 def send_activation_linkv2(user, request):
     uid = urlsafe_base64_encode(force_bytes(user.id))
     token = account_activation_token.make_token(user)    
@@ -130,17 +130,10 @@ def send_newsletter_mail(post, request):
     privacy_url = f"{abs_url}/privacy-policy"
     subs = blog_subscriber.objects.values_list('email', 'conf_num').filter(confirmed=True)
     
-    # ctxt = []    
     context = {}
     for sub in subs.iterator():
         unsubscribe_url = '{}?id={}'.format(f"{abs_url}/unsubscribe", sub[1])
         context[sub[0]] = unsubscribe_url
-        # context[sub[0]] = sub[1]
-        # print(sub[0])
-        # lista=list(sub)
-        # ctxt.append(lista)
-
-    print(f"final context: {context}")
 
     # To delete later (maybe) - START
     subscribers = []
@@ -148,15 +141,11 @@ def send_newsletter_mail(post, request):
     for (i, element) in enumerate([i[0] for i in subs], start=1):
         subscribers.append(element)
         print(f'> {i}: {element}')
-    # print(f"subs: {subscribers}")
    
     if SendNewsletterMessage(subscribers, context, index_url=abs_url, post_title=post.title, post_url=post_url, post_preview=post_preview, post_bg_img=post_bg_img, privacy_url=privacy_url).send_massive_email():
         return True
-        print('okey sent segun massive')
     else:
         return False
-        print('neeel massive')
-
 
 
 

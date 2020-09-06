@@ -57,12 +57,13 @@
                             <div class="col">
                                 <div class="bg-platinum p-3 rounded">
                                     <form method="GET" action="{% url 'search' %}" class="rounded" >
-                                        <label class="bg-platinum pb-1 par ml-1" for="search_input">{{searchForm.q.label}}</label>
+                                        <label class="bg-platinum pb-1 par ml-1" for="search_input">{{ q.label}}</label>
                                         <div class="bg-white p-2 rounded">
                                             <div class="input-group input-group-lg flex-fill">
                                                 {{searchForm.q}}
                                                 <div class="input-group-append rounded">
                                                     <button class="btn btn-primary rounded d-none d-sm-block" type="submit"><i class="fas fa-search mr-2"></i>{% trans 'str_search' %}</button>
+                                                    <button class="btn btn-primary rounded d-block d-sm-none" type="submit"><i class="fas fa-search"></i></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -142,6 +143,7 @@
                                                 {{searchForm.q}}
                                                 <div class="input-group-append rounded">
                                                     <button class="btn btn-primary rounded d-none d-sm-block" type="submit"><i class="fas fa-search mr-2"></i>{% trans 'str_search' %}</button>
+                                                    <button class="btn btn-primary rounded d-block d-sm-none" type="submit"><i class="fas fa-search"></i></button>
                                                 </div>
                                             </div>
                                         </div>

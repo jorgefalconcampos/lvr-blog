@@ -66,6 +66,8 @@ def cm(request):
     # return render(request, 'LVR/user/contact-mail.html', {})
     # context = {'action': 'deleted'}
     # return render(request, 'LVR/mails/blog/confirm-mail.html')
+
+
     newsletter_send_new(request)
     return redirect('index')
 

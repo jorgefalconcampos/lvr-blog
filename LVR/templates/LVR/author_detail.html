@@ -126,7 +126,7 @@
             {% endif %}
         </ul>
         {% endif %}
-        <span class="row d-flex- justify-content-center lead text-muted"> Página {{ post_list.number }} de {{ post_list.paginator.num_pages }}</span>
+        <span class="row d-flex- justify-content-center lead text-muted"> {% trans 'str_page' %} {{ post_list.number }} {% trans 'str_of' %} {{ post_list.paginator.num_pages }}</span>
     </div>
 </div>
 {% endif %}
