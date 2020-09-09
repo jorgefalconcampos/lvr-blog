@@ -806,7 +806,7 @@ msgstr "Escribe un comentario"
 
 #: .\templates\LVR\post_detail.html:368
 msgid "post_detail_AwaitingModeration"
-msgstr ""
+msgstr "comentario esperando moderación"
 
 #: .\templates\LVR\post_detail.html:387
 msgid "str_comment_terms"

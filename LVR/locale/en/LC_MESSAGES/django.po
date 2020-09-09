@@ -484,7 +484,7 @@ msgstr ""
 #: .\templates\LVR\mails\user\activate-email.html:285
 #: .\templates\LVR\mails\user\pswd\reset-pass-mail.html:199
 msgid "str_greetings"
-msgstr ""
+msgstr "Greetings"
 
 #: .\templates\LVR\mails\blog\avg-mail.html:86
 #: .\templates\LVR\mails\blog\confirm-mail.html:166
@@ -493,7 +493,7 @@ msgstr ""
 #: .\templates\LVR\user\notifications.html:25
 #: .\templates\LVR\user\tasks.html:25
 msgid "str_Hello"
-msgstr ""
+msgstr "Hello"
 
 #: .\templates\LVR\mails\blog\avg-mail.html:87
 msgid "str_mails_newAvgMail_title"
@@ -542,11 +542,11 @@ msgstr ""
 
 #: .\templates\LVR\mails\blog\confirm-mail.html:215
 msgid "str_mails_clickBtnBelow"
-msgstr ""
+msgstr "To confirm your email click the button below and that's it!"
 
 #: .\templates\LVR\mails\blog\confirm-mail.html:222
 msgid "str_mails_btnNotWorksCopyPaste"
-msgstr ""
+msgstr "If the button doesn't work, copy and paste the following link in your browser"
 
 #: .\templates\LVR\mails\blog\confirm-mail.html:267
 msgid "str_confirm"
@@ -564,7 +564,7 @@ msgstr "If you didn't make this request, ignore this email"
 
 #: .\templates\LVR\mails\user\account-activated.html:11
 msgid "str_accountActivated_success"
-msgstr ""
+msgstr "Account activated successfully"
 
 #: .\templates\LVR\mails\user\account-activated.html:28
 msgid "Account_ActivatedSuccess"
@@ -581,15 +581,15 @@ msgstr ""
 #: .\templates\LVR\mails\user\account-activated.html:49
 #: .\templates\LVR\user\login.html:86
 msgid "str_login"
-msgstr ""
+msgstr "Login"
 
 #: .\templates\LVR\mails\user\activate-email.html:164
 msgid "str_good_news"
-msgstr ""
+msgstr "Good news"
 
 #: .\templates\LVR\mails\user\activate-email.html:171
 msgid "str_mails_welcomeHeader"
-msgstr ""
+msgstr "Now you're part of our redaction team! You only have to activate your account. Do it by following this instructions"
 
 #: .\templates\LVR\mails\user\activate-email.html:214
 msgid "str_mails_welcome_step1"
@@ -643,7 +643,7 @@ msgstr ""
 #: .\templates\LVR\mails\user\email-sent.html:100
 #: .\templates\LVR\user\base.html:33 .\templates\LVR\user\base.html:416
 msgid "str_dashboard_goToPage"
-msgstr ""
+msgstr "Go to site"
 
 #: .\templates\LVR\mails\user\email-sent.html:57
 #: .\templates\LVR\mails\user\email-sent.html:101
@@ -705,7 +705,7 @@ msgstr ""
 #: .\templates\LVR\misc\service_terms.html:19
 #: .\templates\LVR\misc\tutorial.html:20
 msgid "str_lastUpdate"
-msgstr ""
+msgstr "Last update"
 
 #: .\templates\LVR\post_detail.html:42 .\templates\LVR\post_detail.html:45
 msgid "post_draftStatus"
@@ -765,27 +765,27 @@ msgstr "You may also interested in..."
 
 #: .\templates\LVR\post_detail.html:366
 msgid "str_post_detail_CountingComments"
-msgstr ""
+msgstr "comments in this post"
 
 #: .\templates\LVR\post_detail.html:367
 msgid "str_write_a_comment"
-msgstr ""
+msgstr "Write a comment"
 
 #: .\templates\LVR\post_detail.html:368
 msgid "post_detail_AwaitingModeration"
-msgstr ""
+msgstr "comment awaiting for moderation"
 
 #: .\templates\LVR\post_detail.html:387
 msgid "str_comment_terms"
-msgstr ""
+msgstr "participation rules"
 
 #: .\templates\LVR\post_detail.html:394
 msgid "str_comment_CTA"
-msgstr ""
+msgstr "Comment"
 
 #: .\templates\LVR\post_detail.html:432
 msgid "str_reportComment"
-msgstr ""
+msgstr "Reportar comentario"
 
 #: .\templates\LVR\post_detail.html:436
 msgid "str_reportedComment"
@@ -802,63 +802,63 @@ msgstr ""
 
 #: .\templates\LVR\search.html:14
 msgid "str_search_badQ"
-msgstr ""
+msgstr "Bad query"
 
 #: .\templates\LVR\search.html:33
 msgid "str_search_title"
-msgstr ""
+msgstr "Search inside"
 
 #: .\templates\LVR\search.html:34
 msgid "str_search_subtitle"
-msgstr ""
+msgstr "Write one or more keywords"
 
 #: .\templates\LVR\search.html:37
 msgid "str_search_noResults_title"
-msgstr ""
+msgstr "NO RESULTS"
 
 #: .\templates\LVR\search.html:39
 msgid "str_search_results"
-msgstr ""
+msgstr "SEARCH RESULTS"
 
 #: .\templates\LVR\search.html:43
 msgid "str_search_wasFoundOne"
-msgstr ""
+msgstr "Was found"
 
 #: .\templates\LVR\search.html:43
 msgid "str_search_resultRelatedWithSearch"
-msgstr ""
+msgstr "result related with your search"
 
 #: .\templates\LVR\search.html:45
 msgid "str_search_wasFoundMoreThanOne"
-msgstr ""
+msgstr "Were found"
 
 #: .\templates\LVR\search.html:45
 msgid "str_search_resultsRelatedWithSearch"
-msgstr ""
+msgstr "results related with your search"
 
 #: .\templates\LVR\search.html:48
 msgid "str_search_noResults_subtitle"
-msgstr ""
+msgstr "Nothing was found related with your search"
 
 #: .\templates\LVR\search.html:153
 msgid "str_search_badQ_explanaition"
-msgstr ""
+msgstr "Please, write at least a 3 letter word for a more accurate search"
 
 #: .\templates\LVR\search.html:158
 msgid "str_search_badQ_len"
-msgstr ""
+msgstr "Please, write a smaller search term (max 500 chars) for a more accurate search"
 
 #: .\templates\LVR\search.html:162
 msgid "str_search_noResults_changeKeywords"
-msgstr ""
+msgstr "Try again with other(s) keyword(s)"
 
 #: .\templates\LVR\search.html:163
 msgid "str_search_OrIfUWant"
-msgstr ""
+msgstr "Or maybe you can"
 
 #: .\templates\LVR\tags.html:15
 msgid "str_allTags_title"
-msgstr ""
+msgstr "Know what we're talking about"
 
 #: .\templates\LVR\user\base.html:11 .\templates\LVR\user\dashboard.html:12
 #: .\templates\LVR\user\dashboard.html:14
@@ -866,62 +866,62 @@ msgstr ""
 #: .\templates\LVR\user\moderate_posts.html:15
 #: .\templates\LVR\user\post_list.html:15
 msgid "str_dashboard"
-msgstr ""
+msgstr "Dashboard"
 
 #: .\templates\LVR\user\base.html:43 .\templates\LVR\user\base.html:252
 #: .\templates\LVR\user\dashboard.html:146
 #: .\templates\LVR\user\settings.html:41
 msgid "str_dashboard_profile"
-msgstr ""
+msgstr "My profile"
 
 #: .\templates\LVR\user\base.html:44 .\templates\LVR\user\base.html:259
 #: .\templates\LVR\user\settings.html:28
 msgid "str_dashboard_settings"
-msgstr ""
+msgstr "Settings"
 
 #: .\templates\LVR\user\base.html:45 .\templates\LVR\user\base.html:246
 msgid "str_dashboard_activity"
-msgstr ""
+msgstr "Activity"
 
 #: .\templates\LVR\user\base.html:46 .\templates\LVR\user\base.html:160
 msgid "str_dashboard_reportProblem"
-msgstr ""
+msgstr "Report problem"
 
 #: .\templates\LVR\user\base.html:48 .\templates\LVR\user\dashboard.html:101
 msgid "str_dashboard_DjangoAdmin"
-msgstr ""
+msgstr "Django Admin"
 
 #: .\templates\LVR\user\base.html:64
 msgid "str_techSupport"
-msgstr ""
+msgstr "Technical support"
 
 #: .\templates\LVR\user\base.html:84
 msgid "str_dashboard_reportProblem_date"
-msgstr ""
+msgstr "Incident's time and date"
 
 #: .\templates\LVR\user\base.html:94
 msgid "str_dashboard_reportProblem_label"
-msgstr ""
+msgstr "Problem description"
 
 #: .\templates\LVR\user\base.html:96
 msgid "str_dashboard_DescribeProblem_placeholder"
-msgstr ""
+msgstr "Write a small description of the problem"
 
 #: .\templates\LVR\user\base.html:102
 msgid "str_msgSent"
-msgstr ""
+msgstr "Message sent"
 
 #: .\templates\LVR\user\base.html:103
 msgid "str_sendProblem_error"
-msgstr ""
+msgstr "Error while sending the message, try again"
 
 #: .\templates\LVR\user\base.html:123
 msgid "str_LVR_Help"
-msgstr ""
+msgstr "Helol"
 
 #: .\templates\LVR\user\base.html:157
 msgid "str_RedactionRules"
-msgstr ""
+msgstr "Redaction Rules"
 
 #: .\templates\LVR\user\base.html:167
 msgid "Close"
@@ -933,38 +933,38 @@ msgstr ""
 
 #: .\templates\LVR\user\base.html:224
 msgid "str_dashboard_QuickActions"
-msgstr ""
+msgstr "Quick Actions"
 
 #: .\templates\LVR\user\base.html:262 .\templates\LVR\user\login.html:73
 msgid "str_pass"
-msgstr ""
+msgstr "Password"
 
 #: .\templates\LVR\user\base.html:268 .\templates\LVR\user\dashboard.html:124
 #: .\templates\LVR\user\settings.html:53
 msgid "str_dashboard_notifications"
-msgstr ""
+msgstr "Notifications"
 
 #: .\templates\LVR\user\base.html:277
 msgid "str_dashboard_Addons"
-msgstr ""
+msgstr "Addons"
 
 #: .\templates\LVR\user\base.html:283 .\templates\LVR\user\dashboard.html:46
 #: .\templates\LVR\user\moderate_comments.html:47
 #: .\templates\LVR\user\moderate_comments.html:50
 msgid "str_dashboard_moderateComments"
-msgstr ""
+msgstr "Moderate comments"
 
 #: .\templates\LVR\user\base.html:290 .\templates\LVR\user\dashboard.html:135
 msgid "str_dashboard_calendar"
-msgstr ""
+msgstr "Calendar"
 
 #: .\templates\LVR\user\base.html:298
 msgid "str_dashboard_tasks"
-msgstr ""
+msgstr "Tasks"
 
 #: .\templates\LVR\user\base.html:308
 msgid "str_dashboard_help"
-msgstr ""
+msgstr "Help"
 
 #: .\templates\LVR\user\base.html:314
 msgid "str_dashboard_sidenavHide"
@@ -974,61 +974,61 @@ msgstr ""
 #: .\templates\LVR\user\notifications.html:12
 #: .\templates\LVR\user\settings.html:351 .\templates\LVR\user\tasks.html:12
 msgid "str_inDevelopment"
-msgstr ""
+msgstr "In development"
 
 #: .\templates\LVR\user\calendar.html:20
 #: .\templates\LVR\user\notifications.html:19
 #: .\templates\LVR\user\tasks.html:19
 msgid "str_pageInDevelopment"
-msgstr ""
+msgstr "This page stills in development"
 
 #: .\templates\LVR\user\calendar.html:26
 #: .\templates\LVR\user\notifications.html:25
 #: .\templates\LVR\user\tasks.html:25
 msgid "str_pageInDevelopment1"
-msgstr ""
+msgstr "We're so sorry but this page stills in dev phase 👨‍💻 this means that is not finished yet and its functionality could be null, limitated or with errors"
 
 #: .\templates\LVR\user\calendar.html:28
 #: .\templates\LVR\user\notifications.html:27
 #: .\templates\LVR\user\tasks.html:27
 msgid "str_pageInDevelopment2"
-msgstr ""
+msgstr "Soon it'll be finished and will be another feature in Dashboard"
 
 #: .\templates\LVR\user\calendar.html:38
 #: .\templates\LVR\user\notifications.html:37
 #: .\templates\LVR\user\settings.html:148 .\templates\LVR\user\tasks.html:37
 msgid "str_gotIt"
-msgstr ""
+msgstr "Got it!"
 
 #: .\templates\LVR\user\dashboard.html:24
 msgid "str_AddUserAuthor"
-msgstr ""
+msgstr "Add author"
 
 #: .\templates\LVR\user\dashboard.html:35
 #: .\templates\LVR\user\moderate_posts.html:12
 #: .\templates\LVR\user\moderate_posts.html:15
 msgid "str_moderatePosts"
-msgstr ""
+msgstr "Moderate posts"
 
 #: .\templates\LVR\user\dashboard.html:57
 msgid "str_sendNewMail"
-msgstr ""
+msgstr "Send email"
 
 #: .\templates\LVR\user\dashboard.html:68
 msgid "str_addNewEvent"
-msgstr ""
+msgstr "Add event"
 
 #: .\templates\LVR\user\dashboard.html:79
 msgid "str_addNewTask"
-msgstr ""
+msgstr "Add task"
 
 #: .\templates\LVR\user\dashboard.html:159
 msgid "str_dashboard_myLatestPosts"
-msgstr ""
+msgstr "My latest posts"
 
 #: .\templates\LVR\user\dashboard.html:161
 msgid "str_dashboard_seeAllMyPosts"
-msgstr ""
+msgstr "See all my posts"
 
 #: .\templates\LVR\user\dashboard.html:171
 #: .\templates\LVR\user\moderate_posts.html:26
@@ -1036,7 +1036,7 @@ msgstr ""
 #: .\templates\LVR\user\post_list.html:39
 #: .\templates\LVR\user\post_list.html:51
 msgid "str_dashboard_tableTitle_postDetail"
-msgstr ""
+msgstr "See details"
 
 #: .\templates\LVR\user\dashboard.html:172
 #: .\templates\LVR\user\moderate_posts.html:27
@@ -1044,13 +1044,13 @@ msgstr ""
 #: .\templates\LVR\user\post_list.html:40
 #: .\templates\LVR\user\post_list.html:52
 msgid "str_dashboard_tableTitle_postTitle"
-msgstr ""
+msgstr "Title"
 
 #: .\templates\LVR\user\dashboard.html:173
 #: .\templates\LVR\user\post_list.html:41
 #: .\templates\LVR\user\post_list.html:53
 msgid "str_dashboard_tableTitle_postSubtitle"
-msgstr ""
+msgstr "Subtitle"
 
 #: .\templates\LVR\user\dashboard.html:174
 #: .\templates\LVR\user\moderate_posts.html:28
@@ -1058,23 +1058,23 @@ msgstr ""
 #: .\templates\LVR\user\post_list.html:42
 #: .\templates\LVR\user\post_list.html:54
 msgid "str_dashboard_tableTitle_postImage"
-msgstr ""
+msgstr "Image"
 
 #: .\templates\LVR\user\dashboard.html:175
 msgid "str_dashboard_tableTitle_postCreatedOrPublishedDate"
-msgstr ""
+msgstr "Created/published date"
 
 #: .\templates\LVR\user\dashboard.html:176
 #: .\templates\LVR\user\post_list.html:44
 #: .\templates\LVR\user\post_list.html:56
 msgid "str_dashboard_tableTitle_postCommentss"
-msgstr ""
+msgstr "Comments"
 
 #: .\templates\LVR\user\dashboard.html:177
 #: .\templates\LVR\user\post_list.html:45
 #: .\templates\LVR\user\post_list.html:57
 msgid "str_dashboard_tableTitle_postStatus"
-msgstr ""
+msgstr "Status"
 
 #: .\templates\LVR\user\dashboard.html:178
 #: .\templates\LVR\user\moderate_comments.html:98
@@ -1083,18 +1083,18 @@ msgstr ""
 #: .\templates\LVR\user\post_list.html:46
 #: .\templates\LVR\user\post_list.html:58
 msgid "str_dashboard_tableTitle_postActions"
-msgstr ""
+msgstr "Actions"
 
 #: .\templates\LVR\user\dashboard.html:212
 #: .\templates\LVR\user\moderate_comments.html:97
 #: .\templates\LVR\user\moderate_posts.html:29
 #: .\templates\LVR\user\moderate_posts.html:38
 msgid "str_createdDate"
-msgstr ""
+msgstr "Created date"
 
 #: .\templates\LVR\user\dashboard.html:217
 msgid "str_notApprovedYet"
-msgstr ""
+msgstr "Not approved yet"
 
 #: .\templates\LVR\user\dashboard.html:228
 #: .\templates\LVR\user\post_list.html:77
