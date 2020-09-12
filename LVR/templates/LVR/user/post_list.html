@@ -40,7 +40,7 @@
                         <th> {% trans 'str_dashboard_tableTitle_postTitle' %} </th>
                         <th> {% trans 'str_dashboard_tableTitle_postSubtitle' %} </th>
                         <th> {% trans 'str_dashboard_tableTitle_postImage' %} </th>
-                        <th> {% trans 'dashboard_tableTitle_PostPublishedDate' %} </th>
+                        <th> {% trans 'str_dashboard_tableTitle_postCreatedOrPublishedDate' %} </th>
                         <th> {% trans 'str_dashboard_tableTitle_postCommentss' %} </th>
                         <th> {% trans 'str_dashboard_tableTitle_postStatus' %} </th>
                         <th> {% trans 'str_dashboard_tableTitle_postActions' %} </th>
@@ -52,7 +52,7 @@
                         <th> {% trans 'str_dashboard_tableTitle_postTitle' %} </th>
                         <th> {% trans 'str_dashboard_tableTitle_postSubtitle' %} </th>
                         <th> {% trans 'str_dashboard_tableTitle_postImage' %} </th>
-                        <th> {% trans 'dashboard_tableTitle_PostPublishedDate' %} </th>
+                        <th> {% trans 'str_dashboard_tableTitle_postCreatedOrPublishedDate' %} </th>
                         <th> {% trans 'str_dashboard_tableTitle_postCommentss' %} </th>
                         <th> {% trans 'str_dashboard_tableTitle_postStatus' %} </th>
                         <th> {% trans 'str_dashboard_tableTitle_postActions' %} </th>
@@ -70,7 +70,17 @@
                                 <a href="{{ post.image.url }}" target="_blank"> <i class="material-icons align-top md-inactive">image</i> </a> 
                             </div>
                         </td>
-                        <td> {{ post.published_date }} </td>
+                        <td>
+                            <div>
+                                {% trans 'str_createdDate' %}: {{ post.created_date }}
+                                <hr>
+                                {% if post.status == 1 %}
+                                {% trans 'str_publishedDate' %}: {{ post.published_date }}
+                                {% else %}
+                                <b> {% trans 'str_notApprovedYet' %} </b>
+                                {% endif %}
+                            </div>
+                        </td>
                         <td>
                             {% if post.all_cmts %}
                             <span class="d-flex d-inline justify-content-left"> <h6 class="font-weight-bold mr-1"> {{ post.all_cmts }} </h6> 

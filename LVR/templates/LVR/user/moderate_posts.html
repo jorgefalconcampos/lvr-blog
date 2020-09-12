@@ -50,7 +50,7 @@
                                 <a href="{{ post.image.url }}" target="_blank"> <i class="material-icons align-top md-inactive">image</i> </a> 
                             </div>
                         </td>
-                        <td> {{ post.created_date }} </td>
+                        <td class="text-center">{{ post.created_date }}</td>
                         <td class="text-center">
                             <button id="approveBtn_in_moderate_{{post.pk}}" class="btn btn-sm btn-outline-success mx-1" type="button" data-postid="{{post.pk}}" data-posttitle="{{post.title}}" data-toggle="modal" data-target="#postActionsModal">
                                 <i class="material-icons align-top">check</i>                                 

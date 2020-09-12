@@ -1132,7 +1132,7 @@ msgstr "Acciones"
 #: .\templates\LVR\user\moderate_posts.html:29
 #: .\templates\LVR\user\moderate_posts.html:38
 msgid "str_createdDate"
-msgstr "Fecha de creación"
+msgstr "Creado"
 
 #: .\templates\LVR\user\dashboard.html:217
 msgid "str_notApprovedYet"
@@ -1308,8 +1308,8 @@ msgstr "Todos mis posts"
 
 #: .\templates\LVR\user\post_list.html:43
 #: .\templates\LVR\user\post_list.html:55
-msgid "dashboard_tableTitle_PostPublishedDate"
-msgstr ""
+msgid "str_dashboard_tableTitle_publishedDate"
+msgstr "Publicado"
 
 #: .\templates\LVR\user\profile.html:22 .\templates\LVR\user\settings.html:96
 msgid "str_dashboard_seeProfile"
@@ -1375,8 +1375,8 @@ msgstr "¿Qué c$!#/% es el"
 msgid "str_dashboard_settings_emailsExplanaition_p1"
 msgstr ""
 "Al crear la cuenta, tu email privado (al que llegó el email de activación) "
-"se asocia a tu cuenta para realizar actividades importantes con él. Por otro "
-"lado, el email público tiene como propósito ser un medio de contacto y se "
+"se asocia a tu perfil para realizar actividades importantes con él. Por otro "
+"lado, el email público pretende ser un medio de contacto entre tú y los lectores y se "
 "asocia a"
 
 #: .\templates\LVR\user\settings.html:144
@@ -1386,8 +1386,8 @@ msgstr "tu perfil público"
 #: .\templates\LVR\user\settings.html:144
 msgid "str_dashboard_settings_emailsExplanaition_p2"
 msgstr ""
-"Por defecto el email público no está definido pero puedes configurar uno "
-"(diferente al privado) o puedes omitirlo dejando en blanco el cuadro de "
+"Por defecto, no se configura ningún email público (pero puedes hacerlo "
+"mientras sea diferente al privado) o puedes omitirlo dejando vacío el cuadro de "
 "texto; esta acción no afectará a tu email privado."
 
 #: .\templates\LVR\user\settings.html:157
