@@ -23,11 +23,13 @@ class PostAdmin(SummernoteModelAdmin):
     summernote_fields = ('post_body')
     list_filter = ('author', 'status')
     search_fields = ['title', 'subtitle'] #author name has the double underscore bc is a foreign key
-    actions = [ 'approve_posts', 'reject_posts', 'archive_posts' ]
+    actions = [ 'put_in_draft', 'approve_posts', 'reject_posts', 'archive_posts' ]
+
+    def put_in_draft(self, request, queryset):
+        queryset.update(status=0)
 
     def approve_posts(self, request, queryset):
-        queryset.update(status=1, published_date=timezone.now)
-        print(timezone.now)
+        queryset.update(status=1)
 
     def reject_posts(self, request, queryset):
         queryset.update(status=2)

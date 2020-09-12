@@ -111,7 +111,7 @@ msgstr "Write an username"
 
 #: .\forms.py:89 .\forms.py:92
 msgid "str_private"
-msgstr "private"
+msgstr "(private)"
 
 #: .\forms.py:91 .\templates\LVR\user\base.html:74
 #: .\templates\LVR\user\login.html:61 .\templates\LVR\user\login.html:66
@@ -140,7 +140,7 @@ msgstr "Tell the readers a little bit about you and your life :)"
 
 #: .\forms.py:118 .\forms.py:126 .\templates\LVR\user\settings.html:138
 msgid "str_public"
-msgstr "public"
+msgstr "(public)"
 
 #: .\forms.py:119
 msgid "str_uploadPhoto"
@@ -794,11 +794,11 @@ msgstr ""
 #: .\templates\LVR\post_detail.html:450 .\templates\LVR\user\base.html:138
 #: .\templates\LVR\user\settings.html:238
 msgid "str_show"
-msgstr ""
+msgstr "Show"
 
 #: .\templates\LVR\search.html:11
 msgid "str_search_titleHTML"
-msgstr ""
+msgstr "Do a search"
 
 #: .\templates\LVR\search.html:14
 msgid "str_search_badQ"
@@ -1099,74 +1099,74 @@ msgstr "Not approved yet"
 #: .\templates\LVR\user\dashboard.html:228
 #: .\templates\LVR\user\post_list.html:77
 msgid "str_dashboard_table_TotalComments"
-msgstr ""
+msgstr "Total comments"
 
 #: .\templates\LVR\user\dashboard.html:230
 #: .\templates\LVR\user\post_list.html:79
 msgid "str_approvedComments"
-msgstr ""
+msgstr "Approved comments"
 
 #: .\templates\LVR\user\dashboard.html:231
 #: .\templates\LVR\user\post_list.html:80
 msgid "str_nonApprovedComments"
-msgstr ""
+msgstr "Non approved comments"
 
 #: .\templates\LVR\user\dashboard.html:234
 #: .\templates\LVR\user\post_list.html:83
 msgid "str_noComments"
-msgstr ""
+msgstr "No comments"
 
 #: .\templates\LVR\user\dashboard.html:241
 #: .\templates\LVR\user\post_edit.html:185
 #: .\templates\LVR\user\post_list.html:90
 msgid "str_status_draft_desc"
-msgstr ""
+msgstr "On hold"
 
 #: .\templates\LVR\user\dashboard.html:247
 #: .\templates\LVR\user\post_edit.html:192
 #: .\templates\LVR\user\post_list.html:96
 msgid "str_status_approved_desc"
-msgstr ""
+msgstr "This post have been approved"
 
 #: .\templates\LVR\user\dashboard.html:253
 #: .\templates\LVR\user\post_edit.html:199
 #: .\templates\LVR\user\post_list.html:102
 msgid "str_status_rejected_desc"
-msgstr ""
+msgstr "This posts have been rejected"
 
 #: .\templates\LVR\user\dashboard.html:259
 #: .\templates\LVR\user\post_edit.html:206
 #: .\templates\LVR\user\post_list.html:108
 msgid "str_status_archived_desc"
-msgstr ""
+msgstr "This post have been archived"
 
 #: .\templates\LVR\user\dashboard.html:292
 #: .\templates\LVR\user\post_list.html:154
 msgid "str_itSeems_wAnyArticle"
-msgstr ""
+msgstr "It seems you have not written any post yet"
 
 #: .\templates\LVR\user\dashboard.html:293
 #: .\templates\LVR\user\post_list.html:155
 msgid "str_whyNot_writeArticle"
-msgstr ""
+msgstr "Write a post now... why not?"
 
 #: .\templates\LVR\user\login.html:10 .\templates\LVR\user\login.html:25
 msgid "str_login_g"
-msgstr ""
+msgstr "Login"
 
 #: .\templates\LVR\user\login.html:27
 msgid "str_login_subtitle"
-msgstr ""
+msgstr "Staff-use only"
 
 #: .\templates\LVR\user\login.html:32
 #: .\templates\LVR\user\new_category.html:20
 #: .\templates\LVR\user\sign_up.html:20
 msgid "str_goBack"
-msgstr ""
+msgstr "Go back"
 
 #: .\templates\LVR\user\login.html:74
 msgid "str_forgottenPass"
-msgstr ""
+msgstr "Forgotten pass?"
 
 #: .\templates\LVR\user\moderate_comments.html:57
 msgid "CommentsWithNoModeration"
@@ -1182,34 +1182,34 @@ msgstr ""
 
 #: .\templates\LVR\user\moderate_comments.html:135
 msgid "str_itSeems_anyComment"
-msgstr ""
+msgstr "No comments have been written..."
 
 #: .\templates\LVR\user\moderate_posts.html:77
 msgid "str_itSeems_anyArticle"
-msgstr ""
+msgstr "No posts have been written"
 
 #: .\templates\LVR\user\post_edit.html:61
 msgid "str_postEdit_title"
-msgstr ""
+msgstr "Write something the people love to read"
 
 #: .\templates\LVR\user\post_edit.html:62
 msgid "str_postEdit_subtitle"
-msgstr ""
+msgstr "Create or edit a post"
 
 #: .\templates\LVR\user\post_edit.html:75
 msgid "str_author"
-msgstr ""
+msgstr "Author"
 
 #: .\templates\LVR\user\post_edit.html:134
 #: .\templates\LVR\user\post_edit.html:136
 msgid "str_preview"
-msgstr ""
+msgstr "Preview"
 
 #: .\templates\LVR\user\post_edit.html:147
 #: .\templates\LVR\user\post_edit.html:151
 #: .\templates\LVR\user\post_edit.html:154
 msgid "str_save"
-msgstr ""
+msgstr "Save"
 
 #: .\templates\LVR\user\post_edit.html:182
 msgid "postStatus"
@@ -1262,7 +1262,7 @@ msgstr ""
 #: .\templates\LVR\user\post_list.html:12
 #: .\templates\LVR\user\post_list.html:15
 msgid "str_dashboard_allMyPosts"
-msgstr ""
+msgstr "All my posts"
 
 #: .\templates\LVR\user\post_list.html:43
 #: .\templates\LVR\user\post_list.html:55
@@ -1271,63 +1271,63 @@ msgstr ""
 
 #: .\templates\LVR\user\profile.html:22 .\templates\LVR\user\settings.html:96
 msgid "str_dashboard_seeProfile"
-msgstr ""
+msgstr "See profile"
 
 #: .\templates\LVR\user\profile.html:70 .\templates\LVR\user\settings.html:220
 msgid "str_dashboard_joinedDate"
-msgstr ""
+msgstr "Joined date"
 
 #: .\templates\LVR\user\profile.html:71 .\templates\LVR\user\settings.html:221
 msgid "str_dashboard_lastLogin"
-msgstr ""
+msgstr "Last login date"
 
 #: .\templates\LVR\user\profile.html:83
 msgid "str_dashboard_stats_titlePosts"
-msgstr ""
+msgstr "Post stats"
 
 #: .\templates\LVR\user\profile.html:87
 msgid "str_dashboard_stats_allPosts"
-msgstr ""
+msgstr "All my posts"
 
 #: .\templates\LVR\user\profile.html:94
 msgid "str_dashboard_stats_approvedPosts"
-msgstr ""
+msgstr "Approved posts"
 
 #: .\templates\LVR\user\profile.html:100
 msgid "str_dashboard_stats_DraftPosts"
-msgstr ""
+msgstr "Posts on hold"
 
 #: .\templates\LVR\user\profile.html:106
 msgid "str_dashboard_stats_archivedPosts"
-msgstr ""
+msgstr "Archived posts"
 
 #: .\templates\LVR\user\profile.html:112
 msgid "str_dashboard_stats_rejectedPosts"
-msgstr ""
+msgstr "Rejected posts"
 
 #: .\templates\LVR\user\profile.html:121
 msgid "str_dashboard_stats_titleReactions"
-msgstr ""
+msgstr "Reactions stats"
 
 #: .\templates\LVR\user\profile.html:128
 msgid "str_dashboard_stats_allReactions"
-msgstr ""
+msgstr "Total reactions"
 
 #: .\templates\LVR\user\settings.html:46
 msgid "str_dashboard_Settings_accountSettings"
-msgstr ""
+msgstr "Account settings"
 
 #: .\templates\LVR\user\settings.html:50
 msgid "str_dashboard_Settings_securityPass"
-msgstr ""
+msgstr "Password & security"
 
 #: .\templates\LVR\user\settings.html:94
 msgid "str_publicInfo"
-msgstr ""
+msgstr "Public information"
 
 #: .\templates\LVR\user\settings.html:138
 msgid "str_whatIs"
-msgstr ""
+msgstr "What the f*©% is the"
 
 #: .\templates\LVR\user\settings.html:144
 msgid "str_dashboard_settings_emailsExplanaition_p1"
@@ -1335,7 +1335,7 @@ msgstr ""
 
 #: .\templates\LVR\user\settings.html:144
 msgid "str_yourublicProfile"
-msgstr ""
+msgstr "your public profile"
 
 #: .\templates\LVR\user\settings.html:144
 msgid "str_dashboard_settings_emailsExplanaition_p2"
@@ -1343,24 +1343,24 @@ msgstr ""
 
 #: .\templates\LVR\user\settings.html:157
 msgid "str_socialMedia"
-msgstr ""
+msgstr "Social media"
 
 #: .\templates\LVR\user\settings.html:182
 msgid "str_currentPhoto"
-msgstr ""
+msgstr "Current photo"
 
 #: .\templates\LVR\user\settings.html:193
 #: .\templates\LVR\user\settings.html:224
 msgid "str_saveChanges"
-msgstr ""
+msgstr "Save changes"
 
 #: .\templates\LVR\user\settings.html:203
 msgid "str_miAccount"
-msgstr ""
+msgstr "Mi account"
 
 #: .\templates\LVR\user\settings.html:230
 msgid "str_myPermissions"
-msgstr ""
+msgstr "Permissions on my account"
 
 #: .\templates\LVR\user\sign_up.html:15
 msgid "signup_Title"

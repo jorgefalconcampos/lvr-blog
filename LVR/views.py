@@ -844,6 +844,12 @@ def post_actions(request, post_action, pk):
                 elif post_action == 'approve':
                     post.approve_post()
                     response_data['success'] = True
+                elif post_action == 'approve_n_send':
+                    post.approve_post()
+                    if send_new_newsletter_mail(request, post):
+                        response_data['success'] = True
+                    else:
+                        response_data['err'] = 'error sending email'
             else:
                 response_data['invalid_request'] = f"{request.user} cannot perform this action - is not the author"
         except Exception as e:
@@ -852,6 +858,18 @@ def post_actions(request, post_action, pk):
             return JsonResponse(response_data)
     else:
         return redirect('index')
+
+
+# Given a post pk, this method sents the post to all newsletter susbscribers
+@login_required(login_url='login')
+@user_passes_test(lambda u: u.is_superuser)
+def send_new_newsletter_mail(request, post):
+    if send_newsletter_mail(post, request): # 'send_newsletter_mail' lives in helpers.py... be careful
+        return True
+    else: 
+        return False
+    
+
 
 
 

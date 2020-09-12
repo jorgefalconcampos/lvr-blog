@@ -420,6 +420,13 @@ function post_action_config(val, where_f){
             label.html(`¿Aprobar el post <b>${posttitle}</b>? (ID: ${postID})`)
             button.attr('class', 'btn btn-success px-3'); button.html(`${icon} Si, aprobar`);
         break;
+
+        case 6: 
+            post_action = 'approve_n_send'; 
+            frm.attr('method', 'POST');
+            label.html(`¿Aprobar y enviar por Newsletter el post <b>${posttitle}</b>? (ID: ${postID})`)
+            button.attr('class', 'btn btn-success px-3'); button.html(`${icon} Si, aprobar y enviar`);
+        break;
       
         default: break;
       }
@@ -446,6 +453,13 @@ $(document).on('submit', '#postActionsModal',function(e){
         case 'reject': param = 1; success_text = 'El post fue rechazado.'; break;
 
         case 'approve': param = 1; success_text = 'El post fue aprobado.'; break;
+        
+        case 'approve_n_send': param = 1; 
+            success_text = 'El post fue aprobado y enviado a todos los destinatarios inscritos al Newsletter.'; 
+            $('#modal_post_action_confirm').css({'display': 'none'}).fadeOut(800);
+            $('#send_newsletter_sending').css({'display': 'block'}).fadeIn(800);
+            $('#sending_newsletter_loadingProgressBar').css({'display': 'block'}).fadeIn(800);
+        break;
 
         default: break;        
     }
@@ -461,7 +475,12 @@ $(document).on('submit', '#postActionsModal',function(e){
         },
         success:function(json){
           if(json.success){
-              success(success_title, success_text, param, postID, $('#postActionsModal'));
+              if(post_action == 'approve_n_send'){
+                  $('#send_newsletter_sending').css({'display': 'none'});
+                  $('#modal_post_action_confirm').css({'display': 'block'});
+                  $('#sending_newsletter_loadingProgressBar').css({'display': 'none'});
+                }
+                success(success_title, success_text, param, postID, $('#postActionsModal'));
             //   postID = ""; posttitle = ""; iconName = ""; post_action = ""; frm.attr('method', '');
             //   label.html(""); button.attr('class', ''); button.html("");
             }
@@ -473,6 +492,25 @@ $(document).on('submit', '#postActionsModal',function(e){
 
 });
 // END MANAGE/MODERATE POSTS SECTION //
+
+
+
+
+// START MANAGE/MODERATE POSTS & SEND NEWSLETTER SECTION //
+
+
+$('[id^="approveSendNewsletter_Btn_in_moderate_"]').click(function() {
+    postID = $(this).data('postid'); posttitle = $(this).data('posttitle');
+    iconName = 'check'; post_action_config(6,2);
+
+ });
+
+
+// END MANAGE/MODERATE POSTS & SEND NEWSLETTER SECTION //
+
+
+
+
 
 
 

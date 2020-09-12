@@ -59,6 +59,7 @@ urlpatterns = [
     path('user/post/edit/<slug:slug_text>', views.post_edit, name='post_edit'),
     path('activate/<str:uidb64>/<str:token>/', views.activate, name='activate'),
     path('user/account-activated/<str:user>', views.signup_account_activated, name='account_activated'),
+    path('user/send-newsletter/<int:pk>', views.send_newsletter_mail, name='send_newsletter_mail'),
     path('delete/<slug:slug_text>', views.post_delete, name='post_delete'),
     path('archive/<slug:slug_text>', views.post_archive, name='post_archive'),
     path('user/logout', views.logout, name='logout'),
