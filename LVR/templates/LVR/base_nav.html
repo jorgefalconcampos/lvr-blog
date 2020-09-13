@@ -28,7 +28,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#contactModal" data-toggle="modal"> {% trans 'str_Contact' %} </a>
           </li>
-          <li class="nav-item dropdown mx-0 {% if request.path == search_url %}active{%endif%}">
+          <li class="nav-item dropdown mx-0 text-center {% if request.path == search_url %}active{%endif%}">
             <a class="nav-link dropdown-toggle" id="searchDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="material-icons align-middle md-22">search</i>
             </a>
@@ -38,7 +38,7 @@
                 <h5 class="py-1 font-weight-bold">{% trans 'str_searchInBlog' %}</h5>
                 <form method="GET" action="{% url 'search' %}" class="mt-2 mb-1 rounded" >
                   <label class="bg-platinum py-1 text-center par" for="{{searchForm.q.id_for_label}}">{{searchForm.q.label}} </label>
-                  <div class="bg-white mx-1 p-2 rounded">
+                  <div class="bg-white mx-auto p-2 rounded">
                     <div class="input-group">
                       <!-- In base -->
                       {{searchForm.q}} 

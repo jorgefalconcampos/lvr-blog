@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-05 17:03-0500\n"
+"POT-Creation-Date: 2020-09-13 12:42-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -184,7 +184,7 @@ msgstr "Asunto"
 msgid "str_message"
 msgstr "Mensaje"
 
-#: .\forms.py:172 .\templates\LVR\base.html:210
+#: .\forms.py:172 .\templates\LVR\base.html:211
 msgid "str_subNewsletter_title"
 msgstr "Suscríbete al Newsletter"
 
@@ -257,8 +257,9 @@ msgstr "Todos los posts publicados por"
 #: .\templates\LVR\author_detail.html:99
 #: .\templates\LVR\categories_detail.html:34 .\templates\LVR\index.html:133
 #: .\templates\LVR\post_detail.html:142 .\templates\LVR\post_detail.html:266
-#: .\templates\LVR\post_detail.html:314 .\templates\LVR\search.html:125
-#: .\templates\LVR\tags_detail.html:35 .\templates\LVR\user\dashboard.html:215
+#: .\templates\LVR\post_detail.html:314 .\templates\LVR\search.html:126
+#: .\templates\LVR\tags_detail.html:35 .\templates\LVR\user\dashboard.html:214
+#: .\templates\LVR\user\post_list.html:78
 msgid "str_publishedDate"
 msgstr "Publicado"
 
@@ -270,7 +271,7 @@ msgstr "Este autor aún no escribe ningún post"
 #: .\templates\LVR\categories_detail.html:72 .\templates\LVR\index.html:196
 #: .\templates\LVR\tags_detail.html:73
 #: .\templates\LVR\user\moderate_posts.html:108
-#: .\templates\LVR\user\post_list.html:185
+#: .\templates\LVR\user\post_list.html:195
 msgid "str_page"
 msgstr "Página"
 
@@ -278,7 +279,7 @@ msgstr "Página"
 #: .\templates\LVR\categories_detail.html:72 .\templates\LVR\index.html:196
 #: .\templates\LVR\tags_detail.html:73
 #: .\templates\LVR\user\moderate_posts.html:108
-#: .\templates\LVR\user\post_list.html:185
+#: .\templates\LVR\user\post_list.html:195
 msgid "str_of"
 msgstr "de"
 
@@ -312,7 +313,7 @@ msgstr ""
 "Usamos cookies para mejorar tu experiencia en este sitio web. Al seguir "
 "navegando, aceptas la"
 
-#: .\templates\LVR\base.html:109 .\templates\LVR\base.html:226
+#: .\templates\LVR\base.html:109 .\templates\LVR\base.html:227
 msgid "str_CookiesPolicy"
 msgstr "Política de Cookies"
 
@@ -324,63 +325,69 @@ msgstr "Aceptar"
 msgid "str_ContactWithUs"
 msgstr "Contacta con"
 
+#: .\templates\LVR\base.html:153 .\templates\LVR\user\base.html:102
+msgid "str_msgSent"
+msgstr "Mensaje enviado"
+
 #: .\templates\LVR\base.html:155 .\templates\LVR\user\base.html:104
 #: .\templates\LVR\user\post_edit.html:145
 msgid "str_cancel"
 msgstr "Cancelar"
 
 #: .\templates\LVR\base.html:156 .\templates\LVR\user\base.html:105
-#: .\templates\LVR\user\pswd\password-reset.html:100
+#: .\templates\LVR\user\pswd\password-reset.html:58
 msgid "str_send"
 msgstr "Enviar"
 
 #: .\templates\LVR\base.html:159 .\templates\LVR\user\base.html:108
+#: .\templates\LVR\user\base.html:212
 msgid "str_sending"
 msgstr "Enviando"
 
-#: .\templates\LVR\base.html:202
+#: .\templates\LVR\base.html:203
 msgid "str_subNewsletter_explanaition"
 msgstr "Recibe un email cuando escribamos un nuevo post. Sin spam garantizado."
 
-#: .\templates\LVR\base.html:203
+#: .\templates\LVR\base.html:204
 msgid "str_subNewsletter_done"
 msgstr ""
 "Listo, enviamos un mensaje a tu email para que verifiques tu suscripción"
 
-#: .\templates\LVR\base.html:204
+#: .\templates\LVR\base.html:205
 msgid "str_subNewsletter_error"
 msgstr "Ocurrió un error al enviar el email, intenta de nuevo más tarde"
 
-#: .\templates\LVR\base.html:205
+#: .\templates\LVR\base.html:206
 msgid "str_subNewsletter_emailAlreadyInUse"
 msgstr "Parece que este email ya está registrado en el newsletter"
 
-#: .\templates\LVR\base.html:225 .\templates\LVR\mails\blog\avg-mail.html:350
+#: .\templates\LVR\base.html:226 .\templates\LVR\mails\blog\avg-mail.html:350
 #: .\templates\LVR\user\base.html:159
 msgid "str_PrivacyPolicy"
 msgstr "Política de Privacidad"
 
-#: .\templates\LVR\base.html:227
+#: .\templates\LVR\base.html:228
 msgid "str_ServiceTerms"
 msgstr "Términos del Servicio"
 
-#: .\templates\LVR\base.html:228
+#: .\templates\LVR\base.html:229
 msgid "str_StaffAuthors"
 msgstr "Redactores"
 
-#: .\templates\LVR\base.html:232 .\templates\LVR\user\settings.html:69
+#: .\templates\LVR\base.html:233 .\templates\LVR\user\settings.html:69
 msgid "str_language"
 msgstr "Idioma"
 
-#: .\templates\LVR\base.html:252
+#: .\templates\LVR\base.html:253
 msgid "str_with"
 msgstr "con"
 
-#: .\templates\LVR\base.html:252
+#: .\templates\LVR\base.html:253
+#: .\templates\LVR\mails\user\pswd\reset-pass-mail.html:139
 msgid "str_in"
 msgstr "en"
 
-#: .\templates\LVR\base_nav.html:23 .\templates\LVR\user\base.html:239
+#: .\templates\LVR\base_nav.html:23 .\templates\LVR\user\base.html:259
 msgid "str_Home"
 msgstr "Inicio"
 
@@ -393,12 +400,12 @@ msgid "str_searchInBlog"
 msgstr "Busca en el blog"
 
 #: .\templates\LVR\base_nav.html:47 .\templates\LVR\post_detail.html:214
-#: .\templates\LVR\search.html:65 .\templates\LVR\search.html:144
+#: .\templates\LVR\search.html:65 .\templates\LVR\search.html:145
 msgid "str_search"
 msgstr "Buscar"
 
 #: .\templates\LVR\base_nav.html:55 .\templates\LVR\index.html:219
-#: .\templates\LVR\search.html:163
+#: .\templates\LVR\search.html:165
 msgid "str_seeAllCatgories"
 msgstr "Ver todas las categorías"
 
@@ -406,15 +413,15 @@ msgstr "Ver todas las categorías"
 msgid "str_loggedInAs"
 msgstr "Iniciar sesión"
 
-#: .\templates\LVR\base_nav.html:69 .\templates\LVR\user\base.html:231
+#: .\templates\LVR\base_nav.html:69 .\templates\LVR\user\base.html:251
 msgid "str_Dashboard"
 msgstr "Panel de Control"
 
 #: .\templates\LVR\base_nav.html:70 .\templates\LVR\user\base.html:34
-#: .\templates\LVR\user\base.html:243 .\templates\LVR\user\dashboard.html:113
-#: .\templates\LVR\user\dashboard.html:296
+#: .\templates\LVR\user\base.html:263 .\templates\LVR\user\dashboard.html:113
+#: .\templates\LVR\user\dashboard.html:292
 #: .\templates\LVR\user\post_list.html:26
-#: .\templates\LVR\user\post_list.html:158
+#: .\templates\LVR\user\post_list.html:168
 msgid "str_NewPost"
 msgstr "Nuevo post"
 
@@ -496,17 +503,6 @@ msgstr "Tendencias"
 msgid "str_index_LatestEntries"
 msgstr "Últimas entradas"
 
-#: .\templates\LVR\mails\blog\average-mail.html:171
-msgid "Hello"
-msgstr ""
-
-#: .\templates\LVR\mails\blog\average-mail.html:194
-#: .\templates\LVR\mails\blog\confirm-mail.html:277
-#: .\templates\LVR\mails\user\activate-email.html:285
-#: .\templates\LVR\mails\user\pswd\reset-pass-mail.html:199
-msgid "str_greetings"
-msgstr "Con cariño, el equipo de"
-
 #: .\templates\LVR\mails\blog\avg-mail.html:86
 #: .\templates\LVR\mails\blog\confirm-mail.html:166
 #: .\templates\LVR\mails\user\activate-email.html:164
@@ -578,34 +574,136 @@ msgstr ""
 msgid "str_confirm"
 msgstr "Confirmar"
 
+#: .\templates\LVR\mails\blog\confirm-mail.html:277
+#: .\templates\LVR\mails\user\activate-email.html:285
+#: .\templates\LVR\mails\user\pswd\reset-pass-mail.html:200
+msgid "str_greetings"
+msgstr "Con cariño, el equipo de"
+
 #: .\templates\LVR\mails\blog\confirm-mail.html:293
-#: .\templates\LVR\mails\user\pswd\reset-pass-mail.html:201
+#: .\templates\LVR\mails\user\pswd\reset-pass-mail.html:202
 msgid "str_mails_msgWasSentTo"
 msgstr "Este mensaje se envió a"
 
 #: .\templates\LVR\mails\blog\confirm-mail.html:293
-#: .\templates\LVR\mails\user\pswd\reset-pass-mail.html:201
+#: .\templates\LVR\mails\user\pswd\reset-pass-mail.html:202
 msgid "str_mails_notMakeThisReq"
 msgstr "Si tu no hiciste esta solicitud, ignora este mensaje"
+
+#: .\templates\LVR\mails\blog\verify.html:11
+msgid "str_confirmEmail_success"
+msgstr "Email activado con éxito"
+
+#: .\templates\LVR\mails\blog\verify.html:14
+#: .\templates\LVR\mails\blog\verify.html:70
+msgid "str_confirmEmail_alreadyConfirmed"
+msgstr "Email ya activado"
+
+#: .\templates\LVR\mails\blog\verify.html:17
+msgid "str_confirmEmail_error"
+msgstr "Ocurrió un error"
+
+#: .\templates\LVR\mails\blog\verify.html:20
+msgid "str_confirmEmail_byebye"
+msgstr "Nos duele verte partir"
+
+#: .\templates\LVR\mails\blog\verify.html:23
+msgid "str_confirmEmail_notFound"
+msgstr "Email no encontrado"
+
+#: .\templates\LVR\mails\blog\verify.html:41
+msgid "str_confirmEmail_confirmed"
+msgstr "Tu email ahora está confirmado"
+
+#: .\templates\LVR\mails\blog\verify.html:46
+msgid "str_confirmEmail_msg1"
+msgstr "¡Felicidades! tu email"
+
+#: .\templates\LVR\mails\blog\verify.html:46
+msgid "str_confirmEmail_msg2"
+msgstr "ahora está confirmado y suscrito al Newsletter"
+
+#: .\templates\LVR\mails\blog\verify.html:47
+#: .\templates\LVR\mails\blog\verify.html:76
+msgid "str_readLatestHistories"
+msgstr "Lee las últimas historias en LE VÉLO ROUGE"
+
+#: .\templates\LVR\mails\blog\verify.html:52
+#: .\templates\LVR\mails\blog\verify.html:81
+#: .\templates\LVR\mails\blog\verify.html:186
+#: .\templates\LVR\user\pswd\password-reset-done.html:26
+msgid "str_goHome"
+msgstr "Ir a nicio"
+
+#: .\templates\LVR\mails\blog\verify.html:75
+msgid "str_confirmEmail_already_msg1"
+msgstr "Parece que el email"
+
+#: .\templates\LVR\mails\blog\verify.html:75
+msgid "str_confirmEmail_already_msg2"
+msgstr ""
+"ya está confirmado, así que no hay necesidad de intentar confirmarlo de nuevo"
+
+#: .\templates\LVR\mails\blog\verify.html:99
+msgid "str_confirmEmail_unexpected"
+msgstr "Se supone que eso no debía pasar"
+
+#: .\templates\LVR\mails\blog\verify.html:105
+msgid "str_confirmEmail_errorTryn2Confirm"
+msgstr "¡Oh no! Ocurrió un error al confirmar el email"
+
+#: .\templates\LVR\mails\blog\verify.html:106
+msgid "str_confirmEmail_tryAgain"
+msgstr "Intenta agregar tu email de nuevo"
+
+#: .\templates\LVR\mails\blog\verify.html:153
+msgid "str_confirmEmail_comeBackSoon"
+msgstr "¡Esperemos que regreses pronto!"
+
+#: .\templates\LVR\mails\blog\verify.html:159
+msgid "str_yourEmail"
+msgstr "Tu email"
+
+#: .\templates\LVR\mails\blog\verify.html:159
+msgid "str_confirmEmail_outNewsletter"
+msgstr "ahora está fuera de la lista del Newsletter"
+
+#: .\templates\LVR\mails\blog\verify.html:163
+#: .\templates\LVR\mails\blog\verify.html:214
+msgid "str_confirmEmail_subscribeAgain"
+msgstr "Si lo deseas, puedes suscribirte de nuevo"
+
+#: .\templates\LVR\mails\blog\verify.html:203
+msgid "str_confirmEmail_notFoundGivenEmail"
+msgstr "No encontramos el email proporcionado"
+
+#: .\templates\LVR\mails\blog\verify.html:209
+msgid "str_confirmEmail_alreadyDeleted"
+msgstr ""
+"Parece que el email que se está tratando de eliminar ya no está registrado "
+"en el Newsletter"
 
 #: .\templates\LVR\mails\user\account-activated.html:11
 msgid "str_accountActivated_success"
 msgstr "Cuenta activada con éxito"
 
 #: .\templates\LVR\mails\user\account-activated.html:28
-msgid "Account_ActivatedSuccess"
-msgstr ""
+msgid "str_account_ActivatedSuccess"
+msgstr "Tu cuenta ha sido activada exitosamente"
 
 #: .\templates\LVR\mails\user\account-activated.html:36
-msgid "Account_Activated_Msg1"
-msgstr ""
+msgid "str_account_Activated_Msg1"
+msgstr "tu cuenta ahora está activa, ¡genial!"
 
 #: .\templates\LVR\mails\user\account-activated.html:40
-msgid "Account_Activated_Msg2"
-msgstr ""
+msgid "str_account_Activated_Msg2"
+msgstr "Ya puedes iniciar sesión"
 
-#: .\templates\LVR\mails\user\account-activated.html:49
+#: .\templates\LVR\mails\user\account-activated.html:48
 #: .\templates\LVR\user\login.html:86
+#: .\templates\LVR\user\pswd\password-change-done.html:29
+#: .\templates\LVR\user\pswd\password-change.html:28
+#: .\templates\LVR\user\pswd\password-reset.html:28
 msgid "str_login"
 msgstr "Iniciar sesión"
 
@@ -644,76 +742,144 @@ msgstr "ahora ve y escribe algo genial"
 msgid "str_activate"
 msgstr "Activar"
 
+#: .\templates\LVR\mails\user\email-sent.html:12
+msgid "str_emailSent_successfully"
+msgstr "Email enviado con éxito"
+
+#: .\templates\LVR\mails\user\email-sent.html:14
+#: .\templates\LVR\mails\user\email-sent.html:72
+msgid "str_emailSent_error"
+msgstr "Ocurrió un error el enviar el email"
+
 #: .\templates\LVR\mails\user\email-sent.html:33
-msgid "EmailSent_success"
-msgstr ""
+msgid "str_emailSent_success"
+msgstr "El email ha sido enviado con éxito"
 
 #: .\templates\LVR\mails\user\email-sent.html:36
-msgid "EmailSent_AfewStepsMore"
-msgstr ""
+msgid "str_emailSent_aFewStepsMore"
+msgstr "Solo quedan algunos pasos más..."
 
 #: .\templates\LVR\mails\user\email-sent.html:43
-msgid "EmailSent_Step1_part1"
-msgstr ""
+msgid "str_emailSent_Step1_part1"
+msgstr "debe ir a su email"
 
 #: .\templates\LVR\mails\user\email-sent.html:43
-msgid "EmailSent_Step1_part2"
-msgstr ""
+msgid "str_emailSent_Step1_part2"
+msgstr "y abrir el último correo recibido por parte del equipo"
 
 #: .\templates\LVR\mails\user\email-sent.html:44
-msgid "EmailSent_Step2"
-msgstr ""
+msgid "str_emailSent_Step2"
+msgstr "En el correo habrá un botón grande con la leyenda 'ACTIVAR'"
 
 #: .\templates\LVR\mails\user\email-sent.html:45
-msgid "EmailSent_Step3"
+msgid "str_emailSent_Step3"
 msgstr ""
+"debe presionar el botón, seguir los pasos mostrados en la pantalla y listo"
+
+#: .\templates\LVR\mails\user\email-sent.html:54
+msgid "str_addOtherNewAuthor"
+msgstr "Agregar otro redactor"
 
 #: .\templates\LVR\mails\user\email-sent.html:55
-msgid "EmailSent_CTA_newAuthor"
-msgstr ""
-
-#: .\templates\LVR\mails\user\email-sent.html:56
-#: .\templates\LVR\mails\user\email-sent.html:100
-#: .\templates\LVR\user\base.html:33 .\templates\LVR\user\base.html:416
+#: .\templates\LVR\mails\user\email-sent.html:98
+#: .\templates\LVR\user\base.html:33 .\templates\LVR\user\base.html:436
 msgid "str_dashboard_goToPage"
 msgstr "Ir al sitio"
 
-#: .\templates\LVR\mails\user\email-sent.html:57
-#: .\templates\LVR\mails\user\email-sent.html:101
-msgid "EmailSent_CTA_gotoDashboard"
-msgstr ""
+#: .\templates\LVR\mails\user\email-sent.html:56
+#: .\templates\LVR\mails\user\email-sent.html:99
+msgid "str_gotoDashboard"
+msgstr "Ir al Panel de Control"
 
-#: .\templates\LVR\mails\user\email-sent.html:73
-msgid "EmailSent_failed"
-msgstr ""
-
-#: .\templates\LVR\mails\user\email-sent.html:75
+#: .\templates\LVR\mails\user\email-sent.html:74
 msgid "Clic2Retry"
 msgstr ""
 
-#: .\templates\LVR\mails\user\email-sent.html:76
-msgid "EmailSent_failed_tryThis"
-msgstr ""
+#: .\templates\LVR\mails\user\email-sent.html:75
+msgid "str_tryFollowing"
+msgstr "Intenta lo siguiente"
+
+#: .\templates\LVR\mails\user\email-sent.html:85
+msgid "str_emailFailed_Step1"
+msgstr "Verifica que tu equipo esté conectado o verifica la conexión Wi-Fi"
 
 #: .\templates\LVR\mails\user\email-sent.html:86
-msgid "EmailFailed_Step1"
+msgid "str_emailFailed_Step2"
 msgstr ""
+"Configura el email de salida para que permita enviar correos desde fuentes "
+"externas"
 
 #: .\templates\LVR\mails\user\email-sent.html:87
-msgid "EmailFailed_Step2"
+msgid "str_emailFailed_Step3"
 msgstr ""
+"debe configurar su email correctamente para recibir correos de todas las "
+"fuentes"
 
-#: .\templates\LVR\mails\user\email-sent.html:88
-msgid "EmailFailed_Step3"
-msgstr ""
-
-#: .\templates\LVR\mails\user\email-sent.html:99
-msgid "EmailFailed_CTA_newAuthor"
-msgstr ""
+#: .\templates\LVR\mails\user\email-sent.html:97
+msgid "str_emailFailed_CTA_tryAgainNewAuthor"
+msgstr "Regresar e intentar de nuevo"
 
 #: .\templates\LVR\mails\user\pswd\reset-pass-mail-subj.txt:2
-msgid "LVR: Solicitud de restablecimiento de contraseña"
+msgid "str_resetPasswordRequest"
+msgstr "LVR - Solicitud de restablecimiento de contraseña"
+
+#: .\templates\LVR\mails\user\pswd\reset-pass-mail.html:16
+#: .\templates\LVR\mails\user\pswd\reset-pass-mail.html:139
+#: .\templates\LVR\user\pswd\password-change.html:12
+#: .\templates\LVR\user\pswd\password-reset.html:12
+msgid "str_resetYourPassword"
+msgstr "Restablece tu contraseña"
+
+#: .\templates\LVR\mails\user\pswd\reset-pass-mail.html:167
+msgid "str_resetPass_moreOftenThanUThink"
+msgstr "¡Esto pasa más seguido de lo que crees"
+
+#: .\templates\LVR\mails\user\pswd\reset-pass-mail.html:170
+msgid "str_resetPass_title1"
 msgstr ""
+"A veces olvidamos cosas... pero no te preocupes, que estamos aquí para "
+"ayudar. Sigue los siguientes pasos para restablecer tu contraseña"
+
+#: .\templates\LVR\mails\user\pswd\reset-pass-mail.html:172
+msgid "str_makeClic"
+msgstr "Haz clic"
+
+#: .\templates\LVR\mails\user\pswd\reset-pass-mail.html:172
+msgid "str_inThisLink"
+msgstr "en este enlace"
+
+#: .\templates\LVR\mails\user\pswd\reset-pass-mail.html:172
+msgid "str_resetPass_btnBelow"
+msgstr "o en el botón de abajo"
+
+#: .\templates\LVR\mails\user\pswd\reset-pass-mail.html:173
+msgid "str_resetPass_step2_1"
+msgstr "Se abrirá una página segura de"
+
+#: .\templates\LVR\mails\user\pswd\reset-pass-mail.html:173
+msgid "str_resetPass_step2_2"
+msgstr "donde podrás ingresar una nueva contraseña"
+
+#: .\templates\LVR\mails\user\pswd\reset-pass-mail.html:173
+#: .\templates\LVR\user\pswd\password-reset-confirm.html:34
+msgid "str_resetPass_thisTimeRemind"
+msgstr "¡Esta vez recuérdala bien"
+
+#: .\templates\LVR\mails\user\pswd\reset-pass-mail.html:174
+msgid "str_resetPass_step3"
+msgstr "Ahora podrás iniciar sesión con la nueva contraseña"
+
+#: .\templates\LVR\mails\user\pswd\reset-pass-mail.html:178
+msgid "str_resetPass_ifBtnDoesNotWork"
+msgstr ""
+"Si el botón o enlace no funcionan, copia y pega el siguiente enlace en tu "
+"navegador"
+
+#: .\templates\LVR\mails\user\pswd\reset-pass-mail.html:190
+#: .\templates\LVR\user\pswd\password-reset-confirm.html:79
+#: .\templates\LVR\user\settings.html:276
+msgid "str_resetPass"
+msgstr "Restablecer contraseña"
 
 #: .\templates\LVR\mails\user\wrong-link.html:28
 msgid "EmailActivationFailed_title"
@@ -873,23 +1039,23 @@ msgstr "resultados relacionados con tu búsqueda"
 msgid "str_search_noResults_subtitle"
 msgstr "No se encontró nada relacionado con tu búsqueda"
 
-#: .\templates\LVR\search.html:153
+#: .\templates\LVR\search.html:155
 msgid "str_search_badQ_explanaition"
 msgstr ""
 "Por favor, introduce al menos una palabra de 3 letras para una búsqueda más "
 "precisa"
 
-#: .\templates\LVR\search.html:158
+#: .\templates\LVR\search.html:160
 msgid "str_search_badQ_len"
 msgstr ""
 "Por favor, introduce un término de búsqueda más corto (de máximo 50 "
 "caracteres) para una búsqueda más precisa"
 
-#: .\templates\LVR\search.html:162
+#: .\templates\LVR\search.html:164
 msgid "str_search_noResults_changeKeywords"
 msgstr "Intenta de nuevo cambiando la(s) palabras clave"
 
-#: .\templates\LVR\search.html:163
+#: .\templates\LVR\search.html:165
 msgid "str_search_OrIfUWant"
 msgstr "O si lo prefieres, puedes"
 
@@ -905,18 +1071,18 @@ msgstr "Conoce de lo que estamos hablando"
 msgid "str_dashboard"
 msgstr "Panel de Control"
 
-#: .\templates\LVR\user\base.html:43 .\templates\LVR\user\base.html:252
+#: .\templates\LVR\user\base.html:43 .\templates\LVR\user\base.html:272
 #: .\templates\LVR\user\dashboard.html:146
 #: .\templates\LVR\user\settings.html:41
 msgid "str_dashboard_profile"
 msgstr "Mi perfil"
 
-#: .\templates\LVR\user\base.html:44 .\templates\LVR\user\base.html:259
+#: .\templates\LVR\user\base.html:44 .\templates\LVR\user\base.html:279
 #: .\templates\LVR\user\settings.html:28
 msgid "str_dashboard_settings"
 msgstr "Ajustes"
 
-#: .\templates\LVR\user\base.html:45 .\templates\LVR\user\base.html:246
+#: .\templates\LVR\user\base.html:45 .\templates\LVR\user\base.html:266
 msgid "str_dashboard_activity"
 msgstr "Mi actividad"
 
@@ -944,10 +1110,6 @@ msgstr "Descripción del problema"
 msgid "str_dashboard_DescribeProblem_placeholder"
 msgstr "Escribe una breve descripción del problema (máx. 500 caracteres)"
 
-#: .\templates\LVR\user\base.html:102
-msgid "str_msgSent"
-msgstr "Mensaje enviado"
-
 #: .\templates\LVR\user\base.html:103
 msgid "str_sendProblem_error"
 msgstr "Ocurrió un error al enviar el mensaje, intenta de nuevo más tarde"
@@ -968,48 +1130,48 @@ msgstr ""
 msgid "dashboard_PostActions_Title"
 msgstr ""
 
-#: .\templates\LVR\user\base.html:224
+#: .\templates\LVR\user\base.html:244
 msgid "str_dashboard_QuickActions"
 msgstr "Acciones rápidas"
 
-#: .\templates\LVR\user\base.html:262 .\templates\LVR\user\login.html:73
+#: .\templates\LVR\user\base.html:282 .\templates\LVR\user\login.html:73
 msgid "str_pass"
 msgstr "Contraseña"
 
-#: .\templates\LVR\user\base.html:268 .\templates\LVR\user\dashboard.html:124
+#: .\templates\LVR\user\base.html:288 .\templates\LVR\user\dashboard.html:124
 #: .\templates\LVR\user\settings.html:53
 msgid "str_dashboard_notifications"
 msgstr "Notificaciones"
 
-#: .\templates\LVR\user\base.html:277
+#: .\templates\LVR\user\base.html:297
 msgid "str_dashboard_Addons"
 msgstr "Complementos"
 
-#: .\templates\LVR\user\base.html:283 .\templates\LVR\user\dashboard.html:46
+#: .\templates\LVR\user\base.html:303 .\templates\LVR\user\dashboard.html:46
 #: .\templates\LVR\user\moderate_comments.html:47
 #: .\templates\LVR\user\moderate_comments.html:50
 msgid "str_dashboard_moderateComments"
 msgstr "Moderar comentarios"
 
-#: .\templates\LVR\user\base.html:290 .\templates\LVR\user\dashboard.html:135
+#: .\templates\LVR\user\base.html:310 .\templates\LVR\user\dashboard.html:135
 msgid "str_dashboard_calendar"
 msgstr "Calendario"
 
-#: .\templates\LVR\user\base.html:298
+#: .\templates\LVR\user\base.html:318
 msgid "str_dashboard_tasks"
 msgstr "Tareas"
 
-#: .\templates\LVR\user\base.html:308
+#: .\templates\LVR\user\base.html:328
 msgid "str_dashboard_help"
 msgstr "Ayuda"
 
-#: .\templates\LVR\user\base.html:314
+#: .\templates\LVR\user\base.html:334
 msgid "str_dashboard_sidenavHide"
 msgstr "Ocultar"
 
 #: .\templates\LVR\user\calendar.html:13
 #: .\templates\LVR\user\notifications.html:12
-#: .\templates\LVR\user\settings.html:351 .\templates\LVR\user\tasks.html:12
+#: .\templates\LVR\user\settings.html:334 .\templates\LVR\user\tasks.html:12
 msgid "str_inDevelopment"
 msgstr "En desarrollo"
 
@@ -1103,6 +1265,8 @@ msgid "str_dashboard_tableTitle_postImage"
 msgstr "Imagen"
 
 #: .\templates\LVR\user\dashboard.html:175
+#: .\templates\LVR\user\post_list.html:43
+#: .\templates\LVR\user\post_list.html:55
 msgid "str_dashboard_tableTitle_postCreatedOrPublishedDate"
 msgstr "Fecha de creación/publicación"
 
@@ -1127,68 +1291,70 @@ msgstr "Status"
 msgid "str_dashboard_tableTitle_postActions"
 msgstr "Acciones"
 
-#: .\templates\LVR\user\dashboard.html:212
+#: .\templates\LVR\user\dashboard.html:211
 #: .\templates\LVR\user\moderate_comments.html:97
 #: .\templates\LVR\user\moderate_posts.html:29
 #: .\templates\LVR\user\moderate_posts.html:38
+#: .\templates\LVR\user\post_list.html:75
 msgid "str_createdDate"
 msgstr "Creado"
 
-#: .\templates\LVR\user\dashboard.html:217
+#: .\templates\LVR\user\dashboard.html:216
+#: .\templates\LVR\user\post_list.html:80
 msgid "str_notApprovedYet"
 msgstr "No aprobado aún"
 
-#: .\templates\LVR\user\dashboard.html:228
-#: .\templates\LVR\user\post_list.html:77
+#: .\templates\LVR\user\dashboard.html:224
+#: .\templates\LVR\user\post_list.html:87
 msgid "str_dashboard_table_TotalComments"
 msgstr "en total"
 
-#: .\templates\LVR\user\dashboard.html:230
-#: .\templates\LVR\user\post_list.html:79
+#: .\templates\LVR\user\dashboard.html:226
+#: .\templates\LVR\user\post_list.html:89
 msgid "str_approvedComments"
 msgstr "Aprobados"
 
-#: .\templates\LVR\user\dashboard.html:231
-#: .\templates\LVR\user\post_list.html:80
+#: .\templates\LVR\user\dashboard.html:227
+#: .\templates\LVR\user\post_list.html:90
 msgid "str_nonApprovedComments"
 msgstr "Por aprobar"
 
-#: .\templates\LVR\user\dashboard.html:234
-#: .\templates\LVR\user\post_list.html:83
+#: .\templates\LVR\user\dashboard.html:230
+#: .\templates\LVR\user\post_list.html:93
 msgid "str_noComments"
 msgstr "Sin comentarios"
 
-#: .\templates\LVR\user\dashboard.html:241
+#: .\templates\LVR\user\dashboard.html:237
 #: .\templates\LVR\user\post_edit.html:185
-#: .\templates\LVR\user\post_list.html:90
+#: .\templates\LVR\user\post_list.html:100
 msgid "str_status_draft_desc"
 msgstr "En espera"
 
-#: .\templates\LVR\user\dashboard.html:247
+#: .\templates\LVR\user\dashboard.html:243
 #: .\templates\LVR\user\post_edit.html:192
-#: .\templates\LVR\user\post_list.html:96
+#: .\templates\LVR\user\post_list.html:106
 msgid "str_status_approved_desc"
 msgstr "Este post ha sido aprobado"
 
-#: .\templates\LVR\user\dashboard.html:253
+#: .\templates\LVR\user\dashboard.html:249
 #: .\templates\LVR\user\post_edit.html:199
-#: .\templates\LVR\user\post_list.html:102
+#: .\templates\LVR\user\post_list.html:112
 msgid "str_status_rejected_desc"
 msgstr "Este post no fue aprobado"
 
-#: .\templates\LVR\user\dashboard.html:259
+#: .\templates\LVR\user\dashboard.html:255
 #: .\templates\LVR\user\post_edit.html:206
-#: .\templates\LVR\user\post_list.html:108
+#: .\templates\LVR\user\post_list.html:118
 msgid "str_status_archived_desc"
 msgstr "Este post fue archivado"
 
-#: .\templates\LVR\user\dashboard.html:292
-#: .\templates\LVR\user\post_list.html:154
+#: .\templates\LVR\user\dashboard.html:288
+#: .\templates\LVR\user\post_list.html:164
 msgid "str_itSeems_wAnyArticle"
 msgstr "Parece que aún no has escrito ningún post"
 
-#: .\templates\LVR\user\dashboard.html:293
-#: .\templates\LVR\user\post_list.html:155
+#: .\templates\LVR\user\dashboard.html:289
+#: .\templates\LVR\user\post_list.html:165
 msgid "str_whyNot_writeArticle"
 msgstr "¿Porqué no escribes uno ahora?"
 
@@ -1306,11 +1472,6 @@ msgstr ""
 msgid "str_dashboard_allMyPosts"
 msgstr "Todos mis posts"
 
-#: .\templates\LVR\user\post_list.html:43
-#: .\templates\LVR\user\post_list.html:55
-msgid "str_dashboard_tableTitle_publishedDate"
-msgstr "Publicado"
-
 #: .\templates\LVR\user\profile.html:22 .\templates\LVR\user\settings.html:96
 msgid "str_dashboard_seeProfile"
 msgstr "Ver perfil"
@@ -1355,6 +1516,67 @@ msgstr "Estadísticas de reacciones"
 msgid "str_dashboard_stats_allReactions"
 msgstr "Total de reacciones"
 
+#: .\templates\LVR\user\pswd\password-change-done.html:12
+msgid "str_changedPassword"
+msgstr "Contraseña cambiada"
+
+#: .\templates\LVR\user\pswd\password-change-done.html:36
+msgid "str_passwordChangedDone"
+msgstr "¡Listo! Tu contraseña fue cambiada"
+
+#: .\templates\LVR\user\pswd\password-change-done.html:37
+#: .\templates\LVR\user\pswd\password-reset-complete.html:36
+msgid "str_nowUCanNewPass"
+msgstr "Ahora puedes iniciar sesión con tu nueva contraseña"
+
+#: .\templates\LVR\user\pswd\password-change.html:35
+msgid "str_changeYourPassword"
+msgstr "Cambia tu contraseña"
+
+#: .\templates\LVR\user\pswd\password-change.html:78
+#: .\templates\LVR\user\settings.html:271
+msgid "str_changePassword"
+msgstr "Cambiar contraseña"
+
+#: .\templates\LVR\user\pswd\password-reset-complete.html:12
+msgid "str_resetedPassword"
+msgstr "Contraseña restablecida"
+
+#: .\templates\LVR\user\pswd\password-reset-complete.html:35
+msgid "str_passwordResetedDone"
+msgstr "¡Listo! Tu contraseña fue restablecida"
+
+#: .\templates\LVR\user\pswd\password-reset-confirm.html:12
+#: .\templates\LVR\user\pswd\password-reset-confirm.html:33
+msgid "str_writeYourNewPass"
+msgstr "Escribe tu nueva contraseña"
+
+#: .\templates\LVR\user\pswd\password-reset-done.html:33
+msgid "str_resetPassCheckUrMail"
+msgstr "¡Listo! revisa tu email"
+
+#: .\templates\LVR\user\pswd\password-reset-done.html:34
+msgid "str_resetPass_step1"
+msgstr "Sigue las instrucciones que enviamos a tu email para restablecer la contraseña"
+
+#: .\templates\LVR\user\pswd\password-reset-done.html:35
+msgid "str_resetPass_step2"
+msgstr "El email solo tiene validez durante 30 minutos"
+
+#: .\templates\LVR\user\pswd\password-reset.html:35
+msgid "str_resetPass_thingsHappen"
+msgstr "Son cosas que pasan"
+
+#: .\templates\LVR\user\pswd\password-reset.html:36
+msgid "str_resetPass_weWillEmailU_1"
+msgstr "Escribe tu email para restablecer tu contraseña"
+
+#: .\templates\LVR\user\pswd\password-reset.html:37
+msgid "str_resetPass_weWillEmailU_2"
+msgstr ""
+"Si una cuenta está asociada a ese email recibirás un mensaje con las "
+"instrucciones para restablacer tu contraseña"
+
 #: .\templates\LVR\user\settings.html:46
 msgid "str_dashboard_Settings_accountSettings"
 msgstr "Configuración de la cuenta"
@@ -1376,8 +1598,8 @@ msgid "str_dashboard_settings_emailsExplanaition_p1"
 msgstr ""
 "Al crear la cuenta, tu email privado (al que llegó el email de activación) "
 "se asocia a tu perfil para realizar actividades importantes con él. Por otro "
-"lado, el email público pretende ser un medio de contacto entre tú y los lectores y se "
-"asocia a"
+"lado, el email público pretende ser un medio de contacto entre tú y los "
+"lectores y se asocia a"
 
 #: .\templates\LVR\user\settings.html:144
 msgid "str_yourublicProfile"
@@ -1387,8 +1609,8 @@ msgstr "tu perfil público"
 msgid "str_dashboard_settings_emailsExplanaition_p2"
 msgstr ""
 "Por defecto, no se configura ningún email público (pero puedes hacerlo "
-"mientras sea diferente al privado) o puedes omitirlo dejando vacío el cuadro de "
-"texto; esta acción no afectará a tu email privado."
+"mientras sea diferente al privado) o puedes omitirlo dejando vacío el cuadro "
+"de texto; esta acción no afectará a tu email privado."
 
 #: .\templates\LVR\user\settings.html:157
 msgid "str_socialMedia"
@@ -1419,13 +1641,22 @@ msgstr ""
 msgid "signup_CTA"
 msgstr ""
 
-#: .\views.py:765
+#: .\views.py:736
 msgid "ErrorCreatingUser"
 msgstr ""
 
-#: .\views.py:949
+#: .\views.py:935
 msgid "EmptyFields"
 msgstr ""
+
+#~ msgid "str_resetPass_resetYourPassIn"
+#~ msgstr "Restablece tu contraseña"
+
+#~ msgid "LVR: Solicitud de restablecimiento de contraseña"
+#~ msgstr "LVR: Solicitud de restablecimiento de contraseña"
+
+#~ msgid "str_dashboard_tableTitle_publishedDate"
+#~ msgstr "Publicado"
 
 #~ msgid "str_mails_welcomeTitle_users"
 #~ msgstr "Ahora eres parte de la comunidad de redactores de"

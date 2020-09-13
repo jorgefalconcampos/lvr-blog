@@ -141,7 +141,7 @@ def send_newsletter_mail(post, request):
     for (i, element) in enumerate([i[0] for i in subs], start=1):
         subscribers.append(element)
         print(f'> {i}: {element}')
-   
+
     if SendNewsletterMessage(subscribers, context, index_url=abs_url, post_title=post.title, post_url=post_url, post_preview=post_preview, post_bg_img=post_bg_img, privacy_url=privacy_url).send_massive_email():
         return True
     else:

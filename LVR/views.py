@@ -68,7 +68,6 @@ def cm(request):
     # return render(request, 'LVR/mails/blog/confirm-mail.html')
 
 
-    newsletter_send_new(request)
     return redirect('index')
 
     # return render(request, 'LVR/mails/user/pswd/reset-pass-mail.html')
@@ -166,40 +165,7 @@ def subscribe(request):
         subscribe_form = SubscribeForm()
 
 
-
-#This method sends an email to all newsletter subs. When a new post is accepted by superuser, subscribers will know 
-def newsletter_send_new(request):
-    pk = 52
-    post = get_object_or_404(blog_post, pk=pk)
-    
-    if send_newsletter_mail(post, request):
-        return True
-    else: 
-        return False
-    
-    
-    # #Creating a subs object full of tuples with subscribers info from 'blog_subscriber'
-    # subs = blog_subscriber.objects.values_list('email', 'conf_num').filter(confirmed=True)
-    # ctxt = []
-    # for sub in subs.iterator():
-    #     lista=list(sub)
-    #     ctxt.append(lista)
-    # subscribers = []
-    # print(f'\n\n# --- PY: (views.py) List of all subscribers email: --- #\n')
-    # for (i, element) in enumerate([i[0] for i in subs], start=1):
-    #     subscribers.append(element)
-    #     print(f'> {i}: {element}')
-
-    # print(subscribers)
-
-    # subj = 'Nuevo post en LVR: titulo del post'
-    # template = 'LVR/mails/blog/average-mail.html'
-
-    # if mail_newsletter(subscribers, subj, template, ctxt, True, request):
-    #     print('Massive sent OK')
-    # else:
-    #     print('Massive sent failed')
-
+ 
 
 
 #Method that allows a subscriber confirm its email and receive updates
@@ -208,11 +174,16 @@ def confirm_subscribe(request):
     conf_numb = request.GET['id']
     sub = blog_subscriber.objects.get(conf_num=conf_numb)
     context = {'email': sub.email}
+
+   
     if sub.conf_num == conf_numb:
-        sub.confirmed = True
-        sub.save()
-        print(f'\n\n# --- PY: The email <<{sub}>> is now confirmed! --- #\n')
-        context['action'] = 'confirmed'
+        if sub.confirmed:
+            context['action'] = 'already_confirmed'
+        else:
+            sub.confirmed = True
+            sub.save()
+            print(f'\n\n# --- PY: The email <<{sub}>> is now confirmed! --- #\n')
+            context['action'] = 'confirmed'
         return render(request, template, context)
     else:
         context['action'] = 'denied'
@@ -871,8 +842,6 @@ def send_new_newsletter_mail(request, post):
     
 
 
-
-
 # This method approves or deletes a comment inside a blog post
 @login_required(login_url='login')
 def comment_actions(request, comment_action, pk):
@@ -897,7 +866,6 @@ def comment_actions(request, comment_action, pk):
             return JsonResponse(response_data)
     else:
         return redirect('index')
-
 
 
 
@@ -1052,9 +1020,6 @@ def post_archive(request, slug_text):
     return redirect('dashboard')
 
 
-
-def send_newsletter_msg(request):
-    return redirect('dashboard')
 
 
 
