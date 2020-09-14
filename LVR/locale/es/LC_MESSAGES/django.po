@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-13 12:42-0500\n"
+"POT-Creation-Date: 2020-09-13 19:09-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -330,7 +330,7 @@ msgid "str_msgSent"
 msgstr "Mensaje enviado"
 
 #: .\templates\LVR\base.html:155 .\templates\LVR\user\base.html:104
-#: .\templates\LVR\user\post_edit.html:145
+#: .\templates\LVR\user\base.html:200 .\templates\LVR\user\post_edit.html:142
 msgid "str_cancel"
 msgstr "Cancelar"
 
@@ -340,7 +340,7 @@ msgid "str_send"
 msgstr "Enviar"
 
 #: .\templates\LVR\base.html:159 .\templates\LVR\user\base.html:108
-#: .\templates\LVR\user\base.html:212
+#: .\templates\LVR\user\base.html:205
 msgid "str_sending"
 msgstr "Enviando"
 
@@ -387,7 +387,7 @@ msgstr "con"
 msgid "str_in"
 msgstr "en"
 
-#: .\templates\LVR\base_nav.html:23 .\templates\LVR\user\base.html:259
+#: .\templates\LVR\base_nav.html:23 .\templates\LVR\user\base.html:249
 msgid "str_Home"
 msgstr "Inicio"
 
@@ -413,12 +413,12 @@ msgstr "Ver todas las categorías"
 msgid "str_loggedInAs"
 msgstr "Iniciar sesión"
 
-#: .\templates\LVR\base_nav.html:69 .\templates\LVR\user\base.html:251
+#: .\templates\LVR\base_nav.html:69 .\templates\LVR\user\base.html:241
 msgid "str_Dashboard"
 msgstr "Panel de Control"
 
 #: .\templates\LVR\base_nav.html:70 .\templates\LVR\user\base.html:34
-#: .\templates\LVR\user\base.html:263 .\templates\LVR\user\dashboard.html:113
+#: .\templates\LVR\user\base.html:253 .\templates\LVR\user\dashboard.html:113
 #: .\templates\LVR\user\dashboard.html:292
 #: .\templates\LVR\user\post_list.html:26
 #: .\templates\LVR\user\post_list.html:168
@@ -508,7 +508,7 @@ msgstr "Últimas entradas"
 #: .\templates\LVR\mails\user\activate-email.html:164
 #: .\templates\LVR\user\base.html:41 .\templates\LVR\user\calendar.html:26
 #: .\templates\LVR\user\notifications.html:25
-#: .\templates\LVR\user\tasks.html:25
+#: .\templates\LVR\user\post_edit.html:26 .\templates\LVR\user\tasks.html:25
 msgid "str_Hello"
 msgstr "¡Hola"
 
@@ -782,7 +782,7 @@ msgstr "Agregar otro redactor"
 
 #: .\templates\LVR\mails\user\email-sent.html:55
 #: .\templates\LVR\mails\user\email-sent.html:98
-#: .\templates\LVR\user\base.html:33 .\templates\LVR\user\base.html:436
+#: .\templates\LVR\user\base.html:33 .\templates\LVR\user\base.html:426
 msgid "str_dashboard_goToPage"
 msgstr "Ir al sitio"
 
@@ -1071,18 +1071,18 @@ msgstr "Conoce de lo que estamos hablando"
 msgid "str_dashboard"
 msgstr "Panel de Control"
 
-#: .\templates\LVR\user\base.html:43 .\templates\LVR\user\base.html:272
+#: .\templates\LVR\user\base.html:43 .\templates\LVR\user\base.html:262
 #: .\templates\LVR\user\dashboard.html:146
 #: .\templates\LVR\user\settings.html:41
 msgid "str_dashboard_profile"
 msgstr "Mi perfil"
 
-#: .\templates\LVR\user\base.html:44 .\templates\LVR\user\base.html:279
+#: .\templates\LVR\user\base.html:44 .\templates\LVR\user\base.html:269
 #: .\templates\LVR\user\settings.html:28
 msgid "str_dashboard_settings"
 msgstr "Ajustes"
 
-#: .\templates\LVR\user\base.html:45 .\templates\LVR\user\base.html:266
+#: .\templates\LVR\user\base.html:45 .\templates\LVR\user\base.html:256
 msgid "str_dashboard_activity"
 msgstr "Mi actividad"
 
@@ -1127,45 +1127,45 @@ msgid "Close"
 msgstr ""
 
 #: .\templates\LVR\user\base.html:182
-msgid "dashboard_PostActions_Title"
-msgstr ""
+msgid "str_dashboard_confirmAction"
+msgstr "Confirmar acción"
 
-#: .\templates\LVR\user\base.html:244
+#: .\templates\LVR\user\base.html:234
 msgid "str_dashboard_QuickActions"
 msgstr "Acciones rápidas"
 
-#: .\templates\LVR\user\base.html:282 .\templates\LVR\user\login.html:73
+#: .\templates\LVR\user\base.html:272 .\templates\LVR\user\login.html:73
 msgid "str_pass"
 msgstr "Contraseña"
 
-#: .\templates\LVR\user\base.html:288 .\templates\LVR\user\dashboard.html:124
+#: .\templates\LVR\user\base.html:278 .\templates\LVR\user\dashboard.html:124
 #: .\templates\LVR\user\settings.html:53
 msgid "str_dashboard_notifications"
 msgstr "Notificaciones"
 
-#: .\templates\LVR\user\base.html:297
+#: .\templates\LVR\user\base.html:287
 msgid "str_dashboard_Addons"
 msgstr "Complementos"
 
-#: .\templates\LVR\user\base.html:303 .\templates\LVR\user\dashboard.html:46
+#: .\templates\LVR\user\base.html:293 .\templates\LVR\user\dashboard.html:46
 #: .\templates\LVR\user\moderate_comments.html:47
 #: .\templates\LVR\user\moderate_comments.html:50
 msgid "str_dashboard_moderateComments"
 msgstr "Moderar comentarios"
 
-#: .\templates\LVR\user\base.html:310 .\templates\LVR\user\dashboard.html:135
+#: .\templates\LVR\user\base.html:300 .\templates\LVR\user\dashboard.html:135
 msgid "str_dashboard_calendar"
 msgstr "Calendario"
 
-#: .\templates\LVR\user\base.html:318
+#: .\templates\LVR\user\base.html:308
 msgid "str_dashboard_tasks"
 msgstr "Tareas"
 
-#: .\templates\LVR\user\base.html:328
+#: .\templates\LVR\user\base.html:318
 msgid "str_dashboard_help"
 msgstr "Ayuda"
 
-#: .\templates\LVR\user\base.html:334
+#: .\templates\LVR\user\base.html:324
 msgid "str_dashboard_sidenavHide"
 msgstr "Ocultar"
 
@@ -1325,25 +1325,25 @@ msgid "str_noComments"
 msgstr "Sin comentarios"
 
 #: .\templates\LVR\user\dashboard.html:237
-#: .\templates\LVR\user\post_edit.html:185
+#: .\templates\LVR\user\post_edit.html:182
 #: .\templates\LVR\user\post_list.html:100
 msgid "str_status_draft_desc"
 msgstr "En espera"
 
 #: .\templates\LVR\user\dashboard.html:243
-#: .\templates\LVR\user\post_edit.html:192
+#: .\templates\LVR\user\post_edit.html:189
 #: .\templates\LVR\user\post_list.html:106
 msgid "str_status_approved_desc"
 msgstr "Este post ha sido aprobado"
 
 #: .\templates\LVR\user\dashboard.html:249
-#: .\templates\LVR\user\post_edit.html:199
+#: .\templates\LVR\user\post_edit.html:196
 #: .\templates\LVR\user\post_list.html:112
 msgid "str_status_rejected_desc"
 msgstr "Este post no fue aprobado"
 
 #: .\templates\LVR\user\dashboard.html:255
-#: .\templates\LVR\user\post_edit.html:206
+#: .\templates\LVR\user\post_edit.html:203
 #: .\templates\LVR\user\post_list.html:118
 msgid "str_status_archived_desc"
 msgstr "Este post fue archivado"
@@ -1376,17 +1376,26 @@ msgstr "Regresar"
 msgid "str_forgottenPass"
 msgstr "Olvidé mi contraseña"
 
+#: .\templates\LVR\user\moderate_comments.html:18
+msgid "str_dashboard_confirmActionSurComment"
+msgstr "Confirmar acción sobre comentario"
+
 #: .\templates\LVR\user\moderate_comments.html:57
 msgid "CommentsWithNoModeration"
 msgstr ""
 
+#: .\templates\LVR\user\moderate_comments.html:83
+msgid "str_seePost"
+msgstr "Ver post"
+
 #: .\templates\LVR\user\moderate_comments.html:95
-msgid "moderateCmts_author"
-msgstr ""
+#: .\templates\LVR\user\post_edit.html:72
+msgid "str_author"
+msgstr "Autor"
 
 #: .\templates\LVR\user\moderate_comments.html:96
-msgid "moderateCmts_coment"
-msgstr ""
+msgid "str_comment"
+msgstr "Comentario"
 
 #: .\templates\LVR\user\moderate_comments.html:135
 msgid "str_itSeems_anyComment"
@@ -1396,76 +1405,91 @@ msgstr "Parece que aún no se ha escrito ningún comentario..."
 msgid "str_itSeems_anyArticle"
 msgstr "Parece que aún no se ha escrito ningún post"
 
-#: .\templates\LVR\user\post_edit.html:61
+#: .\templates\LVR\user\new_category.html:32
+msgid "str_addCatego_added"
+msgstr "Categoría agregada"
+
+#: .\templates\LVR\user\new_category.html:33
+msgid "str_addCatego_error"
+msgstr "Error al agregar categoría"
+
+#: .\templates\LVR\user\post_edit.html:27
+msgid "str_noCategosExplanaition_1"
+msgstr "La forma en la que está creado el blog de"
+
+#: .\templates\LVR\user\post_edit.html:27
+msgid "str_noCategosExplanaition_2"
+msgstr ""
+"es muy especial ya que los posts están organizados dentro de categorías. De "
+"esta manera es mucho más fácil ubicarlos o saber de qué tema se está "
+"hablando."
+
+#: .\templates\LVR\user\post_edit.html:29
+msgid "str_noCategosExplanaition_3"
+msgstr ""
+"Tristemente, aún no se ha agregado ninguna categoría y por lo tanto el post "
+"que quieres escribir no puede redactarse aún ya que quedaría al aire. Te "
+"pedimos que por favor esperes a que el administrador del sitio cree una o "
+"más categorías nuevas."
+
+#: .\templates\LVR\user\post_edit.html:39
+msgid "str_goBack2Dashboard"
+msgstr "Regresar al Panel de Control"
+
+#: .\templates\LVR\user\post_edit.html:58
 msgid "str_postEdit_title"
 msgstr "Crear o editar un post"
 
-#: .\templates\LVR\user\post_edit.html:62
+#: .\templates\LVR\user\post_edit.html:59
 msgid "str_postEdit_subtitle"
 msgstr "Escribe algo que los demás amen leer"
 
-#: .\templates\LVR\user\post_edit.html:75
-msgid "str_author"
-msgstr "Autor"
-
-#: .\templates\LVR\user\post_edit.html:134
-#: .\templates\LVR\user\post_edit.html:136
+#: .\templates\LVR\user\post_edit.html:131
+#: .\templates\LVR\user\post_edit.html:133
 msgid "str_preview"
 msgstr "Previsualizar"
 
-#: .\templates\LVR\user\post_edit.html:147
+#: .\templates\LVR\user\post_edit.html:144
+#: .\templates\LVR\user\post_edit.html:148
 #: .\templates\LVR\user\post_edit.html:151
-#: .\templates\LVR\user\post_edit.html:154
 msgid "str_save"
 msgstr "Guardar"
 
-#: .\templates\LVR\user\post_edit.html:182
-msgid "postStatus"
-msgstr ""
+#: .\templates\LVR\user\post_edit.html:179
+msgid "str_postStatus"
+msgstr "Status del post"
 
-#: .\templates\LVR\user\post_edit.html:187
-msgid "status_draft"
-msgstr ""
+#: .\templates\LVR\user\post_edit.html:184
+msgid "str_status_draft"
+msgstr "En espera"
 
-#: .\templates\LVR\user\post_edit.html:194
-msgid "status_approved"
-msgstr ""
+#: .\templates\LVR\user\post_edit.html:191
+msgid "str_status_approved"
+msgstr "Aprobado"
 
-#: .\templates\LVR\user\post_edit.html:201
-msgid "status_rejected"
-msgstr ""
+#: .\templates\LVR\user\post_edit.html:198
+msgid "str_status_rejected"
+msgstr "No aprobado"
 
-#: .\templates\LVR\user\post_edit.html:208
-msgid "status_archived"
-msgstr ""
+#: .\templates\LVR\user\post_edit.html:205
+msgid "str_status_archived"
+msgstr "Archivado"
 
-#: .\templates\LVR\user\post_edit.html:224
-msgid "post_DangerZone"
-msgstr ""
+#: .\templates\LVR\user\post_edit.html:207
+msgid "str_unarchive"
+msgstr "Desarchivar"
 
-#: .\templates\LVR\user\post_edit.html:229
-msgid "post_deletePost"
-msgstr ""
+#: .\templates\LVR\user\post_edit.html:217
+msgid "str_post_DangerZone"
+msgstr "Zona de peligro"
 
-#: .\templates\LVR\user\post_edit.html:234
-msgid "post_archivePost"
-msgstr ""
+#: .\templates\LVR\user\post_edit.html:222
+msgid "str_deletePost"
+msgstr "Eliminar post"
 
-#: .\templates\LVR\user\post_edit.html:247
-msgid "dashboard_PostDelete_Title"
-msgstr ""
-
-#: .\templates\LVR\user\post_edit.html:258
-msgid "dashboard_PostDelete"
-msgstr ""
-
-#: .\templates\LVR\user\post_edit.html:267
-msgid "str_dashboard_reportProblem_cancel"
-msgstr ""
-
-#: .\templates\LVR\user\post_edit.html:268
-msgid "dashboard_ConfirmDelete"
-msgstr ""
+#: .\templates\LVR\user\post_edit.html:227
+msgid "str_archivePost"
+msgstr "Archivar post"
 
 #: .\templates\LVR\user\post_list.html:12
 #: .\templates\LVR\user\post_list.html:15
@@ -1557,7 +1581,9 @@ msgstr "¡Listo! revisa tu email"
 
 #: .\templates\LVR\user\pswd\password-reset-done.html:34
 msgid "str_resetPass_step1"
-msgstr "Sigue las instrucciones que enviamos a tu email para restablecer la contraseña"
+msgstr ""
+"Sigue las instrucciones que enviamos a tu email para restablecer la "
+"contraseña"
 
 #: .\templates\LVR\user\pswd\password-reset-done.html:35
 msgid "str_resetPass_step2"
@@ -1588,6 +1614,12 @@ msgstr "Contraseña y seguridad"
 #: .\templates\LVR\user\settings.html:94
 msgid "str_publicInfo"
 msgstr "Información pública"
+
+#: .\templates\LVR\user\settings.html:125
+msgid "str_optionalPublicInfo"
+msgstr ""
+"Esta sección es opcional y puedes colocar perfiles personales o de trabajo; "
+"si no quieres mostrar algún campo simplemente déjalo en blanco"
 
 #: .\templates\LVR\user\settings.html:138
 msgid "str_whatIs"
@@ -1633,13 +1665,30 @@ msgstr "Mi cuenta"
 msgid "str_myPermissions"
 msgstr "Permisos que tiene mi cuenta"
 
-#: .\templates\LVR\user\sign_up.html:15
-msgid "signup_Title"
+#: .\templates\LVR\user\settings.html:263
+msgid "str_changeOrRecoverPass"
+msgstr "Cambiar o recuperar contraseña"
+
+#: .\templates\LVR\user\settings.html:267
+msgid "str_selectOptionAccordingUrNeeds"
+msgstr "Selecciona la opción que más se ajuste a tus necesidades"
+
+#: .\templates\LVR\user\settings.html:269
+msgid "str_changePass_explanaition"
+msgstr "Modifica tu contraseña actual a una diferente o a una más segura"
+
+#: .\templates\LVR\user\settings.html:274
+msgid "str_resetPass_explanaition"
 msgstr ""
+"Recibe en tu email un enlace para resetear tu contraseña en caso olvidadarla"
+
+#: .\templates\LVR\user\sign_up.html:15
+msgid "str_signup_Title"
+msgstr "Agregar nuevo redactor"
 
 #: .\templates\LVR\user\sign_up.html:78
-msgid "signup_CTA"
-msgstr ""
+msgid "str_signup_CTA"
+msgstr "Agregar redactor"
 
 #: .\views.py:736
 msgid "ErrorCreatingUser"

@@ -23,13 +23,10 @@
                         <div class="row">
                             <div class="col">
                                 <div class="center py-3 h6"> 
-                                  ¡Hola {{ request.user.first_name|default:request.user }}!
-                                  La forma en la que está creado el blog de <b>LVR</b> es muy especial ya que los posts están organizados dentro de categorías. De esta manera es mucho más fácil ubicarlos o saber de qué tema se está hablando.
+                                  {% trans 'str_Hello' %} {{ request.user.first_name|default:request.user }}!
+                                  {% trans 'str_noCategosExplanaition_1' %} <b>LVR</b> {% trans 'str_noCategosExplanaition_2' %}
                                 </div>
-                                <div class="center py-2 h6"> 
-                                  Tristemente, aún no se ha agregado ninguna categoría y por lo tanto el post que quieres escribir no puede redactarse aún ya que quedaría al aire.
-                                  Te pedimos que por favor esperes a que el administrador del sitio cree una o más categorías nuevas.
-                                </div>
+                                <div class="center py-2 h6">{% trans 'str_noCategosExplanaition_3' %}</div>
                             </div>
                         </div>
                     </div>
@@ -39,7 +36,7 @@
                 </div>
             </div>
               <div class="modal-footer justify-content-end px-sm-0 px-md-0 px-lg-0">
-                <a href="{% url 'dashboard' %}" class="btn btn-primary">Regresar al Panel de Control</a>
+                <a href="{% url 'dashboard' %}" class="btn btn-primary">{% trans 'str_goBack2Dashboard' %}</a>
 
               </div>
             </div>
@@ -58,8 +55,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-left my-4">
-                        <h3 class="section-heading font-weight-bold text-uppercase">{% trans 'str_postEdit_title' %}</h3>
-                        <h4 class="section-subheading text-muted">{% trans 'str_postEdit_subtitle' %} :)</h4>
+                        <h3 class="section-heading font-weight-bold text-uppercase">{% trans 'str_postEdit_title' %} :)</h3>
+                        <h4 class="section-subheading text-muted">{% trans 'str_postEdit_subtitle' %}</h4>
                     </div>
                 </div>
                 
@@ -179,39 +176,35 @@
 
             {% if is_edit %}
             <div class="container d-flex inline mt-5">
-                <h6 class="ml-2 font-weight-bold"> {% trans 'postStatus' %}: </h6>
+                <h6 class="ml-2 font-weight-bold"> {% trans 'str_postStatus' %}: </h6>
 
                 {% if post.status == 0 %}
                 <div class="d-flex d-inline" data-toggle="tooltip" data-html="true" data-placement='top' title="{% trans 'str_status_draft_desc' %}">
                     <i class="ml-1 px-0 material-icons align-top md-inactive">access_time</i>  
-                    <h6 > {% trans 'status_draft' %} </h6>
+                    <h6 > {% trans 'str_status_draft' %} </h6>
                 </div>
                 {% endif %}
 
                 {% if post.status == 1 %}
                 <div class="d-flex d-inline" data-toggle="tooltip" data-html="true" data-placement='top' title="{% trans 'str_status_approved_desc' %}">
                     <i class="ml-1 px-0 material-icons align-top md-inactive">done</i>  
-                    <h6> {% trans 'status_approved' %} </h6>
+                    <h6> {% trans 'str_status_approved' %} </h6>
                 </div>
                 {% endif %}
 
                 {% if post.status == 2 %}
                 <div class="d-flex d-inline" data-toggle="tooltip" data-html="true" data-placement='top' title="{% trans 'str_status_rejected_desc' %}">
                     <i class="ml-1 px-0 material-icons align-top md-inactive">clear</i>  
-                    <h6> {% trans 'status_rejected' %} </h6>
+                    <h6> {% trans 'str_status_rejected' %} </h6>
                 </div>
                 {% endif %}
 
                 {% if post.status == 3 %}
                 <div class="d-flex d-inline" data-toggle="tooltip" data-html="true" data-placement='top' title="{% trans 'str_status_archived_desc' %}">
                     <i class="ml-1 px-0 material-icons align-top md-inactive">archive</i>  
-                    <h6> {% trans 'status_archived' %} </h6>
+                    <h6> {% trans 'str_status_archived' %} </h6>
                 </div>    
-                <a id="unarchiveBtn_in_post_edit" class="h6 ml-3 border bg-warning-light px-2" style="cursor: pointer;" data-postid="{{post.pk}}" data-posttitle="{{post.title}}" data-toggle="modal" data-target="#postActionsModal">Desarchivar</a>
-
-              
-
-
+                <a id="unarchiveBtn_in_post_edit" class="h6 ml-3 border bg-warning-light px-2" style="cursor: pointer;" data-postid="{{post.pk}}" data-posttitle="{{post.title}}" data-toggle="modal" data-target="#postActionsModal">{% trans 'str_unarchive' %}</a>
                 {% endif %}
             </div>
 
@@ -221,55 +214,23 @@
                 <div class="card border-danger rounded">
                     <div class="card-header p-0">
                         <div class="container py-2">
-                            <h5 class="text-danger"> <i class="material-icons align-middle">warning</i> {% trans 'post_DangerZone' %} </h3>
+                            <h5 class="text-danger"> <i class="material-icons align-middle">warning</i> {% trans 'str_post_DangerZone' %} </h3>
                         </div>
                     </div>
                     <div class="card-body my-auto">
                         <a id="deleteBtn_in_post_edit" type="button" class="btn btn-danger mr-2 my-1 text-white" data-postid="{{post.pk}}" data-posttitle="{{post.title}}" data-toggle="modal" data-target="#postActionsModal"> 
-                           {% trans 'post_deletePost' %}
+                           {% trans 'str_deletePost' %}
                         </a>
 
                         {% if not post.status == 3 %}
-                        <a id="archiveBtn_in_post_edit" type="button" class="btn btn-danger my-1 text-white" data-postid="{{post.pk}}" data-posttitle="{{post.title}}" data-toggle="modal" data-target="#postActionsModal"> 
-                            {% trans 'post_archivePost' %}
+                        <a id="archiveBtn_in_post_edit" type="button" class="btn btn-warning-light my-1 text-dark" data-postid="{{post.pk}}" data-posttitle="{{post.title}}" data-toggle="modal" data-target="#postActionsModal"> 
+                            {% trans 'str_archivePost' %}
                          </a>
                         {% endif %}
                     </div>
                 </div>
             </div>
 
-            <div class="modal fade pt-5 mt-5" id="deletePostModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <span class="d-flex d-inline">
-                                <i style="font-size: 30px;" class="material-icons">error</i>
-                                <h4 class="ml-3 modal-title"> {% trans 'dashboard_PostDelete_Title' %}? </h4>
-                            </span>
-                            <button type="button" class="close" data-dismiss="modal">×</button>
-                        </div>
-                        
-                        <div class="modal-body">
-                            <form>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-12 pt-2">
-                                            <div class="container"> 
-                                                <h6 class="ml-1"> {% trans 'dashboard_PostDelete' %} <b> {{post.title}} </b>? </h6>
-                                             </div> 
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        
-                        <div class="modal-footer mr-2">
-                            <button type="button" class="btn border-secondary" data-dismiss="modal"> {% trans 'str_dashboard_reportProblem_cancel' %} </button>
-                            <a href="{% url 'post_actions' 'del' post.pk %}" class="btn btn-danger"> {% trans 'dashboard_ConfirmDelete' %} </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
 
             {% endif %}

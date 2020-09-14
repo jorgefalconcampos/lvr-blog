@@ -15,7 +15,7 @@
             <div class="modal-header bg-gray-400">
                 <span class="d-flex d-inline">
                     <i style="font-size: 30px;" class="material-icons">error</i>
-                    <h4 class="ml-3 modal-title">Confirmar acción sobre comentario</h4>
+                    <h4 class="ml-3 modal-title">{% trans 'str_dashboard_confirmActionSurComment' %}</h4>
                 </span>
                 <button type="button" class="close" data-dismiss="modal">×</button>
             </div>
@@ -80,7 +80,7 @@
                                 </span>
                                 
                                 <div class="col text-center text-lg-right">
-                                    <a href="{% url 'post_detail' post.category post.slug %}" target="_blank" class="btn btn-secondary">Ver post</a>
+                                    <a href="{% url 'post_detail' post.category post.slug %}" target="_blank" class="btn btn-secondary">{% trans 'str_seePost' %}</a>
                                 </div> 
                             </div>
                         </div>
@@ -92,8 +92,8 @@
                                 <table class="table table-bordered bg-gray-100" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="bg-dark text-white rounded-top">
                                         <tr class="text-center">
-                                            <th>{% trans 'moderateCmts_author' %}</th>
-                                            <th>{% trans 'moderateCmts_coment' %}</th>
+                                            <th>{% trans 'str_author' %}</th>
+                                            <th>{% trans 'str_comment' %}</th>
                                             <th>{% trans 'str_createdDate' %}</th>
                                             <th>{% trans 'str_dashboard_tableTitle_postActions' %}</th>
                                         </tr>
