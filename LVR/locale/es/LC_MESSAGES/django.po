@@ -1697,18 +1697,3 @@ msgstr ""
 #: .\views.py:935
 msgid "EmptyFields"
 msgstr ""
-
-#~ msgid "str_resetPass_resetYourPassIn"
-#~ msgstr "Restablece tu contraseña"
-
-#~ msgid "LVR: Solicitud de restablecimiento de contraseña"
-#~ msgstr "LVR: Solicitud de restablecimiento de contraseña"
-
-#~ msgid "str_dashboard_tableTitle_publishedDate"
-#~ msgstr "Publicado"
-
-#~ msgid "str_mails_welcomeTitle_users"
-#~ msgstr "Ahora eres parte de la comunidad de redactores de"
-
-#~ msgid "str_dashboard_stats_holdingPosts"
-#~ msgstr "Estadísticas de reacciones"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-13 14:23-0500\n"
+"POT-Creation-Date: 2020-09-13 19:15-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -321,7 +321,7 @@ msgid "str_msgSent"
 msgstr "Message sent"
 
 #: .\templates\LVR\base.html:155 .\templates\LVR\user\base.html:104
-#: .\templates\LVR\user\base.html:200 .\templates\LVR\user\post_edit.html:145
+#: .\templates\LVR\user\base.html:200 .\templates\LVR\user\post_edit.html:142
 msgid "str_cancel"
 msgstr "Cancel"
 
@@ -497,7 +497,7 @@ msgstr "Latest entries"
 #: .\templates\LVR\mails\user\activate-email.html:164
 #: .\templates\LVR\user\base.html:41 .\templates\LVR\user\calendar.html:26
 #: .\templates\LVR\user\notifications.html:25
-#: .\templates\LVR\user\tasks.html:25
+#: .\templates\LVR\user\post_edit.html:26 .\templates\LVR\user\tasks.html:25
 msgid "str_Hello"
 msgstr "Hello"
 
@@ -1367,25 +1367,25 @@ msgid "str_noComments"
 msgstr "No comments"
 
 #: .\templates\LVR\user\dashboard.html:237
-#: .\templates\LVR\user\post_edit.html:185
+#: .\templates\LVR\user\post_edit.html:182
 #: .\templates\LVR\user\post_list.html:100
 msgid "str_status_draft_desc"
 msgstr "On hold"
 
 #: .\templates\LVR\user\dashboard.html:243
-#: .\templates\LVR\user\post_edit.html:192
+#: .\templates\LVR\user\post_edit.html:189
 #: .\templates\LVR\user\post_list.html:106
 msgid "str_status_approved_desc"
 msgstr "This post have been approved"
 
 #: .\templates\LVR\user\dashboard.html:249
-#: .\templates\LVR\user\post_edit.html:199
+#: .\templates\LVR\user\post_edit.html:196
 #: .\templates\LVR\user\post_list.html:112
 msgid "str_status_rejected_desc"
 msgstr "This posts have been rejected"
 
 #: .\templates\LVR\user\dashboard.html:255
-#: .\templates\LVR\user\post_edit.html:206
+#: .\templates\LVR\user\post_edit.html:203
 #: .\templates\LVR\user\post_list.html:118
 msgid "str_status_archived_desc"
 msgstr "This post have been archived"
@@ -1431,7 +1431,7 @@ msgid "str_seePost"
 msgstr "See post"
 
 #: .\templates\LVR\user\moderate_comments.html:95
-#: .\templates\LVR\user\post_edit.html:75
+#: .\templates\LVR\user\post_edit.html:72
 msgid "str_author"
 msgstr "Author"
 
@@ -1459,72 +1459,108 @@ msgstr "Add category"
 msgid "str_addCatego_error"
 msgstr "Add category"
 
-#: .\templates\LVR\user\post_edit.html:61
+#: .\templates\LVR\user\post_edit.html:27
+#, fuzzy
+#| msgid "str_CookiesExplanaition"
+msgid "str_noCategosExplanaition_1"
+msgstr ""
+"We use cookies to improve your experience in this website. By using it, you "
+"accept the"
+
+#: .\templates\LVR\user\post_edit.html:27
+#, fuzzy
+#| msgid "str_CookiesExplanaition"
+msgid "str_noCategosExplanaition_2"
+msgstr ""
+"We use cookies to improve your experience in this website. By using it, you "
+"accept the"
+
+#: .\templates\LVR\user\post_edit.html:29
+#, fuzzy
+#| msgid "str_CookiesExplanaition"
+msgid "str_noCategosExplanaition_3"
+msgstr ""
+"We use cookies to improve your experience in this website. By using it, you "
+"accept the"
+
+#: .\templates\LVR\user\post_edit.html:39
+#, fuzzy
+#| msgid "str_Dashboard"
+msgid "str_goBack2Dashboard"
+msgstr "Dashboard"
+
+#: .\templates\LVR\user\post_edit.html:58
 msgid "str_postEdit_title"
 msgstr "Write something the people love to read"
 
-#: .\templates\LVR\user\post_edit.html:62
+#: .\templates\LVR\user\post_edit.html:59
 msgid "str_postEdit_subtitle"
 msgstr "Create or edit a post"
 
-#: .\templates\LVR\user\post_edit.html:134
-#: .\templates\LVR\user\post_edit.html:136
+#: .\templates\LVR\user\post_edit.html:131
+#: .\templates\LVR\user\post_edit.html:133
 msgid "str_preview"
 msgstr "Preview"
 
-#: .\templates\LVR\user\post_edit.html:147
+#: .\templates\LVR\user\post_edit.html:144
+#: .\templates\LVR\user\post_edit.html:148
 #: .\templates\LVR\user\post_edit.html:151
-#: .\templates\LVR\user\post_edit.html:154
 msgid "str_save"
 msgstr "Save"
 
-#: .\templates\LVR\user\post_edit.html:182
-msgid "postStatus"
-msgstr ""
+#: .\templates\LVR\user\post_edit.html:179
+#, fuzzy
+#| msgid "str_postBy"
+msgid "str_postStatus"
+msgstr "By"
 
-#: .\templates\LVR\user\post_edit.html:187
-msgid "status_draft"
-msgstr ""
+#: .\templates\LVR\user\post_edit.html:184
+#, fuzzy
+#| msgid "str_status_draft_desc"
+msgid "str_status_draft"
+msgstr "On hold"
 
-#: .\templates\LVR\user\post_edit.html:194
-msgid "status_approved"
-msgstr ""
+#: .\templates\LVR\user\post_edit.html:191
+#, fuzzy
+#| msgid "str_status_approved_desc"
+msgid "str_status_approved"
+msgstr "This post have been approved"
 
-#: .\templates\LVR\user\post_edit.html:201
-msgid "status_rejected"
-msgstr ""
+#: .\templates\LVR\user\post_edit.html:198
+#, fuzzy
+#| msgid "str_status_rejected_desc"
+msgid "str_status_rejected"
+msgstr "This posts have been rejected"
 
-#: .\templates\LVR\user\post_edit.html:208
-msgid "status_archived"
-msgstr ""
+#: .\templates\LVR\user\post_edit.html:205
+#, fuzzy
+#| msgid "str_status_archived_desc"
+msgid "str_status_archived"
+msgstr "This post have been archived"
 
-#: .\templates\LVR\user\post_edit.html:224
-msgid "post_DangerZone"
-msgstr ""
+#: .\templates\LVR\user\post_edit.html:207
+#, fuzzy
+#| msgid "str_activate"
+msgid "str_unarchive"
+msgstr "Activate"
 
-#: .\templates\LVR\user\post_edit.html:229
-msgid "post_deletePost"
-msgstr ""
+#: .\templates\LVR\user\post_edit.html:217
+#, fuzzy
+#| msgid "str_post_detail_moreFrom"
+msgid "str_post_DangerZone"
+msgstr "More from"
 
-#: .\templates\LVR\user\post_edit.html:234
-msgid "post_archivePost"
-msgstr ""
+#: .\templates\LVR\user\post_edit.html:222
+#, fuzzy
+#| msgid "str_seePost"
+msgid "str_deletePost"
+msgstr "See post"
 
-#: .\templates\LVR\user\post_edit.html:247
-msgid "dashboard_PostDelete_Title"
-msgstr ""
-
-#: .\templates\LVR\user\post_edit.html:258
-msgid "dashboard_PostDelete"
-msgstr ""
-
-#: .\templates\LVR\user\post_edit.html:267
-msgid "str_dashboard_reportProblem_cancel"
-msgstr ""
-
-#: .\templates\LVR\user\post_edit.html:268
-msgid "dashboard_ConfirmDelete"
-msgstr ""
+#: .\templates\LVR\user\post_edit.html:227
+#, fuzzy
+#| msgid "str_readPost"
+msgid "str_archivePost"
+msgstr "Read post"
 
 #: .\templates\LVR\user\post_list.html:12
 #: .\templates\LVR\user\post_list.html:15
@@ -1656,6 +1692,10 @@ msgstr "Password & security"
 msgid "str_publicInfo"
 msgstr "Public information"
 
+#: .\templates\LVR\user\settings.html:125
+msgid "str_optionalPublicInfo"
+msgstr "Public information"
+
 #: .\templates\LVR\user\settings.html:138
 msgid "str_whatIs"
 msgstr "What the f*©% is the"
@@ -1693,13 +1733,29 @@ msgstr "Mi account"
 msgid "str_myPermissions"
 msgstr "Permissions on my account"
 
-#: .\templates\LVR\user\sign_up.html:15
-msgid "signup_Title"
+#: .\templates\LVR\user\settings.html:263
+msgid "str_changeOrRecoverPass"
+msgstr "Save changes"
+
+#: .\templates\LVR\user\settings.html:267
+msgid "str_selectOptionAccordingUrNeeds"
 msgstr ""
 
+#: .\templates\LVR\user\settings.html:269
+msgid "str_changePass_explanaition"
+msgstr "Please, write at least a 3 letter word for a more accurate search"
+
+#: .\templates\LVR\user\settings.html:274
+msgid "str_resetPass_explanaition"
+msgstr "Get an email in your inbox when a new post is published"
+
+#: .\templates\LVR\user\sign_up.html:15
+msgid "str_signup_Title"
+msgstr "Staff-use only"
+
 #: .\templates\LVR\user\sign_up.html:78
-msgid "signup_CTA"
-msgstr ""
+msgid "str_signup_CTA"
+msgstr "Comment"
 
 #: .\views.py:736
 msgid "ErrorCreatingUser"
@@ -1708,6 +1764,3 @@ msgstr ""
 #: .\views.py:935
 msgid "EmptyFields"
 msgstr ""
-
-#~ msgid "str_dashboard_tableTitle_publishedDate"
-#~ msgstr "Published date"
